@@ -40,7 +40,7 @@ A record is identified by the `MFN`.
 
 Fields can be repeatable and subfields within a field can be repeatable too.
 
-Addressing the fields (by tag), subfields (by subfield-id) and occurrence (of a repeatable entity) is done by a [field-selector](abc-of-cisis/cisis-fl/field-selector.md).
+Addressing the fields (by tag), subfields (by subfield-id) and occurrence (of a repeatable entity) is done by a field-selector.
 
 
 # Inverted File structure

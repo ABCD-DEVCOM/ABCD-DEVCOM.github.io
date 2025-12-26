@@ -12,7 +12,7 @@ This information is sent as a header specifying the *"Content-type"* which must 
 <display><pft>’Content-type: text/html’##</pft></display>
 ```
 
-This statement must be written in the ISIS formatting language using `##` (or `/#`) to produce the blank line. (See [abc-of-cisis/cisis-fl/start.md](abc-of-cisis/cisis-fl/start.md)). You cannot use the HTML `<br>` element here because the server has not yet been told to expect HTML!
+This statement must be written in the ISIS formatting language using `##` (or `/#`) to produce the blank line. You cannot use the HTML `<br>` element here because the server has not yet been told to expect HTML!
 
 You can now put together a complete script:
 ```xml
