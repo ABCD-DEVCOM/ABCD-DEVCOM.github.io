@@ -28,7 +28,7 @@ const config = {
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'ABCD-DEVCOM', // Usually your GitHub org/user name.
-  projectName: 'ABCD KB', // Usually your repo name.
+  projectName: 'ABCD-DEVCOM.github.io', // Usually your repo name.
   deploymentBranch: 'gh-pages',    // Branch onde o site estático ficará (padrão)
   trailingSlash: false,            // Recomendado pelo GitHub Pages
   onBrokenLinks: 'throw',
