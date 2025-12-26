@@ -1,0 +1,8 @@
+{
+    "label": "FAQ (Perguntas Frequentes)",
+    "position": 10,
+    "link": {
+        "type": "generated-index",
+        "description": "Respostas para as dúvidas mais comuns dos usuários."
+    }
+}

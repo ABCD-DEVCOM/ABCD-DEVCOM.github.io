@@ -1,0 +1,8 @@
+{
+    "label": "OPAC ABCD",
+    "position": 6,
+    "link": {
+        "type": "generated-index",
+        "description": "Aprenda a configurar o OPAC (Catálogo Online de Acesso Público) nativo do ABCD. Esta seção cobre desde a configuração da interface de busca para os usuários finais até a personalização da exibição dos resultados e registros."
+    }
+}

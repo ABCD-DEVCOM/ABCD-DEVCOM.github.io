@@ -1,0 +1,8 @@
+{
+    "label": "ABCD Site",
+    "position": 8,
+    "link": {
+        "type": "generated-index",
+        "description": "Aprenda a administrar o portal web do ABCD. Esta seção aborda a gestão da estrutura do site, dos seus componentes e do conteúdo exibido aos usuários finais."
+    }
+}

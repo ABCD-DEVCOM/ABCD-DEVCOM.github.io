@@ -1,0 +1,8 @@
+{
+    "label": "Circulação (Empréstimos)",
+    "position": 3,
+    "link": {
+        "type": "generated-index",
+        "description": "Aprenda a gerenciar todas as operações de empréstimo do ABCD, desde a configuração de políticas e tipos de usuários até o registro de transações diárias como empréstimos, devoluções e renovações."
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "label": "Modules",
+    "position": 5,
+    "link": {
+        "type": "generated-index",
+        "description": "This is the central section of the documentation, detailing each ABCD module."
+    }
+}

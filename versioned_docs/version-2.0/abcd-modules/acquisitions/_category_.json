@@ -1,0 +1,8 @@
+{
+    "label": "Aquisições",
+    "position": 5,
+    "link": {
+        "type": "generated-index",
+        "description": "Entenda o fluxo de trabalho do módulo de Aquisições, desde o recebimento de sugestões de compra dos usuários até a criação e o gerenciamento de ordens de compra para fornecedores."
+    }
+}

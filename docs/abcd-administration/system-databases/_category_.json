@@ -1,0 +1,8 @@
+{
+  "label": "System Databases",
+  "position": 10,
+  "link": {
+    "type": "generated-index",
+    "description": "Technical reference for ABCD internal administrative databases."
+  }
+}

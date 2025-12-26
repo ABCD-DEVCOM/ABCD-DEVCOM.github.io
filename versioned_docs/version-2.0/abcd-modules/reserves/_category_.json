@@ -1,0 +1,8 @@
+{
+    "label": "Reservas",
+    "position": 4,
+    "link": {
+        "type": "generated-index",
+        "description": "Aprenda a configurar e gerenciar o sistema de reservas de itens do ABCD, permitindo que os usuários solicitem materiais que estão atualmente emprestados."
+    }
+}

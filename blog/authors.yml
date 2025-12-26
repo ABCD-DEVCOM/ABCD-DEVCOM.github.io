@@ -1,0 +1,19 @@
+rogercgui:
+  name: Roger C. Guilherme
+  title: Librarian and programmer at ABCD
+  url: https://www.linkedin.com/in/rogerguilherme/
+  image_url: https://avatars.githubusercontent.com/u/20482054?s=96&v=4
+  page: true
+  socials:
+    x: rogercgui
+    linkedin: rogercgui
+    github: rogercgui
+    newsletter: https://abcd-community.org/blog/
+fho4abcd:
+  name: Fred Hommerson
+  title: Programmer at ABCD
+  image_url: https://avatars.githubusercontent.com/u/64411779?v=4
+  page: true
+  socials:
+    github: fho4abcd
+    newsletter: https://abcd-community.org/blog/
