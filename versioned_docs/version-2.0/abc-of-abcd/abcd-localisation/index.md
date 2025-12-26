@@ -237,7 +237,7 @@ done
 ```
 where basically the string 'en' was changed to 'am' and 'to_en' was changed into 'to_am'.
 
-When running this script in a terminal (or CMD in Windows) some smart use of the CISIS mx-tool will read in the key-values text for your language and process the lines to add special brackets {{ and }}. Then these will be replaced, with a gizmo-parameter using the database created in the previous step, in the existing script-templates by their actual values, both for the PFT and HTM extension files.
+When running this script in a terminal (or CMD in Windows) some smart use of the CISIS mx-tool will read in the key-values text for your language and process the lines to add special brackets \{\{ and \}\}. Then these will be replaced, with a gizmo-parameter using the database created in the previous step, in the existing script-templates by their actual values, both for the PFT and HTM extension files.
 
 The resulting scripts then are stored in the language-specific subfolder one level up in the file-system (from the 'translate' subfolder).
 
