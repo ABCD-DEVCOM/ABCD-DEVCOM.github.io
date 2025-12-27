@@ -20,12 +20,8 @@ Located at the top of the record editor, this toolbar provides the following act
 | Icon | Action | Description |
 | :--- | :--- | :--- |
 | ![alt text](../../../media/abcd-modules/cataloguing/manual/data-entry/data-entry-search-icon.png) | **Search** | Opens the search dialog to find specific records. |
-| 📄 | **New** | Creates a blank record using the default worksheet. |
-| ✏️ | **Edit** | Unlocks the current record for modification. |
-| 💾 | **Save** | Commits changes to the Master File. |
-| ❌ | **Cancel** | Discards unsaved changes and reloads the record. |
-| 🗑️ | **Delete** | Logically deletes the record (marks it for removal). |
-| 🖨️ | **Print** | Sends the current record to a printer-friendly view. |
+|![New](../../../media/abcd-modules/cataloguing/manual/data-entry/data-entry-new-icon.png) | **New** | Creates a blank record using the default worksheet. |
+| ![Print](../../../media/abcd-modules/cataloguing/manual/data-entry/data-entry-print-icon.png) | **Print** | Sends the current record to a printer-friendly view. |
 | 📋 | **Copy** | Duplicates the current record content into a new record. |
 | ☁️ | **Z39.50** | Opens the [Z39.50 client](/docs/3.1/abcd-modules/cataloguing/configuration/z3950-server) to import external data. |
 
@@ -41,6 +37,17 @@ Located at the bottom of the screen, this bar allows you to move sequentially th
 ---
 
 ## Creating and Editing Records
+
+In the registry area, there is another toolbar. It's the registry toolbar.
+
+| Icon | Action | Description |
+| :--- | :--- | :--- |
+| ✏️ | **Edit** | Unlocks the current record for modification. |
+| 💾 | **Save** | Commits changes to the Master File. |
+| ❌ | **Cancel** | Discards unsaved changes and reloads the record. |
+| 🗑️ | **Delete** | Logically deletes the record (marks it for removal). |
+| 📋 | **Copy** | Duplicates the current record content into a new record. |
+
 
 ### 1. Creating a New Record
 1. Select the desired database (e.g., **Books**) from the top central menu.
