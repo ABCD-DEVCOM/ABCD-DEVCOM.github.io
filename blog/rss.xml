@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xsl" href="rss.xsl"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>ABCD Software Documentation Blog</title>
+        <link>https://ABCD-DEVCOM.github.io/blog</link>
+        <description>ABCD Software Documentation Blog</description>
+        <lastBuildDate>Sat, 06 Sep 2025 00:00:00 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <language>en</language>
+        <item>
+            <title><![CDATA[Release 2.3.0 Status 2025-09-06]]></title>
+            <link>https://ABCD-DEVCOM.github.io/blog/release-2.3.0</link>
+            <guid>https://ABCD-DEVCOM.github.io/blog/release-2.3.0</guid>
+            <pubDate>Sat, 06 Sep 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Overview of > 650 commits since version v2.2.0-beta-1]]></description>
+            <content:encoded><![CDATA[<p>Overview of &gt; 650 commits since version v2.2.0-beta-1</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="overview-of--650-commits-since-version-v220-beta-1">Overview of &gt; 650 commits since version v2.2.0-beta-1<a href="https://abcd-devcom.github.io/blog/release-2.3.0#overview-of--650-commits-since-version-v220-beta-1" class="hash-link" aria-label="Direct link to Overview of > 650 commits since version v2.2.0-beta-1" title="Direct link to Overview of > 650 commits since version v2.2.0-beta-1" translate="no">​</a></h3>
+<p>Major functional improvements:</p>
+<ul>
+<li class="">Enhanced OPAC;</li>
+<li class="">Rewritten OAI-PHM;</li>
+<li class="">Redesigned statistics and reports;</li>
+<li class="">Captcha implemented;</li>
+<li class="">Added Search, result in list</li>
+<li class="">Moved Empweb to separate GitHub repository</li>
+</ul>
+<p>Other improvements:</p>
+<ul>
+<li class="">Stabelized layout and convert more scripts to new look;</li>
+<li class="">Make z3950 protocol working</li>
+<li class="">Update Portuguese, Spanish and French languages</li>
+<li class="">Improved example databases</li>
+<li class="">Many small functional improvements in menus/buttons/layout</li>
+<li class="">Improved generated HTML and solved small bugs</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="prerequisites">Prerequisites<a href="https://abcd-devcom.github.io/blog/release-2.3.0#prerequisites" class="hash-link" aria-label="Direct link to Prerequisites" title="Direct link to Prerequisites" translate="no">​</a></h3>
+<p>This ABCD version is already tested on PHP 8.4. Will still run on PHP 7.4, recommendation is to upgrade to at least PHP 8.1.
+Note that Z3950 requires the YAZ extension for PHP. YAZ is not available for every PHP version.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="upgrading">Upgrading<a href="https://abcd-devcom.github.io/blog/release-2.3.0#upgrading" class="hash-link" aria-label="Direct link to Upgrading" title="Direct link to Upgrading" translate="no">​</a></h3>
+<p>Upgrading to this version depends heavily on your current version.
+It is recommended to read the standard upgrade instructions in
+<a class="" href="https://abcd-devcom.github.io/blog/upgrade_instructions.md">https://github.com/ABCD-DEVCOM/ABCD/blob/master/zz_installation/upgrade_instructions.md</a>
+Check the configuration files of your databases with the corresponding upgraded example databases.</p>
+<p>The new Upgrade tool is still in the development phase: Will become available in a next release.
+If you use it now: <em>Take sufficient precautions (e.g. backups). Data loss and/or code mismatches may occur by using it now.</em></p>]]></content:encoded>
+            <category>release</category>
+            <category>v2.3.0</category>
+        </item>
+        <item>
+            <title><![CDATA[Update site]]></title>
+            <link>https://ABCD-DEVCOM.github.io/blog/update-site</link>
+            <guid>https://ABCD-DEVCOM.github.io/blog/update-site</guid>
+            <pubDate>Wed, 05 Oct 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[Minor updates to the files related to the Site Module to have minimal compatibility with newer versions of PHP.]]></description>
+            <content:encoded><![CDATA[<p>Minor updates to the files related to the Site Module to have minimal compatibility with newer versions of PHP.
+Some commands like "each" have been deprecated in PHP 8 making the Site incompatible with upgraded servers.
+This commit reduces the bugs in parts, but not all of them.
+Testing is still needed.</p>]]></content:encoded>
+            <category>BVS Site</category>
+            <category>PHP</category>
+        </item>
+        <item>
+            <title><![CDATA[Some ISIS-Software History and Technical Background]]></title>
+            <link>https://ABCD-DEVCOM.github.io/blog/isis-history-and-technical-background</link>
+            <guid>https://ABCD-DEVCOM.github.io/blog/isis-history-and-technical-background</guid>
+            <pubDate>Mon, 01 Feb 2010 00:00:00 GMT</pubDate>
+            <description><![CDATA[While free and open source software is gaining momentum in library automation, it is still not a trivial event to launch a full-blown integrated library system (ILS), given today's high demands on such library systems.]]></description>
+            <content:encoded><![CDATA[<p>While free and open source software is gaining momentum in library automation, it is still not a trivial event to launch a full-blown integrated library system (ILS), given today's high demands on such library systems.</p>
+<p>In this article, we describe the ISIS-software origins of the ABCD software. Many librarians, especially younger ones, have never heard about ISIS, its relevance, and its technological concepts, so we will try to shed some light on this in order for librarians to better judge the meaning of the ABCD software.</p>
+<p><strong>Editor's Note:</strong> <em>This article was originally published in LIBER QUARTERLY 19 (3/4), February 2010. It serves as the foundational manifesto for the ABCD project.</em></p>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-origins-of-the-isis-software">The Origins of the ISIS Software<a href="https://abcd-devcom.github.io/blog/isis-history-and-technical-background#the-origins-of-the-isis-software" class="hash-link" aria-label="Direct link to The Origins of the ISIS Software" title="Direct link to The Origins of the ISIS Software" translate="no">​</a></h2>
+<p>For those who know about ISIS (or, with its full name: <strong>CDS/ISIS</strong>), there is often a partly correct but also partly incorrect association with "old DOS-software", "UNESCO" and "developing countries".</p>
+<p>The software indeed has a history of many decades. Its roots go back to the <strong>International Labour Organisation (ILO)</strong> in Geneva which developed an 'Integrated Set of Information Systems' (ISIS) in the early 1960s. This system was meant to run on the mainframe computers of that era.</p>
+<p>This system was picked up by <strong>UNESCO</strong> (United Nations Educational, Scientific and Cultural Organization) towards the end of the 1960s to manage their database of projects, consultants and publications. UNESCO further developed the software and named it <strong>CDS/ISIS</strong>: <em>Computerised Documentation Service / Integrated Set of Information Systems</em>.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-micro-computer-revolution">The Micro-Computer Revolution<a href="https://abcd-devcom.github.io/blog/isis-history-and-technical-background#the-micro-computer-revolution" class="hash-link" aria-label="Direct link to The Micro-Computer Revolution" title="Direct link to The Micro-Computer Revolution" translate="no">​</a></h3>
+<p>In 1985, a version for "mini-computers" (the PDP-11 series of Digital Equipment Corporation) was produced (MINISIS) in cooperation with the Canadian IDRC, but more importantly: a version for the upcoming "micro-computers" (running on MS-DOS) was released: <strong>Micro-CDS/ISIS</strong>.</p>
+<p>This version became immensely popular worldwide because:</p>
+<ol>
+<li class=""><strong>It was free:</strong> UNESCO distributed it free of charge to non-profit organizations.</li>
+<li class=""><strong>It was efficient:</strong> It ran remarkably well on the modest hardware of that time (IBM PC/XT/AT).</li>
+<li class=""><strong>It was flexible:</strong> It allowed the management of non-structured, variable-length text data, ideal for bibliographic information.</li>
+</ol>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="technical-philosophy-the-nosql-precursor">Technical Philosophy: The "NoSQL" Precursor<a href="https://abcd-devcom.github.io/blog/isis-history-and-technical-background#technical-philosophy-the-nosql-precursor" class="hash-link" aria-label="Direct link to Technical Philosophy: The &quot;NoSQL&quot; Precursor" title="Direct link to Technical Philosophy: The &quot;NoSQL&quot; Precursor" translate="no">​</a></h2>
+<p>Technologically, the software relies on very specific concepts which are currently being 'reinvented' as <strong>"NoSQL"</strong> databases.</p>
+<p>In the relational database world (SQL), databases are sets of two-dimensional tables (Rows and Columns). This structure is rigid: a column must be defined with a fixed type and length. This causes issues for libraries:</p>
+<ul>
+<li class=""><em>How long is a title?</em> It can be 5 characters or 500.</li>
+<li class=""><em>How many authors does a book have?</em> It can be one, none, or twenty.</li>
+</ul>
+<p>ISIS solved this decades ago with a different storage architecture:</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="1-the-master-file-mst">1. The Master File (<code>.MST</code>)<a href="https://abcd-devcom.github.io/blog/isis-history-and-technical-background#1-the-master-file-mst" class="hash-link" aria-label="Direct link to 1-the-master-file-mst" title="Direct link to 1-the-master-file-mst" translate="no">​</a></h3>
+<p>Instead of tables, ISIS stores records in a linear file.</p>
+<ul>
+<li class="">Each record has a unique number: <strong>MFN</strong> (Master File Number).</li>
+<li class="">Fields are stored with a <strong>Directory</strong> (Tag, Length, Position) followed by the data.</li>
+<li class="">Fields are <strong>Variable Length</strong>: They only take up the space they need.</li>
+<li class="">Fields are <strong>Repeatable</strong>: You can have multiple occurrences of the same field (e.g., multiple authors) without creating new tables.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="2-the-cross-reference-file-xrf">2. The Cross-Reference File (<code>.XRF</code>)<a href="https://abcd-devcom.github.io/blog/isis-history-and-technical-background#2-the-cross-reference-file-xrf" class="hash-link" aria-label="Direct link to 2-the-cross-reference-file-xrf" title="Direct link to 2-the-cross-reference-file-xrf" translate="no">​</a></h3>
+<p>This is a simple index (Pointer) file. It tells the system exactly where (byte offset) each MFN starts in the Master File, allowing for instant access to any record by its number.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="3-the-inverted-file-ifp">3. The Inverted File (<code>.IFP</code>)<a href="https://abcd-devcom.github.io/blog/isis-history-and-technical-background#3-the-inverted-file-ifp" class="hash-link" aria-label="Direct link to 3-the-inverted-file-ifp" title="Direct link to 3-the-inverted-file-ifp" translate="no">​</a></h3>
+<p>This is the B*Tree index that makes searching fast.</p>
+<ul>
+<li class="">It functions like the index at the back of a book.</li>
+<li class="">It maps <strong>Terms</strong> (Words, Phrases) to the <strong>MFNs</strong> that contain them.</li>
+<li class="">It is created based on a <strong>FST (Field Selection Table)</strong>, which extracts data from the records using the Formatting Language.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="4-the-formatting-language-pft">4. The Formatting Language (PFT)<a href="https://abcd-devcom.github.io/blog/isis-history-and-technical-background#4-the-formatting-language-pft" class="hash-link" aria-label="Direct link to 4. The Formatting Language (PFT)" title="Direct link to 4. The Formatting Language (PFT)" translate="no">​</a></h3>
+<p>ISIS includes a powerful scripting language (Print Format Technology) that can:</p>
+<ul>
+<li class="">Display data conditionally (e.g., <em>only show the edition if it exists</em>).</li>
+<li class="">Format data (e.g., <em>convert authors to Uppercase</em>).</li>
+<li class="">Generate complex outputs like HTML, XML, or catalog cards.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="evolution-windows-and-the-web">Evolution: Windows and the Web<a href="https://abcd-devcom.github.io/blog/isis-history-and-technical-background#evolution-windows-and-the-web" class="hash-link" aria-label="Direct link to Evolution: Windows and the Web" title="Direct link to Evolution: Windows and the Web" translate="no">​</a></h2>
+<p>As technology moved from DOS to Windows, UNESCO released <strong>WinISIS</strong>. However, the real challenge was the Internet.</p>
+<p>In 1995, during the World Congress on Health Information, <strong>BIREME</strong> (the PAHO/WHO center in Brazil) launched the <strong>ISIS-DLL</strong>, a library that allowed developers to interact with ISIS databases from Windows applications.</p>
+<p>From this, <strong>WXIS</strong> (Web eXtended ISIS) was born. WXIS allowed ISIS databases to be queried and updated via a Web Server (CGI), effectively bringing ISIS to the Internet. This technology powers the <strong>BVS (Biblioteca Virtual em Saúde)</strong>, one of the largest networks of health information in the world.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-birth-of-abcd">The Birth of ABCD<a href="https://abcd-devcom.github.io/blog/isis-history-and-technical-background#the-birth-of-abcd" class="hash-link" aria-label="Direct link to The Birth of ABCD" title="Direct link to The Birth of ABCD" translate="no">​</a></h2>
+<p>Despite these advances, the ISIS community lacked a modern, integrated tool. Users had the <em>engine</em> (CISIS/WXIS) but had to build the <em>car</em> (the interface) themselves.</p>
+<p>In 2007, a consortium of <strong>VLIR/UOS</strong> (Belgium) and <strong>BIREME</strong> (Brazil) started the <strong>ABCD Project</strong>:</p>
+<ul>
+<li class=""><strong>A</strong>utomatisación de</li>
+<li class=""><strong>B</strong>ibliotécas y</li>
+<li class=""><strong>C</strong>entros de</li>
+<li class=""><strong>D</strong>ocumentación</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="goals-of-abcd">Goals of ABCD<a href="https://abcd-devcom.github.io/blog/isis-history-and-technical-background#goals-of-abcd" class="hash-link" aria-label="Direct link to Goals of ABCD" title="Direct link to Goals of ABCD" translate="no">​</a></h3>
+<ol>
+<li class=""><strong>Full Integration:</strong> Combine the cataloging power of ISIS with circulation (loans), acquisitions, and serials management.</li>
+<li class=""><strong>Web-Based:</strong> run entirely in a browser.</li>
+<li class=""><strong>FOSS:</strong> Released as Free and Open Source Software.</li>
+<li class=""><strong>Multilingual:</strong> Designed from the start to support multiple languages.</li>
+</ol>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="architecture">Architecture<a href="https://abcd-devcom.github.io/blog/isis-history-and-technical-background#architecture" class="hash-link" aria-label="Direct link to Architecture" title="Direct link to Architecture" translate="no">​</a></h3>
+<p>ABCD uses <strong>Central</strong> (the management interface) and <strong>iAH/EmpWeb</strong> (the public interface). It utilizes the <strong>CISIS</strong> utilities (created by BIREME) to perform high-speed indexing and data manipulation, ensuring that even large databases (millions of records) can be managed on modest servers.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="conclusion">Conclusion<a href="https://abcd-devcom.github.io/blog/isis-history-and-technical-background#conclusion" class="hash-link" aria-label="Direct link to Conclusion" title="Direct link to Conclusion" translate="no">​</a></h2>
+<p>The release of ABCD brings a modern solution to the thousands of libraries worldwide that still rely on ISIS technology. It proves that the "NoSQL" concepts pioneered by ISIS in the 1960s are still valid and highly efficient for managing unstructured text data in the 21st century.</p>
+<p>By combining the proven stability of the ISIS storage engine with modern web technologies (PHP, JavaScript), ABCD offers a powerful, low-cost alternative to commercial Library Systems, empowering libraries in developing countries to manage their information with autonomy.</p>]]></content:encoded>
+            <category>History</category>
+            <category>Architecture</category>
+            <category>CISIS</category>
+            <category>NoSQL</category>
+        </item>
+    </channel>
+</rss>
