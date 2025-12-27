@@ -137,7 +137,7 @@ const config = {
             items: [
               {
                 label: 'Tutorial',
-                to: '/docs/3.1/category/tutorials',
+                to: '/docs/3.1/category/tutorials--how-to',
               },
             ],
           },
