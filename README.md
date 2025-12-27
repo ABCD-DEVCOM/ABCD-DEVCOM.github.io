@@ -18,7 +18,7 @@ Clone the repository and install the dependencies:
 
 ```bash
 # Clone the repository
-git clone [https://github.com/ABCD-DEVCOM/ABCD-DEVCOM.github.io.git](https://github.com/ABCD-DEVCOM/ABCD-DEVCOM.github.io.git)
+git clone https://github.com/ABCD-DEVCOM/ABCD-DEVCOM.github.io.git
 
 # Enter the directory
 cd ABCD-DEVCOM.github.io
