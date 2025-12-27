@@ -45,6 +45,16 @@ const config = {
     mermaid: true,
   },
 
+  headTags: [
+    {
+      tagName: 'meta',
+      attributes: {
+        name: 'algolia-site-verification', // Confirme se o nome pedido é este
+        content: '96027C8806F3B990',
+      },
+    },
+  ],
+
   presets: [
     [
       'classic',
