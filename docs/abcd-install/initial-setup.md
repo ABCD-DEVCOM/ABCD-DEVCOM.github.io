@@ -32,7 +32,7 @@ The default credentials are public knowledge. Keeping them represents a major se
 3.  In the main menu, navigate to **Administration** > **User administration**.
 4.  Click on the **User administration** icon.
 
-![User Administration Menu](../media/install/user-admin-menu.png)
+![User Administration Menu](../media/install/operator-admin-menu.png)
 
 5.  Locate the operator **abcd** in the list and click the **Edit** (pencil) icon.
 6.  Enter a new, strong password in the "Password" and "Confirm password" fields.
@@ -43,16 +43,20 @@ The default credentials are public knowledge. Keeping them represents a major se
 You should replace the generic ABCD logos and texts with your institution's branding.
 
 1.  Go to **Administration** > **ABCD Configuration**.
+![ABCD Configuration](../media/install/config-abcd-menu.png)
+
 2.  Select **System settings (abcd.def)**.
+![System Settings Screen](../media/install/abcd-def-settings.png)
+
 3.  Here you can modify:
     * **Institution Name:** Appears in headers and reports.
     * **Logo:** You can upload your library's logo file.
     * **URL:** The official website of your institution.
 
-![System Settings Screen](../media/install/abcd-def-settings.png)
+![Edit ABCD.DEF](../media/install/abcd-def-edit.png)
 
 :::tip
-Changes made here reflect immediately on the internal interface. For the OPAC customization, please refer to the **OPAC Configuration** section in the documentation.
+Changes made here reflect immediately on the internal interface. For the OPAC customization, please refer to the **[OPAC Configuration](/docs/3.1/category/opac-public-catalog)** section in the documentation.
 :::
 
 ## 4. Create Profiles and Operators
@@ -74,4 +78,4 @@ Avoid using the generic `abcd` superuser for daily tasks. Create individual acco
 Now that your system is secure and personalized, you are ready to start:
 
 * **[Creating your first Catalog](../quickstart/creating-first-catalog.md)**
-* **[Configuring the OPAC](/docs/3.1/category/opac-abcd)**
+* **[Configuring the OPAC](/docs/3.1/category/opac-public-catalog)**
