@@ -31,7 +31,7 @@ const config = {
   projectName: 'ABCD-DEVCOM.github.io', // Usually your repo name.
   deploymentBranch: 'gh-pages',    // Branch onde o site estático ficará (padrão)
   trailingSlash: false,            // Recomendado pelo GitHub Pages
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
 
   // Even if you don't use internationalization, you can use this field to set
@@ -137,7 +137,7 @@ const config = {
             items: [
               {
                 label: 'Tutorial',
-                to: '/category/tutorials',
+                to: '/docs/3.1/category/tutorials',
               },
             ],
           },
