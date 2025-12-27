@@ -13,17 +13,17 @@ The OPAC is highly customizable. Almost every aspect—from the logo to the sear
 
 **Access:**
 1.  Log in to the **Central Module** as a Superuser.
+
+![Central Module](../../../media/abcd-modules/opac-abcd/opac-admin/opac-admin-001.png)
+
 2.  Go to **OPAC Configuration** (usually an icon in the main toolbar or a menu option).
 
-<img width="1357" height="693" alt="image" src="https://github.com/user-attachments/assets/f30944ad-0325-40f3-b42f-ae908cf8f59b" />
-
-<img width="1140" height="424" alt="image" src="https://github.com/user-attachments/assets/c7d77431-1132-4887-9309-eded6498930b" />
+![OPAC Configuration](../../../media/abcd-modules/opac-abcd/opac-admin/opac-admin-002.png)
 
 
 3.  This opens the **OPAC Back-Office** (`conf_opac_menu.php`).
 
-<img width="1363" height="765" alt="image" src="https://github.com/user-attachments/assets/79421aee-4aa4-4afe-9f62-63590042f3a6" />
-
+![OPAC Back-Office](../../../media/abcd-modules/opac-abcd/opac-admin/opac-admin-panel.png)
 
 ## Key Configuration Areas
 
