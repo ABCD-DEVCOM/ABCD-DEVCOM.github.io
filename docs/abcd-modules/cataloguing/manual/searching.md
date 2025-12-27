@@ -21,7 +21,7 @@ Located at the top of the cataloging interface, this is the fastest way to find 
     1.  Select the **Index** from the dropdown menu (e.g., `Title`, `Author`, `Control Number`).
     2.  Type your term in the text box.
     3.  Press **Enter** or click **Go**.
-* **Technical Note:** This sends a direct query to the Lucene/CISIS Inverted File using the prefix defined in your FST (e.g., `TI_` for Title).
+* **Technical Note:** This sends a direct query to the CISIS Inverted File using the prefix defined in your FST (e.g., `TI_` for Title).
 
 ---
 
