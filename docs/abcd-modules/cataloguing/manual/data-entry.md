@@ -17,6 +17,9 @@ When you open the Data Entry module, you are presented with a toolbar, a workspa
 ### The Main Toolbar
 Located at the top of the record editor, this toolbar provides the following actions:
 
+![Record toolbar](../../../media/abcd-modules/cataloguing/manual/data-entry/data-entry-record-toolbar.png)
+
+
 | Icon | Action | Description |
 | :--- | :--- | :--- |
 | ![alt text](../../../media/abcd-modules/cataloguing/manual/data-entry/data-entry-search-icon.png) | **Search** | Opens the search dialog to find specific records. |

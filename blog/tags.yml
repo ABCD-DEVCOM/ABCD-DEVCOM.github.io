@@ -31,7 +31,7 @@ bvs-site:
   label: BVS Site
 php:
   label: PHP
-  release:
+release:
   label: Release
   permalink: /release
   description: Official release notes
