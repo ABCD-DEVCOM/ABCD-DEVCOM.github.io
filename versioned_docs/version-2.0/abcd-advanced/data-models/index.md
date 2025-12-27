@@ -390,7 +390,7 @@ The default table in the root of the databases folder has content:
 
 In this particular table we have included the numbers from 0 to 9 (codes 048 to 057) because it is in our interest to index as words those cases of titles or other phrases that contain numerical values ​​such as dates and other references. This table includes also many letters from the Unicode Latin-1 Supplement range.
 
-See the [full ANSI table](miscellanea/ansi-table.md) for the all characters and corresponding ANSI codes.
+See the [full ANSI table](./docs/abcd-advanced/cisis-utilities/ansi-table) for the all characters and corresponding ANSI codes.
 
 If you want to include other symbols in Technique 4 or 8 indexing, just get your ANSI code and insert it in the place corresponding to your sequence.\\ 
 If you do not want the numbers to be included in the indexing by techniques 4 or 8, eliminate the codes 048 to 057.
@@ -484,7 +484,7 @@ The default table for ANSI/ISO-8859-1 in the root of the databases folder has co
 
 ```
 
-See the [full ANSI table](miscellanea/ansi-table.md) for the all characters and corresponding ANSI codes.
+See the [full ANSI table](./docs/abcd-advanced/cisis-utilities/ansi-table) for the all characters and corresponding ANSI codes.
 
 The same table with captions. Th first line is the decimal number, the second line is value, the third line is the result.\\
 However for the table used by ABCD: 
