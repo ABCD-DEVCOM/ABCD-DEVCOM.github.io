@@ -103,7 +103,7 @@ const config = {
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       algolia: {
-        contextualSearch: true,
+        contextualSearch: false,
         appId: 'AV1I37IPEK',
         indexName: 'docs_abcd',
         apiKey: '32900ef65effb8906fc43597b7376aef',
