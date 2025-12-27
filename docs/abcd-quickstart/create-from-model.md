@@ -14,6 +14,8 @@ The fastest way to get started is to clone one of the industry-standard models i
 2.  On the main dashboard, locate the **Administration** section.
 3.  Click on **Create new database**.
 
+![Access the Administration Menu](../media/abcd-quickstart/create-from-model-001.png)
+
 ### 2. Define Basic Information
 You will see a form asking for the database details:
 
@@ -23,6 +25,8 @@ You will see a form asking for the database details:
 * **Database description:** Enter a human-readable title.
     * *Example:* `Main Library Catalog (MARC 21)`
 * **Create from:** Select **Use existing database**.
+
+![Define Basic Information](../media/abcd-quickstart/create-from-model-002.png)
 
 ### 3. Select the Model
 A dropdown list will appear with available templates. Common options include:
@@ -38,6 +42,8 @@ The system will copy all necessary structure files (`.fdt`, `.fmt`, `.pft`, `.fs
 When the process finishes, you will see a confirmation message.
 
 Click **Back** or **Return to Menu**.
+
+![Confirmation](../media/abcd-quickstart/create-from-model-003.png)
 
 ## Next Steps
 Your database is ready!
