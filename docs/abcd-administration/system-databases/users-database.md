@@ -44,4 +44,4 @@ Administrators can manage this database via the **User Administration** menu in 
 * Changing user profiles.
 * Deactivating users.
 
-For detailed instructions on managing users via the interface, see the [User Management](../user-management.md) guide.
+For detailed instructions on managing users via the interface, see the [User Management](/docs/3.1/abcd-administration/access-management) guide.

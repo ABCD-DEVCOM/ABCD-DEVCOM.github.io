@@ -54,4 +54,4 @@ This is achieved by another flow element, this time with the action exit, which 
 ```
 
 The argument of the flow element, 1 or 2 in this example, is the return code that is passed to the operating system. \\
-More info: [abc-of-cisis/isiscriptref/flow.md](abc-of-cisis/isiscriptref/flow.md)
+More info: [/docs/3.1/isisscript](/docs/3.1/isisscript)

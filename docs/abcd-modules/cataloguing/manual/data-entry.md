@@ -25,7 +25,7 @@ Located at the top of the record editor, this toolbar provides the following act
 | 🗑️ | **Delete** | Logically deletes the record (marks it for removal). |
 | 🖨️ | **Print** | Sends the current record to a printer-friendly view. |
 | 📋 | **Copy** | Duplicates the current record content into a new record. |
-| ☁️ | **Z39.50** | Opens the [Z39.50 client](z3950.md) to import external data. |
+| ☁️ | **Z39.50** | Opens the [Z39.50 client](/docs/3.1/abcd-modules/cataloguing/configuration/z3950-server) to import external data. |
 
 ### Navigation Bar
 Located at the bottom of the screen, this bar allows you to move sequentially through the database.

@@ -18,4 +18,4 @@ A crucial parameter for most tasks is the name of the database to be used, e.g.
 
 The WWWISIS Reference Manual tells you what parameters can be used in what tasks.
 
-See also [abc-of-cisis/isiscriptref/parm.md](abc-of-cisis/isiscriptref/parm.md)
+See also [/docs/3.1/abcd-advanced/isisscript/reference/parm](/docs/3.1/abcd-advanced/isisscript/reference/parm)

@@ -14,7 +14,7 @@ This documentation is divided into three main sections depending on your role:
 If you need to catalog books, search for records, or print labels, start here.
 * **[Data Entry](manual/data-entry.md)**: Creating and editing records.
 * **[Searching](manual/searching.md)**: Retrieving information.
-* **[Z39.50 Copy Cataloging](manual/z3950.md)**: Downloading records from other libraries.
+* **[Z39.50 Copy Cataloging](manual/Z39.50.md)**: Downloading records from other libraries.
 
 ## 2. Database Configuration (Technical)
 If you are setting up the database structure or modifying fields.
