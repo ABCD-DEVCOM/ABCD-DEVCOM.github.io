@@ -94,9 +94,9 @@ const config = {
       image: 'img/docusaurus-social-card.jpg',
       algolia: {
         contextualSearch: true,
-        appId: 'AERTJQXT51',
+        appId: 'AV1I37IPEK',
         indexName: 'docs_abcd',
-        apiKey: '03e71cff11c45330590869da821f7e47',
+        apiKey: '32900ef65effb8906fc43597b7376aef',
       },
       navbar: {
         title: '',

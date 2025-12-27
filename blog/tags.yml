@@ -31,3 +31,11 @@ bvs-site:
   label: BVS Site
 php:
   label: PHP
+  release:
+  label: Release
+  permalink: /release
+  description: Official release notes
+v2.3.0:
+  label: v2.3.0
+  permalink: /v2.3.0
+  description: Version 2.3.0 specific posts

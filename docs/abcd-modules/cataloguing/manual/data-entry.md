@@ -12,12 +12,14 @@ The **Data Entry** window is the primary workspace for catalogers. It allows for
 
 When you open the Data Entry module, you are presented with a toolbar, a workspace (worksheet), and a navigation bar.
 
+![Data Entry Interface](../../../media/abcd-modules/cataloguing/manual/data-entry/data-entry-toolbar.png)
+
 ### The Main Toolbar
 Located at the top of the record editor, this toolbar provides the following actions:
 
 | Icon | Action | Description |
 | :--- | :--- | :--- |
-| 🔍 | **Search** | Opens the search dialog to find specific records. |
+| ![alt text](../../../media/abcd-modules/cataloguing/manual/data-entry/data-entry-search-icon.png) | **Search** | Opens the search dialog to find specific records. |
 | 📄 | **New** | Creates a blank record using the default worksheet. |
 | ✏️ | **Edit** | Unlocks the current record for modification. |
 | 💾 | **Save** | Commits changes to the Master File. |

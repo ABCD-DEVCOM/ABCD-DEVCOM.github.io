@@ -5,6 +5,7 @@ authors:
   - name: Egbert de Smet
     title: University of Antwerp
     url: https://github.com/ABCD-DEVCOM
+    image_url: https://github.com/ABCD-DEVCOM.png
 tags: [history, architecture, cisis, nosql]
 date: 2010-02-01
 ---
