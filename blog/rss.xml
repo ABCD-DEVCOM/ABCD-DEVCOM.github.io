@@ -44,7 +44,7 @@ It is recommended to read the standard upgrade instructions in
 Check the configuration files of your databases with the corresponding upgraded example databases.</p>
 <p>The new Upgrade tool is still in the development phase: Will become available in a next release.
 If you use it now: <em>Take sufficient precautions (e.g. backups). Data loss and/or code mismatches may occur by using it now.</em></p>]]></content:encoded>
-            <category>release</category>
+            <category>Release</category>
             <category>v2.3.0</category>
         </item>
         <item>
