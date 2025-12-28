@@ -10,7 +10,7 @@ The Cataloging module provides **6 distinct methods** to retrieve records. Each 
 
 ![Forms search](../../../media/abcd-modules/cataloguing/manual/data-entry/forms-search.png)
 
-
+---
 
 ## 1. Quick Search (Top Bar)
 Located at the top of the cataloging interface, this is the fastest way to find a record if you know a specific identifier.
@@ -19,8 +19,12 @@ Located at the top of the cataloging interface, this is the fastest way to find 
 
 * **How it works:**
     1.  Select the **Index** from the dropdown menu (e.g., `Title`, `Author`, `Control Number`).
-    2.  Type your term in the text box.
-    3.  Press **Enter** or click **Go**.
+    2.  A click on the magnifier icon shows the index of the field.  
+    Selecting a term from the index starts the search immediately
+    2.  Manual entry in the text field is also possible.   
+    Wild card and logical expression function the same as in the advanced search.  
+    Hit return to start the search
+
 * **Technical Note:** This sends a direct query to the CISIS Inverted File using the prefix defined in your FST (e.g., `TI_` for Title).
 
 ---
@@ -68,7 +72,7 @@ If your system is connected to a Thesaurus database, this tool allows you to sea
 ---
 
 ## 5. Free Search / Text Search (`freesearch.php`)
-**Icon:** ![Free Search](../../../media/abcd-modules/cataloguing/manual/data-entry/data-entry-free-search-icon.png) (Database Search)
+**Icon:** ![Free Search](../../../media/abcd-modules/cataloguing/manual/data-entry/data-entry-search-list-icon.png) (Database Search)
 
 Unlike the other methods that rely solely on the Index (FST), the **Free Search** is a powerful tool that can perform **Sequential Searches** on the raw data. This allows you to find text in fields that are *not* indexed.
 
@@ -100,4 +104,5 @@ In bibliographic databases mostly the title field.
 2.  **Browse:** The system displays a scrollable dictionary of terms actually existing in the database. In this list each alphabetic section can be clicked on to allow navigation in this normally large list. 
 3.  **Select:** Click on a term to retrieve all linked records.
     * *Tip:* You can select multiple terms to perform an `OR` search (e.g., "Smith" OR "Smyth").
+
 
