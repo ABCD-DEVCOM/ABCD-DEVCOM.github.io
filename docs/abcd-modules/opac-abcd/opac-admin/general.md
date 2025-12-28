@@ -17,8 +17,14 @@ This interface is the primary way to configure the behavior and look of your por
 
 ### Visual Identity
 * **Logo:** You can upload an image file (PNG, JPG) directly through the interface to replace the site logo.
+![Logo](../../../media/abcd-modules/opac-abcd/opac-admin/opac-layout-logo.png)
+
 * **Favicon (ShortIcon):** Upload the small icon displayed in the browser tab.
+![Favicon](../../../media/abcd-modules/opac-abcd/opac-admin/opac-layout-favicon.png)
+
 * **Styles (CSS):** Select the color scheme (e.g., `styles.css`, `dark.css`) from the dropdown menu.
+![alt text](../../../media/abcd-modules/opac-abcd/opac-admin/opac-layout-darkmod.png)
+
 * **Link Logo:** Define the URL where users are redirected when clicking the logo (usually the library homepage).
 
 ### Content & Text

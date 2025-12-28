@@ -29,8 +29,8 @@ The OPAC is highly customizable. Almost every aspect—from the logo to the sear
 
 The configuration menu is divided into logical sections:
 
-1.  **[General Configuration](./general):** Define the visual identity (Logo, Title) and global behavior (Languages, Charsets).
-2.  **[Databases](./databases):** Select which databases are published to the OPAC and define their paths.
+1.  **[General Configuration](./general.md):** Define the visual identity (Logo, Title) and global behavior (Languages, Charsets).
+2.  **[Databases](./databases.md):** Select which databases are published to the OPAC and define their paths.
 3.  **Search & Display:** Configure how users find records (Facets, Advanced Search) and how results look (PFTs).
 4.  **Info & Layout:** Manage the sidebar menus, footer, and informational pages (About, Help).
 

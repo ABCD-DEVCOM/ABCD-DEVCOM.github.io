@@ -15,6 +15,9 @@ Use the **"Available Databases"** option to create the list of catalogs visible 
 * **Add:** Select a database from the server and give it a public name (e.g., "Main Collection").
 * **Hide:** Remove a database from this list to make it invisible in the OPAC, even if it exists on the server.
 
+![Available Databases](../../../media/abcd-modules/opac-abcd/opac-admin/admin-databases.png)
+
+
 ## 2. Database Paths (`dr_path.def`)
 The OPAC needs to know exactly where the images and full-text files for each database are stored. This is configured in the **DR_PATH** (Digital Resources Path).
 
