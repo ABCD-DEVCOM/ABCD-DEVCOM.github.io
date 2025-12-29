@@ -139,7 +139,7 @@ const config = {
       },
           {to: '/blog', label: 'Blog', position: 'left'},
           {
-            href: 'https://github.com/ABCD-Community',
+            href: 'https://github.com/ABCD-DEVCOM/ABCD-DEVCOM.github.io',
             label: 'GitHub',
             position: 'right',
           },
