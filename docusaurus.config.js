@@ -96,16 +96,17 @@ const config = {
     ],
   ],
  // themes: ['@docusaurus/theme-search-algolia'],
-  themes: ['@docusaurus/theme-mermaid'],
   themes: [
+    '@docusaurus/theme-mermaid',
     [
       require.resolve("@easyops-cn/docusaurus-search-local"),
-      ({
+      {
         hashed: true,
-        language: ["en", "pt"], // ou só "en"
-      }),
+        language: ["en", "pt"],
+      },
     ],
   ],
+
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
