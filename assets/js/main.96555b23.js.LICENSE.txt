@@ -2,6 +2,54 @@
  * @license MIT */
 
 /*!
+ * Lunr languages, `Arabic` language
+ * https://github.com/MihaiValentin/lunr-languages
+ *
+ * Copyright 2018, Dalia Al-Shahrabi
+ * http://www.mozilla.org/MPL/
+ */
+
+/*!
+ * Lunr languages, `Dutch` language
+ * https://github.com/MihaiValentin/lunr-languages
+ *
+ * Copyright 2014, Mihai Valentin
+ * http://www.mozilla.org/MPL/
+ */
+
+/*!
+ * Lunr languages, `French` language
+ * https://github.com/MihaiValentin/lunr-languages
+ *
+ * Copyright 2014, Mihai Valentin
+ * http://www.mozilla.org/MPL/
+ */
+
+/*!
+ * Lunr languages, `German` language
+ * https://github.com/MihaiValentin/lunr-languages
+ *
+ * Copyright 2014, Mihai Valentin
+ * http://www.mozilla.org/MPL/
+ */
+
+/*!
+ * Lunr languages, `Italian` language
+ * https://github.com/MihaiValentin/lunr-languages
+ *
+ * Copyright 2014, Mihai Valentin
+ * http://www.mozilla.org/MPL/
+ */
+
+/*!
+ * Lunr languages, `Japanese` language
+ * https://github.com/MihaiValentin/lunr-languages
+ *
+ * Copyright 2014, Chad Liu
+ * http://www.mozilla.org/MPL/
+ */
+
+/*!
  * Lunr languages, `Portuguese` language
  * https://github.com/MihaiValentin/lunr-languages
  *
@@ -10,6 +58,35 @@
  */
 
 /*!
+ * Lunr languages, `Russian` language
+ * https://github.com/MihaiValentin/lunr-languages
+ *
+ * Copyright 2014, Mihai Valentin
+ * http://www.mozilla.org/MPL/
+ */
+
+/*!
+ * Lunr languages, `Spanish` language
+ * https://github.com/MihaiValentin/lunr-languages
+ *
+ * Copyright 2014, Mihai Valentin
+ * http://www.mozilla.org/MPL/
+ */
+
+/*!
+ * Snowball JavaScript Library v0.3
+ * http://code.google.com/p/urim/
+ * http://snowball.tartarus.org/
+ *
+ * Copyright 2010, Oleg Mazko
+ * http://www.mozilla.org/MPL/
+ */
+
+/*!
+ * based on
+ * Kazem Taghva, Rania Elkhoury, and Jeffrey Coombs (2005)
+ * Meryeme Hadni, Abdelmonaime Lachkar, and S. Alaoui Ouatik (2012)
+ *
  * Snowball JavaScript Library v0.3
  * http://code.google.com/p/urim/
  * http://snowball.tartarus.org/
