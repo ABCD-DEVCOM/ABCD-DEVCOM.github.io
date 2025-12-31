@@ -32,7 +32,6 @@ const config = {
   deploymentBranch: 'gh-pages',    // Branch onde o site estático ficará (padrão)
   trailingSlash: false,            // Recomendado pelo GitHub Pages
   onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'warn',
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
@@ -102,7 +101,7 @@ const config = {
       require.resolve("@easyops-cn/docusaurus-search-local"),
       {
         hashed: true,
-        language: ["pt", "en", "es", "fr", "de", "it", "ru", "ja", "ar", "nl", "be"],
+        language: ["pt", "en", "es", "fr", "de", "it", "ru", "ja", "ar", "nl"],
       },
     ],
   ],
