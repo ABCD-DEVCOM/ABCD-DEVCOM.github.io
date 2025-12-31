@@ -25,7 +25,7 @@ export default function FooterWrapper(props) {
             window.gtranslateSettings = {
               "default_language": "en",
               "detect_browser_language": true,
-              "languages": ["pt", "en", "es", "fr"],
+              "languages": ["pt", "en", "es", "fr", "de", "it", "ru", "ja", "ar","nl","be", ],
               "wrapper_selector": ".gtranslate_wrapper" 
             };
           `}
