@@ -29,22 +29,42 @@ Located at the top of the cataloging interface, this is the fastest way to find 
 
 ---
 
-## 2. Advanced Search (`buscar.php`)
+## 2. Search
 **Icon:** ![alt text](../../../media/abcd-modules/cataloguing/manual/data-entry/data-entry-search-icon.png)
 
-The Advanced Search provides a structured form for building complex queries using Boolean Logic (`AND`, `OR`, `NOT`).
+The Search (defined by the `Advanced Search form`) provides a structured form for building complex queries using Boolean Logic (`AND`, `OR`, `NOT`).
 
-![Advanced Search](../../../media/abcd-modules/cataloguing/manual/data-entry/forms-search-advanced.png)
+![Search](../../../media/abcd-modules/cataloguing/manual/data-entry/forms-search-advanced.png)
 
 **Features:**
 * **Multiple Fields:** Combine different criteria (e.g., `Author="Asimov"` **AND** `Year="1980"`).
-* **Search History Access:** Provides a shortcut to reload previous queries.
-* **Save Search:** You can save complex queries to your user profile (via `busqueda_guardar.php`) to re-run them later.
+* **Saved Searches:** You can save complex queries to your user profile (via `busqueda_guardar.php`) to re-run them later.
+
+ Details:
+
+- The Field column shows all fields of the `Advanced Search form`. With the drop-down button another field can be selected. Allows reordering of the expression and duplicate terms in the expression.
+- Note that Field = `- - -` allows arbitrary search expressions.
+- Button `Index` shows the index of the terms for the current field in the [Index window](#index-window).
+- The `Expression` may contain the dollar character `$` as last character of a string. Example: `myt$` means that any string starting with `myt` will match.
+- The `Expression` may contain the strings **and**, **or**, and **not**. To build logical expressions.
+- The `Expression` may contain groups, indicated by **(**…**)**
+- ![Copy expression](../../../media/abcd-modules/cataloguing/manual/data-entry/but-warehouse.png) shows a pop-up to copy a stored expression.
+- The last column contains the boolean operator between the expression fields (and, or, and not).
+
+The bottom shows a button to `Search`, a button to `reset` the values in the form and a button to `Edit search expression previously stored`
+
+### Index window
+![Index window](../../../media/abcd-modules/cataloguing/manual/data-entry/forms-search-index.png)
+
+Options in the index window:
+- Select one or more terms and `Search`. Performs the search immediately. Multiple terms are connected by **or**.
+- Select one or more terms and `Copy terms`. Copies the term(s) to the search form. Multiple terms are connected by **or**.
+- Type the first few characters  in the `Go to` box and `Enter`. Moves the list to the indicated term.
 
 ---
 
-## 3. Search History & Management
-**Icon:** ![Search History & Management](../../../media/abcd-modules/cataloguing/manual/data-entry/data-entry-search-history-icon.png)
+## 3. Search History
+**Icon:** ![Search History](../../../media/abcd-modules/cataloguing/manual/data-entry/data-entry-search-history-icon.png)
 
 Cataloging is repetitive. The **Search History** (`search_history.php`) keeps track of your recent activities.
 
@@ -75,8 +95,6 @@ If your system is connected to a Thesaurus database, this tool allows you to sea
 **Icon:** ![Free Search](../../../media/abcd-modules/cataloguing/manual/data-entry/data-entry-search-list-icon.png)  
 This search method is also called **Free Search** as it has powerful options to model the applied search and the resulting output. 
 
-Unlike the other methods that rely solely on the Index (FST), the **Free Search** is a powerful tool that can perform 
-
 **Key Capabilities:**
 * **Results in List:** Displays matches in a spreadsheet-like grid (defined in `freesearch_ex.php`), ideal for comparing records.
 * **Mark string:** You can search for an arbitrary string within a chosen field (e.g., "Find 'Biology' inside Tag 650"). This allows you to find text in fields that are *not* indexed.
@@ -88,7 +106,7 @@ Click the name of a parameterset and all fields in the set will be copied to the
 
 #### Record Selection
 Main goal of the record selection is to limit the number of results for the resulting list. This limits also the time to search for arbitrary strings.
-- By an advanced search. See [Advanced Search](#2-advanced-search-buscarphp)  
+- By a standard search. See [Search](#2-search)  
 Button Search` will copy the search expression to the form
 - By entering an MFN range  
 This options is intended for checks and rarely used, so hidden during normal operation
@@ -146,6 +164,7 @@ In bibliographic databases mostly the title field.
 2.  **Browse:** The system displays a scrollable dictionary of terms actually existing in the database. In this list each alphabetic section can be clicked on to allow navigation in this normally large list. 
 3.  **Select:** Click on a term to retrieve all linked records.
     * *Tip:* You can select multiple terms to perform an `OR` search (e.g., "Smith" OR "Smyth").
+
 
 
 
