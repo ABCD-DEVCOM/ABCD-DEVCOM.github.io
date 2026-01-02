@@ -30,7 +30,7 @@ Located at the top of the cataloging interface, this is the fastest way to find 
 ---
 
 ## 2. Advanced Search (`buscar.php`)
-**Icon:** ![alt text](../../../media/abcd-modules/cataloguing/manual/data-entry/data-entry-search-icon.png) (Magnifying Glass)
+**Icon:** ![alt text](../../../media/abcd-modules/cataloguing/manual/data-entry/data-entry-search-icon.png)
 
 The Advanced Search provides a structured form for building complex queries using Boolean Logic (`AND`, `OR`, `NOT`).
 
@@ -44,7 +44,7 @@ The Advanced Search provides a structured form for building complex queries usin
 ---
 
 ## 3. Search History & Management
-**Icon:** ![Search History & Management](../../../media/abcd-modules/cataloguing/manual/data-entry/data-entry-search-history-icon.png) (Clipboard)
+**Icon:** ![Search History & Management](../../../media/abcd-modules/cataloguing/manual/data-entry/data-entry-search-history-icon.png)
 
 Cataloging is repetitive. The **Search History** (`search_history.php`) keeps track of your recent activities.
 
@@ -57,7 +57,7 @@ Cataloging is repetitive. The **Search History** (`search_history.php`) keeps tr
 ---
 
 ## 4. Search with Thesaurus
-**Icon:** ![Search with Thesaurus](../../../media/abcd-modules/cataloguing/manual/data-entry/data-entry-tesaurus.png) (Notebook)
+**Icon:** ![Search with Thesaurus](../../../media/abcd-modules/cataloguing/manual/data-entry/data-entry-tesaurus.png)
 
 If your system is connected to a Thesaurus database, this tool allows you to search using **Controlled Vocabulary**.
 
@@ -71,21 +71,63 @@ If your system is connected to a Thesaurus database, this tool allows you to sea
 
 ---
 
-## 5. Free Search / Text Search (`freesearch.php`)
-**Icon:** ![Free Search](../../../media/abcd-modules/cataloguing/manual/data-entry/data-entry-search-list-icon.png) (Database Search)
+## 5. Search,result in list
+**Icon:** ![Free Search](../../../media/abcd-modules/cataloguing/manual/data-entry/data-entry-search-list-icon.png)  
+This search method is also called **Free Search** as it has powerful options to model the applied search and the resulting output. 
 
-Unlike the other methods that rely solely on the Index (FST), the **Free Search** is a powerful tool that can perform **Sequential Searches** on the raw data. This allows you to find text in fields that are *not* indexed.
+Unlike the other methods that rely solely on the Index (FST), the **Free Search** is a powerful tool that can perform 
 
 **Key Capabilities:**
-* **Results in List:** Displays matches in a spreadsheet-like grid (defined in `freesearch_ex.php`), ideal for reviewing large sets of data.
-* **Field Targeting:** You can search for a string specifically within a chosen tag (e.g., "Find 'Biology' inside Tag 650").
-* **Range Search:** Filter by MFN range (e.g., "Search only records 100 to 500").
-
+* **Results in List:** Displays matches in a spreadsheet-like grid (defined in `freesearch_ex.php`), ideal for comparing records.
+* **Mark string:** You can search for an arbitrary string within a chosen field (e.g., "Find 'Biology' inside Tag 650"). This allows you to find text in fields that are *not* indexed.
 ![Free Search](../../../media/abcd-modules/cataloguing/manual/data-entry/forms-free-search.png)
 
-:::info Sequential Search
-Since this method scans records one by one (if not using the index), it is the only way to find data in non-indexed fields (like Notes or internal URLs), though it may be slower on very large databases.
-:::
+### Form components
+A dropdown to use a `Saved parameterset`  
+Click the name of a parameterset and all fields in the set will be copied to the form
+
+#### Record Selection
+Main goal of the record selection is to limit the number of results for the resulting list. This limits also the time to search for arbitrary strings.
+- By an advanced search. See [Advanced Search](#2-advanced-search-buscarphp)  
+Button Search` will copy the search expression to the form
+- By entering an MFN range  
+This options is intended for checks and rarely used, so hidden during normal operation
+
+#### Action on the selected records
+- Sort by a selected field. Sort in reverse order is optional
+- Mark a string. The entered string will be marked red in the text of the result list
+- Action if the marked string is present in the results:
+  - Omit record if no hits will still find the number of the search results, but records with no hits will not be displayed.
+  - Omit field if no hits will omit displayed fields for a record if that field does not contain the Mark string
+
+#### Display field(s) and/or PFT
+This component determines the shown results.  
+The shown Fields can be selected in the multiselect list. The radio buttons modify the content:
+- Repeatable occurrences can be shown as a single line (concatenated and separated by a ";") or as multiple lines
+- The text of a field is preceded by a field indicator. This is either the Title (e.g. "Collectie") or the tag (e.g. "100")
+
+The field `Apply PFT` gives the option to show something extra in front of the standard selected Fields.
+- Text example: `if p(v250) then v250 fi`
+- Related picture example: `if p(v250) then '<img src="../../bases/snr/snrbld/'v250'" width=225>'fi`
+
+#### Action buttons
+
+Action buttons on the bottom of the form:
+- Button `Save parameterset` is used to save a set. See Parameterset
+- Button `Delete parameterset` is used to delete set. See Parameterset
+- Button `Executes` the search, sorts and marks the results and shows the [Result form](#-result-form)
+
+### Result form
+
+Note the buttons on the right of the form:
+- ![Select](../../../media/abcd-modules/cataloguing/manual/data-entry/but_select.jpg) Check box is used to add the record to the set of selected records. Equivalent to Check box in [Toolbar record](../data-entry.md#2-the-record-toolbar-toolbar_recordphp)
+- ![Select](../../../media/abcd-modules/cataloguing/manual/data-entry/but_view.jpg) Shows the selected record in a pop-up window with the default display format. Each clicked record gets its own pop-up window. This allows to visually compare the complete records.
+
+### Parameter set
+
+The parametersets are administrated in file `<base>/pfts/<lang>/freesearch_save.tab`. Each line of this file contains the name of the parameterset and the values of the parameters 
+- Button `Save parameterset` gives options to update an existing set or to create a new set
+- Button `Delete parameterset` gives the option to delete an existing parameterset 
 
 ---
 
@@ -104,5 +146,6 @@ In bibliographic databases mostly the title field.
 2.  **Browse:** The system displays a scrollable dictionary of terms actually existing in the database. In this list each alphabetic section can be clicked on to allow navigation in this normally large list. 
 3.  **Select:** Click on a term to retrieve all linked records.
     * *Tip:* You can select multiple terms to perform an `OR` search (e.g., "Smith" OR "Smyth").
+
 
 
