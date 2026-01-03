@@ -61,6 +61,20 @@ Options in the index window:
 - Select one or more terms and `Copy terms`. Copies the term(s) to the search form. Multiple terms are connected by **or**.
 - Type the first few characters  in the `Go to` box and `Enter`. Moves the list to the indicated term.
 
+### Result window
+
+- Search results are collected in a list that can be browsed.
+- On top of this page the record toolbar is shown for all kinds of edits
+- Button `Expression` can be used to modify/save the search expression
+![Index window](../../../media/abcd-modules/cataloguing/manual/data-entry/forms-search-edit-sav-expression.png)
+- The text of the search expression can be modified and button`Search` will execute the modified expression
+- Button `Refine` shows [Search](#2-search)
+- An expression can be saved by entering a name in `Description` followed by `save search expression`
+
+A saved expression can be used by ![Copy expression](../../../media/abcd-modules/cataloguing/manual/data-entry/but-warehouse.png).
+This shows a pop-up to copy a stored expression. ![Index window](../../../media/abcd-modules/cataloguing/manual/data-entry/forms-search-copy.png)
+
+
 ---
 
 ## 3. Search History
@@ -166,6 +180,7 @@ In bibliographic databases mostly the title field.
 2.  **Browse:** The system displays a scrollable dictionary of terms actually existing in the database. In this list each alphabetic section can be clicked on to allow navigation in this normally large list. 
 3.  **Select:** Click on a term to retrieve all linked records.
     * *Tip:* You can select multiple terms to perform an `OR` search (e.g., "Smith" OR "Smyth").
+
 
 
 
