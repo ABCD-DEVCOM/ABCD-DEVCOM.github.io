@@ -67,10 +67,8 @@ Options in the index window:
 **Icon:** ![Search History](../../../media/abcd-modules/cataloguing/manual/data-entry/data-entry-search-history-icon.png)
 
 Cataloging is repetitive. The **Search History** (`search_history.php`) keeps track of your recent activities.
-
-* **Session History:** Lists every search performed since you logged in. Click any entry to re-execute it.
-* **Saved Searches:** Access queries you explicitly saved. Useful for monthly reports or routine maintenance checks (e.g., "Show me all books without an ISBN").
-* **Combine Sets:** Advanced users can combine previous result sets (e.g., "Result Set #1" **NOT** "Result Set #2").
+- The shown history is for the current database.
+- A click on the magnifier icon executes the query
 
 ![Search History & Management](../../../media/abcd-modules/cataloguing/manual/data-entry/forms-history.png)
 
@@ -106,8 +104,12 @@ Click the name of a parameterset and all fields in the set will be copied to the
 
 #### Record Selection
 Main goal of the record selection is to limit the number of results for the resulting list. This limits also the time to search for arbitrary strings.
+
+Only one selection method can be used for the search
 - By a standard search. See [Search](#2-search)  
 Button Search` will copy the search expression to the form
+- By using the MFN's of previously selected records.
+This method is only shown if there are selected records. It is not possible modify the MFN numbers.
 - By entering an MFN range  
 This options is intended for checks and rarely used, so hidden during normal operation
 
@@ -136,7 +138,7 @@ Action buttons on the bottom of the form:
 - Button `Executes` the search, sorts and marks the results and shows the [Result form](#-result-form)
 
 ### Result form
-
+![Free Search result](../../../media/abcd-modules/cataloguing/manual/data-entry/forms-free-search-result.png)
 Note the buttons on the right of the form:
 - ![Select](../../../media/abcd-modules/cataloguing/manual/data-entry/but_select.jpg) Check box is used to add the record to the set of selected records. Equivalent to Check box in [Toolbar record](../data-entry.md#2-the-record-toolbar-toolbar_recordphp)
 - ![Select](../../../media/abcd-modules/cataloguing/manual/data-entry/but_view.jpg) Shows the selected record in a pop-up window with the default display format. Each clicked record gets its own pop-up window. This allows to visually compare the complete records.
@@ -164,6 +166,7 @@ In bibliographic databases mostly the title field.
 2.  **Browse:** The system displays a scrollable dictionary of terms actually existing in the database. In this list each alphabetic section can be clicked on to allow navigation in this normally large list. 
 3.  **Select:** Click on a term to retrieve all linked records.
     * *Tip:* You can select multiple terms to perform an `OR` search (e.g., "Smith" OR "Smyth").
+
 
 
 
