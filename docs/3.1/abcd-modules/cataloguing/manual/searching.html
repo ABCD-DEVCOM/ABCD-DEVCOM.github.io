@@ -13,7 +13,7 @@
 
 
 <meta name="algolia-site-verification" content="96027C8806F3B990"><link rel="stylesheet" href="/assets/css/styles.01d56ca4.css">
-<script src="/assets/js/runtime~main.dd91eeae.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.f467e8fa.js" defer="defer"></script>
 <script src="/assets/js/main.d58660b5.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -78,9 +78,8 @@
 <p><strong>Icon:</strong> <img decoding="async" loading="lazy" alt="Search History" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACkAAAArCAYAAADlqKH9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAALiSURBVFhH7ZZbSBRhGIbfMQg08xSbZZlpYW6LHSlWLTUvRKMoCwsWs4jWCjNWRIm6UdDCJfOQVJYoyCJkuoLRoqC2aWlJgmm2qZRspqnplrqpmbpdlEPzQzSjP2owD8zFvPO98PAPM3zM+Pi4BYscKzJYjIiStBAlaSFK0kKUpIUoSYv/QpKZ64LRaPiIpHsVePmmi5Pvkrki6WwItnmu4eSzYc6SQeduwTQ0CkXoDiyx+vVipqanodE1Yu1KB+iylGRFMIIlO7oGEJ9RhobWD2y230+KnCvhHEllchHK696yM7tl65AedxjuLk5sxhfBkn6ns/BtbII9OUNnH3TPDOQY8Fte6u7MnqzE0RZVt8+TY/9EsKRLSCJUCn8kRAYBACwWCyqet6H1XS9nbrOHM0J9pey9uqAaGYU16ClP5MzxYVZf98xrBQCGYRDi44W4iEDO9acg2RHK7JvziGBJTzcJld+KEARLFiafwFfzGG7er0VJdTM+DQyTI9QRJFnyuAUBUdmIUWtxLb8KMWotApTZeFjTSo5Shbdkc0cPLqq1kDjaolh9Cu2ll/Eg9SSc7JchOrUE7cbPZIUavCWva/RwkdhBl6mE75b1sLVeCr+t7niUqYSjnTVuFD4hK9TgLfmqvRvB8k1wWG7NyVfY2yBY7oWG10ZOThPekgwY/JicImOWyalpMqIGb8mdUldUNXTANDzKyfu/mFH5og1ybzdOThPekiqFP3oHR3BAlYv6FiPMYxOobXqPg6pc9JnMuHBsD1mhBm9J742rkZVwBP2mERyNz4dn2FUcv1SA7xOTAICnTZ1khRqCF4zu/iHUtxjRNzgM2YZV2LvdA3eK65CSV4n4yH2IVQSQFWCOC4Zgyb+RptEjTaNHXEQgosJ8cLe0nn02s6o52dtAnxPN6fGBmiQApORVorzOgLL0M5CFp3Keyb3dkBZ7aH6W3oWA94ezkIiStBAlaSFK0kKUpMVPXw4MDEURoBwAAAAASUVORK5CYII=" width="41" height="43" class="img_ev3q"></p>
 <p>Cataloging is repetitive. The <strong>Search History</strong> (<code>search_history.php</code>) keeps track of your recent activities.</p>
 <ul>
-<li class=""><strong>Session History:</strong> Lists every search performed since you logged in. Click any entry to re-execute it.</li>
-<li class=""><strong>Saved Searches:</strong> Access queries you explicitly saved. Useful for monthly reports or routine maintenance checks (e.g., &quot;Show me all books without an ISBN&quot;).</li>
-<li class=""><strong>Combine Sets:</strong> Advanced users can combine previous result sets (e.g., &quot;Result Set #1&quot; <strong>NOT</strong> &quot;Result Set #2&quot;).</li>
+<li class="">The shown history is for the current database.</li>
+<li class="">A click on the magnifier icon executes the query</li>
 </ul>
 <p><img decoding="async" loading="lazy" alt="Search History &amp;amp; Management" src="/assets/images/forms-history-122471b49b2cd3e760a8f73ce341ee45.png" width="1169" height="200" class="img_ev3q"></p>
 <hr>
@@ -109,9 +108,12 @@
 <!-- -->Click the name of a parameterset and all fields in the set will be copied to the form</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="record-selection">Record Selection<a href="#record-selection" class="hash-link" aria-label="Direct link to Record Selection" title="Direct link to Record Selection" translate="no">​</a></h4>
 <p>Main goal of the record selection is to limit the number of results for the resulting list. This limits also the time to search for arbitrary strings.</p>
+<p>Only one selection method can be used for the search</p>
 <ul>
 <li class="">By a standard search. See <a href="#2-search" class="">Search</a><br>
 <!-- -->Button Search` will copy the search expression to the form</li>
+<li class="">By using the MFN&#x27;s of previously selected records.
+This method is only shown if there are selected records. It is not possible modify the MFN numbers.</li>
 <li class="">By entering an MFN range<br>
 <!-- -->This options is intended for checks and rarely used, so hidden during normal operation</li>
 </ul>
@@ -146,7 +148,8 @@
 <li class="">Button <code>Executes</code> the search, sorts and marks the results and shows the <a href="#-result-form" class="">Result form</a></li>
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="result-form">Result form<a href="#result-form" class="hash-link" aria-label="Direct link to Result form" title="Direct link to Result form" translate="no">​</a></h3>
-<p>Note the buttons on the right of the form:</p>
+<p><img decoding="async" loading="lazy" alt="Free Search result" src="/assets/images/forms-free-search-result-b7e2ee94ed235b67f58267505020b47d.png" width="1220" height="735" class="img_ev3q">
+Note the buttons on the right of the form:</p>
 <ul>
 <li class=""><img decoding="async" loading="lazy" alt="Select" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD//gA7Q1JFQVRPUjogZ2QtanBlZyB2MS4wICh1c2luZyBJSkcgSlBFRyB2NjIpLCBxdWFsaXR5ID0gNzAK/9sAQwAKBwcIBwYKCAgICwoKCw4YEA4NDQ4dFRYRGCMfJSQiHyIhJis3LyYpNCkhIjBBMTQ5Oz4+PiUuRElDPEg3PT47/9sAQwEKCwsODQ4cEBAcOygiKDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7/8AAEQgAGQAZAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/aAAwDAQACEQMRAD8A9Qvb6/OqLYaelvv8nzmactjG7GBikx4k/wCoX/5Epqf8jef+vD/2pWzTAx4r7U7fU7a01BLUrch9jQFuCozzmtbNZOqf8jBpH/bb/wBBFalIDIvUvbXWl1C1tBdKbfySnmBCPmznml/tfVv+gH/5NL/hWpJUVMDMQahqGrWdzcWItY7UP1mDltwx2raxTEqSgD//2Q==" width="25" height="25" class="img_ev3q"> Check box is used to add the record to the set of selected records. Equivalent to Check box in <a class="" href="/docs/3.1/abcd-modules/cataloguing/data-entry.md#2-the-record-toolbar-toolbar_recordphp">Toolbar record</a></li>
 <li class=""><img decoding="async" loading="lazy" alt="Select" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/4QBoRXhpZgAATU0AKgAAAAgABAEaAAUAAAABAAAAPgEbAAUAAAABAAAARgEoAAMAAAABAAIAAAExAAIAAAARAAAATgAAAAAAAABgAAAAAQAAAGAAAAABcGFpbnQubmV0IDUuMC4xMwAA/9sAQwABAQEBAQEBAQEBAQEBAgIDAgICAgIEAwMCAwUEBQUFBAQEBQYHBgUFBwYEBAYJBgcICAgICAUGCQoJCAoHCAgI/9sAQwEBAQECAgIEAgIECAUEBQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgI/8AAEQgAGQAZAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/aAAwDAQACEQMRAD8A/uY+Nnx++Dv7OXge5+Ivxt8f6F8PfCUbiFbi8Zme5lIJEUEKBpZ5SAT5cas2ATjAJHw2v/BU7wbd241vRv2N/wDgoZ4h8CsPNi8S2XwukbTZ7fk/aUdp1cw4G7ds6du1eT/B/SPC/wAVv+Ck/wC0BL+1csN38bPCLwt8HfCuqqG0u38Nldw1fTFclZ713jzK4G6FlwD8v7r+cH9tf9uX9qH45ftV+H/GOreH7v4E/GHwUw8M6dp/h03EF7aXcVw5YOxYyPI0sjAJ93aQuGyzN+s8HcC0cdXhhpJylKEZt3tFKSbiopazd9JtNKLvGztd/mnFfGNXB0amIg+WMJuCVrylJPW7ekFa8o3Tco2ldJ2X9rn7Pn7UXwI/al8MXfiv4G/EPSfGtjayCHULZUkt73S5TnCXVpMqzQklWwWUBtpKlgM179X4XftNW0nw/wDjX+wp8VfhZZWfhn/goz4ruNJsfFnhjR1WODxXo0kCnVDrUaEBYIGjcpcsGYGLgN5IaL90a+Kz/KKVCMK9Bvkm5Kzd2nB2bTSSlBv4ZWV2pK14s+pyLNqldypVl70VGV0raTTaTV3yzVvejd6OMr2lZfLv7SP7Ivwd/an0fw/F8QbPXtC8ZaJOLvw54t8PXp0/XfDdxkHzLO8UEpyASjBkJCnbuVSPhq6/4Ju/tQN4ys/GFr/wUBsbjWLRBa2Wvap8E/D1/wCKLa1ClAg16Qi5Mm0kebw3fjpX7CJ0P1p9c2X8Q4vCw9nSkuXXSUYySvvZSTSv1ta/U7MfkeGxMuerF82mqcot22u4tN26X26HyH+zV+xZ8Jf2aNS8SeNNJv8Axn8TvjLrqhNe8d+MNROpa5qiDBERnYARQjauI4woIRN24opH15RRXn43H1sTU9rXlzS2+S2S7JdEtEdmDwNLDw9nRjZb+re7b3bfVvVn/9k=" width="25" height="25" class="img_ev3q"> Shows the selected record in a pop-up window with the default display format. Each clicked record gets its own pop-up window. This allows to visually compare the complete records.</li>
