@@ -4,7 +4,7 @@ title: Gizmo (String Manipulation)
 ---
 
 # Gizmo
-A useful parameter is *gizmo*. ([=> \<parm name=gizmo\>](abc-of-cisis/isiscriptref/parm#parm_name_gizmo.md)). It makes a reference to a gizmo database.
+A useful parameter is *gizmo*. ([=> \<parm name=gizmo\>](/abcd-advanced/isisscript/reference/parm.md#gizmo)). It makes a reference to a gizmo database.
 
 For example, if you have a gizmo database called *GIZ1*, the line would read:
 

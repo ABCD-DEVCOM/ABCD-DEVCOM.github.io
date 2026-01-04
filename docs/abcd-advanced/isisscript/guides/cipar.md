@@ -4,7 +4,7 @@ title: CIPAR and Paths
 ---
 
 # Cipar
-The example in [abc-of-cisis/isiscript/loops.md](abc-of-cisis/isiscript/loops.md) assumes that the CDS database is held in the same directory as the Isis script. Usually this is not desirable – you want to keep the database(s) in one directory and the scripts in the **`/cgi-bin`** directory.
+The example in [abcd-advanced/isisscript/guides/loops.md](abcd-advanced/isisscript/guides/loops.md) assumes that the CDS database is held in the same directory as the Isis script. Usually this is not desirable – you want to keep the database(s) in one directory and the scripts in the **`/cgi-bin`** directory.
 
 So you need to tell WXIS where to find the database. This is done using a parameter called **`cipar`**. 
 
