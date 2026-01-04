@@ -63,6 +63,8 @@ const config = {
           sidebarPath: './sidebars.js',
           includeCurrentVersion: true, // Garante que a pasta 'docs' seja publicada
           lastVersion: 'current', // Define que a versão 'current' é a última versão estável
+          showLastUpdateTime: true, // Mostra "Última atualização em..."
+          showLastUpdateAuthor: true, // (Opcional) Mostra quem atualizou
           versions: {
             current: {
               label: '3.1.X', // O nome que aparece no menu (em vez de Next)
@@ -75,6 +77,7 @@ const config = {
         },
         blog: {
           showReadingTime: true,
+          showLastUpdateTime: true,
           feedOptions: {
             type: ['rss', 'atom'],
             xslt: true,
