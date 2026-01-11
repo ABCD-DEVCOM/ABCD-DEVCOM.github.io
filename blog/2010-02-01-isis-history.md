@@ -1,11 +1,7 @@
 ---
 slug: isis-history-and-technical-background
 title: Some ISIS-Software History and Technical Background
-authors:
-  - name: Egbert de Smet
-    title: University of Antwerp
-    url: https://github.com/ABCD-DEVCOM
-    image_url: https://github.com/ABCD-DEVCOM.png
+authors: [edsz14]
 tags: [history, architecture, cisis, nosql]
 date: 2010-02-01
 ---
@@ -16,7 +12,7 @@ In this article, we describe the ISIS-software origins of the ABCD software. Man
 
 **Editor's Note:** *This article was originally published in LIBER QUARTERLY 19 (3/4), February 2010. It serves as the foundational manifesto for the ABCD project.*
 
----
+{/* truncate */}
 
 ## The Origins of the ISIS Software
 
