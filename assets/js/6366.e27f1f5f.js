@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkabcd_devcom_github_io=self.webpackChunkabcd_devcom_github_io||[]).push([[6366],{86366:(e,c,i)=>{i.d(c,{createArchitectureServices:()=>t.S});var t=i(38980);i(87960)}}]);

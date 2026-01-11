@@ -4,18 +4,302 @@
         <title>ABCD Software Documentation Blog</title>
         <link>https://ABCD-DEVCOM.github.io/blog</link>
         <description>ABCD Software Documentation Blog</description>
-        <lastBuildDate>Sat, 06 Sep 2025 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 10 Jan 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[v3.1.2 Cleaning and repairs]]></title>
+            <link>https://ABCD-DEVCOM.github.io/blog/v3-1-2-cleaning-and-repairs</link>
+            <guid>https://ABCD-DEVCOM.github.io/blog/v3-1-2-cleaning-and-repairs</guid>
+            <pubDate>Sat, 10 Jan 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[What's Changed]]></description>
+            <content:encoded><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-changed">What's Changed<a href="https://abcd-devcom.github.io/blog/v3-1-2-cleaning-and-repairs#whats-changed" class="hash-link" aria-label="Direct link to What's Changed" title="Direct link to What's Changed" translate="no">​</a></h2>
+<ul>
+<li class="">General Cleanup, UI Improvements, and Bug Fixes by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/590" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/590</a></li>
+<li class="">Meta tag added by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/591" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/591</a></li>
+<li class="">Update opac.tab by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/592" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/592</a></li>
+<li class="">OPAC HTML Improvement by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/593" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/593</a></li>
+</ul>
+<p><strong>Full Changelog</strong>: <a href="https://github.com/ABCD-DEVCOM/ABCD/compare/v3.1.1...v3.1.2" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/compare/v3.1.1...v3.1.2</a></p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="actions-by-database-administrator">Actions by database administrator<a href="https://abcd-devcom.github.io/blog/v3-1-2-cleaning-and-repairs#actions-by-database-administrator" class="hash-link" aria-label="Direct link to Actions by database administrator" title="Direct link to Actions by database administrator" translate="no">​</a></h2>
+<p>The upgrade of the code can be done with the upgrade manager</p>
+<p><strong>Note: If you are upgrading from v.3.0.0 or earlier then</strong></p>
+<ol>
+<li class="">Download from Git file upgrade_manager.php (<a href="https://github.com/ABCD-DEVCOM/ABCD/blob/9b2c3cad60831bf1436b391d325d497750fb2d70/www/htdocs/update_manager.php" target="_blank" rel="noopener noreferrer" class="">www/htdocs/update_manager.php</a> )</li>
+<li class="">Copy the downloaded file to the Document root of your installation<!-- -->
+<ol>
+<li class="">In Linux typical  <code>/opt/ABCD/htdocs</code></li>
+<li class="">Check that <code>update_manager.php</code> is readable by your webserver</li>
+</ol>
+</li>
+<li class="">Run ABCD, login as administrator, perform some arbitrary actions to ensure that ABCD detects the new version</li>
+<li class="">The footer shows a yellow bar with text <code>Update now (v3.1.2) ABCD is available</code>. Click on the link <code>Update Now</code></li>
+<li class="">The version of the Update  manager should be: <strong>v4.3</strong></li>
+<li class="">The Update manager will guide you through the upgrade process</li>
+</ol>]]></content:encoded>
+            <category>Release</category>
+            <category>v3.1.2</category>
+        </item>
+        <item>
+            <title><![CDATA[Update for HTML5 part1]]></title>
+            <link>https://ABCD-DEVCOM.github.io/blog/release-v3-1-1-update-for-html5-part1-latest</link>
+            <guid>https://ABCD-DEVCOM.github.io/blog/release-v3-1-1-update-for-html5-part1-latest</guid>
+            <pubDate>Tue, 23 Dec 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[What's Changed]]></description>
+            <content:encoded><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-changed">What's Changed<a href="https://abcd-devcom.github.io/blog/release-v3-1-1-update-for-html5-part1-latest#whats-changed" class="hash-link" aria-label="Direct link to What's Changed" title="Direct link to What's Changed" translate="no">​</a></h2>
+<p>Functional: nothing</p>
+<p><strong>Full Changelog</strong>: <a href="https://github.com/ABCD-DEVCOM/ABCD/compare/v3.1.0...v3.1.1" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/compare/v3.1.0...v3.1.1</a></p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="details">Details<a href="https://abcd-devcom.github.io/blog/release-v3-1-1-update-for-html5-part1-latest#details" class="hash-link" aria-label="Direct link to Details" title="Direct link to Details" translate="no">​</a></h2>
+<p>The current generated HTML has obsolete tags/attributes, unclosed tags and many more (small errors). Many of these inconsistencies are hidden/masked/solved by modern browsers so the user is not aware of anomalies. But this is a ticking bomb, so the target is more robust code in HTML5.</p>
+<p>Tool:  <strong>Markup Validation Service</strong> (<a href="https://validator.w3.org/" target="_blank" rel="noopener noreferrer" class="">https://validator.w3.org/</a>)
+Planning: Several code upgrades will be necessary and, at a certain moment also a rewrite of existing users defined reports/worksheets.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="actions-by-database-administrator">Actions by database administrator<a href="https://abcd-devcom.github.io/blog/release-v3-1-1-update-for-html5-part1-latest#actions-by-database-administrator" class="hash-link" aria-label="Direct link to Actions by database administrator" title="Direct link to Actions by database administrator" translate="no">​</a></h3>
+<p>The upgrade of the code can be done with the upgrade manager</p>]]></content:encoded>
+            <category>Release</category>
+            <category>v3.1.1</category>
+        </item>
+        <item>
+            <title><![CDATA[Release v3.1.0: Repairs for OPAC and Update manager]]></title>
+            <link>https://ABCD-DEVCOM.github.io/blog/release-v3-1-0-repairs-for-opac-and-update-manager</link>
+            <guid>https://ABCD-DEVCOM.github.io/blog/release-v3-1-0-repairs-for-opac-and-update-manager</guid>
+            <pubDate>Fri, 12 Dec 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[What's Changed]]></description>
+            <content:encoded><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-changed">What's Changed<a href="https://abcd-devcom.github.io/blog/release-v3-1-0-repairs-for-opac-and-update-manager#whats-changed" class="hash-link" aria-label="Direct link to What's Changed" title="Direct link to What's Changed" translate="no">​</a></h2>
+<ul>
+<li class="">OPAC: functionality + security + search + cleanup</li>
+<li class="">Update update manager</li>
+<li class="">Repair missing footer</li>
+</ul>
+<p><strong>Full Changelog</strong>: <a href="https://github.com/ABCD-DEVCOM/ABCD/compare/v3.0.0...v3.1.0" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/compare/v3.0.0...v3.1.0</a></p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="actions-by-database-administrator">Actions by database administrator<a href="https://abcd-devcom.github.io/blog/release-v3-1-0-repairs-for-opac-and-update-manager#actions-by-database-administrator" class="hash-link" aria-label="Direct link to Actions by database administrator" title="Direct link to Actions by database administrator" translate="no">​</a></h2>
+<p>The upgrade proces for this release consists of following steps</p>
+<ol>
+<li class="">Download from Git file upgrade_manager.php (<a href="https://github.com/ABCD-DEVCOM/ABCD/blob/9b2c3cad60831bf1436b391d325d497750fb2d70/www/htdocs/update_manager.php" target="_blank" rel="noopener noreferrer" class="">www/htdocs/update_manager.php</a> )</li>
+<li class="">Copy the downloaded file to the Document root of your installation<!-- -->
+<ol>
+<li class="">In Linux typical  <code>/opt/ABCD/htdocs</code></li>
+<li class="">Check that <code>update_manager.php</code> is readable by your webserver</li>
+</ol>
+</li>
+<li class="">Run ABCD, login as administrator, perform some arbitrary actions to ensure that ABCD detects the new version</li>
+<li class="">The footer shows a yellow bar with text <code>Update now (v3.1.0) ABCD is available</code>. Click on the link <code>Update Now</code>
+5.The version of the Update  manager should be: <strong>v4.3</strong></li>
+<li class="">The Update manager will guide you through the upgrade process</li>
+</ol>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="notes">Notes<a href="https://abcd-devcom.github.io/blog/release-v3-1-0-repairs-for-opac-and-update-manager#notes" class="hash-link" aria-label="Direct link to Notes" title="Direct link to Notes" translate="no">​</a></h2>
+<ul>
+<li class="">ABCD module <code>Site</code> is no longer present in Git. If not used: delete folder <code>.../htdocs/site</code></li>
+<li class="">ABCD module <code>iAH</code> is no longer present in Git. If not used: delete folder <code>.../htdocs/iah</code></li>
+</ul>
+<p>We no longer work with <code>site</code> and <code>iah</code>, but feel free to continue</p>]]></content:encoded>
+            <category>Release</category>
+            <category>v3.1.0</category>
+        </item>
+        <item>
+            <title><![CDATA[v3.0.0 Major upgrade for OPAC]]></title>
+            <link>https://ABCD-DEVCOM.github.io/blog/v3-0-0-major-upgrade-for-opac</link>
+            <guid>https://ABCD-DEVCOM.github.io/blog/v3-0-0-major-upgrade-for-opac</guid>
+            <pubDate>Tue, 25 Nov 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[What's Changed]]></description>
+            <content:encoded><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-changed">What's Changed<a href="https://abcd-devcom.github.io/blog/v3-0-0-major-upgrade-for-opac#whats-changed" class="hash-link" aria-label="Direct link to What's Changed" title="Direct link to What's Changed" translate="no">​</a></h2>
+<p><strong>Description</strong>: Major changes and implementations in OPAC by @rogercgui in</p>
+<ul>
+<li class=""><a href="https://github.com/ABCD-DEVCOM/ABCD/pull/574" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/574</a></li>
+<li class=""><a href="https://github.com/ABCD-DEVCOM/ABCD/pull/577" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/577</a></li>
+</ul>
+<p><strong>Details</strong></p>
+<ul>
+<li class="">Enhance session management &amp; small bug by @fho4abcd in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/572" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/572</a></li>
+<li class="">Update test/wxis.php by @fho4abcd in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/573" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/573</a></li>
+<li class="">Opac v2 by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/574" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/574</a></li>
+<li class="">Improvements to dbadmin by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/575" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/575</a></li>
+<li class="">Update ABCD login/logout for OPAC directory structure by @fho4abcd in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/576" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/576</a></li>
+<li class="">Opac v2 by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/577" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/577</a></li>
+<li class="">Plasters for annoying behavior by @fho4abcd in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/578" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/578</a></li>
+<li class="">Update version.php by @fho4abcd in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/579" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/579</a></li>
+<li class="">Fixes concatenation error for Linux. by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/580" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/580</a></li>
+</ul>
+<p><strong>Full Changelog</strong>: <a href="https://github.com/ABCD-DEVCOM/ABCD/compare/v2.4.1...v3.0.0" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/compare/v2.4.1...v3.0.0</a></p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="actions-by-database-administrator">Actions by database administrator<a href="https://abcd-devcom.github.io/blog/v3-0-0-major-upgrade-for-opac#actions-by-database-administrator" class="hash-link" aria-label="Direct link to Actions by database administrator" title="Direct link to Actions by database administrator" translate="no">​</a></h2>
+<p>The upgrade of the code can be done with the upgrade manager.</p>
+<p>There are also many updates in the database examples. See the Full Changelog. Copy as appropriate</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="info-for-all-users">Info for all users<a href="https://abcd-devcom.github.io/blog/v3-0-0-major-upgrade-for-opac#info-for-all-users" class="hash-link" aria-label="Direct link to Info for all users" title="Direct link to Info for all users" translate="no">​</a></h2>
+<p>OPAC is now the application that opens if you enter the default URL.
+Open ABCD by the default URL + /admin
+You can add a button in OPAC to switch to ABCD.</p>]]></content:encoded>
+            <category>Release</category>
+            <category>v3.0.0</category>
+        </item>
+        <item>
+            <title><![CDATA[Release 2.4.1 Improve update manager and solve small bugs]]></title>
+            <link>https://ABCD-DEVCOM.github.io/blog/release-2-4-1-improve-update-manager-and-solve-small-bugs</link>
+            <guid>https://ABCD-DEVCOM.github.io/blog/release-2-4-1-improve-update-manager-and-solve-small-bugs</guid>
+            <pubDate>Thu, 09 Oct 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[What's Changed]]></description>
+            <content:encoded><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-changed">What's Changed<a href="https://abcd-devcom.github.io/blog/release-2-4-1-improve-update-manager-and-solve-small-bugs#whats-changed" class="hash-link" aria-label="Direct link to What's Changed" title="Direct link to What's Changed" translate="no">​</a></h2>
+<p>Update_manager:</p>
+<ul>
+<li class="">Check that php curl extension is loaded.</li>
+<li class="">Copy also cgi-bin subfolders ansi and utf8. Set executable permissions on executables</li>
+<li class="">Print the log file timestamp in the server timezone (only on linux servers)
+Version_checker:</li>
+<li class="">Moved json file to upgrade folder</li>
+<li class="">Corrected repository name (ABCD2-&gt;ABCD)</li>
+</ul>
+<p>See all changed files for more details</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="actions-by-database-administrator">Actions by database administrator<a href="https://abcd-devcom.github.io/blog/release-2-4-1-improve-update-manager-and-solve-small-bugs#actions-by-database-administrator" class="hash-link" aria-label="Direct link to Actions by database administrator" title="Direct link to Actions by database administrator" translate="no">​</a></h3>
+<p>The upgrade of the code can be done with the upgrade manager.</p>]]></content:encoded>
+            <category>Release</category>
+            <category>v2.4.1</category>
+        </item>
+        <item>
+            <title><![CDATA[Release 2.4.0 Major changes and implementations in OPAC]]></title>
+            <link>https://ABCD-DEVCOM.github.io/blog/release-2-4-0-major-changes-and-implementations-in-opac</link>
+            <guid>https://ABCD-DEVCOM.github.io/blog/release-2-4-0-major-changes-and-implementations-in-opac</guid>
+            <pubDate>Mon, 06 Oct 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[What's Changed]]></description>
+            <content:encoded><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-changed">What's Changed<a href="https://abcd-devcom.github.io/blog/release-2-4-0-major-changes-and-implementations-in-opac#whats-changed" class="hash-link" aria-label="Direct link to What's Changed" title="Direct link to What's Changed" translate="no">​</a></h2>
+<p><strong>Description</strong>: Major changes and implementations in OPAC by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/570" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/570</a></p>
+<p><strong>Full Changelog</strong>: <a href="https://github.com/ABCD-DEVCOM/ABCD/compare/v2.3.6...v2.4.0" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/compare/v2.3.6...v2.4.0</a></p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="actions-by-database-administrator">Actions by database administrator<a href="https://abcd-devcom.github.io/blog/release-2-4-0-major-changes-and-implementations-in-opac#actions-by-database-administrator" class="hash-link" aria-label="Direct link to Actions by database administrator" title="Direct link to Actions by database administrator" translate="no">​</a></h2>
+<p>The upgrade of the code can be done with the upgrade manager.</p>
+<p>For Windows users: copy a new executable
+...\www\cgi-bin_Windows\utf8\bigisis\ifkeys.exe to
+...\www\cgi-bin\utf8\bigisis\ifkeys.exe</p>
+<p>There are also many updates in the database examples. See the Full Changelog. Copy as appropriate</p>]]></content:encoded>
+            <category>Release</category>
+            <category>v2.4.0</category>
+        </item>
+        <item>
+            <title><![CDATA[Release 2.3.6 More robust upgrade manager]]></title>
+            <link>https://ABCD-DEVCOM.github.io/blog/release-2-3-6-more-robust-upgrade-manager</link>
+            <guid>https://ABCD-DEVCOM.github.io/blog/release-2-3-6-more-robust-upgrade-manager</guid>
+            <pubDate>Tue, 30 Sep 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Major changes]]></description>
+            <content:encoded><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="major-changes">Major changes<a href="https://abcd-devcom.github.io/blog/release-2-3-6-more-robust-upgrade-manager#major-changes" class="hash-link" aria-label="Direct link to Major changes" title="Direct link to Major changes" translate="no">​</a></h2>
+<p>The upgrade manager has now several checks to cope with error situations.</p>
+<p>The search by A-Z list gives now information how to repair erroneous configuration</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="details-of-upgrade-manager-checks">Details of upgrade manager checks<a href="https://abcd-devcom.github.io/blog/release-2-3-6-more-robust-upgrade-manager#details-of-upgrade-manager-checks" class="hash-link" aria-label="Direct link to Details of upgrade manager checks" title="Direct link to Details of upgrade manager checks" translate="no">​</a></h3>
+<ul>
+<li class="">Added log file. Is overwritten on next run.</li>
+<li class="">Activated check for admin rights: user must have profile "adm"</li>
+<li class="">Check that php zip extension is loaded.</li>
+<li class="">Check download and unzip result. Tested with insufficient disk quota</li>
+<li class="">Check that all required sources are present in the package before actual update</li>
+<li class="">Detect and log run-time errors in actual update. Tested with wrong permissions</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="actions-by-database-administrator">Actions by database administrator<a href="https://abcd-devcom.github.io/blog/release-2-3-6-more-robust-upgrade-manager#actions-by-database-administrator" class="hash-link" aria-label="Direct link to Actions by database administrator" title="Direct link to Actions by database administrator" translate="no">​</a></h3>
+<p>None</p>]]></content:encoded>
+            <category>Release</category>
+            <category>v2.3.6</category>
+        </item>
+        <item>
+            <title><![CDATA[Release 2.3.5 New option to sort database records]]></title>
+            <link>https://ABCD-DEVCOM.github.io/blog/release-2-3-5-new-option-to-sort-database-records</link>
+            <guid>https://ABCD-DEVCOM.github.io/blog/release-2-3-5-new-option-to-sort-database-records</guid>
+            <pubDate>Wed, 24 Sep 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Major changes]]></description>
+            <content:encoded><![CDATA[<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="major-changes">Major changes<a href="https://abcd-devcom.github.io/blog/release-2-3-5-new-option-to-sort-database-records#major-changes" class="hash-link" aria-label="Direct link to Major changes" title="Direct link to Major changes" translate="no">​</a></h3>
+<p>Database records could be sorted with command line utility msrt.
+This improvement adds an interactive capability in menu Utilities -&gt; DB Maintenance.
+Defaults can be set in the Advanced database settings (dr_path.def)</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="details">Details<a href="https://abcd-devcom.github.io/blog/release-2-3-5-new-option-to-sort-database-records#details" class="hash-link" aria-label="Direct link to Details" title="Direct link to Details" translate="no">​</a></h3>
+<ul>
+<li class="">Best results are obtained by using the Principal entry tag as sort key. But this is not mandatory. Other tags will also work.</li>
+<li class="">Existing batch scripts combined the sort with additional operations in order to get better results. This new option offers buttons for these operations. E.g.<!-- -->
+<ul>
+<li class="">Preparatory action <em>Unlock database</em></li>
+<li class="">Preparatory action <em>Clean/Compact DB</em></li>
+<li class="">Follow-up actions <em>Inverted file generation</em>. Note that <strong>search</strong> indexes will give <strong>wrong results</strong> when the inverted files are not regenerated.</li>
+</ul>
+</li>
+<li class="">The commandline utility does not perform an extensive error check. Major errors return sometimes an incomprehensible error code. Advice is to look at the formatting language.</li>
+<li class="">The current source does NOT use parameter <em>-mfn</em>.  Implies that the .xrf file and the .mst file are modified. See source code for details</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="actions-by-database-administrator">Actions by database administrator<a href="https://abcd-devcom.github.io/blog/release-2-3-5-new-option-to-sort-database-records#actions-by-database-administrator" class="hash-link" aria-label="Direct link to Actions by database administrator" title="Direct link to Actions by database administrator" translate="no">​</a></h3>
+<p>The new option works without any administrator actions.
+In order to avoid mistakes by the operators the administrator can set defaults for the entries of the Sort option by editing file <strong>dr_path.def</strong> for <strong>each</strong> database that might need it. This can be done interactively with via <em>Update database Definitions</em> --&gt; <em>Advanced database settings (dr_path.def)</em>. Check values of:</p>
+<ul>
+<li class="">Sort database records key length (<em>SORTLENGTH</em>)</li>
+<li class="">Sort database records by (<em>SORTBY</em>)</li>
+<li class="">Specification of the sort key (<em>SORTSPEC</em>)</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="upgrade">Upgrade<a href="https://abcd-devcom.github.io/blog/release-2-3-5-new-option-to-sort-database-records#upgrade" class="hash-link" aria-label="Direct link to Upgrade" title="Direct link to Upgrade" translate="no">​</a></h3>
+<p>The new and modified files can overwrite existing files.</p>
+<p>Th Upgrade tool can be tested.</p>]]></content:encoded>
+            <category>Release</category>
+            <category>v2.3.5</category>
+        </item>
+        <item>
+            <title><![CDATA[Release 2.3.4 Status 2025-09-17: Update Manager Tool]]></title>
+            <link>https://ABCD-DEVCOM.github.io/blog/release-2-3-4-status-2025-09-17-update-manager-tool</link>
+            <guid>https://ABCD-DEVCOM.github.io/blog/release-2-3-4-status-2025-09-17-update-manager-tool</guid>
+            <pubDate>Wed, 17 Sep 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[What's Changed]]></description>
+            <content:encoded><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-changed">What's Changed<a href="https://abcd-devcom.github.io/blog/release-2-3-4-status-2025-09-17-update-manager-tool#whats-changed" class="hash-link" aria-label="Direct link to What's Changed" title="Direct link to What's Changed" translate="no">​</a></h2>
+<p>This update definitively implements the ABCD update system.
+Now, with this installation, you will see a yellow banner with each release.</p>
+<p>The available options are:</p>
+<ul>
+<li class="">Partial update: will only update the system, preserving your databases and local settings.</li>
+<li class="">Full update: the entire system will be reset, including the model databases.
+More info in pull request Update manager by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/567" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/567</a></li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="upgrade">Upgrade<a href="https://abcd-devcom.github.io/blog/release-2-3-4-status-2025-09-17-update-manager-tool#upgrade" class="hash-link" aria-label="Direct link to Upgrade" title="Direct link to Upgrade" translate="no">​</a></h3>
+<p>Copy the changed files over the existing files. No further action for this release.</p>
+<p>The current Upgrade tool is still in the development phase: In a next release you can use the tool that is installed in this release.
+If you use it now: <em>Take sufficient precautions (e.g. backups). Data loss and/or code mismatches may occur by using it now.</em></p>]]></content:encoded>
+            <category>Release</category>
+            <category>v2.3.4</category>
+        </item>
+        <item>
+            <title><![CDATA[Release 2.3.3 Status 2025-09-16]]></title>
+            <link>https://ABCD-DEVCOM.github.io/blog/release-2-3-3-status-2025-09-16</link>
+            <guid>https://ABCD-DEVCOM.github.io/blog/release-2-3-3-status-2025-09-16</guid>
+            <pubDate>Tue, 16 Sep 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[This release improves the captcha on the login page.]]></description>
+            <content:encoded><![CDATA[<p>This release improves the captcha on the login page.
+File version.php contains the correct tag for this release.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="upgrade">Upgrade<a href="https://abcd-devcom.github.io/blog/release-2-3-3-status-2025-09-16#upgrade" class="hash-link" aria-label="Direct link to Upgrade" title="Direct link to Upgrade" translate="no">​</a></h3>
+<p>Copy the changed files over the existing files. No further action for this release.</p>
+<p>The new Upgrade tool is still in the development phase: Will become available in a next release.
+If you use it now: <em>Take sufficient precautions (e.g. backups). Data loss and/or code mismatches may occur by using it now.</em></p>]]></content:encoded>
+            <category>Release</category>
+            <category>v2.3.3</category>
+        </item>
+        <item>
+            <title><![CDATA[Release 2.3.2 Status 2025-09-15 better]]></title>
+            <link>https://ABCD-DEVCOM.github.io/blog/release-2-3-2-status-2025-09-15-better</link>
+            <guid>https://ABCD-DEVCOM.github.io/blog/release-2-3-2-status-2025-09-15-better</guid>
+            <pubDate>Mon, 15 Sep 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Major Changes]]></description>
+            <content:encoded><![CDATA[<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="major-changes">Major Changes<a href="https://abcd-devcom.github.io/blog/release-2-3-2-status-2025-09-15-better#major-changes" class="hash-link" aria-label="Direct link to Major Changes" title="Direct link to Major Changes" translate="no">​</a></h3>
+<ul>
+<li class="">Corrections for PHP version in Site</li>
+<li class="">Improve speed of version check in the upgrade process.</li>
+<li class="">Improve editing of Opac facets</li>
+<li class="">New look of screen "Configuration ABCD"</li>
+<li class="">Improvement of OPAC in the back-end and front-end.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="actions-by-database-administrator">Actions by database administrator<a href="https://abcd-devcom.github.io/blog/release-2-3-2-status-2025-09-15-better#actions-by-database-administrator" class="hash-link" aria-label="Direct link to Actions by database administrator" title="Direct link to Actions by database administrator" translate="no">​</a></h3>
+<ul>
+<li class="">Check value of new parameter "Check version of ABCD?" (internal<!-- -->:CHECK_VERSION<!-- -->) in the ‘Other’ tab in the ABCD settings.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="upgrading">Upgrading<a href="https://abcd-devcom.github.io/blog/release-2-3-2-status-2025-09-15-better#upgrading" class="hash-link" aria-label="Direct link to Upgrading" title="Direct link to Upgrading" translate="no">​</a></h3>
+<p>The new and modified files can overwrite existing files Note that some files can be deleted (See Pull Requests for details)</p>
+<p>The new Upgrade tool is still in the development phase: Will become available in a next release.
+If you use it now: <em>Take sufficient precautions (e.g. backups). Data loss and/or code mismatches may occur by using it now.</em></p>]]></content:encoded>
+            <category>Release</category>
+            <category>v2.3.2</category>
+        </item>
         <item>
             <title><![CDATA[Release 2.3.0 Status 2025-09-06]]></title>
             <link>https://ABCD-DEVCOM.github.io/blog/release-2.3.0</link>
             <guid>https://ABCD-DEVCOM.github.io/blog/release-2.3.0</guid>
             <pubDate>Sat, 06 Sep 2025 00:00:00 GMT</pubDate>
             <description><![CDATA[Overview of > 650 commits since version v2.2.0-beta-1]]></description>
-            <content:encoded><![CDATA[<p>Overview of &gt; 650 commits since version v2.2.0-beta-1</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="overview-of--650-commits-since-version-v220-beta-1">Overview of &gt; 650 commits since version v2.2.0-beta-1<a href="https://abcd-devcom.github.io/blog/release-2.3.0#overview-of--650-commits-since-version-v220-beta-1" class="hash-link" aria-label="Direct link to Overview of > 650 commits since version v2.2.0-beta-1" title="Direct link to Overview of > 650 commits since version v2.2.0-beta-1" translate="no">​</a></h3>
+            <content:encoded><![CDATA[<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="overview-of--650-commits-since-version-v220-beta-1">Overview of &gt; 650 commits since version v2.2.0-beta-1<a href="https://abcd-devcom.github.io/blog/release-2.3.0#overview-of--650-commits-since-version-v220-beta-1" class="hash-link" aria-label="Direct link to Overview of > 650 commits since version v2.2.0-beta-1" title="Direct link to Overview of > 650 commits since version v2.2.0-beta-1" translate="no">​</a></h3>
 <p>Major functional improvements:</p>
 <ul>
 <li class="">Enhanced OPAC;</li>
@@ -69,7 +353,7 @@ Testing is still needed.</p>]]></content:encoded>
             <content:encoded><![CDATA[<p>While free and open source software is gaining momentum in library automation, it is still not a trivial event to launch a full-blown integrated library system (ILS), given today's high demands on such library systems.</p>
 <p>In this article, we describe the ISIS-software origins of the ABCD software. Many librarians, especially younger ones, have never heard about ISIS, its relevance, and its technological concepts, so we will try to shed some light on this in order for librarians to better judge the meaning of the ABCD software.</p>
 <p><strong>Editor's Note:</strong> <em>This article was originally published in LIBER QUARTERLY 19 (3/4), February 2010. It serves as the foundational manifesto for the ABCD project.</em></p>
-<hr>
+<!-- -->
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-origins-of-the-isis-software">The Origins of the ISIS Software<a href="https://abcd-devcom.github.io/blog/isis-history-and-technical-background#the-origins-of-the-isis-software" class="hash-link" aria-label="Direct link to The Origins of the ISIS Software" title="Direct link to The Origins of the ISIS Software" translate="no">​</a></h2>
 <p>For those who know about ISIS (or, with its full name: <strong>CDS/ISIS</strong>), there is often a partly correct but also partly incorrect association with "old DOS-software", "UNESCO" and "developing countries".</p>
 <p>The software indeed has a history of many decades. Its roots go back to the <strong>International Labour Organisation (ILO)</strong> in Geneva which developed an 'Integrated Set of Information Systems' (ISIS) in the early 1960s. This system was meant to run on the mainframe computers of that era.</p>
