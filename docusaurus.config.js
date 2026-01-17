@@ -60,20 +60,24 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          sidebarPath: './sidebars.js',
-          includeCurrentVersion: true, // Garante que a pasta 'docs' seja publicada
-          lastVersion: 'current', // Define que a versão 'current' é a última versão estável
-          showLastUpdateTime: true, // Mostra "Última atualização em..."
-          showLastUpdateAuthor: true, // (Opcional) Mostra quem atualizou
+          sidebarPath: require.resolve('./sidebars.js'),
+          // Define a versão 'current' (o que está na pasta /docs) como a padrão
+          lastVersion: 'current',
+
           versions: {
             current: {
-              label: '3.1.X', // O nome que aparece no menu (em vez de Next)
-              path: '3.1', // A URL muda de /docs/next/... para /docs/3.1/...
-              banner: 'none', 
+              label: '3.1.X', // O nome no menu dropdown
+              path: '',       // <--- O TRUQUE: Deixar vazio remove o prefixo da URL
+              banner: 'none', // Remove o aviso de "versão não lançada"
             },
           },
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+
+          // Outras configurações visuais úteis
+          showLastUpdateTime: true,
+          showLastUpdateAuthor: true,
+
+          // Ajuste a URL do botão "Editar esta página" para o seu repositório real
+          editUrl: 'https://github.com/ABCD-DEVCOM/ABCD-DEVCOM.github.io/tree/main/',
         },
         blog: {
           showReadingTime: true,
