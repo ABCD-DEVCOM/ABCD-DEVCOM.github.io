@@ -76,6 +76,5 @@ Avoid using the generic `abcd` superuser for daily tasks. Create individual acco
 ## 5. Next Steps
 
 Now that your system is secure and personalized, you are ready to start:
-
-* **[Creating your first Catalog](../quickstart/creating-first-catalog.md)**
-* **[Configuring the OPAC](/docs/3.1/category/opac-public-catalog)**
+* **[Creating your first Catalog](../abcd-quickstart/create-from-model.md)**
+* **[Configuring the OPAC](/docs/category/opac-public-catalog)**
