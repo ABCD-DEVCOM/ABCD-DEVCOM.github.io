@@ -6,39 +6,65 @@ sidebar_position: 2
 
 # Facets Configuration
 
-Facets are the filters that appear on the side of the search results (e.g., "Filter by Year", "Filter by Author"). They allow users to refine a broad search into a specific set of records.
+Facets are the side filters that appear after a search (e.g., "Filter by Year", "Filter by Author"). They allow users to refine a broad search into a specific set of records by grouping results based on common values.
 
 **Script:** `facetas_cnf.php`
 **File Created:** `bases/[db]/opac/[lang]/[db]_facetas.dat`
 
 ## 1. How Facets Work
-Facets rely entirely on the **Inverted File (Index)**. You cannot create a facet for a field that is not indexed in the database's **FST** (Field Selection Table).
+Facets rely on a combination of the **Inverted File (Index)** for counting and the **Master File** for display.
+* **Prerequisite:** You cannot create a facet for a field that is not indexed in the database's **FST** (Field Selection Table).
+* **Technique:** Ideally, fields used for facets should be indexed using **Technique 0 (Line)**.
 
-* **Correct Indexing:** Ideally, fields used for facets should be indexed using **Technique 0 (Line)** or **Technique 2 (Term)**.
-* **Warning:** If you use Technique 4 (Word) for an Author facet, "Steve Jobs" will appear as two separate facets: "Steve" and "Jobs".
+## 2. Configuration Columns
 
-## 2. Configuration Interface
-The interface provides a table where you map database tags to visible labels.
+The configuration file is a pipe-delimited text file where each line represents a facet box. The interface allows you to define 4 specific columns:
 
-### Fields
-* **Tag:** The numeric tag of the field in the database (e.g., `50` for Author).
-* **Label:** The title of the box that will appear in the OPAC (e.g., "Authors").
+| Column | Name | Description | Example |
+| :--- | :--- | :--- | :--- |
+| **1** | **Label** | The title of the facet box displayed to the user. | `Authors` |
+| **2** | **Extraction Format** | A mini-PFT (ISIS Format) to extract the value from the record. **Crucial:** Use `/` at the end to handle repetitive fields correctly. | `v100^a/` |
+| **3** | **Prefix** | The FST prefix used to filter the search when the user clicks a term. | `AU_` |
+| **4** | **Sort Order** | Defines how the terms inside the facet box are sorted.<br/>**Q**: By Quantity (Highest count first).<br/>**A**: Alphabetical order (A-Z). | `Q` |
 
-### Helper: The FST Viewer
-To assist you, the script reads and displays the `[base].fst` file at the bottom of the screen inside an accordion.
-1.  Open the **"View FST Help"** panel.
-2.  Identify the Tag you want to use.
-3.  Ensure it has a valid indexing technique.
+## 3. Configuration Example
+Below is a typical configuration for a MARC database (`marc_facetas.dat`).
 
-## 3. Example Configuration
-For a typical Library catalog:
+```text
+Place of Publication|v260^a|PA_|Q
+Publisher|v260^b|ED_|Q
+Year|v260^c|DA_|A
+ISBN/ISSN|v20^a|IS_|Q
+Personal Author|v100^a/|AU_|Q
+Institutional Author|v110^a/|AI_|Q
+Title|v245^a|TI_|Q
+Subject (Topic)|v650^a/|MA_|Q
 
-| Tag | Label | Result in OPAC |
-| :-- | :-- | :-- |
-| `50` | Authors | A list of authors found in the current result set. |
-| `60` | Subjects | A list of subject descriptors. |
-| `10` | Year | Allows filtering by publication date. |
+```
 
-:::danger Multilingual Configuration
-Remember that this configuration is saved inside the language folder (e.g., `/en/`). You must replicate this configuration for Spanish (`/es/`) and Portuguese (`/pt/`), translating the **Labels** accordingly.
+### Analysis of the Example:
+
+* **Row 5 (Personal Author):**
+* **Label:** "Personal Author"
+* **Format:** `v100^a/` (Extracts subfield `^a`. The `/` ensures that if a book has 3 authors, 3 separate lines are generated).
+* **Prefix:** `AU_` (Matches the FST index).
+* **Sort:** `Q` (Shows the most prolific authors at the top).
+
+
+* **Row 3 (Year):**
+* **Sort:** `A` (Alphabetical/Numerical). This is better for dates, so the years appear as 1990, 1991, 1992, rather than by popularity.
+
+
+
+## 4. Helper: The FST Viewer
+
+To assist you, the configuration script includes a panel at the bottom ("View FST Help").
+
+1. Open the panel to see your `[base].fst`.
+2. Identify the **Prefix** (e.g., `AU_`) corresponding to the field you want to facet.
+3. Copy that prefix into the 3rd column of your configuration.
+
+:::tip Repetitive Fields
+If a field is repetitive (like **Subjects** or **Authors**), you **must** include the slash `/` at the end of the extraction format (e.g., `v650^a/`). If you omit it, ABCD will concatenate all subjects into a single long string.
 :::
+
