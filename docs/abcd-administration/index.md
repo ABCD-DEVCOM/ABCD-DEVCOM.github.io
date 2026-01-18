@@ -33,7 +33,7 @@ Regular maintenance is crucial for the health of the ISIS technology behind ABCD
 ### 4. Technical Reference
 Deep dive into the internal structures of ABCD.
 * **[System Databases](system-databases/index.md)**: Technical documentation of internal databases like `users`, `trans`, `copies`, etc.
-* **[CISIS Utilities](../abcd-advanced/cisis-utilities/cisis-utilities.md)**: Command-line reference for `mx`, `retag`, etc.
+* **[CISIS Utilities](../abcd-advanced/cisis-utilities/index.md)**: Command-line reference for `mx`, `retag`, etc.
 
 :::tip Best Practice
 We recommend that all administrators schedule a weekly **Full Inverted File Generation** for active databases to ensure search results remain accurate.
