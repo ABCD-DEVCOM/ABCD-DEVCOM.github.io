@@ -72,7 +72,8 @@ Options in the index window:
 - An expression can be saved by entering a name in `Description` followed by `save search expression`
 
 A saved expression can be used by ![Copy expression](../../../media/abcd-modules/cataloguing/manual/data-entry/but-warehouse.png).
-This shows a pop-up to copy a stored expression. ![Index window](../../../media/abcd-modules/cataloguing/manual/data-entry/forms-search-copy.png)
+This shows a pop-up to copy a stored expression.
+![Index window](../../../media/abcd-modules/cataloguing/manual/data-entry/forms-search-copy.jpg)
 
 
 ---
@@ -180,6 +181,7 @@ In bibliographic databases mostly the title field.
 2.  **Browse:** The system displays a scrollable dictionary of terms actually existing in the database. In this list each alphabetic section can be clicked on to allow navigation in this normally large list. 
 3.  **Select:** Click on a term to retrieve all linked records.
     * *Tip:* You can select multiple terms to perform an `OR` search (e.g., "Smith" OR "Smyth").
+
 
 
 
