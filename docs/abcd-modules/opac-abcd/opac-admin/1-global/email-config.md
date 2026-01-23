@@ -3,12 +3,15 @@ title: Email Configuration (SMTP)
 sidebar_label: Email Settings
 sidebar_position: 7
 ---
+import Video from '@site/src/components/Video';
 
 # Email Configuration (SMTP)
 
 The ABCD OPAC requires a working email configuration to interact with users. This includes sending **Password Recovery** links, **Reservation** notices, and **Comments/Suggestions** to the library staff.
 
 **Access:** **OPAC Configuration** > **Email Configuration** (`adm_email.php`)
+
+<Video src="https://www.youtube.com/embed/h9yxflujifQ" />
 
 ## 1. Configuration Parameters
 

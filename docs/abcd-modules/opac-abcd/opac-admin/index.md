@@ -4,6 +4,8 @@ sidebar_label: Overview
 sidebar_position: 1
 ---
 
+import Video from '@site/src/components/Video';
+
 # OPAC Configuration Overview
 
 The **ABCD OPAC** (Online Public Access Catalog) is the public face of your library. While cataloging happens in the Central module, the OPAC is where users search and retrieve information.
@@ -12,6 +14,10 @@ The **ABCD OPAC** (Online Public Access Catalog) is the public face of your libr
 The OPAC is highly customizable. Almost every aspect—from the logo to the search filters—can be managed without writing code.
 
 **Access:**
+
+<Video src="https://www.youtube.com/embed/iQQDEAl5MP4" />
+
+
 1.  Log in to the **Central Module** as a Superuser.
 
 ![Central Module](../../../media/abcd-modules/opac-abcd/opac-admin/opac-admin-001.png)

@@ -3,10 +3,13 @@ title: System Architecture & Global Config
 sidebar_label: Architecture & Global Config
 sidebar_position: 2
 ---
+import Video from '@site/src/components/Video';
 
 # System Architecture & Global Configuration
 
 The ABCD OPAC is controlled by a hierarchy of configuration files. While advanced users can edit these files directly, the system provides a robust **Graphic Interface (GUI)** to manage global parameters, visual identity, and system cache.
+
+<Video src="https://www.youtube.com/embed/0rhztRm5uTI" />
 
 ## 1. Global Parameters (GUI)
 **Access:** **General** > **Parameters** (`parametros.php`)
