@@ -4,10 +4,62 @@
         <title>ABCD Software Documentation Blog</title>
         <link>https://ABCD-DEVCOM.github.io/blog</link>
         <description>ABCD Software Documentation Blog</description>
-        <lastBuildDate>Sat, 10 Jan 2026 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 11 Feb 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Major upgrade and improvements for OPAC]]></title>
+            <link>https://ABCD-DEVCOM.github.io/blog/2026-02-11-release-v3.2.0</link>
+            <guid>https://ABCD-DEVCOM.github.io/blog/2026-02-11-release-v3.2.0</guid>
+            <pubDate>Wed, 11 Feb 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[What's Changed]]></description>
+            <content:encoded><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-changed">What's Changed<a href="https://abcd-devcom.github.io/blog/2026-02-11-release-v3.2.0#whats-changed" class="hash-link" aria-label="Direct link to What's Changed" title="Direct link to What's Changed" translate="no">​</a></h2>
+<ul>
+<li class="">Update instructions by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/594" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/594</a></li>
+<li class="">Updates OPAC help by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/595" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/595</a></li>
+<li class="">Repairs in OPAC and more by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/596" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/596</a></li>
+</ul>
+<p><strong>Full Changelog</strong>: <a href="https://github.com/ABCD-DEVCOM/ABCD/compare/v3.1.2...v3.2.0" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/compare/v3.1.2...v3.2.0</a></p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="actions-by-database-administrator">Actions by database administrator<a href="https://abcd-devcom.github.io/blog/2026-02-11-release-v3.2.0#actions-by-database-administrator" class="hash-link" aria-label="Direct link to Actions by database administrator" title="Direct link to Actions by database administrator" translate="no">​</a></h2>
+<p>The upgrade of the code can be done with the upgrade manager.</p>
+<p>Upgrade of database content is not required, but there are updates in some database configuration folders</p>
+<ul>
+<li class="">Folder <em>bases/lang/*</em></li>
+<li class="">Folder <em>bases/opac_conf/*</em></li>
+</ul>
+<p>Copy the relevant files from <em>bases-examples_Linux</em> or <em>bases-examples_Windows</em> to your installation</p>
+<p><strong>Note: If you are upgrading from v.3.0.0 or earlier then see the  <a href="https://github.com/ABCD-DEVCOM/ABCD/releases/tag/v3.1.2" target="_blank" rel="noopener noreferrer" class="">release notes of v3.1.2</a></strong></p>]]></content:encoded>
+            <category>Release</category>
+            <category>v3.2.0</category>
+        </item>
+        <item>
+            <title><![CDATA[v3.2.1 Update of version indicator]]></title>
+            <link>https://ABCD-DEVCOM.github.io/blog/2026-02-11-release-v3.2.1</link>
+            <guid>https://ABCD-DEVCOM.github.io/blog/2026-02-11-release-v3.2.1</guid>
+            <pubDate>Wed, 11 Feb 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[What's Changed]]></description>
+            <content:encoded><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-changed">What's Changed<a href="https://abcd-devcom.github.io/blog/2026-02-11-release-v3.2.1#whats-changed" class="hash-link" aria-label="Direct link to What's Changed" title="Direct link to What's Changed" translate="no">​</a></h2>
+<p>Only the version file "version.php"</p>
+<p>Note the changes of the previous version</p>
+<ul>
+<li class="">Update instructions by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/594" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/594</a></li>
+<li class="">Updates OPAC help by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/595" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/595</a></li>
+<li class="">Repairs in OPAC and more by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/596" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/596</a></li>
+</ul>
+<p><strong>Full Changelog</strong>: <a href="https://github.com/ABCD-DEVCOM/ABCD/compare/v3.1.2...v3.2.0" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/compare/v3.1.2...v3.2.0</a></p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="actions-by-database-administrator">Actions by database administrator<a href="https://abcd-devcom.github.io/blog/2026-02-11-release-v3.2.1#actions-by-database-administrator" class="hash-link" aria-label="Direct link to Actions by database administrator" title="Direct link to Actions by database administrator" translate="no">​</a></h2>
+<p>The upgrade of the code can be done with the upgrade manager.</p>
+<p>Upgrade of database content is not required, but there are updates in some database configuration folders</p>
+<ul>
+<li class="">Folder <em>bases/lang/*</em></li>
+<li class="">Folder <em>bases/opac_conf/*</em></li>
+</ul>
+<p>Copy the relevant files from <em>bases-examples_Linux</em> or <em>bases-examples_Windows</em> to your installation</p>
+<p><strong>Note: If you are upgrading from v.3.0.0 or earlier then see the  <a href="https://github.com/ABCD-DEVCOM/ABCD/releases/tag/v3.1.2" target="_blank" rel="noopener noreferrer" class="">release notes of v3.1.2</a></strong></p>]]></content:encoded>
+            <category>Release</category>
+            <category>v3.2.1</category>
+        </item>
         <item>
             <title><![CDATA[v3.1.2 Cleaning and repairs]]></title>
             <link>https://ABCD-DEVCOM.github.io/blog/v3-1-2-cleaning-and-repairs</link>
