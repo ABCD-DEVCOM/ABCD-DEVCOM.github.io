@@ -66,7 +66,7 @@ const config = {
 
           versions: {
             current: {
-              label: '3.1.X', // O nome no menu dropdown
+              label: '3.2.X', // O nome no menu dropdown
               path: '',       // <--- O TRUQUE: Deixar vazio remove o prefixo da URL
               banner: 'none', // Remove o aviso de "versão não lançada"
             },
@@ -168,7 +168,7 @@ const config = {
             items: [
               {
                 label: 'Tutorial',
-                to: '/docs/3.1/category/tutorials--how-to',
+                to: '/docs/category/tutorials--how-to',
               },
             ],
           },

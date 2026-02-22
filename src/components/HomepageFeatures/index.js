@@ -7,7 +7,7 @@ const FeatureList = [
   {
     title: 'Installation and Server',
     Svg: require('@site/static/img/main_arrow_download_32_regular.svg').default,
-    link: '/docs/3.1/category/installation',
+    link: '/docs/category/installation',
     description: (
       <>
         Installation of Apache, PHP, and configuration of Virtual Hosts and ports (9090). Understand the <code>htdocs</code> and <code>cgi-bin</code> folders.
@@ -17,7 +17,7 @@ const FeatureList = [
   {
     title: 'User guide',
     Svg: require('@site/static/img/main_form_new_32_regular.svg').default,
-    link: '/docs/3.1/category/user-guide---modules',
+    link: '/docs/category/user-guide---modules',
     description: (
       <>
         User guide for cataloguing, circulation, OPAC acquisitions, and user administration in the web interface.
@@ -27,7 +27,7 @@ const FeatureList = [
   {
     title: 'Database Architecture',
     Svg: require('@site/static/img/main_database_plus_32_regular.svg').default,
-    link: '/docs/3.1/category/data-models--standards', // Nova rota sugerida
+    link: '/docs/category/data-models--standards', // Nova rota sugerida
     description: (
       <>
         Delve deeper into the <code>bases</code> folder. Structure of CISIS files (.mst, .xrf, .pft) and system customisation.
@@ -37,7 +37,7 @@ const FeatureList = [
   {
     title: 'CISIS Utilities and Format Language',
     Svg: require('@site/static/img/main_content_settings_32_regular.svg').default, // Sugestão de ícone (pode usar outro existente)
-    link: '/docs/3.1/category/advanced-topics--reference-technical',
+    link: '/docs/category/advanced-topics--reference-technical',
     description: (
       <>
         Advanced use of executables in the <code>cgi-bin</code> folder (mx, wxis) for data manipulation via command line and Formatting Language.
