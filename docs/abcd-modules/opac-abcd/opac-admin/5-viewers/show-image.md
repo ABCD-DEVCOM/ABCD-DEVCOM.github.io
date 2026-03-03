@@ -79,6 +79,10 @@ Use this method for standard image display.
 
 ```
 
+![Images on CEPAL database](../../../../media/abcd-modules/opac-abcd/opac-admin/viewer-show_image.png)
+
+
+
 ### 2. Protected Display (`<canvas>` Tag)
 
 If you want to make it difficult for users to "Right-click > Save Image As", you can render the image onto an HTML5 Canvas. This requires the OPAC's JavaScript libraries to function.
