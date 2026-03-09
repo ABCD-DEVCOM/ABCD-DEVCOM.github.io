@@ -1,0 +1,8 @@
+{
+  "label": "ABCD Internal Scripts",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "description": "Technical documentation of the core .xis scripts used by ABCD (wxis folder)."
+  }
+}
