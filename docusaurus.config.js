@@ -66,9 +66,19 @@ const config = {
 
           versions: {
             current: {
-              label: '3.2.X', // O nome no menu dropdown
+              label: '3.3.X', // O nome no menu dropdown
               path: '',       // <--- O TRUQUE: Deixar vazio remove o prefixo da URL
               banner: 'none', // Remove o aviso de "versão não lançada"
+            },
+            '3.2': {
+              label: '3.2.x',
+              path: '3.2',
+              banner: 'none',
+            },
+            '2.0': {
+              label: '2.0.x',
+              path: '2.0', 
+              banner: 'none',
             },
           },
 
