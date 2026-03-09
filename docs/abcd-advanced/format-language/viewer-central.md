@@ -99,7 +99,3 @@ The script includes a comprehensive `switch` block to handle various formats:
 * **2023-01-04:** Added lowercase extension conversion to ensure compatibility with Linux servers.
 * **2026-02-28:** Implemented `realpath` validation to block Path Traversal.
 * **2026-03-08:** Added `HTTP_REFERER` checks and enhanced filename sanitization.
-
-Would you like me to generate a specific PFT example for a different database field or explain how to customize the error messages in this script?
-
-Aliás, para liberar as funcionalidades de todos os apps, ative a [Atividade nos apps do Gemini](https://myactivity.google.com/product/gemini).
