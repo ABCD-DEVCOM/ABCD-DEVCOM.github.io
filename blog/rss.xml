@@ -4,10 +4,87 @@
         <title>ABCD Software Documentation Blog</title>
         <link>https://ABCD-DEVCOM.github.io/blog</link>
         <description>ABCD Software Documentation Blog</description>
-        <lastBuildDate>Wed, 11 Feb 2026 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 08 Mar 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[ABCD 3.3.0 Technical Release Notes]]></title>
+            <link>https://ABCD-DEVCOM.github.io/blog/2026-03-08-release-3-3-0</link>
+            <guid>https://ABCD-DEVCOM.github.io/blog/2026-03-08-release-3-3-0</guid>
+            <pubDate>Sun, 08 Mar 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[We are pleased to announce the release of ABCD 3.3.0. This release focuses heavily on hardening the codebase against security vulnerabilities, introducing native DevOps tools for system administrators, and improving PHP 8.x compatibility.]]></description>
+            <content:encoded><![CDATA[<p>We are pleased to announce the release of <strong>ABCD 3.3.0</strong>. This release focuses heavily on hardening the codebase against security vulnerabilities, introducing native DevOps tools for system administrators, and improving PHP 8.x compatibility.</p>
+<p>This post details the technical implementation of these features and the necessary server configurations for upgrading.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="security-hardening">Security Hardening<a href="https://abcd-devcom.github.io/blog/2026-03-08-release-3-3-0#security-hardening" class="hash-link" aria-label="Direct link to Security Hardening" title="Direct link to Security Hardening" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="digital-object-handling-show_imagephp">Digital Object Handling (<code>show_image.php</code>)<a href="https://abcd-devcom.github.io/blog/2026-03-08-release-3-3-0#digital-object-handling-show_imagephp" class="hash-link" aria-label="Direct link to digital-object-handling-show_imagephp" title="Direct link to digital-object-handling-show_imagephp" translate="no">​</a></h3>
+<p>The mechanism for serving digital objects (images, PDFs) has been refactored to mitigate Path Traversal vulnerabilities and ensure stricter access control.</p>
+<p><img decoding="async" loading="lazy" alt="show_image.php in CEPAL database" src="https://abcd-devcom.github.io/assets/images/show_image_cepal-63a2ed1f2ed6c22c810d55562c893903.png" width="1418" height="641" class="img_ev3q"></p>
+<ul>
+<li class=""><strong>Session Validation:</strong> The script now explicitly validates <code>isset($_SESSION["permiso"])</code> before serving any content, preventing unauthenticated access to restricted assets.</li>
+<li class=""><strong>Path Traversal Prevention:</strong> We introduced a strict check using <code>realpath()</code> to ensure the requested resource resides within the authorized base directory.<!-- -->
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">// Security implementation in show_image.php</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">$base_dir = realpath($image_path);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">$real_requested_path = realpath($requested_path);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">if ($real_requested_path === false || strpos($real_requested_path, $base_dir) !== 0) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    die("Access denied");</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre></div></div>
+</li>
+<li class=""><strong>HTTP_REFERRER Checks:</strong> Added logic to validate the request origin, reducing the risk of hotlinking or CSRF attacks.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="database-portability-path_database">Database Portability (<code>%path_database%</code>)<a href="https://abcd-devcom.github.io/blog/2026-03-08-release-3-3-0#database-portability-path_database" class="hash-link" aria-label="Direct link to database-portability-path_database" title="Direct link to database-portability-path_database" translate="no">​</a></h3>
+<p>To facilitate containerization (Docker) and server migrations, we introduced the <code>%path_database%</code> wildcard variable. This allows the <code>dr_path.def</code> configuration to use relative paths instead of hardcoded absolute paths, decoupling the database configuration from the server filesystem.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="new-system-administration-tools">New System Administration Tools<a href="https://abcd-devcom.github.io/blog/2026-03-08-release-3-3-0#new-system-administration-tools" class="hash-link" aria-label="Direct link to New System Administration Tools" title="Direct link to New System Administration Tools" translate="no">​</a></h2>
+<p>Version 3.3.0 introduces three new PHP modules located in <code>htdocs/central/settings/</code> (or <code>dbadmin</code>), reducing reliance on shell access.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="1-native-backup-manager">1. Native Backup Manager<a href="https://abcd-devcom.github.io/blog/2026-03-08-release-3-3-0#1-native-backup-manager" class="hash-link" aria-label="Direct link to 1. Native Backup Manager" title="Direct link to 1. Native Backup Manager" translate="no">​</a></h3>
+<p><strong>File:</strong> <code>admin_backup.php</code></p>
+<p><strong>Path:</strong> Configuration ABCD &gt; Backup</p>
+<p><img decoding="async" loading="lazy" alt="Native Backup Manager" src="https://abcd-devcom.github.io/assets/images/backup-manager-efb35069886ea65f413ccb6ba8d2d8d5.png" width="1905" height="991" class="img_ev3q"></p>
+<p>This module implements a Zip-based backup strategy directly from the PHP interface. It utilizes the <code>ZipArchive</code> class and <code>RecursiveIteratorIterator</code> to handle directory traversal efficiently.</p>
+<ul>
+<li class=""><strong>Storage Path:</strong> Backups are strictly generated in <code>$db_path . "wrk/backups/"</code> to separate them from standard database operations and ISO exports.</li>
+<li class=""><strong>OS Tagging:</strong> The script detects the underlying OS via <code>PHP_OS</code> and prefixes the filename (e.g., <code>Lin_FULL_NOMEDIA...zip</code> or <code>Win_FULL...</code>). This is crucial for troubleshooting case-sensitivity issues during restoration.</li>
+<li class=""><strong>Memory Management:</strong> The script overrides execution limits using <code>set_time_limit(0)</code> and <code>ini_set('memory_limit', '1024M')</code> to handle large <code>collection</code> directories.</li>
+</ul>
+<div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>Prerequisite</div><div class="admonitionContent_BuS1"><p>The <code>php-zip</code> extension must be enabled in your <code>php.ini</code> for this module to function.</p></div></div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="2-cross-platform-database-converter-crunchmf">2. Cross-Platform Database Converter (Crunchmf)<a href="https://abcd-devcom.github.io/blog/2026-03-08-release-3-3-0#2-cross-platform-database-converter-crunchmf" class="hash-link" aria-label="Direct link to 2. Cross-Platform Database Converter (Crunchmf)" title="Direct link to 2. Cross-Platform Database Converter (Crunchmf)" translate="no">​</a></h3>
+<p><strong>File:</strong> <code>db_convert_crunchmf.php</code></p>
+<p><strong>Path:</strong> Select database &gt; Menu Utilities &gt; Export/Import &gt; Operating System Converter (Crunchmf)</p>
+<p><img decoding="async" loading="lazy" alt="Cross-Platform Database Converter (Crunchmf)" src="https://abcd-devcom.github.io/assets/images/utilities-convert-database-4448ad36cd9359bac4657955b95e3143.png" width="1900" height="993" class="img_ev3q"></p>
+<p>Migrating CISIS databases between Windows (Little Endian) and Linux (Big Endian) architectures typically requires command-line intervention. We have wrapped the <code>crunchmf</code> utility in a PHP interface to automate this.</p>
+<ul>
+<li class=""><strong>Workflow:</strong>
+<ol>
+<li class=""><strong>Export:</strong> Executes <code>$cisis_path/crunchmf source_db target_db_suffix</code>.</li>
+<li class=""><strong>Packaging:</strong> Zips the resulting <code>.mst</code> and <code>.xrf</code> files immediately.</li>
+<li class=""><strong>Sanitization:</strong> Cleans up temporary <code>.mst/.xrf</code> files after zipping to save space.</li>
+</ol>
+</li>
+<li class=""><strong>Import:</strong> Automatically backs up the existing database (appends <code>_bkp_TIMESTAMP</code>) before overwriting with the converted version.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="3-server-side-log-viewer">3. Server-Side Log Viewer<a href="https://abcd-devcom.github.io/blog/2026-03-08-release-3-3-0#3-server-side-log-viewer" class="hash-link" aria-label="Direct link to 3. Server-Side Log Viewer" title="Direct link to 3. Server-Side Log Viewer" translate="no">​</a></h3>
+<p><strong>File:</strong> <code>admin_logs.php</code></p>
+<p><strong>Path:</strong> Configuration ABCD &gt; PHP Error Log</p>
+<p><img decoding="async" loading="lazy" alt="Server-Side Log Viewer" src="https://abcd-devcom.github.io/assets/images/log-viewer-3129760e9d71bccd4bc58e2cf355d3cb.png" width="1919" height="997" class="img_ev3q"></p>
+<p>A robust viewer for PHP error logs has been added. It features a custom <code>tailCustom()</code> function that reads files from the <strong>end</strong> (using <code>fseek</code> and <code>SEEK_END</code>), allowing it to handle large log files without memory exhaustion.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="configuration-requirements">Configuration Requirements<a href="https://abcd-devcom.github.io/blog/2026-03-08-release-3-3-0#configuration-requirements" class="hash-link" aria-label="Direct link to Configuration Requirements" title="Direct link to Configuration Requirements" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="enabling-the-log-viewer">Enabling the Log Viewer<a href="https://abcd-devcom.github.io/blog/2026-03-08-release-3-3-0#enabling-the-log-viewer" class="hash-link" aria-label="Direct link to Enabling the Log Viewer" title="Direct link to Enabling the Log Viewer" translate="no">​</a></h3>
+<p>To make the Log Viewer functional, you must explicitly define the log path in your main <code>config.php</code>. The system expects logs to be written to <code>bases/log/</code>.</p>
+<p>Add the following block to your <code>config.php</code>:</p>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">// Sets the path to ABCD's own log folder.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">$log_folder = $db_path . "log/";</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">if (!is_dir($log_folder)) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    mkdir($log_folder, 0777, true);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">$php_error_log = $log_folder . "php_error.log";</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">// Forces PHP to log errors to this specific file</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">ini_set('log_errors', 1);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">ini_set('error_log', $php_error_log);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span></code></pre></div></div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="uiux--opac-enhancements">UI/UX &amp; OPAC Enhancements<a href="https://abcd-devcom.github.io/blog/2026-03-08-release-3-3-0#uiux--opac-enhancements" class="hash-link" aria-label="Direct link to UI/UX &amp; OPAC Enhancements" title="Direct link to UI/UX &amp; OPAC Enhancements" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Bootstrap Integration:</strong> The OPAC now supports the CEPAL model database with a dedicated <code>opac.pft</code> template styled with Bootstrap.</li>
+<li class=""><strong>PHP 8 Compatibility:</strong> Polyfills for functions like <code>str_contains</code> have been added to the OPAC codebase to ensure compatibility with PHP 8.0+ environments.</li>
+<li class=""><strong>Refactored Navigation:</strong> The main configuration menu (<code>conf_abcd.php</code>) has been reorganized. The language selector was moved to the footer, and module buttons are now persistent.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="upgrade-path">Upgrade Path<a href="https://abcd-devcom.github.io/blog/2026-03-08-release-3-3-0#upgrade-path" class="hash-link" aria-label="Direct link to Upgrade Path" title="Direct link to Upgrade Path" translate="no">​</a></h2>
+<ol>
+<li class=""><strong>Backup:</strong> Perform a full file-system backup.</li>
+<li class=""><strong>Update Files:</strong> Overwrite the <code>htdocs</code> directory with the 3.3.0 source.</li>
+<li class=""><strong>Dependencies:</strong> Verify <code>php-zip</code> is installed.</li>
+<li class=""><strong>Config:</strong> Update <code>config.php</code> with the logging directives shown above.</li>
+<li class=""><strong>Permissions:</strong> Ensure the web server user has write permissions to <code>bases/wrk/</code> and <code>bases/log/</code>.</li>
+</ol>
+<pre tabindex="0" class="codeBlockStandalone_MEMb thin-scrollbar codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"></code></pre>]]></content:encoded>
+            <category>Release</category>
+            <category>v3.3.0</category>
+        </item>
         <item>
             <title><![CDATA[Major upgrade and improvements for OPAC]]></title>
             <link>https://ABCD-DEVCOM.github.io/blog/2026-02-11-release-v3.2.0</link>
@@ -375,8 +452,7 @@ If you use it now: <em>Take sufficient precautions (e.g. backups). Data loss and
 Note that Z3950 requires the YAZ extension for PHP. YAZ is not available for every PHP version.</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="upgrading">Upgrading<a href="https://abcd-devcom.github.io/blog/release-2.3.0#upgrading" class="hash-link" aria-label="Direct link to Upgrading" title="Direct link to Upgrading" translate="no">​</a></h3>
 <p>Upgrading to this version depends heavily on your current version.
-It is recommended to read the standard upgrade instructions in
-<a class="" href="https://abcd-devcom.github.io/blog/upgrade_instructions.md">https://github.com/ABCD-DEVCOM/ABCD/blob/master/zz_installation/upgrade_instructions.md</a>
+It is recommended to read the standard upgrade instructions in <a href="https://github.com/ABCD-DEVCOM/ABCD/blob/master/zz_installation/upgrade_instructions.md" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/blob/master/zz_installation/upgrade_instructions.md</a>
 Check the configuration files of your databases with the corresponding upgraded example databases.</p>
 <p>The new Upgrade tool is still in the development phase: Will become available in a next release.
 If you use it now: <em>Take sufficient precautions (e.g. backups). Data loss and/or code mismatches may occur by using it now.</em></p>]]></content:encoded>
