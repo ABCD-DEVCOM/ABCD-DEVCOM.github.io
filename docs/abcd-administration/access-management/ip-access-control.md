@@ -66,8 +66,6 @@ You do not need to edit the configuration files manually. The ABCD Central modul
 ![Valid IP Addresses Field](../../media/database-architecture-and-administration/ip-access-control.png)
 
 
-*(Note: Replace the image path above with the correct path where you save your screenshot).*
-
 ## Configuration Options
 
 In the **Valid IP adresses** field, you can define the access rules using the following formats:
