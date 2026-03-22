@@ -318,6 +318,7 @@ Following version non longer supported by ABCD
 
 This table defines the character codes of all alphabetic characters. It is used each time CDS/ISIS needs to know whether a given character is alphabetic (e.g. when performing word indexing using indexing technique 4, or validating alphabetic fields).\\
 A given text character whose code is stored in this table will be considered an alphabetic character.
+
 ## Syntax actab for ANSI/ISO-8859-1
 
 The standard table supplied by UNESCO is given below. Note 32 decimal ANSI codes per line
@@ -395,78 +396,103 @@ See the [full ANSI table](/docs/3.1/abcd-advanced/cisis-utilities/ansi-table) fo
 If you want to include other symbols in Technique 4 or 8 indexing, just get your ANSI code and insert it in the place corresponding to your sequence.\\ 
 If you do not want the numbers to be included in the indexing by techniques 4 or 8, eliminate the codes 048 to 057.
 
-# Upper case conversion table (uctab)
+## Upper Case Conversion Table (uctab / isisuc.tab)
 
-This table is used to convert database text (i.e. as stored in the database) to upper case.
+The **uctab** (upper case table) is used to convert database text (as stored in the database) to upper case. It is one of the most important and frequently underestimated resources in CDS/ISIS and ABCD.
 
-One of the characteristics of the information search process in CDS/Isis structures is transparency to the presence of accented characters and upper or lower case in search expressions. CDS/Isis will locate the information regardless of whether the accent is incorrectly placed or whether the keywords were written in upper or lower case.\\ 
-To achieve this goal, the keys in the inverted file are stored in uppercase and all search expressions are automatically converted to uppercase.\\ 
-This lowercase to uppercase conversion is performed with the help of a table called **uctab** (uc = upper). When a search expression is read each character is indexed in the **uctab** table and replaced by the equivalent value placed in that table.
+One of the vital characteristics of the information retrieval process is its transparency regarding the presence of accented characters and the use of upper or lower case. The system must be able to locate the information regardless of whether the user typed the exact spelling or not.
 
-## Syntax uctab for ANSI/ISO-8859-1
+To achieve this goal, the keys in the Inverted File (index) are stored in uppercase, and all search expressions entered by the user are automatically converted to uppercase before the search is executed.
 
-This table consists of 256 characters, and each character represents an Ansi Code.
+### Why is Standardization Necessary?
+Identical concepts can be entered into the database in various ways. For example:
+* População
+* população
+* POPULAÇÃO
 
-Example:\\ 
-The letter **ñ** is at (decimal) position 241 in the ANSI character table.\\ 
-In file **isisuc.tab** the letter **ñ** is also at position 241.\\ 
-The uppercase of **ñ** is **Ñ**.\\ 
-At position 241 of the table we have to place the code 209, which corresponds to the **Ñ** in the ANSI character table.  
+For these three variations to constitute a **single entry** in the search index, they must undergo a standardization process, resulting in a single access key (e.g., `POPULACAO`).
 
-The standard table supplied by UNESCO (without any conversions) is given below: 
-```
+This conversion is guided by the `isisuc.tab` table. During indexing, the system reads the extraction commands in the FST (such as `mhu`, `mpu`, `mdu`) and refers to the table to convert the characters. During a search, the system does the same with the term entered by the user, ensuring the searched term matches the key in the index.
 
+### Syntax for ANSI/ISO-8859-1
+
+The ANSI/ISO-8859-1 table is a fixed matrix map containing **exactly 256 values** (codes from 000 to 255). 
+The position of the value in the table represents the original character, and the number written in that position represents the character it should be converted to.
+
+**Practical Example:**
+The lowercase letter **a** occupies the (decimal) position 097 in the ASCII table.
+In the `isisuc.tab` file, if we go to the 97th position, we will find the value **065**. 
+Code 065 corresponds to the uppercase letter **A**. Thus, the system knows that "a" converts to "A".
+
+### The Issue with Special Characters (Ñ, Ç, and Accents)
+Due to the strict limit of 256 positions, **you do not add or remove positions from the file**. You only change the mapping of one code to another.
+
+Historically, many standard tables are configured to "clean" accents by mapping accented characters to their unaccented versions:
+* `ñ` (position 241) is converted to `N` (value 078).
+* `ç` (position 231) is converted to `C` (value 067).
+* `á` (position 225) is converted to `A` (value 065).
+
+If users from Hispanic or Lusophone countries want the **Ñ** and **Ç** to be indexed as independent letters and retain their spelling in the index, you simply alter the mapping value in their respective positions:
+* Go to position **241** (which represents `ñ`) and change the value from `078` to **`209`** (which is the ANSI code for uppercase `Ñ`).
+* Go to position **231** (which represents `ç`) and change the value from `067` to **`199`** (which is the ANSI code for uppercase `Ç`).
+
+Below is an example of the file using the UNESCO standard, which preserves the strict structure of 8 rows and 32 columns. Note that line breaks and spaces must be strictly maintained; otherwise, a fatal error will occur during the inverted file generation.
+
+```text
 000 001 002 003 004 005 006 007 008 009 010 011 012 013 014 015 016 017 018 019 020 021 022 023 024 025 026 027 028 028 030 031
 032 033 034 035 036 037 038 039 040 041 042 043 044 045 046 047 048 049 050 051 052 053 054 055 056 057 058 059 060 061 062 063
 064 065 066 067 068 069 070 071 072 073 074 075 076 077 078 079 080 081 082 083 084 085 086 087 088 089 090 091 092 093 094 095
 096 065 066 067 068 069 070 071 072 073 074 075 076 077 078 079 080 081 082 083 084 085 086 087 088 089 090 123 124 125 126 127
 067 085 069 065 065 065 065 067 069 069 069 073 073 073 065 065 069 069 069 079 079 079 085 085 089 079 085 155 156 157 158 159
-065 073 079 085 078 078 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191
-192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223
-224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 
+065 073 079 085 078 078 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 065 065 085 184 185 186 187 188 189 190 191
+192 193 194 195 196 197 065 065 200 201 202 203 204 205 206 207 079 068 069 069 069 073 073 073 073 217 218 219 220 221 222 223
+079 225 079 079 079 079 230 231 232 085 085 085 089 089 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255
 ```
+*(Note: The highlighted numbers in this block determine the accentuation behavior in your database. Edit them according to your library's phonetic policies).*
 
-Notice that the **isisuc.tab** table has 8 rows and 32 columns of 3 numbers. This format must be preserved, otherwise an error would be generated when updating the inverted list. 
-## Syntax uctab for UTF-8
-- Each line contains: decimal value lowercase = decimal value uppercase
-- Optionally followed by a hash mark (`#`) with comment.
-- One assignment per line
-- It is mandatory to fill in ascending order
-- Empty lines and lines starting with # are considered comment and ignored
-Excerpt from an actual uctab with ~300 lines (if no case conversion is required the character can be omitted)
+### Syntax for UTF-8
 
-```
+The configuration for Unicode (UTF-8) databases is much more user-friendly. It does not require a strict positional matrix but rather a direct declaration format:
+* Each line contains: `decimal value lowercase = decimal value uppercase`
+* Optionally followed by a hash mark (`#`) and a comment.
+* It is mandatory to fill it in ascending order.
 
-# One assignment per line
-# It is mandatory to fill in ascending order
+Example of explicit mapping (excerpt from the `isisuc_utf8.tab` file):
+
+```text
+# One assignment per line, in ascending order
 
 097=065			# a -> A
 098=066			# b -> B
-
+...
 122=090			# z -> Z
 
-195 128=065		# À	-> A LATIN CAPITAL LETTER A WITH GRAVE
-195 129=065		# Á	-> A LATIN CAPITAL LETTER A WITH ACUTE 
+195 128=065		# À	-> Converts to uppercase A (without accent)
+195 129=065		# Á	-> Converts to uppercase A (without accent)
 
+195 164=195 132 # ä -> Ä (Keeps the umlaut)
 ```
 
-## Location in ABCD
-By default it is placed in the root of the base folder and referenced in the `par/<dbn>.par` file. If you want to use a specific table for a database, place the table in the data folder of the database and modify the `<dbn>.par` file to indicate the new path.
+### Location in ABCD
+By default, the table files are located in the root of the `bases` folder and are applied globally to all databases referenced by the `par/<dbn>.par` files. If you want to use a specific table for only one database (e.g., a database with an indigenous language indexing policy), place the table inside the `data` folder of that database and modify the respective `.par` file to indicate the new path.
 
-Note: An actual installation contains normally an `uctab` file for ANS/ISO-8859-1 **and** an `uctab` file for UTF-8.
-
+```text
+www/<bases>/isisuc.tab                    # default ANSI table
+www/<bases>/isisuc_utf8.tab               # default UTF-8 table
+www/<bases>/<dbn>/data/isisuc.tab         # database-specific ANSI table
+www/<bases>/<dbn>/data/isisuc_utf8.tab    # database-specific UTF-8 table
+www/<bases>/par/<dbn>.par                 # file that points to the tables
 ```
 
-www/<bases>/isisuc.tab                    # default
-www/<bases>/isisuc_utf8.tab               # default
-www/<bases>/<dbn>/data/isisuc.tab         # database specific
-www/<bases>/<dbn>/data/isisuc_utf8.tab    # database specific
-www/<bases>/par/<dbn>.par                 # reference to the table
-```
+:::warning Important Post-Editing Step
+If you decide to change the mapping behavior of a character (for example, making `Ç` index as `Ç` instead of `C`), you **must** run the **Full Inverted File Generation** utility on your database immediately after saving the `isisuc.tab` file. This ensures that the old index keys are recreated using the new conversion rules. If you skip this step, search results will be inconsistent!
+:::
+
+
 
 ## Details
 ### Link for decimal UTF-8
-[Unicode to decimal converter](https///onlineunicodetools.com/convert-unicode-to-decimal)
+[Unicode to decimal converter](https://onlineunicodetools.com/convert-unicode-to-decimal)
 
 ### Usage in ABCD
 
