@@ -4,10 +4,67 @@
         <title>ABCD Software Documentation Blog</title>
         <link>https://ABCD-DEVCOM.github.io/blog</link>
         <description>ABCD Software Documentation Blog</description>
-        <lastBuildDate>Sun, 08 Mar 2026 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 21 Mar 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[ABCD 3.4.0 Technical Release Notes]]></title>
+            <link>https://ABCD-DEVCOM.github.io/blog/2026-03-21-release-3-4-0</link>
+            <guid>https://ABCD-DEVCOM.github.io/blog/2026-03-21-release-3-4-0</guid>
+            <pubDate>Sat, 21 Mar 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[What's Changed]]></description>
+            <content:encoded><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-changed">What's Changed<a href="https://abcd-devcom.github.io/blog/2026-03-21-release-3-4-0#whats-changed" class="hash-link" aria-label="Direct link to What's Changed" title="Direct link to What's Changed" translate="no">​</a></h2>
+<ul>
+<li class="">Branch for small issue by @fho4abcd in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/607" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/607</a></li>
+<li class="">Improve client IP check by @fho4abcd in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/608" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/608</a></li>
+<li class="">Add option to convert csv to iso-2709 by @fho4abcd in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/609" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/609</a></li>
+<li class="">Improve IP check by @fho4abcd in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/610" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/610</a></li>
+<li class="">Update inc_ip_check.php by @fho4abcd in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/611" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/611</a></li>
+<li class="">Branch for small issue by @fho4abcd in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/612" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/612</a></li>
+<li class="">Update institutional_info.php by @fho4abcd in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/613" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/613</a></li>
+<li class="">Improvements to opac by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/614" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/614</a></li>
+</ul>
+<p><strong>Full Changelog</strong>: <a href="https://github.com/ABCD-DEVCOM/ABCD/compare/v3.3.0...v3.4.0" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/compare/v3.3.0...v3.4.0</a></p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="option-to-limit-access-to-a-database-based-on-the-ip-address-of-the-requestor">Option to limit access to a database based on the IP address of the requestor.<a href="https://abcd-devcom.github.io/blog/2026-03-21-release-3-4-0#option-to-limit-access-to-a-database-based-on-the-ip-address-of-the-requestor" class="hash-link" aria-label="Direct link to Option to limit access to a database based on the IP address of the requestor." title="Direct link to Option to limit access to a database based on the IP address of the requestor." translate="no">​</a></h3>
+<ul>
+<li class="">The administrator can limit access by edit  of file 'the database to protect'/dr_path.def. This file may contain now new tag VALID_IP. The content of this tag is a comma separated list of internet IP addresses OR the keyword 'none'</li>
+<li class="">An empty value or missing tag allows all IP addresses</li>
+<li class="">Keyword 'none' limits the allowed IP addresses to link-local addresses or loopback addresses. Note that other keywords will have the same effect.</li>
+<li class="">A value with valid IP addresses allows the link-local addresses + the entered IP addresses</li>
+<li class="">If an IP address is not allowed then all actions for this database are blocked . Also for administrators !</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="utility-to-convert-a-csv-file-to-a-iso-file">Utility to convert a '.csv' file to a '.iso' file.<a href="https://abcd-devcom.github.io/blog/2026-03-21-release-3-4-0#utility-to-convert-a-csv-file-to-a-iso-file" class="hash-link" aria-label="Direct link to Utility to convert a '.csv' file to a '.iso' file." title="Direct link to Utility to convert a '.csv' file to a '.iso' file." translate="no">​</a></h3>
+<ul>
+<li class="">Found in Utilities ⇒ Export/Import</li>
+<li class="">Can be helpfull for importing Excels lists with new records into ABCD</li>
+<li class="">Unfortunately not suitable for UTF-8</li>
+<li class="">The structure of the .csv file is<!-- -->
+<ul>
+<li class="">The first line contains the ABCD field identifiers (e.g. 100,110,....)</li>
+<li class="">Following lines define the data.</li>
+<li class="">A record ends with a lineend, embedded lineends (between "") are allowed</li>
+<li class="">A data cell gives the data of the corresponding field. (may be empty)</li>
+<li class="">All records should have the same number of columns, however less columns as the first line is allowed</li>
+<li class="">ABCD has repeating fields. This program can process the phenomonon in three ways:<!-- -->
+<ul>
+<li class="">Multiple columns with the same tag number are allowed.</li>
+<li class="">Columns of repeated tags (as given by the fdt) are split at delimiter ; (see option -r)</li>
+<li class="">Columns of repeated tags (as given by the fdt) are split at an embedded lineend</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="actions-by-database-administrator">Actions by database administrator<a href="https://abcd-devcom.github.io/blog/2026-03-21-release-3-4-0#actions-by-database-administrator" class="hash-link" aria-label="Direct link to Actions by database administrator" title="Direct link to Actions by database administrator" translate="no">​</a></h3>
+<p>Most code updates can be excuted by the Upgrade manager.</p>
+<ul>
+<li class="">The administrator may protect databases by updating dr_path.def. No actions are required if the IP protection is not used.</li>
+<li class="">The administrator must copy the executable 'cnv_csv_to_iso' (from <a href="https://github.com/ABCD-DEVCOM/ABCD/tree/master/www/cgi-bin_Linux" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/tree/master/www/cgi-bin_Linux</a>) or 'cnv_csv_to_iso.exe' (from <a href="https://github.com/ABCD-DEVCOM/ABCD/tree/master/www/cgi-bin_Windows" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/tree/master/www/cgi-bin_Windows</a>) to his own cgi-bin.</li>
+</ul>]]></content:encoded>
+            <category>Release</category>
+            <category>v3.4.0</category>
+        </item>
         <item>
             <title><![CDATA[ABCD 3.3.0 Technical Release Notes]]></title>
             <link>https://ABCD-DEVCOM.github.io/blog/2026-03-08-release-3-3-0</link>
