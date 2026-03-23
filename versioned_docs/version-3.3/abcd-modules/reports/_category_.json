@@ -1,0 +1,8 @@
+{
+  "label": "Reports & Statistics",
+  "position": 8,
+  "link": {
+    "type": "generated-index",
+    "description": "Advanced statistical generation and cross-tabulation tools."
+  }
+}

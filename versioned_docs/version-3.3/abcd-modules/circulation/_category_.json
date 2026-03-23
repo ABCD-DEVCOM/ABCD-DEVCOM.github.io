@@ -1,0 +1,8 @@
+{
+    "label": "Circulation (Loans)",
+    "position": 3,
+    "link": {
+        "type": "generated-index",
+        "description": "Learn how to manage all ABCD loan operations, from setting up policies and user types to recording daily transactions such as loans, returns, and renewals."
+    }
+}

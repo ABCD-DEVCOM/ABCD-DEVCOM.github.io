@@ -1,0 +1,8 @@
+{
+    "label": "Quikstart Guide",
+    "position": 4,
+    "link": {
+        "type": "generated-index",
+        "description": "A practical tutorial so that new users can start using ABCD quickly."
+    }
+}
