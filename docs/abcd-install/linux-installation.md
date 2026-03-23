@@ -50,7 +50,7 @@ sudo unzip abcd.zip
 # Rename the extracted folder to 'ABCD' (or your preferred name)
 
 ```bash
-sudo mv ABCD-3.1.0  ABCD
+sudo mv ABCD-3.4.0  ABCD
 ```
 
 ## 3. Cleanup Directory Structure
