@@ -7,7 +7,7 @@ sidebar_custom_props:
 
 # 🐧Linux Installation Guide
 
-This guide covers the installation of ABCD 3.1+ on **Ubuntu/Debian** systems using the official release packages.
+This guide covers the installation of ABCD 3.4+ on **Ubuntu/Debian** systems using the official release packages.
 
 ## 1. Install System Dependencies
 Update your repositories and install Apache, PHP 8.x, and necessary tools.
@@ -31,7 +31,7 @@ sudo systemctl restart apache2
 We recommend downloading the latest stable release instead of cloning the development repository.
 
 1. Visit the [ABCD Releases Page](https://github.com/ABCD-DEVCOM/ABCD/releases).
-2. Copy the link for the latest `.zip` or `.tar.gz` file (e.g., `v3.1.0-beta.zip`).
+2. Copy the link for the latest `.zip` or `.tar.gz` file (e.g., `v3.4.0-beta.zip`).
 3. In your terminal, download and extract it (assuming `/var/www/html/ABCD` as destination):
 
 ```bash
@@ -68,7 +68,7 @@ sudo mv cgi-bin_Linux cgi-bin
 * Delete `cgi-bin_Windows`.
 
 ```bash
-sudo rm cgi-bin_Windows
+sudo rm -rf cgi-bin_Windows
 ```
 
 
@@ -85,7 +85,7 @@ ABCD comes with a template configuration file that must be activated.
 1. Navigate to the central configuration folder:
 
 ```bash
-cd /var/www/html/ABCD/htdocs/central/
+cd /var/www/html/ABCD/www/htdocs/central/
 ```
 
 
@@ -108,7 +108,7 @@ For ABCD to work (save records, upload images), permissions must be exact.
 Ensure the CISIS binaries have execution rights:
 
 ```bash
-sudo chmod +x /var/www/html/ABCD/cgi-bin/*
+sudo chmod +x /var/www/html/ABCD/www/cgi-bin/*
 ```
 
 ## 7. Next Steps
