@@ -4,10 +4,41 @@
         <title>ABCD Software Documentation Blog</title>
         <link>https://ABCD-DEVCOM.github.io/blog</link>
         <description>ABCD Software Documentation Blog</description>
-        <lastBuildDate>Sat, 21 Mar 2026 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 26 Mar 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[ABCD 3.5.0 Technical Release Notes]]></title>
+            <link>https://ABCD-DEVCOM.github.io/blog/2026-03-26-release-3-5-0</link>
+            <guid>https://ABCD-DEVCOM.github.io/blog/2026-03-26-release-3-5-0</guid>
+            <pubDate>Thu, 26 Mar 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[What's Changed]]></description>
+            <content:encoded><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-changed">What's Changed<a href="https://abcd-devcom.github.io/blog/2026-03-26-release-3-5-0#whats-changed" class="hash-link" aria-label="Direct link to What's Changed" title="Direct link to What's Changed" translate="no">​</a></h2>
+<ul>
+<li class="">UI improvements import txt by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/615" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/615</a></li>
+<li class="">Improves the dictionary's performance when there are Cyrillic charact… by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/616" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/616</a></li>
+<li class="">Update update_manager.php by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/617" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/617</a></li>
+<li class="">Create a real-time viewer for database changes using PROC by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/618" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/618</a></li>
+<li class="">Cleanup cgi-bin top folder by @fho4abcd in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/619" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/619</a></li>
+<li class="">Fix PHP 8 bug in CodificaSubCampos by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/621" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/621</a></li>
+<li class="">Visual logic opac by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/622" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/622</a></li>
+<li class="">Update show_image.php by @fho4abcd in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/623" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/623</a></li>
+<li class="">Cleaning footer by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/624" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/624</a></li>
+<li class="">Fixes navigation between modules.  by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/625" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/625</a></li>
+<li class="">Clear Cepal (biblo) database  by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/626" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/626</a></li>
+</ul>
+<p><strong>Full Changelog</strong>: <a href="https://github.com/ABCD-DEVCOM/ABCD/compare/v3.4.0...v3.5.0" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/compare/v3.4.0...v3.5.0</a></p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="utility-to-manipulate-records">Utility to manipulate records<a href="https://abcd-devcom.github.io/blog/2026-03-26-release-3-5-0#utility-to-manipulate-records" class="hash-link" aria-label="Direct link to Utility to manipulate records" title="Direct link to Utility to manipulate records" translate="no">​</a></h3>
+<p>You can view changes to fields in real time. Further information on how this screen works can be found at this link: <a href="https://abcd-devcom.github.io/docs/abcd-administration/field_manipulation_with_proc" target="_blank" rel="noopener noreferrer" class="">https://abcd-devcom.github.io/docs/abcd-administration/field_manipulation_with_proc</a></p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="actions-by-database-administrator">Actions by database administrator<a href="https://abcd-devcom.github.io/blog/2026-03-26-release-3-5-0#actions-by-database-administrator" class="hash-link" aria-label="Direct link to Actions by database administrator" title="Direct link to Actions by database administrator" translate="no">​</a></h2>
+<p>Most code updates can be excuted by the Upgrade manager.</p>
+<p>This release has also several improvements of the bases-examples_Linux and bases-examples_Windows folder for database cepal. Please apply modifications relevant for you manually.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="specials-for-code">Specials for code<a href="https://abcd-devcom.github.io/blog/2026-03-26-release-3-5-0#specials-for-code" class="hash-link" aria-label="Direct link to Specials for code" title="Direct link to Specials for code" translate="no">​</a></h3>
+<p>Note that <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/624" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/624</a> modifies file central/config.php.template. Please copy the changes to your central/config.php</p>]]></content:encoded>
+            <category>Release</category>
+            <category>v3.5.0</category>
+        </item>
         <item>
             <title><![CDATA[ABCD 3.4.0 Technical Release Notes]]></title>
             <link>https://ABCD-DEVCOM.github.io/blog/2026-03-21-release-3-4-0</link>
