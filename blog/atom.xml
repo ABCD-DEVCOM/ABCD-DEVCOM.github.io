@@ -2,11 +2,94 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ABCD-DEVCOM.github.io/blog</id>
     <title>ABCD Software Documentation Blog</title>
-    <updated>2026-03-26T00:00:00.000Z</updated>
+    <updated>2026-03-28T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ABCD-DEVCOM.github.io/blog"/>
     <subtitle>ABCD Software Documentation Blog</subtitle>
     <icon>https://ABCD-DEVCOM.github.io/img/favicon.png</icon>
+    <entry>
+        <title type="html"><![CDATA[ABCD 3.5.0 What's New?]]></title>
+        <id>https://ABCD-DEVCOM.github.io/blog/2026-03-28-about-3-5-0</id>
+        <link href="https://ABCD-DEVCOM.github.io/blog/2026-03-28-about-3-5-0"/>
+        <updated>2026-03-28T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[We are thrilled to announce the release of ABCD Version 3.5.0! This major update brings a wide array of improvements focused on user experience, system performance, security, and empowering database administrators with better tools.]]></summary>
+        <content type="html"><![CDATA[<p>We are thrilled to announce the release of <strong>ABCD Version 3.5.0</strong>! This major update brings a wide array of improvements focused on user experience, system performance, security, and empowering database administrators with better tools.</p>
+<p>From flexible new OPAC layouts to real-time record manipulation, here is a detailed breakdown of everything new in this release:</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-performance--stability">⚡ Performance &amp; Stability<a href="https://abcd-devcom.github.io/blog/2026-03-28-about-3-5-0#-performance--stability" class="hash-link" aria-label="Direct link to ⚡ Performance &amp; Stability" title="Direct link to ⚡ Performance &amp; Stability" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Optimized TXT Data Migration (#615):</strong> The TXT data import screen has been completely overhauled.<!-- -->
+<ul>
+<li class=""><strong>Real-time Progress:</strong> PHP now calculates the total number of migrated records and displays a percentage-based progress bar for clear visual feedback.</li>
+</ul>
+</li>
+</ul>
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/53a65fbe-40d8-4854-a750-2bde37c6bd6b">
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/8b18baae-d7ed-479f-8735-d42c9894ac6b">
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/bec183d6-0b67-407f-aa89-728fef935907">
+<ul>
+<li class=""><strong>Memory Management:</strong> We significantly improved memory handling to prevent browser crashes during heavy imports (files with more than 1,000 rows).</li>
+<li class=""><strong>Enhanced Analysis:</strong> The display of raw records has been improved to give database administrators a clearer view during data analysis.</li>
+<li class=""><strong>Cyrillic Dictionary Support (#616):</strong> We resolved a critical issue where clicking on a dictionary term containing Russian or other Cyrillic characters caused the search to crash. The A-Z alphabetical navigation is now fully stable for these languages.</li>
+<li class=""><strong>Cleaner <code>cgi-bin</code> Directory (#619):</strong> Unused executables in the "ansi" folder have been removed from the top <code>cgi-bin</code> directory, keeping the installation cleaner and more lightweight.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-layout--user-experience">🎨 Layout &amp; User Experience<a href="https://abcd-devcom.github.io/blog/2026-03-28-about-3-5-0#-layout--user-experience" class="hash-link" aria-label="Direct link to 🎨 Layout &amp; User Experience" title="Direct link to 🎨 Layout &amp; User Experience" translate="no">​</a></h2>
+<ul>
+<li class="">
+<p><strong>Dynamic OPAC Visual Logic (#622):</strong> The OPAC layout structure now responds perfectly to the <code>SIDEBAR</code> parameter in your <code>global_style.def</code> configuration, giving you total control over the interface. Furthermore, the use of Facets is no longer a mandatory requirement.</p>
+</li>
+<li class="">
+<p><code>SIDEBAR=Y</code>: Applies the standard layout with the sidebar visible.</p>
+</li>
+</ul>
+<img width="540" height="338" alt="layout-sidebar" src="https://github.com/user-attachments/assets/7c8322f7-e423-4720-b48e-adc8b87dfa64">
+<ul>
+<li class=""><code>SIDEBAR=N</code>: Applies a clean, full-width layout without the sidebar.</li>
+</ul>
+<img width="540" height="338" alt="layout-nosidebar" src="https://github.com/user-attachments/assets/2bb4f0e6-607b-494a-a22a-28692d1a4b74">
+<ul>
+<li class=""><code>SIDEBAR=SL</code>: Applies a layout focused on a large, prominent search bar.</li>
+</ul>
+<img width="540" height="338" alt="layout-search-large" src="https://github.com/user-attachments/assets/97abf8a4-5885-4871-8165-8b556d870690">
+<hr>
+<ul>
+<li class=""><strong>Standardized, Cleaner Footer (#624):</strong> The system footer has undergone a complete standardization for a more professional look:<!-- -->
+<ul>
+<li class="">Reduced font sizes for a cleaner aesthetic.</li>
+<li class="">Fixed the display logic for "Main Institution" and "Responsible Institution".</li>
+<li class="">The ABCD Community logo is now fixed.</li>
+<li class="">The language selector has been centered (Note: while useful for development testing, changing languages via the footer may not apply to all subpages due to current architectural limits).</li>
+<li class="">The outdated "ONLY FOR TESTING - NOT FOR DISTRIBUTION" watermark has been replaced with the official slogan: <em>"Free software for library automation"</em>.</li>
+</ul>
+</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Footer v3.5.0" src="https://abcd-devcom.github.io/assets/images/footer_3.5-64b025c3cba70b131086a64556b19b39.png" width="1349" height="94" class="img_ev3q"></p>
+<ul>
+<li class=""><strong>Seamless Module Navigation (#625):</strong> We fixed a persistent navigation bug that affected the OPAC settings, ensuring a smooth workflow when moving between different system modules.
+<img decoding="async" loading="lazy" alt="Module Navigation" src="data:image/png;base64,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" width="236" height="107" class="img_ev3q"></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-advanced-administrator-tools">🛠️ Advanced Administrator Tools<a href="https://abcd-devcom.github.io/blog/2026-03-28-about-3-5-0#%EF%B8%8F-advanced-administrator-tools" class="hash-link" aria-label="Direct link to 🛠️ Advanced Administrator Tools" title="Direct link to 🛠️ Advanced Administrator Tools" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Real-Time PROC Viewer (#618):</strong> We are introducing a brand-new <code>.prc</code> file editor for manipulating records using the <code>PROC</code> command. This innovative feature allows database administrators to view changes to fields in <strong>real-time</strong> as they write the formatting logic. <em>(Learn more in our <a href="https://abcd-devcom.github.io/docs/abcd-administration/field_manipulation_with_proc" target="_blank" rel="noopener noreferrer" class="">Field Manipulation with PROC documentation</a>).</em></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-security--bug-fixes">🔒 Security &amp; Bug Fixes<a href="https://abcd-devcom.github.io/blog/2026-03-28-about-3-5-0#-security--bug-fixes" class="hash-link" aria-label="Direct link to 🔒 Security &amp; Bug Fixes" title="Direct link to 🔒 Security &amp; Bug Fixes" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Uploads Folder Protection (#617):</strong> We added strict protections to the OPAC’s <code>uploads</code> folder. This ensures that vital institutional assets, such as custom logos and icons, are preserved and secured against unauthorized access.</li>
+<li class=""><strong>PHP 8 Bug Fix in <code>CodificaSubCampos</code> (#621):</strong> Resolved a frustrating PHP 8 bug where an empty delimiter would swallow the first character of a field. This issue notoriously affected field 16 of the <code>mm.fmt</code> worksheet in the CEPAL (biblo) database, where the first character was incorrectly saved as a lowercase 'h'.</li>
+<li class=""><strong>Repaired Image Display Errors (#623):</strong> Fixed a spurious bug in older installations where browsers would throw the error: <em>"The image cannot be displayed because it contains errors."</em> We implemented output buffer clearing (<code>ob_end_clean</code>) and strict Path Traversal security checks to ensure images are served safely and flawlessly.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-default-database-enhancements">📚 Default Database Enhancements<a href="https://abcd-devcom.github.io/blog/2026-03-28-about-3-5-0#-default-database-enhancements" class="hash-link" aria-label="Direct link to 📚 Default Database Enhancements" title="Direct link to 📚 Default Database Enhancements" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>CEPAL (Biblo) Database Cleanup (#626):</strong> Thanks to the outstanding collaboration of <strong>Jesus E. Jurado</strong> (Venezuela), the default CEPAL (<code>biblo</code>) database has received an extensive cleanup. Unwanted characters in the middle of worksheets, invalid column values, and various data entry validation errors have been entirely removed, making it perfectly tailored for testing and use in this current version.</li>
+</ul>
+<hr>
+<p><strong>Ready to upgrade?</strong> Check out our official documentation for update instructions and enjoy the most stable and customizable version of ABCD yet!</p>]]></content>
+        <author>
+            <name>Roger C. Guilherme</name>
+            <uri>https://www.linkedin.com/in/rogerguilherme/</uri>
+        </author>
+        <category label="Release" term="Release"/>
+        <category label="v3.5.0" term="v3.5.0"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[ABCD 3.5.0 Technical Release Notes]]></title>
         <id>https://ABCD-DEVCOM.github.io/blog/2026-03-26-release-3-5-0</id>
