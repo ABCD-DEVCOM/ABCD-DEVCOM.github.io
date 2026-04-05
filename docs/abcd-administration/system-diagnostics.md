@@ -49,3 +49,32 @@ The tool scans the `bases.dat` registry and then physically inspects every datab
 :::tip Troubleshooting
 If a database appears in the main menu selection but gives an error (e.g., "breaks") when you try to open it, check this report first. It acts as a "sanity check" to ensure the operating system can actually see and touch the database files.
 :::
+
+
+## 3. Log Viewer
+
+ABCD features a PHP error log viewer that allows for easy system debugging via the interface. The main purpose is to inform the system administrator of what is happening without the need to access the server directly.
+
+### How to access
+To access the log viewer, click on ‘ABCD Configuration’ -> ‘PHP Error Log’
+
+### Enabling the log viewer
+To make the Log Viewer functional, you must explicitly define the log path in your main `config.php`. The system expects logs to be written to `bases/log/`.
+
+Add the following block to your `config.php`:
+
+```php
+// Sets the path to ABCD's own log folder.
+$log_folder = $db_path . "log/";
+
+if (!is_dir($log_folder)) {
+    mkdir($log_folder, 0777, true);
+}
+
+$php_error_log = $log_folder . "php_error.log";
+
+// Forces PHP to log errors to this specific file
+ini_set('log_errors', 1);
+ini_set('error_log', $php_error_log);
+
+```
