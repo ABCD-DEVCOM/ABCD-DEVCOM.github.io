@@ -144,3 +144,75 @@ sudo nano /etc/apache2/apache2.conf
 ```bash
 sudo systemctl restart apache2
 ```
+
+
+
+## SSL Certificate Installation (Let's Encrypt)
+
+This guide provides a step-by-step procedure for installing an SSL certificate using Let's Encrypt on a server running Ubuntu 22.04 LTS.
+
+| Requirement | Specification |
+| :--- | :--- |
+| **Operating System** | Ubuntu 22.04.5 LTS (Jammy Jellyfish) |
+| **Web Server** | Apache2 |
+| **Tool** | Certbot |
+
+---
+
+### Prerequisites
+
+* A registered domain name (e.g., `library.edu`) pointing to your server's IP.
+* Ports **80** (HTTP) and **443** (HTTPS) open in your firewall.
+
+### 1. Install Certbot
+
+First, update your local package index and install the Certbot Python package designed for Apache:
+
+```bash
+sudo apt update
+sudo apt install certbot python3-certbot-apache
+```
+
+### 2. Obtain and Configure Certificate
+
+Run the following command to automatically obtain a certificate and configure Apache to redirect all HTTP traffic to HTTPS. The script will prompt you for an email address and agreement to the Terms of Service.
+
+```bash
+sudo certbot --apache -d yourdomain.com
+```
+
+> **Note:** Replace `yourdomain.com` with your actual domain (e.g., `fheactas.ucv.ve`).
+
+---
+
+### 3. Verifying Auto-Renewal
+
+Let's Encrypt certificates are valid for 90 days. On Ubuntu 22.04, the system automatically creates a background timer to handle renewals. To verify that the renewal process is working correctly, perform a "dry run":
+
+```bash
+sudo certbot renew --dry-run
+```
+
+---
+
+### Troubleshooting
+
+#### Error: "No such authorization"
+If you encounter a malformed message error or `No such authorization` during the process, it usually indicates a synchronization issue with the ACME server. You can resolve this by forcing a clean renewal attempt:
+
+```bash
+sudo certbot --apache -d yourdomain.com --force-renewal
+```
+
+#### Institutional Firewalls
+If the validation fails and the domain is correctly pointed to your IP, ensure that port **443** is open in your network infrastructure. In some university or institutional environments, you may need to request the network administrator to allow inbound traffic on the HTTPS port.
+
+#### Manual Webroot Method
+If the Apache plugin cannot automatically modify your configuration, use the **webroot** method to verify your domain:
+
+```bash
+sudo certbot certonly --webroot -w /var/www/html -d yourdomain.com
+```
+*(Ensure `-w` points to your actual web root directory).*
+
+
