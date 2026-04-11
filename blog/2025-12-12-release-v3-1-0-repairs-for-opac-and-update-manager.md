@@ -11,7 +11,7 @@ tags: [release, v3.1.0]
 * Repair missing footer
 
 
-<!-- truncate -->
+{/* truncate */}
 
 
 **Full Changelog**: https://github.com/ABCD-DEVCOM/ABCD/compare/v3.0.0...v3.1.0

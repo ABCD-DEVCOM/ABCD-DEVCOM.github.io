@@ -10,7 +10,7 @@ Database records could be sorted with command line utility msrt.
 This improvement adds an interactive capability in menu Utilities -> DB Maintenance.
 Defaults can be set in the Advanced database settings (dr_path.def)
 
-<!-- truncate -->
+{/* truncate */}
 
 ### Details
 - Best results are obtained by using the Principal entry tag as sort key. But this is not mandatory. Other tags will also work.

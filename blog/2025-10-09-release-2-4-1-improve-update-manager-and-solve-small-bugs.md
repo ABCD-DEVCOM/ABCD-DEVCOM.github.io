@@ -14,7 +14,7 @@ Version_checker:
 - Moved json file to upgrade folder
 - Corrected repository name (ABCD2->ABCD)
 
-<!-- truncate -->
+{/* truncate */}
 
 See all changed files for more details
 
