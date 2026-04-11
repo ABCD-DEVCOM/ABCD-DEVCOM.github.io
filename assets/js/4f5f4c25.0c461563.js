@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkabcd_devcom_github_io=self.webpackChunkabcd_devcom_github_io||[]).push([[59328],{87460:e=>{e.exports=JSON.parse('{"tags":[{"label":"digital libraries","permalink":"/docs/2.0/tags/digital-libraries","count":1},{"label":"collections","permalink":"/docs/2.0/tags/collections","count":1}]}')}}]);
