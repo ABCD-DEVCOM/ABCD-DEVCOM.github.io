@@ -346,7 +346,7 @@ backgroundClip: 'content-box'
   * **Separation:** Use `.mb-3` (margin-bottom) to separate form elements or paragraphs.
   * **Gutters:** Use `.px-3` to add horizontal cushion inside containers.
 
-<!-- end list -->
+{/* end list */}
 
 ```html
 <div class="p-4 mb-4 bg-light border">

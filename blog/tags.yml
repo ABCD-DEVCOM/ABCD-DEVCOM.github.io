@@ -107,3 +107,7 @@ v3.5.0:
   label: v3.5.0
   permalink: /v3.5.0
   description: Version 3.5.0 specific posts
+v3.6.0:
+  label: v3.6.0
+  permalink: /v3.6.0
+  description: Version 3.6.0 specific posts

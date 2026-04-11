@@ -8,7 +8,7 @@ tags: [release, v2.3.6]
 ## Major changes
 The upgrade manager has now several checks to cope with error situations.
 
-<!-- truncate -->
+{/* truncate */}
 
 The search by A-Z list gives now information how to repair erroneous configuration
 ### Details of upgrade manager checks

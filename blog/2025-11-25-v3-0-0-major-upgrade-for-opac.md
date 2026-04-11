@@ -11,7 +11,7 @@ tags: [release, v3.0.0]
 - https://github.com/ABCD-DEVCOM/ABCD/pull/577
 
 
-<!-- truncate -->
+{/* truncate */}
 
 
 **Details**
