@@ -215,7 +215,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} ACBD Docs.`,
+        copyright: `Copyright © ${new Date().getFullYear()} ABCD Knowledge Base.`,
       },
       prism: {
         theme: prismThemes.github,
