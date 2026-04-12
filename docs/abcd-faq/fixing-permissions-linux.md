@@ -47,7 +47,7 @@ We will apply a standard permission set:
   * **Directories (2775):** The `2` enables the **SGID bit**. This ensures that any *new* file created inside these folders inherits the `www-data` group automatically, preventing future permission errors.
   * **Files (0664):** Owner and Group can write; others can read.
 
-<!-- end list -->
+{/* end list */}
 
 ```bash
 # Set directories to 2775 (User/Group write + SGID)

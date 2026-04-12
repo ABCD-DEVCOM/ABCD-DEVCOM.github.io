@@ -11,7 +11,7 @@ tags: [release, v3.1.2]
 * Update opac.tab by @rogercgui in https://github.com/ABCD-DEVCOM/ABCD/pull/592
 * OPAC HTML Improvement by @rogercgui in https://github.com/ABCD-DEVCOM/ABCD/pull/593
 
-<!-- truncate -->
+{/* truncate */}
 
 **Full Changelog**: https://github.com/ABCD-DEVCOM/ABCD/compare/v3.1.1...v3.1.2
 

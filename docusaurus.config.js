@@ -66,8 +66,13 @@ const config = {
 
           versions: {
             current: {
-              label: '3.5.X', 
+              label: '3.6.X', 
               path: '',       
+              banner: 'none',
+            },
+            '3.5': {
+              label: '3.5.x',
+              path: '3.5',
               banner: 'none',
             },
             '3.4': {

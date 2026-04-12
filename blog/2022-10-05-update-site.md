@@ -10,5 +10,5 @@ Some commands like "each" have been deprecated in PHP 8 making the Site incompat
 This commit reduces the bugs in parts, but not all of them.
 Testing is still needed.
 
-<!-- truncate -->
+{/* truncate */}
 

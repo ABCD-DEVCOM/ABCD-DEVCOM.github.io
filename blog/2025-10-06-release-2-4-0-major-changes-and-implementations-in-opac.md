@@ -8,7 +8,7 @@ tags: [release, v2.4.0]
 ## What's Changed
 **Description**: Major changes and implementations in OPAC by @rogercgui in https://github.com/ABCD-DEVCOM/ABCD/pull/570
 
-<!-- truncate -->
+{/* truncate */}
 
 **Full Changelog**: https://github.com/ABCD-DEVCOM/ABCD/compare/v2.3.6...v2.4.0
 

@@ -14,7 +14,7 @@ The available options are:
 - Full update: the entire system will be reset, including the model databases.
 More info in pull request Update manager by @rogercgui in https://github.com/ABCD-DEVCOM/ABCD/pull/567
 
-<!-- truncate -->
+{/* truncate */}
 
 ### Upgrade
 
