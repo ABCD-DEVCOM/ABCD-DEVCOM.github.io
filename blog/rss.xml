@@ -4,10 +4,123 @@
         <title>ABCD Software Documentation Blog</title>
         <link>https://ABCD-DEVCOM.github.io/blog</link>
         <description>ABCD Software Documentation Blog</description>
-        <lastBuildDate>Thu, 09 Apr 2026 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 20 May 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[ABCD 3.7.0 Technical Release Notes]]></title>
+            <link>https://ABCD-DEVCOM.github.io/blog/2026-05-20-release-3-7-0</link>
+            <guid>https://ABCD-DEVCOM.github.io/blog/2026-05-20-release-3-7-0</guid>
+            <pubDate>Wed, 20 May 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[✨ Key Highlights]]></description>
+            <content:encoded><![CDATA[<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-key-highlights">✨ Key Highlights<a href="https://abcd-devcom.github.io/blog/2026-05-20-release-3-7-0#-key-highlights" class="hash-link" aria-label="Direct link to ✨ Key Highlights" title="Direct link to ✨ Key Highlights" translate="no">​</a></h3>
+<p>This release introduces significant improvements and refactorings to the Statistics module, aimed at increasing performance, enhancing data transparency, and stabilizing character encoding across the module.</p>
+<p><strong>Key Changes:</strong></p>
+<p><strong>Multi-Loop Execution Engine:</strong></p>
+<ul>
+<li class="">Replaced the monolithic execution model with a refined "Multi-Loop" orchestrator.</li>
+<li class="">The system now isolates the execution of each statistical table, allowing for individual search expressions (<code>Expresion</code>) to be processed per table without conflicts.</li>
+<li class="">Integrated a performance-optimized pipeline that combines table-specific search expressions with global interface filters, ensuring high-speed processing while maintaining data accuracy.</li>
+</ul>
+<p><strong>Transparency &amp; UX Improvements:</strong></p>
+<ul>
+<li class="">Added a "Search Expression" field directly into the <strong>Table Configuration (<code>tables_cfg.php</code>)</strong>, allowing administrators to embed specific filter rules per report.</li>
+<li class="">Enhanced output transparency: The module now dynamically displays the active search criteria (MFN range or Search Expression) as a subtitle (<code>&lt;small&gt;</code> tag) directly below the report title (<code>&lt;h3&gt;</code>), providing immediate clarity to end-users regarding the data source.</li>
+</ul>
+<p><strong>Encoding Stabilization:</strong></p>
+<ul>
+<li class="">Resolved long-standing character encoding issues (UTF-8 vs. ISO-8859-1) by implementing a standardized "Gateway" approach.</li>
+<li class="">Requests from the UI (JS/AJAX) are now normalized upon arrival, and output is managed via standard headers, ensuring that special characters (like Portuguese accents) are rendered correctly in tables and UI elements while maintaining strict UTF-8 compliance for ECharts graph generation.</li>
+<li class="">Centralized menu structure: The statistics configuration options (<code>config_vars.php</code>, <code>tables_cfg.php</code>, <code>proc_cfg.php</code>) are now easily accessible via a consolidated navigation include, improving workflow efficiency.</li>
+</ul>
+<p><strong>Code Quality &amp; Maintenance:</strong></p>
+<ul>
+<li class="">Extracted hardcoded strings into the <code>$msgstr</code> internationalization array to ensure full support for multi-language installations.</li>
+<li class="">Cleaned up legacy code, removed deprecated function calls, and ensured compatibility with modern PHP versions (fixing <code>Undefined array key</code> warnings).</li>
+</ul>
+<p><strong><a class="" href="https://abcd-devcom.github.io/docs/abcd-modules/reports/statistics">Read more here!</a></strong></p>
+<hr>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="impact"><strong>Impact:</strong><a href="https://abcd-devcom.github.io/blog/2026-05-20-release-3-7-0#impact" class="hash-link" aria-label="Direct link to impact" title="Direct link to impact" translate="no">​</a></h4>
+<p>This update provides a more reliable and flexible way for institutions to generate specific production reports (e.g., separating "Created" vs "Edited" records) within a single "Process," while significantly improving the user experience for librarians and system administrators.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-changed">What's Changed<a href="https://abcd-devcom.github.io/blog/2026-05-20-release-3-7-0#whats-changed" class="hash-link" aria-label="Direct link to What's Changed" title="Direct link to What's Changed" translate="no">​</a></h2>
+<ul>
+<li class="">Refactoring and Enhancements to the Statistics Module by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/64" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/64</a></li>
+</ul>
+<p><strong>Full Changelog</strong>: <a href="https://github.com/ABCD-DEVCOM/ABCD/compare/v3.6.2...v3.7.0" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/compare/v3.6.2...v3.7.0</a></p>]]></content:encoded>
+            <category>Release</category>
+            <category>v3.7.0</category>
+        </item>
+        <item>
+            <title><![CDATA[ABCD 3.6.2 Technical Release Notes]]></title>
+            <link>https://ABCD-DEVCOM.github.io/blog/2026-05-08-release-3-6-2</link>
+            <guid>https://ABCD-DEVCOM.github.io/blog/2026-05-08-release-3-6-2</guid>
+            <pubDate>Fri, 08 May 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[What's Changed]]></description>
+            <content:encoded><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-changed">What's Changed<a href="https://abcd-devcom.github.io/blog/2026-05-08-release-3-6-2#whats-changed" class="hash-link" aria-label="Direct link to What's Changed" title="Direct link to What's Changed" translate="no">​</a></h2>
+<p>Welcome to the <strong>ABCD v3.6.2</strong> release! This update brings significant improvements to the RDA and MARC databases, expands Portuguese (PT) localization, and introduces important safety limits and UI updates for the PRC Conversion tool.</p>
+<!-- -->
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-key-highlights">✨ Key Highlights<a href="https://abcd-devcom.github.io/blog/2026-05-08-release-3-6-2#-key-highlights" class="hash-link" aria-label="Direct link to ✨ Key Highlights" title="Direct link to ✨ Key Highlights" translate="no">​</a></h3>
+<p><strong>RDA Database &amp; Localization Enhancements</strong>
+We’ve put a lot of work into making sure the RDA database is functional and completely pre-configured out of the box for Portuguese users.</p>
+<ul>
+<li class=""><strong>Ready-to-use RDA:</strong> Improved the integration between the RDA base and Copies, updated essential parameter files (<code>rda.par</code>, <code>marc.par</code>, <code>dbn.par</code>), and created new OPAC configuration files alongside <code>dcxml.pft</code>.</li>
+<li class=""><strong>Better Portuguese (PT) Support:</strong> Inserted localized display formats and barcodes, updated the PT record toolbar and relevance fields, and improved the FDT and Books spreadsheets.</li>
+<li class=""><strong>Sample Data:</strong> Added a sample record to the RDA database and created sample barcode files in the MARC database so users can test features immediately.</li>
+</ul>
+<p><strong>PRC Conversion Preview Updates</strong></p>
+<ul>
+<li class=""><strong>MFN Range Selection:</strong> You can now set specific ranges (<code>mfn_start</code> and <code>mfn_end</code>) when reading original and temporary records, complete with a new <strong>Refresh Preview</strong> button in the UI.</li>
+<li class=""><strong>Server Safety Lock:</strong> To prevent WXIS or the server from overloading, we implemented a strict safety lock that caps the preview window at a maximum of 50 records.</li>
+<li class=""><strong>Localization:</strong> Added new language strings (<code>prc_adjust_preview_range</code>, <code>prc_refresh_preview</code>) to <code>soporte.tab</code>.</li>
+</ul>
+<p><strong>UI &amp; Quality of Life Tweaks</strong></p>
+<ul>
+<li class="">Adjusted the height between input fields during data entry, making the cataloging experience more comfortable and visually balanced.</li>
+<li class="">Minor UI and formatting tweaks in the PRC converter, including a small concatenation fix.</li>
+</ul>
+<p><strong>🧹 Housekeeping &amp; Cleanup</strong></p>
+<ul>
+<li class="">Kept the repository clean and lightweight by deleting unused Stock databases (on both Linux and Windows) and removing obsolete files.</li>
+</ul>
+<hr>
+<p><strong>Detailed Pull Requests:</strong></p>
+<ul>
+<li class=""><strong>#636, #637, #638:</strong> RDA base improvements, PT localization, OPAC configs, and data entry UI tweaks.</li>
+<li class=""><strong>#639:</strong> Removal of unused Stock databases, addition of sample records/barcodes, and file cleanup.</li>
+<li class=""><strong>#641:</strong> PRC conversion MFN range previews, safety limits, and UI fixes.</li>
+</ul>
+<p><strong>Full Changelog</strong>: [<a href="https://github.com/ABCD-DEVCOM/ABCD/compare/v3.6.1...v3.6.2" target="_blank" rel="noopener noreferrer" class="">v3.6.1...v3.6.2</a>](<a href="https://github.com/ABCD-DEVCOM/ABCD/compare/v3.6.1...v3.6.2" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/compare/v3.6.1...v3.6.2</a>)</p>]]></content:encoded>
+            <category>Release</category>
+            <category>v3.6.2</category>
+        </item>
+        <item>
+            <title><![CDATA[ABCD 3.6.1 Technical Release Notes]]></title>
+            <link>https://ABCD-DEVCOM.github.io/blog/2026-04-19-release-3-6-1</link>
+            <guid>https://ABCD-DEVCOM.github.io/blog/2026-04-19-release-3-6-1</guid>
+            <pubDate>Sun, 19 Apr 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[What's Changed]]></description>
+            <content:encoded><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-changed">What's Changed<a href="https://abcd-devcom.github.io/blog/2026-04-19-release-3-6-1#whats-changed" class="hash-link" aria-label="Direct link to What's Changed" title="Direct link to What's Changed" translate="no">​</a></h2>
+<ul>
+<li class="">Enhance language selection and detection with pagination fixes by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/632" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/632</a></li>
+<li class="">Update update_manager.php by @fho4abcd in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/633" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/633</a></li>
+<li class="">Add clear-field button styles  by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/634" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/634</a></li>
+</ul>
+<p><strong>Full Changelog</strong>: <a href="https://github.com/ABCD-DEVCOM/ABCD/compare/v3.6.0...v3.6.1" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/compare/v3.6.0...v3.6.1</a></p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="details">Details<a href="https://abcd-devcom.github.io/blog/2026-04-19-release-3-6-1#details" class="hash-link" aria-label="Direct link to Details" title="Direct link to Details" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="add-clear-field-button-styles-and-fix-textcounter-refs">Add clear-field button styles and fix textCounter refs<a href="https://abcd-devcom.github.io/blog/2026-04-19-release-3-6-1#add-clear-field-button-styles-and-fix-textcounter-refs" class="hash-link" aria-label="Direct link to Add clear-field button styles and fix textCounter refs" title="Direct link to Add clear-field button styles and fix textCounter refs" translate="no">​</a></h3>
+<p>Introduce .btn-limpar-abcd CSS for a compact clear-field button and prevent inputs/textareas in .table-fdt-four from growing wide enough to break button rows. In PHP, unify textCounter calls to use document.forma1 to fix incorrect form references. Update the DOM-inserted clear button: change its class to btn-limpar-abcd and its title to English ('Clear field'). Also remove a stray blank line in the generated output.</p>
+<p><strong>Before</strong></p>
+<img width="582" alt="image" src="https://github.com/user-attachments/assets/4c5e2c6d-4aca-4841-ac8a-4cd207df5c7a">
+<p><strong>After</strong></p>
+<img width="582" alt="image" src="https://github.com/user-attachments/assets/2c7e3fd8-1fc1-4edd-b65b-282ed1fb0aad">
+<p>Note:
+This adjustment was made following complaints from some users about there being too much white space in the data entry field.</p>]]></content:encoded>
+            <category>Release</category>
+            <category>v3.6.1</category>
+        </item>
         <item>
             <title><![CDATA[ABCD 3.6.0 Technical Release Notes]]></title>
             <link>https://ABCD-DEVCOM.github.io/blog/2026-04-09-release-3-6-0</link>
@@ -618,84 +731,6 @@ File version.php contains the correct tag for this release.</p>
 If you use it now: <em>Take sufficient precautions (e.g. backups). Data loss and/or code mismatches may occur by using it now.</em></p>]]></content:encoded>
             <category>Release</category>
             <category>v2.3.3</category>
-        </item>
-        <item>
-            <title><![CDATA[Release 2.3.2 Status 2025-09-15 better]]></title>
-            <link>https://ABCD-DEVCOM.github.io/blog/release-2-3-2-status-2025-09-15-better</link>
-            <guid>https://ABCD-DEVCOM.github.io/blog/release-2-3-2-status-2025-09-15-better</guid>
-            <pubDate>Mon, 15 Sep 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[Major Changes]]></description>
-            <content:encoded><![CDATA[<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="major-changes">Major Changes<a href="https://abcd-devcom.github.io/blog/release-2-3-2-status-2025-09-15-better#major-changes" class="hash-link" aria-label="Direct link to Major Changes" title="Direct link to Major Changes" translate="no">​</a></h3>
-<ul>
-<li class="">Corrections for PHP version in Site</li>
-<li class="">Improve speed of version check in the upgrade process.</li>
-<li class="">Improve editing of Opac facets</li>
-<li class="">New look of screen "Configuration ABCD"</li>
-<li class="">Improvement of OPAC in the back-end and front-end.</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="actions-by-database-administrator">Actions by database administrator<a href="https://abcd-devcom.github.io/blog/release-2-3-2-status-2025-09-15-better#actions-by-database-administrator" class="hash-link" aria-label="Direct link to Actions by database administrator" title="Direct link to Actions by database administrator" translate="no">​</a></h3>
-<ul>
-<li class="">Check value of new parameter "Check version of ABCD?" (internal<!-- -->:CHECK_VERSION<!-- -->) in the ‘Other’ tab in the ABCD settings.</li>
-</ul>
-<!-- -->
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="upgrading">Upgrading<a href="https://abcd-devcom.github.io/blog/release-2-3-2-status-2025-09-15-better#upgrading" class="hash-link" aria-label="Direct link to Upgrading" title="Direct link to Upgrading" translate="no">​</a></h3>
-<p>The new and modified files can overwrite existing files Note that some files can be deleted (See Pull Requests for details)</p>
-<p>The new Upgrade tool is still in the development phase: Will become available in a next release.
-If you use it now: <em>Take sufficient precautions (e.g. backups). Data loss and/or code mismatches may occur by using it now.</em></p>]]></content:encoded>
-            <category>Release</category>
-            <category>v2.3.2</category>
-        </item>
-        <item>
-            <title><![CDATA[Release 2.3.0 Status 2025-09-06]]></title>
-            <link>https://ABCD-DEVCOM.github.io/blog/release-2.3.0</link>
-            <guid>https://ABCD-DEVCOM.github.io/blog/release-2.3.0</guid>
-            <pubDate>Sat, 06 Sep 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[Overview of > 650 commits since version v2.2.0-beta-1]]></description>
-            <content:encoded><![CDATA[<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="overview-of--650-commits-since-version-v220-beta-1">Overview of &gt; 650 commits since version v2.2.0-beta-1<a href="https://abcd-devcom.github.io/blog/release-2.3.0#overview-of--650-commits-since-version-v220-beta-1" class="hash-link" aria-label="Direct link to Overview of > 650 commits since version v2.2.0-beta-1" title="Direct link to Overview of > 650 commits since version v2.2.0-beta-1" translate="no">​</a></h3>
-<p>Major functional improvements:</p>
-<ul>
-<li class="">Enhanced OPAC;</li>
-<li class="">Rewritten OAI-PHM;</li>
-<li class="">Redesigned statistics and reports;</li>
-<li class="">Captcha implemented;</li>
-<li class="">Added Search, result in list</li>
-<li class="">Moved Empweb to separate GitHub repository</li>
-</ul>
-<p>Other improvements:</p>
-<ul>
-<li class="">Stabelized layout and convert more scripts to new look;</li>
-<li class="">Make z3950 protocol working</li>
-<li class="">Update Portuguese, Spanish and French languages</li>
-<li class="">Improved example databases</li>
-<li class="">Many small functional improvements in menus/buttons/layout</li>
-<li class="">Improved generated HTML and solved small bugs</li>
-</ul>
-<!-- -->
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="prerequisites">Prerequisites<a href="https://abcd-devcom.github.io/blog/release-2.3.0#prerequisites" class="hash-link" aria-label="Direct link to Prerequisites" title="Direct link to Prerequisites" translate="no">​</a></h3>
-<p>This ABCD version is already tested on PHP 8.4. Will still run on PHP 7.4, recommendation is to upgrade to at least PHP 8.1.
-Note that Z3950 requires the YAZ extension for PHP. YAZ is not available for every PHP version.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="upgrading">Upgrading<a href="https://abcd-devcom.github.io/blog/release-2.3.0#upgrading" class="hash-link" aria-label="Direct link to Upgrading" title="Direct link to Upgrading" translate="no">​</a></h3>
-<p>Upgrading to this version depends heavily on your current version.
-It is recommended to read the standard upgrade instructions in <a href="https://github.com/ABCD-DEVCOM/ABCD/blob/master/zz_installation/upgrade_instructions.md" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/blob/master/zz_installation/upgrade_instructions.md</a>
-Check the configuration files of your databases with the corresponding upgraded example databases.</p>
-<p>The new Upgrade tool is still in the development phase: Will become available in a next release.
-If you use it now: <em>Take sufficient precautions (e.g. backups). Data loss and/or code mismatches may occur by using it now.</em></p>]]></content:encoded>
-            <category>Release</category>
-            <category>v2.3.0</category>
-        </item>
-        <item>
-            <title><![CDATA[Update site]]></title>
-            <link>https://ABCD-DEVCOM.github.io/blog/update-site</link>
-            <guid>https://ABCD-DEVCOM.github.io/blog/update-site</guid>
-            <pubDate>Wed, 05 Oct 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[Minor updates to the files related to the Site Module to have minimal compatibility with newer versions of PHP.]]></description>
-            <content:encoded><![CDATA[<p>Minor updates to the files related to the Site Module to have minimal compatibility with newer versions of PHP.
-Some commands like "each" have been deprecated in PHP 8 making the Site incompatible with upgraded servers.
-This commit reduces the bugs in parts, but not all of them.
-Testing is still needed.</p>
-]]></content:encoded>
-            <category>BVS Site</category>
-            <category>PHP</category>
         </item>
     </channel>
 </rss>
