@@ -63,11 +63,15 @@ const config = {
           sidebarPath: require.resolve('./sidebars.js'),
           // Define a versão 'current' (o que está na pasta /docs) como a padrão
           lastVersion: 'current',
-
           versions: {
             current: {
-              label: '3.6.X', 
+              label: '3.7.X', 
               path: '',       
+              banner: 'none',
+            },
+            '3.6': {
+              label: '3.6.x',
+              path: '3.6',
               banner: 'none',
             },
             '3.5': {

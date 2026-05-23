@@ -111,3 +111,15 @@ v3.6.0:
   label: v3.6.0
   permalink: /v3.6.0
   description: Version 3.6.0 specific posts
+v3.6.1:
+  label: v3.6.1
+  permalink: /v3.6.1
+  description: Version 3.6.1 specific posts
+v3.6.2:
+  label: v3.6.2
+  permalink: /v3.6.2
+  description: Version 3.6.2 specific posts
+v3.7.0:
+  label: v3.7.0
+  permalink: /v3.7.0
+  description: Version 3.7.0 specific posts
