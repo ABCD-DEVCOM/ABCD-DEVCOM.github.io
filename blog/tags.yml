@@ -123,3 +123,7 @@ v3.7.0:
   label: v3.7.0
   permalink: /v3.7.0
   description: Version 3.7.0 specific posts
+v3.8.0:
+  label: v3.8.0
+  permalink: /v3.8.0
+  description: Version 3.8.0 specific posts
