@@ -47,6 +47,7 @@ You can configure a worksheet to pre-fill certain fields.
 * **Function:** `Pre-literals` or specific default value files (`.val`).
 * **Usage:** Useful for fields like "Library Branch" or "Record Type" that are constant for a specific workflow.
 
-:::info Relation to FDT
+:::info 
+Relation to FDT
 If you add a new field to the database structure (FDT), it **will not** automatically appear in the Data Entry screen. You must explicitly add it to the relevant Worksheets (FMT) using this editor.
 :::
