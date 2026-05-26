@@ -1,7 +1,7 @@
 ---
 title: Data Entry Worksheets (FMT)
 sidebar_label: Worksheets (FMT)
-sidebar_position: 2
+sidebar_position: 1
 ---
 
 # Data Entry Worksheets (FMT)

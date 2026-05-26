@@ -1,7 +1,7 @@
 ---
 title: Field Selection Table (FST)
 sidebar_label: Field Selection Table (FST)
-sidebar_position: 1
+sidebar_position: 2
 ---
 
 # Field Selection Table (FST)
