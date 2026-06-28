@@ -2,11 +2,227 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ABCD-DEVCOM.github.io/blog</id>
     <title>ABCD Software Documentation Blog</title>
-    <updated>2026-05-24T00:00:00.000Z</updated>
+    <updated>2026-06-28T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ABCD-DEVCOM.github.io/blog"/>
     <subtitle>ABCD Software Documentation Blog</subtitle>
     <icon>https://ABCD-DEVCOM.github.io/img/favicon.png</icon>
+    <entry>
+        <title type="html"><![CDATA[ABCD 3.9.0]]></title>
+        <id>https://ABCD-DEVCOM.github.io/blog/2026-06-28-release-3-9-0</id>
+        <link href="https://ABCD-DEVCOM.github.io/blog/2026-06-28-release-3-9-0"/>
+        <updated>2026-06-28T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[The ABCD Community is proud to announce the release of ABCD v3.9.0. This milestone brings substantial architecture modernization, enhanced file security, improved layout responsiveness, and localized data entry definitions.]]></summary>
+        <content type="html"><![CDATA[<p>The ABCD Community is proud to announce the release of <strong>ABCD v3.9.0</strong>. This milestone brings substantial architecture modernization, enhanced file security, improved layout responsiveness, and localized data entry definitions.</p>
+<p>Legacy dependencies have been streamlined, paving the way for a more robust and modular open-source ecosystem.</p>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="new-features--ui-enhancements">New Features &amp; UI Enhancements<a href="https://abcd-devcom.github.io/blog/2026-06-28-release-3-9-0#new-features--ui-enhancements" class="hash-link" aria-label="Direct link to New Features &amp; UI Enhancements" title="Direct link to New Features &amp; UI Enhancements" translate="no">​</a></h3>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="file-upload--media-flexbility">File Upload &amp; Media Flexbility<a href="https://abcd-devcom.github.io/blog/2026-06-28-release-3-9-0#file-upload--media-flexbility" class="hash-link" aria-label="Direct link to File Upload &amp; Media Flexbility" title="Direct link to File Upload &amp; Media Flexbility" translate="no">​</a></h4>
+<ul>
+<li class=""><strong>Windows File Compatibility (#671):</strong> Sanitization regex rules have been updated to securely permit spaces in image filenames. This allows for user-friendly asset names while filtering dangerous terminal characters.</li>
+<li class=""><strong>Custom Upload Subdirectories (#673):</strong> Introduced a destination subdirectory input field within the media upload modal, letting managers organize files dynamically. Built-in path deduplication prevents folder repetition errors.</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="module-modernization">Module Modernization<a href="https://abcd-devcom.github.io/blog/2026-06-28-release-3-9-0#module-modernization" class="hash-link" aria-label="Direct link to Module Modernization" title="Direct link to Module Modernization" translate="no">​</a></h3>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="circulation-module-overhaul-676">Circulation Module Overhaul (#676)<a href="https://abcd-devcom.github.io/blog/2026-06-28-release-3-9-0#circulation-module-overhaul-676" class="hash-link" aria-label="Direct link to Circulation Module Overhaul (#676)" title="Direct link to Circulation Module Overhaul (#676)" translate="no">​</a></h4>
+<ul>
+<li class=""><strong>Legacy Grid Elimination:</strong> Replaced the heavy, third-party <code>dhtmlXGrid</code> implementation on administrative forms (<code>typeofitems</code> and <code>typeofusers</code>) with lightweight, native HTML tables and generic JavaScript controllers.</li>
+<li class=""><strong>PRG Pattern Adoption:</strong> Form submission states now leverage the Post-Redirect-Get pattern, eliminating accidental duplicate submissions and integrating clean success notifications.</li>
+<li class=""><strong>Font Awesome Integration:</strong> Cleaned up navigation blocks by migrating from hardcoded asset image tags to high-resolution Font Awesome typography (<code>menuButton-fa</code>).</li>
+<li class=""><strong>Output Interface Decoupling:</strong> Repositioned footer allocations and disabled institutional site wraps on raw print/receiver frames (<code>rs01.php</code>, <code>rsweb.php</code>, <code>estado_de_cuenta.php</code>) to maximize printable screen areas.</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="opac-settings-672">OPAC Settings (#672)<a href="https://abcd-devcom.github.io/blog/2026-06-28-release-3-9-0#opac-settings-672" class="hash-link" aria-label="Direct link to OPAC Settings (#672)" title="Direct link to OPAC Settings (#672)" translate="no">​</a></h4>
+<ul>
+<li class=""><strong>Visibility Adjustments:</strong> Corrected operational visibility blocks inside <code>config_opac.php</code> to ensure unrestricted search indexing matches standard local installation values.</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="security--performance-hardening">Security &amp; Performance Hardening<a href="https://abcd-devcom.github.io/blog/2026-06-28-release-3-9-0#security--performance-hardening" class="hash-link" aria-label="Direct link to Security &amp; Performance Hardening" title="Direct link to Security &amp; Performance Hardening" translate="no">​</a></h3>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="data-entry-integrity">Data Entry Integrity<a href="https://abcd-devcom.github.io/blog/2026-06-28-release-3-9-0#data-entry-integrity" class="hash-link" aria-label="Direct link to Data Entry Integrity" title="Direct link to Data Entry Integrity" translate="no">​</a></h4>
+<ul>
+<li class=""><strong>Injection Prevention (#673):</strong> Re-engineered multi-part modal upload payloads to handle parameters safely through <code>json_encode()</code> encapsulation for <code>FormData</code> parsing, moving away from vulnerable inline string concatenations.</li>
+<li class=""><strong>Null-Safe UI Controls (#674):</strong> Rewrote the JavaScript validation tree inside <code>copies_add.php</code> with explicit element guards (<code>middleForm</code>, <code>tag200</code>, <code>textarea</code>, and input fields) to completely eradicate client-side runtime crashes when elements are absent.</li>
+<li class=""><strong>File Management Blueprints (#674):</strong> Delivered standardized user asset blueprints via explicit <code>dr_path.def</code> mock configurations specifying <code>UNICODE=0</code> limits and strict extension enforcement (<code>DIRTREE_EXT</code>) across user targets.</li>
+<li class=""><strong>Asset Mapping (#673):</strong> Rectified relative path bindings for core interaction assets, pointing <code>clear_field.js</code> safely to its data-entry editor hub. Adjusted frame reload latency parameters to 800ms to guarantee server-side synchronization.</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="repository-cleanup--standardization">Repository Cleanup &amp; Standardization<a href="https://abcd-devcom.github.io/blog/2026-06-28-release-3-9-0#repository-cleanup--standardization" class="hash-link" aria-label="Direct link to Repository Cleanup &amp; Standardization" title="Direct link to Repository Cleanup &amp; Standardization" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>File Purge (#675):</strong> Dropped non-functional and unreferenced historical scripts to reduce structural overhead.</li>
+<li class=""><strong>Styling Hygiene (#676):</strong> Cleared obsolete <code>.sectionIcon</code> background definitions out of <code>odds.css</code>.</li>
+<li class=""><strong>Documentation Alignment (#677):</strong> Fully revised the primary <code>README.md</code> layout, ensuring up-to-date documentation paths, corrected links, and an accurate project state definition.</li>
+<li class=""><strong>Translation Maintenance:</strong> Continued translating code remarks and inline development logs from Spanish and Portuguese over to English for global open-source community alignment.</li>
+</ul>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-changed">What's Changed<a href="https://abcd-devcom.github.io/blog/2026-06-28-release-3-9-0#whats-changed" class="hash-link" aria-label="Direct link to What's Changed" title="Direct link to What's Changed" translate="no">​</a></h2>
+<ul>
+<li class="">Allow spaces in image filenames by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/671" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/671</a></li>
+<li class="">Update config_opac.php by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/672" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/672</a></li>
+<li class="">Data entry improvements by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/673" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/673</a></li>
+<li class="">Data entry improvements by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/674" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/674</a></li>
+<li class="">Removes files that are no longer needed for the current version. by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/675" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/675</a></li>
+<li class="">Improves circulation by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/676" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/676</a></li>
+<li class="">Revise README.md for clarity and updated links by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/677" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/677</a></li>
+<li class="">Update biblo defs; add isadg dr_path by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/678" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/678</a></li>
+<li class="">Update version.php by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/679" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/679</a></li>
+</ul>
+<p><strong>Full Changelog</strong>: <a href="https://github.com/ABCD-DEVCOM/ABCD/compare/v3.8.4...v3.9.0" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/compare/v3.8.4...v3.9.0</a></p>]]></content>
+        <author>
+            <name>Roger C. Guilherme</name>
+            <uri>https://www.linkedin.com/in/rogerguilherme/</uri>
+        </author>
+        <category label="Release" term="Release"/>
+        <category label="v3.9.0" term="v3.9.0"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[ABCD 3.8.4]]></title>
+        <id>https://ABCD-DEVCOM.github.io/blog/2026-06-22-release-3-8-4</id>
+        <link href="https://ABCD-DEVCOM.github.io/blog/2026-06-22-release-3-8-4"/>
+        <updated>2026-06-22T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[ABCD v3.8.4 brings crucial improvements to system stability, PHP 8.x compatibility, and user experience. This release focuses on hardening input validation, fixing MARC database saving mechanisms, and refining OPAC functionalities.]]></summary>
+        <content type="html"><![CDATA[<p><strong>ABCD v3.8.4</strong> brings crucial improvements to system stability, PHP 8.x compatibility, and user experience. This release focuses on hardening input validation, fixing MARC database saving mechanisms, and refining OPAC functionalities.</p>
+<p>Below is a detailed summary of the changes and enhancements included in this update:</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="search--opac-enhancements">Search &amp; OPAC Enhancements<a href="https://abcd-devcom.github.io/blog/2026-06-22-release-3-8-4#search--opac-enhancements" class="hash-link" aria-label="Direct link to Search &amp; OPAC Enhancements" title="Direct link to Search &amp; OPAC Enhancements" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Alphabetical Indexes &amp; UX:</strong> Fixed bugs related to the "Alphabetical Indexes" button. Added a new UX feature allowing the index submenu to open by default via URL parameters (<code>open_index=Y</code>), ensuring integrated searches navigate correctly while preserving context (<code>base</code>, <code>ctx</code>).</li>
+<li class=""><strong>Strict Mode Enforcement:</strong> Added a strict-mode guard in <code>central/config_opac.php</code> to explicitly deny access if <code>opac_strict_mode</code> is enabled and no database (<code>?base</code>) is provided.</li>
+<li class=""><strong>Topbar Refactoring:</strong> Reorganized the OPAC topbar (<code>topbar.php</code>) to improve the HTML markup, simplify authentication logic (detecting online services, showing logged-in users, or the login modal), and consistently preserve context parameters when navigating to the home link.</li>
+<li class=""><strong>Search Pagination Stability:</strong> Enhanced input validation in <code>buscar_integrada.php</code> to handle edge cases and prevent bot-induced runtime errors. Pagination parameters (<code>desde</code> and <code>count</code>) are now strictly validated and cast with numeric fallbacks.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="data-entry--marc-handling">Data Entry &amp; MARC Handling<a href="https://abcd-devcom.github.io/blog/2026-06-22-release-3-8-4#data-entry--marc-handling" class="hash-link" aria-label="Direct link to Data Entry &amp; MARC Handling" title="Direct link to Data Entry &amp; MARC Handling" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>MARC Indicators Fix:</strong> Resolved broken saving functions in MARC databases. The system now correctly respects MARC indicators by detecting definitions from the FDT, extracting/padding the first two characters, and separating implicit from explicit subfields during client-side assembly.</li>
+<li class=""><strong>Picklist Selection Logic:</strong> Fixed picklist selection mismatches by properly casting and sanitizing option values to strings before comparison, preventing PHP numeric mismatch errors.</li>
+<li class=""><strong>Editor Improvements:</strong> Updated the <code>clear_field.js</code> editor script to use English standard text ("Clear field" instead of "Limpar campo"). Added a new <code>mover</code> action.</li>
+<li class=""><strong>Formatting Script (<code>fmt.php</code>) Cleanup:</strong> Streamlined record display logic, ensured <code>PlantillaDeIngreso()</code> and <code>ColocarMfn()</code> are called in the correct branches, and standardized the use of <code>$arrHttp['login']</code> instead of maintaining separate login variables.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="security--php-81-compatibility">Security &amp; PHP 8.1+ Compatibility<a href="https://abcd-devcom.github.io/blog/2026-06-22-release-3-8-4#security--php-81-compatibility" class="hash-link" aria-label="Direct link to Security &amp; PHP 8.1+ Compatibility" title="Direct link to Security &amp; PHP 8.1+ Compatibility" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Session &amp; Redirect Hardening:</strong> Guarded access to session/login variables with <code>isset()</code> to prevent PHP 8.1+ undefined session errors. Added strict <code>die;</code> statements following header redirects to ensure script execution completely stops when <code>$_SESSION["permiso"]</code> is missing.</li>
+<li class=""><strong>Undefined Variables &amp; Array Keys:</strong> Resolved multiple PHP warnings across the system (e.g., undefined <code>$hasta</code>, undefined <code>Diccio</code> index, and <code>foreach()</code> null arguments in <code>c_global_ex.php</code>).</li>
+<li class=""><strong>Expression Handling:</strong> Hardened logic in <code>PresentarExpresion.php</code> to handle missing expressions safely, defaulting to an empty string to avoid "Undefined array key" errors.</li>
+<li class=""><strong>Input Whitelisting:</strong> Whitelisted the new <code>open_index</code> parameter in <code>is_malicious.php</code> to allow the URL-driven UX flag through security validations.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="system--maintenance">System &amp; Maintenance<a href="https://abcd-devcom.github.io/blog/2026-06-22-release-3-8-4#system--maintenance" class="hash-link" aria-label="Direct link to System &amp; Maintenance" title="Direct link to System &amp; Maintenance" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Update Manager:</strong> Fixed the behavior of the "Update" button to ensure smooth upgrades.</li>
+<li class=""><strong>File Cleanup:</strong> Removed misplaced duplicate files from the repository to keep the architecture clean.</li>
+<li class=""><strong>Version Bump:</strong> Updated <code>version.php</code> to reflect version 3.8.4.</li>
+</ul>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="details">Details:<a href="https://abcd-devcom.github.io/blog/2026-06-22-release-3-8-4#details" class="hash-link" aria-label="Direct link to Details:" title="Direct link to Details:" translate="no">​</a></h2>
+<ul>
+<li class="">Enhance input validation, pagination, and UX for search functionality by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/664" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/664</a></li>
+<li class="">Fix undefined session/login and add die after redirect by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/665" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/665</a></li>
+<li class="">Require DB param in strict mode; update topbar by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/666" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/666</a></li>
+<li class="">Add mover action and fix PHP warnings and compatibility issues by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/667" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/667</a></li>
+<li class="">Use arrHttp login and clean up fmt.php by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/668" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/668</a></li>
+<li class="">Enhance MARC indicator handling and fix picklist selection logic by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/669" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/669</a></li>
+<li class="">Update version.php by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/670" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/670</a></li>
+</ul>
+<p><strong>Full Changelog</strong>: <a href="https://github.com/ABCD-DEVCOM/ABCD/compare/v3.8.3...v3.8.4" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/compare/v3.8.3...v3.8.4</a></p>]]></content>
+        <author>
+            <name>Roger C. Guilherme</name>
+            <uri>https://www.linkedin.com/in/rogerguilherme/</uri>
+        </author>
+        <category label="Release" term="Release"/>
+        <category label="v3.8.4" term="v3.8.4"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[ABCD 3.8.3 – Bug fixes for this version]]></title>
+        <id>https://ABCD-DEVCOM.github.io/blog/2026-06-16-release-3-8-3</id>
+        <link href="https://ABCD-DEVCOM.github.io/blog/2026-06-16-release-3-8-3"/>
+        <updated>2026-06-16T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Version 3.8.3 brings a major overhaul to ABCD's cataloging capabilities, introducing full support for modern cataloging standards like RDA, alongside critical improvements to subfield data handling and system localizations.]]></summary>
+        <content type="html"><![CDATA[<p>Version 3.8.3 brings a major overhaul to ABCD's cataloging capabilities, introducing full support for modern cataloging standards like RDA, alongside critical improvements to subfield data handling and system localizations.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="key-features--updates">Key Features &amp; Updates<a href="https://abcd-devcom.github.io/blog/2026-06-16-release-3-8-3#key-features--updates" class="hash-link" aria-label="Direct link to Key Features &amp; Updates" title="Direct link to Key Features &amp; Updates" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="1-universal-fixed-field-manager">1. Universal Fixed-Field Manager<a href="https://abcd-devcom.github.io/blog/2026-06-16-release-3-8-3#1-universal-fixed-field-manager" class="hash-link" aria-label="Direct link to 1. Universal Fixed-Field Manager" title="Direct link to 1. Universal Fixed-Field Manager" translate="no">​</a></h3>
+<p>The legacy fixed-field engine has been completely refactored. Moving away from the hardcoded <code>008</code> field limitation, the system now features a dynamic, fully adaptable engine for handling multiple and repeatable fixed fields (such as <code>006</code> and <code>007</code>).</p>
+<ul>
+<li class=""><strong>Smart Cataloging Interface:</strong> Catalogers can now add multiple occurrences of fixed fields seamlessly within a single record—essential for mixed-material items (e.g., a book with a CD-ROM). The UI now intelligently reads routing files, automatically deduces material categories from the Leader, and safely parses line breaks.</li>
+<li class=""><strong>Dynamic Administration Hub:</strong> A centralized hub dynamically scans the FDT for 'M' (Matrix) type fields. Administrators can now edit <code>.tab</code> routing files directly from the UI and automatically generate missing <code>.fdt</code> matrices, bypassing legacy restrictions.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="2-core-data-handling--output-sanitization">2. Core Data Handling &amp; Output Sanitization<a href="https://abcd-devcom.github.io/blog/2026-06-16-release-3-8-3#2-core-data-handling--output-sanitization" class="hash-link" aria-label="Direct link to 2. Core Data Handling &amp; Output Sanitization" title="Direct link to 2. Core Data Handling &amp; Output Sanitization" translate="no">​</a></h3>
+<p>Rendering engines and subfield parsers have been hardened to improve data integrity and prevent encoding issues.</p>
+<ul>
+<li class=""><strong>Subfield Helper &amp; Implicit Support:</strong> Introduced a new <code>SubfieldHelper</code> to explicitly extract, decode, and manage the implicit <code>_</code> subfield without losing data during rendering.</li>
+<li class=""><strong>Custom Sanitization:</strong> Replaced standard <code>htmlspecialchars</code> calls with a robust, custom sanitization implementation across the Group, Table, and Text renderers. This ensures consistent escaping and preserves compatibility with legacy JavaScript dependencies.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="3-localization--i18n-improvements">3. Localization &amp; i18n Improvements<a href="https://abcd-devcom.github.io/blog/2026-06-16-release-3-8-3#3-localization--i18n-improvements" class="hash-link" aria-label="Direct link to 3. Localization &amp; i18n Improvements" title="Direct link to 3. Localization &amp; i18n Improvements" translate="no">​</a></h3>
+<p>Extensive updates have been made to the system dictionaries to ensure a fully multilingual cataloging and administrative experience.</p>
+<ul>
+<li class=""><strong>Fixed-Field Interface Translations:</strong> Hardcoded strings in the fixed-field UI have been replaced with dynamic <code>$msgstr</code> variables, with complete translations added for English, Spanish, and Portuguese across both Linux and Windows environments.</li>
+<li class=""><strong>Comprehensive Spanish UI Update:</strong> The <code>admin.tab</code> file for Spanish users received a massive update. Typos and encoding issues were resolved, keys were harmonized, and numerous new UI messages were added covering modules like Z39.50, backups, the thesaurus, file uploads, and search functionalities.</li>
+</ul>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-changed">What's Changed<a href="https://abcd-devcom.github.io/blog/2026-06-16-release-3-8-3#whats-changed" class="hash-link" aria-label="Direct link to What's Changed" title="Direct link to What's Changed" translate="no">​</a></h2>
+<ul>
+<li class="">Implement generic fixed-field editor with repeat support and localization by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/660" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/660</a></li>
+<li class="">Improve subfield handling and sanitize outputs by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/661" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/661</a></li>
+<li class="">Update Spanish admin.tab translations by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/662" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/662</a></li>
+<li class="">Bump version to v3.8.3 by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/663" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/663</a></li>
+</ul>
+<p><strong>Full Changelog</strong>: <a href="https://github.com/ABCD-DEVCOM/ABCD/compare/v3.8.2...v3.8.3" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/compare/v3.8.2...v3.8.3</a></p>
+<p>Release Date: June 16, 2026</p>]]></content>
+        <author>
+            <name>Roger C. Guilherme</name>
+            <uri>https://www.linkedin.com/in/rogerguilherme/</uri>
+        </author>
+        <category label="Release" term="Release"/>
+        <category label="v3.8.2" term="v3.8.2"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[ABCD 3.8.2 – Bug fixes for this version]]></title>
+        <id>https://ABCD-DEVCOM.github.io/blog/2026-05-30-release-3-8-2</id>
+        <link href="https://ABCD-DEVCOM.github.io/blog/2026-05-30-release-3-8-2"/>
+        <updated>2026-05-30T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[What's Changed]]></summary>
+        <content type="html"><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-changed">What's Changed<a href="https://abcd-devcom.github.io/blog/2026-05-30-release-3-8-2#whats-changed" class="hash-link" aria-label="Direct link to What's Changed" title="Direct link to What's Changed" translate="no">​</a></h2>
+<ul>
+<li class="">
+<p>Rebuild SubC JS and handle picklists/indicators by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/656" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/656</a></p>
+<ul>
+<li class="">Refactor campos.php parsing to collect IND/S rows into a JS-friendly SubC string and simplify picklist/label population. The PHP now accumulates relevant rows into subc_js_array, handles both "S" and "IND" marker types (with a historical fallback), builds picklist/name entries with proper escaping, and emits SubC as a single \n-separated JS string. Update editarocurrencias.js to dynamically reconstruct the actual subfields (subc_reais) from SubCampos and inject them into Tx[5], ensuring the renderer sees indicators/subfields even when they were omitted from the main FDT. Improves compatibility with older DB formats and makes picklist/indicator handling more robust.</li>
+</ul>
+</li>
+<li class="">
+<p>New layouts by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/657" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/657</a></p>
+</li>
+<li class="">
+<p>Fix browseby behavior and record checkbox by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/658" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/658</a></p>
+<ul>
+<li class="">Fix browseby behavior and record checkbox</li>
+<li class="">menu_main.php: Prevent programmatic updates to the "browseby" select from triggering onButtonClick (avoids unintended recursive/user-action side effects), add logic to call top.Menu('same') when keeping the current record after changing browse mode, add error logging, and translate several comments to English. toolbar_record.php: Correct MFN handling (properly derive mfn_val), guard against missing DOM element before updating, and set the "Select Record" checkbox via the checked property so it accurately reflects selection state.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Full Changelog</strong>: <a href="https://github.com/ABCD-DEVCOM/ABCD/compare/v3.8.1...v3.8.2" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/compare/v3.8.1...v3.8.2</a></p>]]></content>
+        <author>
+            <name>Roger C. Guilherme</name>
+            <uri>https://www.linkedin.com/in/rogerguilherme/</uri>
+        </author>
+        <category label="Release" term="Release"/>
+        <category label="v3.8.2" term="v3.8.2"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[ABCD V3.8.1 - Improve the version]]></title>
+        <id>https://ABCD-DEVCOM.github.io/blog/2026-05-28-release-3-8-1</id>
+        <link href="https://ABCD-DEVCOM.github.io/blog/2026-05-28-release-3-8-1"/>
+        <updated>2026-05-28T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[What's Changed]]></summary>
+        <content type="html"><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-changed">What's Changed<a href="https://abcd-devcom.github.io/blog/2026-05-28-release-3-8-1#whats-changed" class="hash-link" aria-label="Direct link to What's Changed" title="Direct link to What's Changed" translate="no">​</a></h2>
+<ul>
+<li class="">Correction of processes containing search terms by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/651" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/651</a></li>
+<li class="">Removes unused icons by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/652" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/652</a></li>
+<li class="">Refactor formatting, JS, UI; remove IAH assets by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/653" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/653</a></li>
+</ul>
+<p><strong>Full Changelog</strong>: <a href="https://github.com/ABCD-DEVCOM/ABCD/compare/v3.8.0...v3.8.1" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/compare/v3.8.0...v3.8.1</a></p>]]></content>
+        <author>
+            <name>Roger C. Guilherme</name>
+            <uri>https://www.linkedin.com/in/rogerguilherme/</uri>
+        </author>
+        <category label="Release" term="Release"/>
+        <category label="v3.8.1" term="v3.8.1"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[ABCD 3.8.0 Technical Release Notes]]></title>
         <id>https://ABCD-DEVCOM.github.io/blog/2026-05-24-release-3-8-0</id>
@@ -727,155 +943,5 @@ You can add a button in OPAC to switch to ABCD.</p>]]></content>
         </author>
         <category label="Release" term="Release"/>
         <category label="v3.0.0" term="v3.0.0"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Release 2.4.1 Improve update manager and solve small bugs]]></title>
-        <id>https://ABCD-DEVCOM.github.io/blog/release-2-4-1-improve-update-manager-and-solve-small-bugs</id>
-        <link href="https://ABCD-DEVCOM.github.io/blog/release-2-4-1-improve-update-manager-and-solve-small-bugs"/>
-        <updated>2025-10-09T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[What's Changed]]></summary>
-        <content type="html"><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-changed">What's Changed<a href="https://abcd-devcom.github.io/blog/release-2-4-1-improve-update-manager-and-solve-small-bugs#whats-changed" class="hash-link" aria-label="Direct link to What's Changed" title="Direct link to What's Changed" translate="no">​</a></h2>
-<p>Update_manager:</p>
-<ul>
-<li class="">Check that php curl extension is loaded.</li>
-<li class="">Copy also cgi-bin subfolders ansi and utf8. Set executable permissions on executables</li>
-<li class="">Print the log file timestamp in the server timezone (only on linux servers)
-Version_checker:</li>
-<li class="">Moved json file to upgrade folder</li>
-<li class="">Corrected repository name (ABCD2-&gt;ABCD)</li>
-</ul>
-<!-- -->
-<p>See all changed files for more details</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="actions-by-database-administrator">Actions by database administrator<a href="https://abcd-devcom.github.io/blog/release-2-4-1-improve-update-manager-and-solve-small-bugs#actions-by-database-administrator" class="hash-link" aria-label="Direct link to Actions by database administrator" title="Direct link to Actions by database administrator" translate="no">​</a></h3>
-<p>The upgrade of the code can be done with the upgrade manager.</p>]]></content>
-        <author>
-            <name>Fred Hommerson</name>
-        </author>
-        <author>
-            <name>Roger C. Guilherme</name>
-            <uri>https://www.linkedin.com/in/rogerguilherme/</uri>
-        </author>
-        <category label="Release" term="Release"/>
-        <category label="v2.4.1" term="v2.4.1"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Release 2.4.0 Major changes and implementations in OPAC]]></title>
-        <id>https://ABCD-DEVCOM.github.io/blog/release-2-4-0-major-changes-and-implementations-in-opac</id>
-        <link href="https://ABCD-DEVCOM.github.io/blog/release-2-4-0-major-changes-and-implementations-in-opac"/>
-        <updated>2025-10-06T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[What's Changed]]></summary>
-        <content type="html"><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-changed">What's Changed<a href="https://abcd-devcom.github.io/blog/release-2-4-0-major-changes-and-implementations-in-opac#whats-changed" class="hash-link" aria-label="Direct link to What's Changed" title="Direct link to What's Changed" translate="no">​</a></h2>
-<p><strong>Description</strong>: Major changes and implementations in OPAC by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/570" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/570</a></p>
-<!-- -->
-<p><strong>Full Changelog</strong>: <a href="https://github.com/ABCD-DEVCOM/ABCD/compare/v2.3.6...v2.4.0" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/compare/v2.3.6...v2.4.0</a></p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="actions-by-database-administrator">Actions by database administrator<a href="https://abcd-devcom.github.io/blog/release-2-4-0-major-changes-and-implementations-in-opac#actions-by-database-administrator" class="hash-link" aria-label="Direct link to Actions by database administrator" title="Direct link to Actions by database administrator" translate="no">​</a></h2>
-<p>The upgrade of the code can be done with the upgrade manager.</p>
-<p>For Windows users: copy a new executable
-...\www\cgi-bin_Windows\utf8\bigisis\ifkeys.exe to
-...\www\cgi-bin\utf8\bigisis\ifkeys.exe</p>
-<p>There are also many updates in the database examples. See the Full Changelog. Copy as appropriate</p>]]></content>
-        <author>
-            <name>Fred Hommerson</name>
-        </author>
-        <author>
-            <name>Roger C. Guilherme</name>
-            <uri>https://www.linkedin.com/in/rogerguilherme/</uri>
-        </author>
-        <category label="Release" term="Release"/>
-        <category label="v2.4.0" term="v2.4.0"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Release 2.3.6 More robust upgrade manager]]></title>
-        <id>https://ABCD-DEVCOM.github.io/blog/release-2-3-6-more-robust-upgrade-manager</id>
-        <link href="https://ABCD-DEVCOM.github.io/blog/release-2-3-6-more-robust-upgrade-manager"/>
-        <updated>2025-09-30T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Major changes]]></summary>
-        <content type="html"><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="major-changes">Major changes<a href="https://abcd-devcom.github.io/blog/release-2-3-6-more-robust-upgrade-manager#major-changes" class="hash-link" aria-label="Direct link to Major changes" title="Direct link to Major changes" translate="no">​</a></h2>
-<p>The upgrade manager has now several checks to cope with error situations.</p>
-<!-- -->
-<p>The search by A-Z list gives now information how to repair erroneous configuration</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="details-of-upgrade-manager-checks">Details of upgrade manager checks<a href="https://abcd-devcom.github.io/blog/release-2-3-6-more-robust-upgrade-manager#details-of-upgrade-manager-checks" class="hash-link" aria-label="Direct link to Details of upgrade manager checks" title="Direct link to Details of upgrade manager checks" translate="no">​</a></h3>
-<ul>
-<li class="">Added log file. Is overwritten on next run.</li>
-<li class="">Activated check for admin rights: user must have profile "adm"</li>
-<li class="">Check that php zip extension is loaded.</li>
-<li class="">Check download and unzip result. Tested with insufficient disk quota</li>
-<li class="">Check that all required sources are present in the package before actual update</li>
-<li class="">Detect and log run-time errors in actual update. Tested with wrong permissions</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="actions-by-database-administrator">Actions by database administrator<a href="https://abcd-devcom.github.io/blog/release-2-3-6-more-robust-upgrade-manager#actions-by-database-administrator" class="hash-link" aria-label="Direct link to Actions by database administrator" title="Direct link to Actions by database administrator" translate="no">​</a></h3>
-<p>None</p>]]></content>
-        <author>
-            <name>Fred Hommerson</name>
-        </author>
-        <category label="Release" term="Release"/>
-        <category label="v2.3.6" term="v2.3.6"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Release 2.3.5 New option to sort database records]]></title>
-        <id>https://ABCD-DEVCOM.github.io/blog/release-2-3-5-new-option-to-sort-database-records</id>
-        <link href="https://ABCD-DEVCOM.github.io/blog/release-2-3-5-new-option-to-sort-database-records"/>
-        <updated>2025-09-24T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Major changes]]></summary>
-        <content type="html"><![CDATA[<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="major-changes">Major changes<a href="https://abcd-devcom.github.io/blog/release-2-3-5-new-option-to-sort-database-records#major-changes" class="hash-link" aria-label="Direct link to Major changes" title="Direct link to Major changes" translate="no">​</a></h3>
-<p>Database records could be sorted with command line utility msrt.
-This improvement adds an interactive capability in menu Utilities -&gt; DB Maintenance.
-Defaults can be set in the Advanced database settings (dr_path.def)</p>
-<!-- -->
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="details">Details<a href="https://abcd-devcom.github.io/blog/release-2-3-5-new-option-to-sort-database-records#details" class="hash-link" aria-label="Direct link to Details" title="Direct link to Details" translate="no">​</a></h3>
-<ul>
-<li class="">Best results are obtained by using the Principal entry tag as sort key. But this is not mandatory. Other tags will also work.</li>
-<li class="">Existing batch scripts combined the sort with additional operations in order to get better results. This new option offers buttons for these operations. E.g.<!-- -->
-<ul>
-<li class="">Preparatory action <em>Unlock database</em></li>
-<li class="">Preparatory action <em>Clean/Compact DB</em></li>
-<li class="">Follow-up actions <em>Inverted file generation</em>. Note that <strong>search</strong> indexes will give <strong>wrong results</strong> when the inverted files are not regenerated.</li>
-</ul>
-</li>
-<li class="">The commandline utility does not perform an extensive error check. Major errors return sometimes an incomprehensible error code. Advice is to look at the formatting language.</li>
-<li class="">The current source does NOT use parameter <em>-mfn</em>.  Implies that the .xrf file and the .mst file are modified. See source code for details</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="actions-by-database-administrator">Actions by database administrator<a href="https://abcd-devcom.github.io/blog/release-2-3-5-new-option-to-sort-database-records#actions-by-database-administrator" class="hash-link" aria-label="Direct link to Actions by database administrator" title="Direct link to Actions by database administrator" translate="no">​</a></h3>
-<p>The new option works without any administrator actions.
-In order to avoid mistakes by the operators the administrator can set defaults for the entries of the Sort option by editing file <strong>dr_path.def</strong> for <strong>each</strong> database that might need it. This can be done interactively with via <em>Update database Definitions</em> --&gt; <em>Advanced database settings (dr_path.def)</em>. Check values of:</p>
-<ul>
-<li class="">Sort database records key length (<em>SORTLENGTH</em>)</li>
-<li class="">Sort database records by (<em>SORTBY</em>)</li>
-<li class="">Specification of the sort key (<em>SORTSPEC</em>)</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="upgrade">Upgrade<a href="https://abcd-devcom.github.io/blog/release-2-3-5-new-option-to-sort-database-records#upgrade" class="hash-link" aria-label="Direct link to Upgrade" title="Direct link to Upgrade" translate="no">​</a></h3>
-<p>The new and modified files can overwrite existing files.</p>
-<p>Th Upgrade tool can be tested.</p>]]></content>
-        <author>
-            <name>Fred Hommerson</name>
-        </author>
-        <category label="Release" term="Release"/>
-        <category label="v2.3.5" term="v2.3.5"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Release 2.3.4 Status 2025-09-17: Update Manager Tool]]></title>
-        <id>https://ABCD-DEVCOM.github.io/blog/release-2-3-4-status-2025-09-17-update-manager-tool</id>
-        <link href="https://ABCD-DEVCOM.github.io/blog/release-2-3-4-status-2025-09-17-update-manager-tool"/>
-        <updated>2025-09-17T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[What's Changed]]></summary>
-        <content type="html"><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-changed">What's Changed<a href="https://abcd-devcom.github.io/blog/release-2-3-4-status-2025-09-17-update-manager-tool#whats-changed" class="hash-link" aria-label="Direct link to What's Changed" title="Direct link to What's Changed" translate="no">​</a></h2>
-<p>This update definitively implements the ABCD update system.
-Now, with this installation, you will see a yellow banner with each release.</p>
-<p>The available options are:</p>
-<ul>
-<li class="">Partial update: will only update the system, preserving your databases and local settings.</li>
-<li class="">Full update: the entire system will be reset, including the model databases.
-More info in pull request Update manager by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/567" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/567</a></li>
-</ul>
-<!-- -->
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="upgrade">Upgrade<a href="https://abcd-devcom.github.io/blog/release-2-3-4-status-2025-09-17-update-manager-tool#upgrade" class="hash-link" aria-label="Direct link to Upgrade" title="Direct link to Upgrade" translate="no">​</a></h3>
-<p>Copy the changed files over the existing files. No further action for this release.</p>
-<p>The current Upgrade tool is still in the development phase: In a next release you can use the tool that is installed in this release.
-If you use it now: <em>Take sufficient precautions (e.g. backups). Data loss and/or code mismatches may occur by using it now.</em></p>]]></content>
-        <author>
-            <name>Fred Hommerson</name>
-        </author>
-        <category label="Release" term="Release"/>
-        <category label="v2.3.4" term="v2.3.4"/>
     </entry>
 </feed>
