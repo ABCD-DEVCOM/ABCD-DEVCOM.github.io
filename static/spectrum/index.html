@@ -1,0 +1,1859 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Handbook of Museum Cataloguing: ABCD-Spectrum Database</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Configuração do Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        museum: {
+                            bg: '#fbf9f5',
+                            card: '#ffffff',
+                            sidebar: '#f3eee7',
+                            border: '#e2d9cd',
+                            primary: '#52567a',
+                            primaryLight: '#3d564a',
+                            accent: '#ba86cb',
+                            accentHover: '#a85a3c',
+                            gold: '#d4a359',
+                            muted: '#6b635b',
+                            dark: '#1c1a17'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Georgia', 'Cambria', 'serif'],
+                        sans: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom scrollbars & chart constraints */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f3eee7;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #c5b8a5;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a89983;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 280px;
+            max-height: 320px;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 320px;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-museum-bg text-museum-dark font-sans min-h-screen flex flex-col antialiased">
+
+    <!-- Top Navigation Header -->
+    <header class="bg-museum-primary text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+
+                <!-- Brand Title -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('dashboard')">
+                    <!-- SVG Substituindo o Ícone -->
+                    <svg id="Camada_2" data-name="Camada 2" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 167.85 200.93" class="w-9 sm:w-10 h-auto">
+                        <defs>
+                            <style>
+                                .cls-1 {
+                                    font-family: AgencyFB-Bold, 'Agency FB';
+                                    font-size: 113.59px;
+                                    font-weight: 700;
+                                    letter-spacing: .1em;
+                                }
+
+                                .cls-1,
+                                .cls-2,
+                                .cls-3 {
+                                    fill: #ffffff;
+                                }
+
+                                .cls-2 {
+                                    font-family: AgencyFB-Reg, 'Agency FB';
+                                    font-size: 28.96px;
+                                    letter-spacing: .04em;
+                                }
+                            </style>
+                        </defs>
+                        <g id="Camada_1-2" data-name="Camada 1">
+                            <g>
+                                <polygon class="cls-3" points="83.82 0 2.41 39.59 165.18 39.59 83.82 0" />
+                                <rect class="cls-3" y="44.4" width="167.45" height="8.29" />
+                                <path class="cls-3"
+                                    d="M0,157.69h167.85c0,5.54-4.49,10.03-10.03,10.03H10.03C4.49,167.72,0,163.22,0,157.69H0Z" />
+                                <rect class="cls-3" x="9.5" y="147.92" width="148.86" height="4.81" />
+                                <text class="cls-1" transform="translate(9.5 144.59) scale(.62 1)">
+                                    <tspan x="0" y="0">ABCD</tspan>
+                                </text>
+                                <text class="cls-2" transform="translate(2.41 195.13) scale(1.53 1)">
+                                    <tspan x="0" y="0">SPECTRUM</tspan>
+                                </text>
+                            </g>
+                        </g>
+                    </svg>
+                    <div>
+                        <h1 class="font-serif text-lg sm:text-xl font-bold tracking-wide leading-tight">ABCD-Spectrum
+                        </h1>
+                        <p class="text-xs text-museum-border opacity-90 hidden sm:block">Manual de Catalogação
+                            Museológica Interativo</p>
+                    </div>
+                </div>
+
+                <!-- Global Search & Navigation Links -->
+                <div class="flex items-center space-x-2 sm:space-x-4">
+
+                    <!-- Link Docusaurus (Responsivo) -->
+                    <a href="/docs/abcd-advanced/data-models/abcd-spectrum-manual" target="_blank"
+                        class="flex items-center bg-white/10 hover:bg-white/20 text-white px-2 lg:px-3 py-1.5 rounded-lg border border-white/20 transition shadow-sm"
+                        title="Manual Completo">
+                        <span class="text-sm">📖</span>
+                        <span class="hidden lg:inline ml-1.5 text-xs font-medium" data-i18n="nav.docs">Manual</span>
+                    </a>
+                    <!-- Seletor de Idioma -->
+                    <div class="relative flex items-center ml-2">
+                        <select id="langSwitcher" onchange="changeLanguage(this.value)"
+                            class="appearance-none bg-museum-primaryLight text-white text-xs sm:text-sm pl-3 pr-7 py-1.5 rounded-lg border border-museum-border/30 focus:outline-none focus:ring-2 focus:ring-museum-gold cursor-pointer transition">
+                            <option value="pt">PT</option>
+                            <option value="en">EN</option>
+                            <option value="es">ES</option>
+                            <option value="fr">FR</option>
+                        </select>
+                        <div
+                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white opacity-70">
+                            <span class="text-[10px]">▼</span>
+                        </div>
+                    </div>
+
+                    <div class="relative w-40 sm:w-64">
+                        <input type="text" id="globalSearchInput" data-i18n="search.global" placeholder="Buscar campo, código ou patologia..."
+                            class="w-full pl-8 pr-3 py-1.5 text-xs sm:text-sm bg-museum-primaryLight text-white placeholder-museum-border rounded-lg focus:outline-none focus:ring-2 focus:ring-museum-gold border border-museum-border/30">
+                        <span class="absolute left-2.5 top-2 text-xs opacity-70">🔍</span>
+                    </div>
+
+                    <nav class="hidden lg:flex space-x-1 text-xs sm:text-sm font-medium">
+                        <button onclick="switchTab('dashboard')" id="nav-dashboard"
+                            class="nav-btn px-3 py-2 rounded-md bg-white/10 text-white"
+                            data-i18n="nav.home">Início</button>
+                        <button onclick="switchTab('fdt')" id="nav-fdt"
+                            class="nav-btn px-3 py-2 rounded-md text-museum-border hover:bg-white/10 hover:text-white"
+                            data-i18n="nav.fdt">Campos</button>
+                        <button onclick="switchTab('spectrum')" id="nav-spectrum"
+                            class="nav-btn px-3 py-2 rounded-md text-museum-border hover:bg-white/10 hover:text-white"
+                            data-i18n="nav.spectrum">Procedimentos</button>
+                        <button onclick="switchTab('patologias')" id="nav-patologias"
+                            class="nav-btn px-3 py-2 rounded-md text-museum-border hover:bg-white/10 hover:text-white"
+                            data-i18n="nav.pathology">Patologias</button>
+                        <button onclick="switchTab('ferramentas')" id="nav-ferramentas"
+                            class="nav-btn px-3 py-2 rounded-md text-museum-accent bg-museum-accent/20 hover:bg-museum-accent hover:text-white transition"
+                            data-i18n="nav.tools">Oficina do Catalogador</button>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Bar -->
+        <div
+            class="lg:hidden bg-museum-primaryLight border-t border-museum-border/20 px-2 py-2 flex justify-around text-xs font-medium overflow-x-auto">
+            <button onclick="switchTab('dashboard')"
+                class="mobile-nav-btn px-2 py-1 rounded text-white whitespace-nowrap"
+                data-i18n="nav.home">Início</button>
+            <button onclick="switchTab('fdt')"
+                class="mobile-nav-btn px-2 py-1 rounded text-museum-border whitespace-nowrap" data-i18n="nav.fdt">Campos</button>
+            <button onclick="switchTab('spectrum')"
+                class="mobile-nav-btn px-2 py-1 rounded text-museum-border whitespace-nowrap"
+                data-i18n="nav.spectrum">Procedimentos</button>
+            <button onclick="switchTab('patologias')"
+                class="mobile-nav-btn px-2 py-1 rounded text-museum-border whitespace-nowrap"
+                data-i18n="nav.pathology">Patologias</button>
+            <button onclick="switchTab('ferramentas')"
+                class="mobile-nav-btn px-2 py-1 rounded text-museum-gold font-bold whitespace-nowrap"
+                data-i18n="nav.tools">Oficina</button>
+            <a href="/docs/abcd-advanced/data-models/abcd-spectrum-manual" target="_blank"
+                class="mobile-nav-btn px-2 py-1 rounded text-museum-border hover:text-white whitespace-nowrap flex items-center">
+                <span class="mr-1"></span> <span data-i18n="nav.docs">Manual</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+        <!-- SECTION 1: DASHBOARD / VISÃO GERAL -->
+        <section id="sec-dashboard" class="tab-content space-y-8">
+            <div
+                class="bg-museum-card p-6 sm:p-8 rounded-xl border border-museum-border shadow-sm relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-museum-accent/5 rounded-bl-full pointer-events-none">
+                </div>
+                <div class="max-w-3xl">
+                    <span
+                        class="inline-block px-3 py-1 bg-museum-primary/10 text-museum-primary text-xs font-semibold rounded-full mb-3"
+                        data-i18n="dashboard.version">Versão Oficial de Referência 0.1</span>
+                    <h2 class="text-2xl sm:text-3xl font-serif font-bold text-museum-primary mb-3"
+                        data-i18n="dashboard.title">Normatização da Base de Dados ABCD-Spectrum</h2>
+                    <p class="text-museum-muted text-sm sm:text-base leading-relaxed mb-4"
+                        data-i18n="dashboard.description">Bem-vindo ao portal interativo de catalogação museológica.
+                        Esta documentação consolida os padrões do <strong>Spectrum 5.1</strong> (Collections Trust UK)
+                        com a arquitetura de banco de dados <strong>CDS/ISIS do Sistema ABCD</strong>.</p>
+                    <div class="flex flex-wrap gap-3">
+                        <button onclick="switchTab('fdt')"
+                            class="px-4 py-2 bg-museum-primary hover:bg-museum-primaryLight text-white text-xs sm:text-sm font-semibold rounded-lg shadow transition flex items-center space-x-2"
+                            data-i18n="dashboard.explore_fdt"><span>🔍 Explorar os Campos FDT</span></button>
+                        <button onclick="switchTab('ferramentas')"
+                            class="px-4 py-2 bg-museum-accent hover:bg-museum-accentHover text-white text-xs sm:text-sm font-semibold rounded-lg shadow transition flex items-center space-x-2" data-i18n="nav.tools"><span>⚡
+                                Oficina do Catalogador</span></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Metrics Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div
+                    class="bg-museum-card p-4 sm:p-5 rounded-xl border border-museum-border text-center shadow-sm hover:border-museum-gold transition">
+                    <span class="text-2xl sm:text-3xl mb-1 block">📑</span>
+                    <span class="text-2xl sm:text-3xl font-bold font-serif text-museum-primary block">52</span>
+                    <span class="text-xs text-museum-muted uppercase tracking-wider font-semibold"
+                        data-i18n="dashboard.fdt_fields">Campos FDT Estruturados</span>
+                </div>
+                <div
+                    class="bg-museum-card p-4 sm:p-5 rounded-xl border border-museum-border text-center shadow-sm hover:border-museum-gold transition">
+                    <span class="text-2xl sm:text-3xl mb-1 block">📦</span>
+                    <span class="text-2xl sm:text-3xl font-bold font-serif text-museum-primary block">10</span>
+                    <span class="text-xs text-museum-muted uppercase tracking-wider font-semibold"
+                        data-i18n="dashboard.logical_blocks">Blocos Lógicos (0XX a 9XX)</span>
+                </div>
+                <div
+                    class="bg-museum-card p-4 sm:p-5 rounded-xl border border-museum-border text-center shadow-sm hover:border-museum-gold transition">
+                    <span class="text-2xl sm:text-3xl mb-1 block">🔄</span>
+                    <span class="text-2xl sm:text-3xl font-bold font-serif text-museum-primary block">21</span>
+                    <span class="text-xs text-museum-muted uppercase tracking-wider font-semibold"
+                        data-i18n="dashboard.procedures">Procedimentos Spectrum 5.1</span>
+                </div>
+                <div
+                    class="bg-museum-card p-4 sm:p-5 rounded-xl border border-museum-border text-center shadow-sm hover:border-museum-gold transition">
+                    <span class="text-2xl sm:text-3xl mb-1 block">🧪</span>
+                    <span class="text-2xl sm:text-3xl font-bold font-serif text-museum-primary block">13</span>
+                    <span class="text-xs text-museum-muted uppercase tracking-wider font-semibold"
+                        data-i18n="dashboard.conservative_pathologies">Patologias Conservacionais</span>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div
+                    class="bg-museum-card p-5 rounded-xl border border-museum-border shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-serif font-bold text-museum-primary text-base sm:text-lg"
+                                data-i18n="dashboard.fields_per_block">Distribuição dos Campos</h3>
+                            <span class="text-xs bg-museum-sidebar px-2 py-1 rounded text-museum-muted"
+                                data-i18n="dashboard.base_abcd">Base ABCD</span>
+                        </div>
+                        <p class="text-xs text-museum-muted mb-4" data-i18n="dashboard.fields_per_block_description">
+                            Quantidade de campos FDT alocados em cada um dos 10 blocos de informação.</p>
+                    </div>
+                    <div class="chart-container"><canvas id="chartFieldsPerBlock"></canvas></div>
+                </div>
+                <div
+                    class="bg-museum-card p-5 rounded-xl border border-museum-border shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-serif font-bold text-museum-primary text-base sm:text-lg"
+                                data-i18n="dashboard.spectrum_procedures">Prioridade dos Procedimentos</h3>
+                            <span class="text-xs bg-museum-sidebar px-2 py-1 rounded text-museum-muted"
+                                data-i18n="dashboard.spectrum_version">Spectrum 5.1</span>
+                        </div>
+                        <p class="text-xs text-museum-muted mb-4" data-i18n="dashboard.spectrum_procedures_description">
+                            Nível de obrigatoriedade e recomendação para conformidade museológica.</p>
+                    </div>
+                    <div class="chart-container"><canvas id="chartSpectrumPriority"></canvas></div>
+                </div>
+            </div>
+
+            <!-- Core Principles -->
+            <div class="bg-museum-sidebar p-6 rounded-xl border border-museum-border space-y-4">
+                <h3 class="font-serif font-bold text-museum-primary text-lg flex items-center space-x-2">
+                    <span>💡</span><span data-i18n="dashboard.core_principles">Princípios Fundamentais de Catalogação na
+                        Base ABCD</span>
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm">
+                    <div class="bg-white p-4 rounded-lg border border-museum-border">
+                        <strong class="text-museum-primary block mb-1 font-semibold"
+                            data-i18n="dashboard.principle_1">1. Unicidade do Tombo (002)</strong>
+                        <p class="text-museum-muted" data-i18n="dashboard.principle_1_description">O Número de Tombo é a
+                            chave jurídica do acervo. Deve ser rigorosamente único.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg border border-museum-border">
+                        <strong class="text-museum-primary block mb-1 font-semibold"
+                            data-i18n="dashboard.principle_2">2. Objetividade Descritiva (120)</strong>
+                        <p class="text-museum-muted" data-i18n="dashboard.principle_2_description">A descrição física
+                            deve ser neutra, abstendo-se de juízos de valor estético.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg border border-museum-border">
+                        <strong class="text-museum-primary block mb-1 font-semibold"
+                            data-i18n="dashboard.principle_3">3. Precisão Metrológica (230)</strong>
+                        <p class="text-museum-muted" data-i18n="dashboard.principle_3_description">Todas as dimensões
+                            físicas devem ser aferidas em centímetros (cm).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: EXPLORADOR FDT -->
+        <section id="sec-fdt" class="tab-content hidden space-y-6">
+            <div class="bg-museum-card p-5 rounded-xl border border-museum-border shadow-sm space-y-4">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <h2 class="text-xl sm:text-2xl font-serif font-bold text-museum-primary"
+                            data-i18n="dashboard.fdt_guide">Guia Detalhado da FDT</h2>
+                        <p class="text-xs sm:text-sm text-museum-muted" data-i18n="dashboard.fdt_description">Instruções
+                            técnicas para cada campo.</p>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <input type="text" id="fdtFilterSearch" data-i18n="search.fdt" placeholder="Filtrar por nome, tag ou regra..."
+                            class="px-3 py-1.5 text-xs sm:text-sm border border-museum-border rounded-lg bg-museum-bg focus:outline-none focus:ring-2 focus:ring-museum-primary">
+                        <select id="fdtRepeatableFilter"
+                            class="px-3 py-1.5 text-xs sm:text-sm border border-museum-border rounded-lg bg-museum-bg text-museum-dark focus:outline-none">
+                            <option value="all" data-i18n="dashboard.fdt_filter_all">Todos os tipos</option>
+                            <option value="rep" data-i18n="dashboard.fdt_filter_rep">Apenas Repetitivos</option>
+                            <option value="sub" data-i18n="dashboard.fdt_filter_sub">Com Subcampos (^a, ^b...)</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="blockFilterPills" class="flex flex-wrap gap-1.5 pt-2 border-t border-museum-border/50 text-xs">
+                </div>
+            </div>
+            <div id="fdtFieldsContainer" class="space-y-4"></div>
+        </section>
+
+        <!-- SECTION 3: PROCEDIMENTOS SPECTRUM -->
+        <section id="sec-spectrum" class="tab-content hidden space-y-6">
+            <div class="bg-museum-card p-5 rounded-xl border border-museum-border shadow-sm space-y-4">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <h2 class="text-xl sm:text-2xl font-serif font-bold text-museum-primary"
+                            data-i18n="dashboard.spectrum_title">Os 21 Procedimentos Spectrum 5.1</h2>
+                        <p class="text-xs sm:text-sm text-museum-muted" data-i18n="dashboard.spectrum_description">
+                            Mapeamento dos padrões internacionais.</p>
+                    </div>
+                    <div class="flex items-center space-x-2 text-xs">
+                        <button onclick="filterSpectrum('all')" id="spec-btn-all"
+                            class="spec-filter-btn px-3 py-1.5 rounded-lg bg-museum-primary text-white font-medium"
+                            data-i18n="dashboard.spectrum_filter_all">Todos</button>
+                        <button onclick="filterSpectrum('Essencial')" id="spec-btn-essencial"
+                            class="spec-filter-btn px-3 py-1.5 rounded-lg bg-museum-sidebar text-museum-dark hover:bg-museum-border font-medium"
+                            data-i18n="dashboard.spectrum_filter_essential">🟢 Essencial</button>
+                        <button onclick="filterSpectrum('Recomendado')" id="spec-btn-recomendado"
+                            class="spec-filter-btn px-3 py-1.5 rounded-lg bg-museum-sidebar text-museum-dark hover:bg-museum-border font-medium"
+                            data-i18n="dashboard.spectrum_filter_recommended">🟡 Recomendado</button>
+                        <button onclick="filterSpectrum('Opcional')" id="spec-btn-opcional"
+                            class="spec-filter-btn px-3 py-1.5 rounded-lg bg-museum-sidebar text-museum-dark hover:bg-museum-border font-medium"
+                            data-i18n="dashboard.spectrum_filter_optional">🔵 Opcional</button>
+                    </div>
+                </div>
+            </div>
+            <div id="spectrumGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+        </section>
+
+        <!-- SECTION 4: PATOLOGIAS -->
+        <section id="sec-patologias" class="tab-content hidden space-y-6">
+            <div class="bg-museum-card p-5 rounded-xl border border-museum-border shadow-sm space-y-4">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <h2 class="text-xl sm:text-2xl font-serif font-bold text-museum-primary"
+                            data-i18n="dashboard.patologia_title">Glossário de Patologias</h2>
+                        <p class="text-xs sm:text-sm text-museum-muted" data-i18n="dashboard.patologia_description">
+                            Vocabulário técnico padronizado para o Campo 530.</p>
+                    </div>
+                    <input type="text" id="patologiaSearch" data-i18n="search.pathology" placeholder="Pesquisar patologia..."
+                        class="px-3 py-1.5 text-xs sm:text-sm border border-museum-border rounded-lg bg-museum-bg focus:outline-none w-full md:w-64">
+                </div>
+            </div>
+            <div id="patologiaGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+        </section>
+
+        <!-- SECTION 5: OFICINA -->
+        <section id="sec-ferramentas" class="tab-content hidden space-y-8">
+            <div class="bg-museum-card p-5 rounded-xl border border-museum-border shadow-sm">
+                <h2 class="text-xl sm:text-2xl font-serif font-bold text-museum-primary mb-1"
+                    data-i18n="dashboard.oficina_titulo">Oficina Prática do Catalogador</h2>
+                <p class="text-xs sm:text-sm text-museum-muted" data-i18n="dashboard.oficina_descricao">Ferramentas de
+                    apoio interativas para formatação automatizada.</p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Ferramenta 1 -->
+                <div class="bg-museum-card p-6 rounded-xl border border-museum-border shadow-sm space-y-4">
+                    <div class="border-b border-museum-border pb-3">
+                        <h3 class="font-serif font-bold text-museum-primary text-base flex items-center space-x-2"><span
+                                data-i18n="dashboard.tombo_generator_titulo">Gerador de Número de Tombo</span></h3>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 text-xs">
+                        <div><label class="block font-semibold mb-1"
+                                data-i18n="dashboard.tombo_pais_label">País</label><input type="text" id="tomboPais"
+                                value="BR" class="w-full p-2 border rounded bg-museum-bg"></div>
+                        <div><label class="block font-semibold mb-1"
+                                data-i18n="dashboard.tombo_inst_label">Instituição</label><input type="text"
+                                id="tomboInst" value="MUS" class="w-full p-2 border rounded bg-museum-bg"></div>
+                        <div><label class="block font-semibold mb-1"
+                                data-i18n="dashboard.tombo_col_label">Coleção</label><input type="text" id="tomboCol"
+                                value="ART" class="w-full p-2 border rounded bg-museum-bg"></div>
+                        <div>
+                            <label class="block font-semibold mb-1" data-i18n="dashboard.tombo_tip_label">Classificação</label>
+                            <select id="tomboTip" class="w-full p-2 border border-museum-border rounded bg-museum-bg text-xs">
+                                <option value="AT" data-i18n="tip.AT">AT - Arqueológico</option>
+                                <option value="AV" data-i18n="tip.AV">AV - Artes Visuais</option>
+                                <option value="EQ" data-i18n="tip.EQ">EQ - Equipamento</option>
+                                <option value="GEO" data-i18n="tip.GEO">GEO - Geologia</option>
+                                <option value="HE" data-i18n="tip.HE">HE - Heráldica</option>
+                                <option value="VE" data-i18n="tip.VE">VE - Indumentária</option>
+                                <option value="MB" data-i18n="tip.MB" selected>MB - Mobiliário</option>
+                                <option value="NM" data-i18n="tip.NM">NM - Numismática</option>
+                                <option value="OB" data-i18n="tip.OB">OB - Objeto</option>
+                                <option value="PR" data-i18n="tip.PR">PR - Premiação</option>
+                                <option value="VX" data-i18n="tip.VX">VX - Vexilologia</option>
+                            </select>
+                        </div>
+                        <div class="col-span-2"><label class="block font-semibold mb-1"
+                                data-i18n="dashboard.tombo_seq_label">Sequencial</label><input type="number"
+                                id="tomboSeq" value="1" class="w-full p-2 border rounded bg-museum-bg"></div>
+                        <div class="col-span-2"><label class="block font-semibold mb-1"
+                                data-i18n="dashboard.tombo_conj_label">Conjunto</label><input type="text" id="tomboConj" data-i18n="placeholder.conjunto" placeholder="Ex: 1 para peça 1 do conjunto"
+                                class="w-full p-2 border rounded bg-museum-bg"></div>
+                    </div>
+                    <div class="p-4 bg-museum-sidebar rounded-lg border flex justify-between">
+                        <code id="tomboOutput"
+                            class="text-sm font-mono font-bold text-museum-accent select-all">BR_MUS_ART_MB_0000001</code>
+                        <button onclick="copyToClipboard('tomboOutput')"
+                            class="px-2.5 py-1 text-xs bg-museum-primary text-white rounded">Copiar</button>
+                    </div>
+                </div>
+                <!-- Ferramenta 2 -->
+                <div class="bg-museum-card p-6 rounded-xl border border-museum-border shadow-sm space-y-4">
+                    <div class="border-b border-museum-border pb-3">
+                        <h3 class="font-serif font-bold text-museum-primary text-base flex items-center space-x-2"><span
+                                data-i18n="dashboard.insc_composer_titulo">Compositor de Inscrições</span></h3>
+                    </div>
+                    <div class="space-y-3 text-xs">
+                        <div>
+                            <label class="block font-semibold mb-1" data-i18n="dashboard.insc_tipo_label">Tipo</label>
+                            <select id="inscTipo" class="w-full p-2 border border-museum-border rounded bg-museum-bg text-xs">
+                                <option value="Assinatura" data-i18n="insc.type.assinatura">Assinatura</option>
+                                <option value="Manuscrito" data-i18n="insc.type.manuscrito">Manuscrito</option>
+                                <option value="Marca d'água" data-i18n="insc.type.marcadagua">Marca d'água</option>
+                                <option value="Carimbo" data-i18n="insc.type.carimbo">Carimbo</option>
+                                <option value="Selo" data-i18n="insc.type.selo">Selo</option>
+                                <option value="Etiqueta" data-i18n="insc.type.etiqueta">Etiqueta</option>
+                                <option value="Placa" data-i18n="insc.type.placa">Placa</option>
+                                <option value="Logomarca" data-i18n="insc.type.logomarca">Logomarca</option>
+                                <option value="Impressão" data-i18n="insc.type.impressao">Impressão</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1" data-i18n="dashboard.insc_loc_label">Localização</label>
+                            <select id="inscLoc" class="w-full p-2 border border-museum-border rounded bg-museum-bg text-xs">
+                                <optgroup label="I. Frente - Obra" data-i18n="insc.group.frente_obra">
+                                    <option value="f.c.s.e." data-i18n="insc.loc.fcse">f.c.s.e. (Canto superior esquerdo)</option>
+                                    <option value="f.ac.c." data-i18n="insc.loc.facc">f.ac.c. (Acima ao centro)</option>
+                                    <option value="f.c.s.d." data-i18n="insc.loc.fcsd">f.c.s.d. (Canto superior direito)</option>
+                                    <option value="f.c.e." data-i18n="insc.loc.fce">f.c.e. (Centro à esquerda)</option>
+                                    <option value="f.c." data-i18n="insc.loc.fc">f.c. (Centro)</option>
+                                    <option value="f.c.d." data-i18n="insc.loc.fcd">f.c.d. (Centro à direita)</option>
+                                    <option value="f.c.i.e." data-i18n="insc.loc.fcie">f.c.i.e. (Canto inferior esquerdo)</option>
+                                    <option value="f.ab.c." data-i18n="insc.loc.fabc">f.ab.c. (Abaixo ao centro)</option>
+                                    <option value="f.c.i.d." data-i18n="insc.loc.fcid">f.c.i.d. (Canto inferior direito)</option>
+                                </optgroup>
+                                <optgroup label="I. Frente - Moldura" data-i18n="insc.group.frente_moldura">
+                                    <option value="m.ac." data-i18n="insc.loc.mac">m.ac. (Acima)</option>
+                                    <option value="m.ab." data-i18n="insc.loc.mab">m.ab. (Abaixo)</option>
+                                    <option value="m.e." data-i18n="insc.loc.me">m.e. (Esquerda)</option>
+                                    <option value="m.d." data-i18n="insc.loc.md">m.d. (Direita)</option>
+                                </optgroup>
+                                <optgroup label="II. Verso - Obra" data-i18n="insc.group.verso_obra">
+                                    <option value="v.c.s.e." data-i18n="insc.loc.vcse">v.c.s.e. (Canto superior esq.)</option>
+                                    <option value="v.ac.c." data-i18n="insc.loc.vacc">v.ac.c. (Acima ao centro)</option>
+                                    <option value="v.c.s.d." data-i18n="insc.loc.vcsd">v.c.s.d. (Canto superior dir.)</option>
+                                    <option value="v.c.e." data-i18n="insc.loc.vce">v.c.e. (Centro à esquerda)</option>
+                                    <option value="v.c." data-i18n="insc.loc.vc">v.c. (Centro)</option>
+                                    <option value="v.c.d." data-i18n="insc.loc.vcd">v.c.d. (Centro à direita)</option>
+                                    <option value="v.c.i.e." data-i18n="insc.loc.vcie">v.c.i.e. (Canto inferior esq.)</option>
+                                    <option value="v.i.c." data-i18n="insc.loc.vic">v.i.c. (Inferior centro)</option>
+                                    <option value="v.c.i.d." data-i18n="insc.loc.vcid">v.c.i.d. (Canto inferior dir.)</option>
+                                </optgroup>
+                                <optgroup label="II. Verso - Chassi" data-i18n="insc.group.verso_chassi">
+                                    <option value="chassi ac." data-i18n="insc.loc.chassiac">chassi ac. (Acima)</option>
+                                    <option value="chassi ab." data-i18n="insc.loc.chassiab">chassi ab. (Abaixo)</option>
+                                    <option value="chassi e." data-i18n="insc.loc.chassie">chassi e. (Esquerda)</option>
+                                    <option value="chassi d." data-i18n="insc.loc.chassid">chassi d. (Direita)</option>
+                                </optgroup>
+                                <optgroup label="II. Verso - Moldura" data-i18n="insc.group.verso_moldura">
+                                    <option value="v.m.ac." data-i18n="insc.loc.vmac">v.m.ac. (Acima)</option>
+                                    <option value="v.m.e." data-i18n="insc.loc.vme">v.m.e. (Esquerda)</option>
+                                    <option value="v.m.d." data-i18n="insc.loc.vmd">v.m.d. (Direita)</option>
+                                    <option value="v.m.ab." data-i18n="insc.loc.vmab">v.m.ab. (Abaixo)</option>
+                                </optgroup>
+                                <optgroup label="III. Tridimensional - Geral" data-i18n="insc.group.tridimensional_geral">
+                                    <option value="f.f." data-i18n="insc.loc.ff">f.f. (Face Frontal)</option>
+                                    <option value="f.p." data-i18n="insc.loc.fp">f.p. (Face Posterior)</option>
+                                    <option value="f.s." data-i18n="insc.loc.fs">f.s. (Face Superior)</option>
+                                    <option value="f.i." data-i18n="insc.loc.fi">f.i. (Face Inferior)</option>
+                                    <option value="f.l.e." data-i18n="insc.loc.fle">f.l.e. (Lateral Esquerda)</option>
+                                    <option value="f.l.d." data-i18n="insc.loc.fld">f.l.d. (Lateral Direita)</option>
+                                </optgroup>
+                                <optgroup label="III. Tridimensional - Base" data-i18n="insc.group.tridimensional_base">
+                                    <option value="b.f.f." data-i18n="insc.loc.bff">b.f.f. (Base Frontal)</option>
+                                    <option value="b.f.p." data-i18n="insc.loc.bfp">b.f.p. (Base Posterior)</option>
+                                    <option value="b.f.s." data-i18n="insc.loc.bfs">b.f.s. (Base Superior)</option>
+                                    <option value="b.f.i." data-i18n="insc.loc.bfi">b.f.i. (Base Inferior)</option>
+                                    <option value="b.f.l.e." data-i18n="insc.loc.bfle">b.f.l.e. (Base Lat. Esq.)</option>
+                                    <option value="b.f.l.d." data-i18n="insc.loc.bfld">b.f.l.d. (Base Lat. Dir.)</option>
+                                </optgroup>
+                                <optgroup label="III. Tridimensional - Interno" data-i18n="insc.group.tridimensional_interno">
+                                    <option value="int.f.f." data-i18n="insc.loc.intff">int.f.f. (Interno Frontal)</option>
+                                    <option value="int.f.p." data-i18n="insc.loc.intfp">int.f.p. (Interno Posterior)</option>
+                                    <option value="int.f.s." data-i18n="insc.loc.intfs">int.f.s. (Interno Superior)</option>
+                                    <option value="int.f.i." data-i18n="insc.loc.intfi">int.f.i. (Interno Inferior)</option>
+                                    <option value="int.f.l.e." data-i18n="insc.loc.intfle">int.f.l.e. (Interno Lat. Esq.)</option>
+                                    <option value="int.f.l.d." data-i18n="insc.loc.intfld">int.f.l.d. (Interno Lat. Dir.)</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div><label class="block font-semibold mb-1"
+                                data-i18n="dashboard.insc_idioma_label">Idioma</label><input type="text" id="inscIdioma"
+                                value="Português" class="w-full p-2 border rounded bg-museum-bg"></div>
+                        <div><label class="block font-semibold mb-1"
+                                data-i18n="dashboard.insc_texto_label">Transcrição</label><input type="text" id="inscTexto" data-i18n="placeholder.insc" placeholder="Ex: A. Volpi"
+                                class="w-full p-2 border rounded bg-museum-bg"></div>
+                    </div>
+                    <div class="p-4 bg-museum-sidebar rounded-lg border flex justify-between">
+                        <code id="inscOutput"
+                            class="text-xs font-mono font-bold text-museum-primary select-all">^aAssinatura^bf.c.s.e.^lPortuguês^t"A. Volpi"</code>
+                        <button onclick="copyToClipboard('inscOutput')"
+                            class="px-2.5 py-1 text-xs bg-museum-primary text-white rounded" data-i18n="tools.btn_copy">Copiar</button>
+                    </div>
+                </div>
+                <!-- Ferramenta 3 -->
+                <div
+                    class="bg-museum-card p-6 rounded-xl border border-museum-border shadow-sm space-y-4 lg:col-span-2">
+                    <div class="border-b border-museum-border pb-3">
+                        <h3 class="font-serif font-bold text-museum-primary text-base flex items-center space-x-2"><span
+                                data-i18n="dashboard.dim_formatter_titulo">Formatador de Dimensões</span></h3>
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+                        <div><label class="block font-semibold mb-1"
+                                data-i18n="dashboard.dim_alt_label">Altura</label><input type="number" id="dimAlt"
+                                placeholder="120" class="w-full p-2 border rounded bg-museum-bg"></div>
+                        <div><label class="block font-semibold mb-1"
+                                data-i18n="dashboard.dim_larg_label">Largura</label><input type="number" id="dimLarg"
+                                placeholder="80" class="w-full p-2 border rounded bg-museum-bg"></div>
+                        <div><label class="block font-semibold mb-1"
+                                data-i18n="dashboard.dim_prof_label">Profundidade</label><input type="number"
+                                id="dimProf" placeholder="45" class="w-full p-2 border rounded bg-museum-bg"></div>
+                        <div><label class="block font-semibold mb-1"
+                                data-i18n="dashboard.dim_diam_label">Diâmetro</label><input type="number" id="dimDiam"
+                                placeholder="0" class="w-full p-2 border rounded bg-museum-bg"></div>
+                    </div>
+                    <div class="p-4 bg-museum-sidebar rounded-lg border flex justify-between">
+                        <code id="dimOutput"
+                            class="text-sm font-mono font-bold text-museum-primary select-all">120 x 80 x 45 cm (^a120^b80^c45)</code>
+                        <button onclick="copyToClipboard('dimOutput')" 
+                            class="px-3 py-1.5 text-xs bg-museum-primary text-white rounded" data-i18n="tools.btn_copy_value">Copiar Valor</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+<!-- Footer -->
+<footer class="bg-museum-primary text-museum-border text-xs py-6 mt-12 border-t border-museum-primaryLight">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div>
+            <p class="font-semibold text-white" data-i18n="dashboard.footer_titulo">Base de Dados Museológica
+                ABCD-Spectrum</p>
+            <p class="opacity-80" data-i18n="dashboard.footer_descricao">Alinhado ao Padrão Internacional Spectrum 5.1
+                (<a href="https://collectionstrust.org.uk/spectrum/" target="_blank"
+                    class="text-white hover:underline">Collections Trust UK</a>) & <a href="https://abcd-community.org"
+                    target="_blank" class="text-white hover:underline">Sistema ABCD</a></p>
+        </div>
+        <div class="text-right opacity-80">
+            <p data-i18n="dashboard.footer_desenvolvido">Desenvolvido pelo <a href="https://www.mackenzie.br/"
+                    target="_blank" class="text-white hover:underline">Centro Histórico e Cultural Mackenzie</a></p>
+            <p data-i18n="dashboard.footer_direitos">© 2026 ABCD - Automação de Bibliotecas e Centros de Documentação
+            </p>
+        </div>
+    </div>
+</footer>
+
+    <!-- Lógica JavaScript Principal -->
+    <script>
+        const i18n = {
+            pt: {
+                ui: {
+                    "nav.home": "Início",
+                    "nav.fdt": "Campos",
+                    "nav.spectrum": "Procedimentos",
+                    "nav.pathology": "Patologias",
+                    "nav.tools": "Oficina do Catalogador",
+                    "dashboard.version": "Versão Oficial de Referência 0.1",
+                    "dashboard.title": "Normatização da Base de Dados ABCD-Spectrum",
+                    "dashboard.description": "Bem-vindo ao portal interativo de catalogação museológica. Esta documentação consolida os padrões do Spectrum 5.1 (Collections Trust UK) com a arquitetura de banco de dados CDS/ISIS do Sistema ABCD.",
+                    "dashboard.explore_fdt": "🔍 Explorar os Campos FDT",
+                    "dashboard.fdt_fields": "Campos FDT Estruturados",
+                    "dashboard.logical_blocks": "Blocos Lógicos (0XX a 9XX)",
+                    "dashboard.procedures": "Procedimentos Spectrum 5.1",
+                    "dashboard.conservative_pathologies": "Patologias Conservacionais",
+                    "dashboard.fields_per_block": "Distribuição dos Campos",
+                    "dashboard.base_abcd": "Base ABCD",
+                    "dashboard.fields_per_block_description": "Quantidade de campos FDT alocados em cada um dos 10 blocos de informação.",
+                    "dashboard.spectrum_procedures": "Prioridade dos Procedimentos",
+                    "dashboard.spectrum_version": "Spectrum 5.1",
+                    "dashboard.spectrum_procedures_description": "Nível de obrigatoriedade e recomendação para conformidade museológica.",
+                    "dashboard.core_principles": "Princípios Fundamentais de Catalogação na Base ABCD",
+                    "dashboard.principle_1": "1. Unicidade do Tombo (002)",
+                    "dashboard.principle_1_description": "O Número de Tombo é a chave jurídica do acervo. Deve ser rigorosamente único.",
+                    "dashboard.principle_2": "2. Objetividade Descritiva (120)",
+                    "dashboard.principle_2_description": "A descrição física deve ser neutra, abstendo-se de juízos de valor estético.",
+                    "dashboard.principle_3": "3. Precisão Metrológica (230)",
+                    "dashboard.principle_3_description": "Todas as dimensões físicas devem ser aferidas em centímetros (cm).",
+                    "dashboard.fdt_guide": "Guia Detalhado da FDT",
+                    "dashboard.fdt_description": "Instruções técnicas para cada campo.",
+                    "dashboard.fdt_filter_all": "Todos os tipos",
+                    "dashboard.fdt_filter_rep": "Apenas Repetitivos",
+                    "dashboard.fdt_filter_sub": "Com Subcampos (^a, ^b...)",
+                    "dashboard.spectrum_title": "Os 21 Procedimentos Spectrum 5.1",
+                    "dashboard.spectrum_description": "Mapeamento dos padrões internacionais.",
+                    "dashboard.spectrum_filter_all": "Todos",
+                    "dashboard.spectrum_filter_essential": "🟢 Essencial",
+                    "dashboard.spectrum_filter_recommended": "🟡 Recomendado",
+                    "dashboard.spectrum_filter_optional": "🔵 Opcional",
+                    "dashboard.patologia_title": "Glossário de Patologias",
+                    "dashboard.patologia_description": "Vocabulário técnico padronizado para o Campo 530.",
+                    "dashboard.oficina_titulo": "Oficina Prática do Catalogador",
+                    "dashboard.oficina_descricao": "Ferramentas de apoio interativas para formatação automatizada.",
+                    "dashboard.tombo_generator_titulo": "Gerador de Número de Tombo",
+                    "dashboard.tombo_pais_label": "País",
+                    "dashboard.tombo_inst_label": "Instituição",
+                    "dashboard.tombo_col_label": "Coleção",
+                    "dashboard.tombo_tip_label": "Tipologia",
+                    "dashboard.tombo_seq_label": "Sequencial",
+                    "dashboard.tombo_conj_label": "Conjunto",
+                    "dashboard.insc_composer_titulo": "Compositor de Inscrições",
+                    "dashboard.insc_tipo_label": "Tipo",
+                    "dashboard.insc_loc_label": "Localização",
+                    "dashboard.insc_idioma_label": "Idioma",
+                    "dashboard.insc_texto_label": "Transcrição",
+                    "dashboard.dim_formatter_titulo": "Formatador de Dimensões",
+                    "dashboard.dim_alt_label": "Altura",
+                    "dashboard.dim_larg_label": "Largura",
+                    "dashboard.dim_prof_label": "Profundidade",
+                    "dashboard.dim_diam_label": "Diâmetro",
+                    "search.global": "Buscar campo, código ou patologia...",
+                    "search.fdt": "Filtrar por nome, tag ou regra...",
+                    "search.pathology": "Pesquisar patologia...",
+                    "placeholder.conjunto": "Ex: 1 para peça 1 do conjunto",
+                    "placeholder.insc": "Ex: A. Volpi",
+                    "fdt.fields_count": "campos",
+                    "fdt.rule": "Regra:",
+                    "fdt.example": "Exemplo:",
+                    "fdt.not_found": "Nenhum campo encontrado.",
+                    "fdt.filter_all_blocks": "Todos",
+                    "pathology.impact": "Impacto:",
+                    "tools.btn_copy": "Copiar",
+                    "tools.btn_copy_value": "Copiar Valor",
+                    "tools.alert_copied": "Copiado para a área de transferência: ",
+                    "tools.waiting": "Aguardando...",
+                    "dashboard.footer_titulo": "Base de Dados Museológica ABCD-Spectrum",
+                    "dashboard.footer_descricao": 'Alinhado ao Padrão Internacional Spectrum 5.1 (<a href="https://collectionstrust.org.uk/spectrum/" target="_blank" class="text-white hover:underline">Collections Trust UK</a>) & <a href="https://abcd-community.org" target="_blank" class="text-white hover:underline">Sistema ABCD</a>',
+                    "dashboard.footer_desenvolvido": 'Desenvolvido pelo <a href="https://www.mackenzie.br/" target="_blank" class="text-white hover:underline">Centro Histórico e Cultural Mackenzie</a>',
+                    "dashboard.footer_direitos": "© 2026 ABCD - Automação de Bibliotecas e Centros de Documentação",
+                    "tip.AT": "AT - Arqueológico", "tip.AV": "AV - Artes Visuais", "tip.EQ": "EQ - Equipamento", "tip.GEO": "GEO - Geologia", "tip.HE": "HE - Heráldica", "tip.VE": "VE - Indumentária", "tip.MB": "MB - Mobiliário", "tip.NM": "NM - Numismática", "tip.OB": "OB - Objeto", "tip.PR": "PR - Premiação", "tip.VX": "VX - Vexilologia",
+                    "insc.type.assinatura": "Assinatura", "insc.type.manuscrito": "Manuscrito", "insc.type.marcadagua": "Marca d'água", "insc.type.carimbo": "Carimbo", "insc.type.selo": "Selo", "insc.type.etiqueta": "Etiqueta", "insc.type.placa": "Placa", "insc.type.logomarca": "Logomarca", "insc.type.impressao": "Impressão",
+                    "insc.group.frente_obra": "I. Frente - Obra", "insc.loc.fcse": "f.c.s.e. (Canto sup. esquerdo)", "insc.loc.facc": "f.ac.c. (Acima ao centro)", "insc.loc.fcsd": "f.c.s.d. (Canto sup. direito)", "insc.loc.fce": "f.c.e. (Centro à esquerda)", "insc.loc.fc": "f.c. (Centro)", "insc.loc.fcd": "f.c.d. (Centro à direita)", "insc.loc.fcie": "f.c.i.e. (Canto inf. esquerdo)", "insc.loc.fabc": "f.ab.c. (Abaixo ao centro)", "insc.loc.fcid": "f.c.i.d. (Canto inf. direito)",
+                    "insc.group.frente_moldura": "I. Frente - Moldura", "insc.loc.mac": "m.ac. (Acima)", "insc.loc.mab": "m.ab. (Abaixo)", "insc.loc.me": "m.e. (Esquerda)", "insc.loc.md": "m.d. (Direita)",
+                    "insc.group.verso_obra": "II. Verso - Obra", "insc.loc.vcse": "v.c.s.e. (Canto sup. esq.)", "insc.loc.vacc": "v.ac.c. (Acima ao centro)", "insc.loc.vcsd": "v.c.s.d. (Canto sup. dir.)", "insc.loc.vce": "v.c.e. (Centro à esquerda)", "insc.loc.vc": "v.c. (Centro)", "insc.loc.vcd": "v.c.d. (Centro à direita)", "insc.loc.vcie": "v.c.i.e. (Canto inf. esq.)", "insc.loc.vic": "v.i.c. (Inferior centro)", "insc.loc.vcid": "v.c.i.d. (Canto inf. dir.)",
+                    "insc.group.verso_chassi": "II. Verso - Chassi", "insc.loc.chassiac": "chassi ac. (Acima)", "insc.loc.chassiab": "chassi ab. (Abaixo)", "insc.loc.chassie": "chassi e. (Esquerda)", "insc.loc.chassid": "chassi d. (Direita)",
+                    "insc.group.verso_moldura": "II. Verso - Moldura", "insc.loc.vmac": "v.m.ac. (Acima)", "insc.loc.vme": "v.m.e. (Esquerda)", "insc.loc.vmd": "v.m.d. (Direita)", "insc.loc.vmab": "v.m.ab. (Abaixo)",
+                    "insc.group.tridimensional_geral": "III. Tridimensional - Geral", "insc.loc.ff": "f.f. (Face Frontal)", "insc.loc.fp": "f.p. (Face Posterior)", "insc.loc.fs": "f.s. (Face Superior)", "insc.loc.fi": "f.i. (Face Inferior)", "insc.loc.fle": "f.l.e. (Lateral Esquerda)", "insc.loc.fld": "f.l.d. (Lateral Direita)",
+                    "insc.group.tridimensional_base": "III. Tridimensional - Base", "insc.loc.bff": "b.f.f. (Base Frontal)", "insc.loc.bfp": "b.f.p. (Base Posterior)", "insc.loc.bfs": "b.f.s. (Base Superior)", "insc.loc.bfi": "b.f.i. (Base Inferior)", "insc.loc.bfle": "b.f.l.e. (Base Lat. Esq.)", "insc.loc.bfld": "b.f.l.d. (Base Lat. Dir.)",
+                    "insc.group.tridimensional_interno": "III. Tridimensional - Interno", "insc.loc.intff": "int.f.f. (Interno Frontal)", "insc.loc.intfp": "int.f.p. (Interno Posterior)", "insc.loc.intfs": "int.f.s. (Interno Superior)", "insc.loc.intfi": "int.f.i. (Interno Inferior)", "insc.loc.intfle": "int.f.l.e. (Interno Lat. Esq.)", "insc.loc.intfld": "int.f.l.d. (Interno Lat. Dir.)"
+                },
+                fdt: [
+                    {
+                        block: "0XX", blockTitle: "Bloco 0XX - Identificação e Classificação", fields: [
+                            { tag: "001", name: "ID (Inventário)", req: false, rep: false, sub: false, desc: "Identificador sequencial automático (MFN) ou número provisório de pré-inventário.", rule: "Gerado pelo sistema ou preenchido na entrada provisória.", ex: "000045" },
+                            { tag: "002", name: "Número de Tombo (Acessionamento)", req: true, rep: false, sub: false, desc: "Chave única e definitiva de identificação jurídica do objeto.", rule: "Estrutura: País_Instituição_Coleção_Tipologia_Número.", ex: "BR_MUS_ART_MB_0000001" },
+                            { tag: "010", name: "Nome do Objeto (Object Name)", req: true, rep: false, sub: false, desc: "Nomenclatura primária simples e direta.", rule: "Usar vocabulário controlado no singular.", ex: "Cadeira, Moeda, Escultura" }
+                        ]
+                    },
+                    {
+                        block: "1XX", blockTitle: "Bloco 1XX - Descrição Visual", fields: [
+                            { tag: "100", name: "Descrição Resumida", req: true, rep: false, sub: false, desc: "Texto curto de até 2-3 linhas para pronta identificação.", rule: "Resumo direto sem juízo de valor.", ex: "Cadeira de braço em madeira nobre." },
+                            { tag: "120", name: "Descrição Física", req: false, rep: false, sub: false, desc: "Descrição objetiva da forma, cores e estrutura.", rule: "Descrever do geral para o particular.", ex: "Estrutura retangular em madeira entalhada." }
+                        ]
+                    },
+                    {
+                        block: "2XX", blockTitle: "Bloco 2XX - Características Físicas", fields: [
+                            { tag: "200", name: "Material", req: true, rep: true, sub: false, desc: "Materiais constitutivos do objeto.", rule: "Listar do material preponderante para o minoritário.", ex: "Madeira, bronze" },
+                            { tag: "230", name: "Dimensões", req: true, rep: false, sub: true, desc: "Medidas exatas do objeto registradas em centímetros (cm).", rule: "Subcampos: ^a Altura, ^b Largura, ^c Profundidade, ^d Diâmetro.", ex: "120 x 80 x 45 cm (^a120^b80^c45)" }
+                        ]
+                    },
+                    {
+                        block: "3XX", blockTitle: "Bloco 3XX - Autoria e Produção", fields: [
+                            { tag: "300", name: "Autor / Artista", req: true, rep: true, sub: false, desc: "Criador ou artista responsável pelo objeto.", rule: "Padrão bibliográfico: Sobrenome, Nome.", ex: "Portinari, Cândido" },
+                            { tag: "330", name: "Data / Período de Criação", req: true, rep: false, sub: false, desc: "Datação formal da peça.", rule: "Exata ou Século/Década.", ex: "ca. 1930" }
+                        ]
+                    },
+                    {
+                        block: "5XX", blockTitle: "Bloco 5XX - Conservação e Condição", fields: [
+                            { tag: "500", name: "Estado de Conservação", req: true, rep: true, sub: false, desc: "Avaliação sintética da integridade física.", rule: "Valores válidos: Bom, Regular, Ruim.", ex: "Regular" },
+                            { tag: "530", name: "Descrição de Danos", req: true, rep: true, sub: false, desc: "Detalhamento de patologias visíveis.", rule: "Consultar Glossário de Patologias.", ex: "Craquelamento na camada pictórica." }
+                        ]
+                    },
+                    {
+                        block: "8XX", blockTitle: "Bloco 8XX - Localização e Movimentação", fields: [
+                            { tag: "800", name: "Localização Física Atual", req: false, rep: true, sub: false, desc: "Endereço exato de armazenagem.", rule: "Sala / Estante / Prateleira / Caixa.", ex: "Reserva Técnica 02, Estante B" },
+                            { tag: "850-853", name: "Empréstimos e Comodatos", req: false, rep: true, sub: false, desc: "Controle de saída temporária.", rule: "850: Contrato | 851: Instituição", ex: "Comodato Expo Arte 2024" }
+                        ]
+                    }
+                ],
+                spectrum: [
+                    { num: 1, name: "Entrada de Objeto", priority: "Essencial", desc: "Registro formal e temporário do ingresso de qualquer item.", icon: "📥" },
+                    { num: 2, name: "Aquisição", priority: "Essencial", desc: "Formalização da transferência legal de propriedade do objeto.", icon: "📜" },
+                    { num: 3, name: "Controle de Inventário", priority: "Essencial", desc: "Verificação periódica e rastreabilidade da existência física.", icon: "📋" },
+                    { num: 4, name: "Controle de Localização", priority: "Essencial", desc: "Rastreio e atualização em tempo real do endereço físico.", icon: "📍" },
+                    { num: 5, name: "Catalogação", priority: "Essencial", desc: "Registro normalizado de dados físicos, históricos e conceituais.", icon: "🏷️" },
+                    { num: 7, name: "Conservação e Cuidados", priority: "Recomendado", desc: "Planejamento e execução de ações de conservação preventiva.", icon: "🧪" },
+                    { num: 12, name: "Saída para Descarte", priority: "Opcional", desc: "Execução física do descarte de um item previamente desincorporado.", icon: "🗑️" }
+                ],
+                pathology: [
+                    { name: "Abrasão", desc: "Desgaste superficial provocado por fricção.", impact: "Perda estética e de camada pictórica.", action: "Higienização mecânica suave." },
+                    { name: "Ataque Biológico", desc: "Presença ativa ou inativa de insetos ou fungos.", impact: "Destruição estrutural grave.", action: "Isolamento em quarentena biológica." },
+                    { name: "Craquelamento", desc: "Rede de fissuras finas na camada pictórica.", impact: "Risco de desprendimento de tinta em escamas.", action: "Fixação e consolidação de camada pictórica." },
+                    { name: "Oxidação", desc: "Reação química de metais com oxigênio (ex: ferrugem).", impact: "Corrosão e enfraquecimento.", action: "Remoção mecânica e aplicação de cera." }
+                ]
+            },
+            en: {
+                ui: {
+                    "nav.home": "Home",
+                    "nav.fdt": "Fields",
+                    "nav.spectrum": "Procedures",
+                    "nav.pathology": "Pathologies",
+                    "nav.tools": "Cataloger's Workbench",
+                    "dashboard.version": "Official Reference Version 0.1",
+                    "dashboard.title": "ABCD-Spectrum Database Standardization",
+                    "dashboard.description": "Welcome to the interactive museum cataloging portal. This documentation consolidates the Spectrum 5.1 (Collections Trust UK) standards with the CDS/ISIS database architecture of the ABCD System.",
+                    "dashboard.explore_fdt": "🔍 Explore FDT Fields",
+                    "dashboard.fdt_fields": "Structured FDT Fields",
+                    "dashboard.logical_blocks": "Logical Blocks (0XX to 9XX)",
+                    "dashboard.procedures": "Spectrum 5.1 Procedures",
+                    "dashboard.conservative_pathologies": "Conservation Pathologies",
+                    "dashboard.fields_per_block": "Fields Distribution",
+                    "dashboard.base_abcd": "ABCD Base",
+                    "dashboard.fields_per_block_description": "Number of FDT fields allocated in each of the 10 information blocks.",
+                    "dashboard.spectrum_procedures": "Procedures Priority",
+                    "dashboard.spectrum_version": "Spectrum 5.1",
+                    "dashboard.spectrum_procedures_description": "Level of mandatory and recommended compliance for museum standards.",
+                    "dashboard.core_principles": "Core Principles of ABCD Cataloging",
+                    "dashboard.principle_1": "1. Uniqueness of the Registry Number (002)",
+                    "dashboard.principle_1_description": "The Registry Number is the legal key of the collection. It must be strictly unique.",
+                    "dashboard.principle_2": "2. Descriptive Objectivity (120)",
+                    "dashboard.principle_2_description": "The physical description must be neutral, refraining from aesthetic value judgments.",
+                    "dashboard.principle_3": "3. Metrological Accuracy (230)",
+                    "dashboard.principle_3_description": "All physical dimensions must be measured in centimeters (cm).",
+                    "dashboard.fdt_guide": "Detailed FDT Guide",
+                    "dashboard.fdt_description": "Technical instructions for each field.",
+                    "dashboard.fdt_filter_all": "All types",
+                    "dashboard.fdt_filter_rep": "Repeatable Only",
+                    "dashboard.fdt_filter_sub": "With Subfields (^a, ^b...)",
+                    "dashboard.spectrum_title": "The 21 Spectrum 5.1 Procedures",
+                    "dashboard.spectrum_description": "Mapping of international standards.",
+                    "dashboard.spectrum_filter_all": "All",
+                    "dashboard.spectrum_filter_essential": "🟢 Essential",
+                    "dashboard.spectrum_filter_recommended": "🟡 Recommended",
+                    "dashboard.spectrum_filter_optional": "🔵 Optional",
+                    "dashboard.patologia_title": "Pathology Glossary",
+                    "dashboard.patologia_description": "Standardized technical vocabulary for Field 530.",
+                    "dashboard.oficina_titulo": "Cataloger's Practical Workbench",
+                    "dashboard.oficina_descricao": "Interactive support tools for automated formatting.",
+                    "dashboard.tombo_generator_titulo": "Registry Number Generator",
+                    "dashboard.tombo_pais_label": "Country",
+                    "dashboard.tombo_inst_label": "Institution",
+                    "dashboard.tombo_col_label": "Collection",
+                    "dashboard.tombo_tip_label": "Typology",
+                    "dashboard.tombo_seq_label": "Sequential",
+                    "dashboard.tombo_conj_label": "Set",
+                    "dashboard.insc_composer_titulo": "Inscription Composer",
+                    "dashboard.insc_tipo_label": "Type",
+                    "dashboard.insc_loc_label": "Location",
+                    "dashboard.insc_idioma_label": "Language",
+                    "dashboard.insc_texto_label": "Transcript",
+                    "dashboard.dim_formatter_titulo": "Dimensions Formatter",
+                    "dashboard.dim_alt_label": "Height",
+                    "dashboard.dim_larg_label": "Width",
+                    "dashboard.dim_prof_label": "Depth",
+                    "dashboard.dim_diam_label": "Diameter",
+                    "search.global": "Search field, code, or pathology...",
+                    "search.fdt": "Filter by name, tag, or rule...",
+                    "search.pathology": "Search pathology...",
+                    "placeholder.conjunto": "Ex: 1 for part 1 of the set",
+                    "placeholder.insc": "Ex: A. Volpi",
+                    "fdt.fields_count": "fields",
+                    "fdt.rule": "Rule:",
+                    "fdt.example": "Example:",
+                    "fdt.not_found": "No fields found.",
+                    "fdt.filter_all_blocks": "All",
+                    "pathology.impact": "Impact:",
+                    "tools.btn_copy": "Copy",
+                    "tools.btn_copy_value": "Copy Value",
+                    "tools.alert_copied": "Copied to clipboard: ",
+                    "tools.waiting": "Waiting...",
+                    "dashboard.footer_titulo": "ABCD-Spectrum Museum Database",
+                    "dashboard.footer_descricao": 'Aligned with the International Standard Spectrum 5.1 (<a href="https://collectionstrust.org.uk/spectrum/" target="_blank" class="text-white hover:underline">Collections Trust UK</a>) & <a href="https://abcd-community.org" target="_blank" class="text-white hover:underline">ABCD System</a>',
+                    "dashboard.footer_desenvolvido": 'Developed by <a href="https://www.mackenzie.br/" target="_blank" class="text-white hover:underline">Centro Histórico e Cultural Mackenzie</a>',
+                    "dashboard.footer_direitos": "© 2026 ABCD - Library and Documentation Centers Automation",
+                    "tip.AT": "AT - Archaeological", "tip.AV": "AV - Visual Arts", "tip.EQ": "EQ - Equipment", "tip.GEO": "GEO - Geology", "tip.HE": "HE - Heraldry", "tip.VE": "VE - Garments", "tip.MB": "MB - Furniture", "tip.NM": "NM - Numismatics", "tip.OB": "OB - Object", "tip.PR": "PR - Award", "tip.VX": "VX - Vexillology",
+                    "insc.type.assinatura": "Signature", "insc.type.manuscrito": "Manuscript", "insc.type.marcadagua": "Watermark", "insc.type.carimbo": "Stamp", "insc.type.selo": "Seal", "insc.type.etiqueta": "Label", "insc.type.placa": "Plaque", "insc.type.logomarca": "Logo", "insc.type.impressao": "Print",
+                    "insc.group.frente_obra": "I. Front - Object", "insc.loc.fcse": "f.c.s.e. (Top left corner)", "insc.loc.facc": "f.ac.c. (Top center)", "insc.loc.fcsd": "f.c.s.d. (Top right corner)", "insc.loc.fce": "f.c.e. (Center left)", "insc.loc.fc": "f.c. (Center)", "insc.loc.fcd": "f.c.d. (Center right)", "insc.loc.fcie": "f.c.i.e. (Bottom left corner)", "insc.loc.fabc": "f.ab.c. (Bottom center)", "insc.loc.fcid": "f.c.i.d. (Bottom right corner)",
+                    "insc.group.frente_moldura": "I. Front - Frame", "insc.loc.mac": "m.ac. (Top)", "insc.loc.mab": "m.ab. (Bottom)", "insc.loc.me": "m.e. (Left)", "insc.loc.md": "m.d. (Right)",
+                    "insc.group.verso_obra": "II. Back - Object", "insc.loc.vcse": "v.c.s.e. (Top left corner)", "insc.loc.vacc": "v.ac.c. (Top center)", "insc.loc.vcsd": "v.c.s.d. (Top right corner)", "insc.loc.vce": "v.c.e. (Center left)", "insc.loc.vc": "v.c. (Center)", "insc.loc.vcd": "v.c.d. (Center right)", "insc.loc.vcie": "v.c.i.e. (Bottom left corner)", "insc.loc.vic": "v.i.c. (Bottom center)", "insc.loc.vcid": "v.c.i.d. (Bottom right corner)",
+                    "insc.group.verso_chassi": "II. Back - Chassis", "insc.loc.chassiac": "chassi ac. (Top)", "insc.loc.chassiab": "chassi ab. (Bottom)", "insc.loc.chassie": "chassi e. (Left)", "insc.loc.chassid": "chassi d. (Right)",
+                    "insc.group.verso_moldura": "II. Back - Frame", "insc.loc.vmac": "v.m.ac. (Top)", "insc.loc.vme": "v.m.e. (Left)", "insc.loc.vmd": "v.m.d. (Right)", "insc.loc.vmab": "v.m.ab. (Bottom)",
+                    "insc.group.tridimensional_geral": "III. 3D - General", "insc.loc.ff": "f.f. (Front Face)", "insc.loc.fp": "f.p. (Back Face)", "insc.loc.fs": "f.s. (Top Face)", "insc.loc.fi": "f.i. (Bottom Face)", "insc.loc.fle": "f.l.e. (Left Face)", "insc.loc.fld": "f.l.d. (Right Face)",
+                    "insc.group.tridimensional_base": "III. 3D - Base", "insc.loc.bff": "b.f.f. (Front Base)", "insc.loc.bfp": "b.f.p. (Back Base)", "insc.loc.bfs": "b.f.s. (Top Base)", "insc.loc.bfi": "b.f.i. (Bottom Base)", "insc.loc.bfle": "b.f.l.e. (Left Base)", "insc.loc.bfld": "b.f.l.d. (Right Base)",
+                    "insc.group.tridimensional_interno": "III. 3D - Internal", "insc.loc.intff": "int.f.f. (Internal Front)", "insc.loc.intfp": "int.f.p. (Internal Back)", "insc.loc.intfs": "int.f.s. (Internal Top)", "insc.loc.intfi": "int.f.i. (Internal Bottom)", "insc.loc.intfle": "int.f.l.e. (Internal Left)", "insc.loc.intfld": "int.f.l.d. (Internal Right)"
+                    
+                },
+                fdt: [
+                    {
+                        block: "0XX",
+                        blockTitle: "Block 0XX - Identification and Classification",
+                        fields: [
+                            { tag: "001", name: "ID (Inventory)", req: false, rep: false, sub: false, desc: "Automatic sequential identifier (MFN) or provisional pre-inventory number.", rule: "System-generated or filled in during provisional entry.", ex: "000045" },
+                            { tag: "002", name: "Registry Number (Accession Number)", req: true, rep: false, sub: false, desc: "Unique and definitive legal identification key of the object.", rule: "Structure: Country_Institution_Collection_Typology_Number. For sets, add a subdivision at the end.", ex: "BR_MUS_ART_MB_0000001" },
+                            { tag: "010", name: "Object Name", req: true, rep: false, sub: false, desc: "Simple and direct primary nomenclature.", rule: "Use controlled vocabulary in singular form.", ex: "Chair, Coin, Sculpture, Brush" },
+                            { tag: "020", name: "Classification (Taxonomy/Chenhall)", req: true, rep: false, sub: false, desc: "Hierarchical category based on standardized systems (Chenhall's Nomenclature).", rule: "Defines the broad conceptual group.", ex: "Communication Artifact, Material Culture" },
+                            { tag: "030", name: "Number of Items (Quantity)", req: true, rep: false, sub: false, desc: "Exact quantity of physical elements covered in this record.", rule: "Use whole numbers.", ex: "1 (single piece) or 12 (batch)" },
+                            { tag: "050", name: "Specific Title (if any)", req: false, rep: false, sub: false, desc: "Title given by the author or assigned descriptive title.", rule: "For artworks: Original title. For untitled objects: Use brackets [Precision Balance].", ex: "Workers or [Pair of Armchairs]" },
+                            { tag: "060", name: "Category / Type", req: true, rep: false, sub: false, desc: "Utilitarian function of the object according to the institution's controlled vocabulary.", rule: "Select the primary function of the item.", ex: "Clothing, Numismatics, Furniture, Tool" },
+                            { tag: "070", name: "Barcode/RFID", req: false, rep: false, sub: false, desc: "Numeric/alphanumeric code for smart labels or optical readers.", rule: "Linked to physical labels on the piece for quick auditing.", ex: "7891234567890" }
+                        ]
+                    },
+                    {
+                        block: "1XX",
+                        blockTitle: "Block 1XX - Visual Description",
+                        fields: [
+                            { tag: "100", name: "Summary Description", req: true, rep: false, sub: false, desc: "Short text of up to 2-3 lines for quick identification in OPAC lists.", rule: "Direct summary without aesthetic value judgments.", ex: "Hardwood armchair with brown leather upholstered seat." },
+                            { tag: "110", name: "Detailed/Analytical Description", req: true, rep: false, sub: false, desc: "Text focused on the utility and operating mode of the object.", rule: "Answers: What is it for and how does it work?", ex: "Two-pan mechanical balance designed for precision weighing in grams." },
+                            { tag: "120", name: "Physical Description (Marks/Inscriptions)", req: false, rep: false, sub: false, desc: "Objective description of shape, colors, structure, and decorative elements.", rule: "Describe from general to specific, from foreground to background. No aesthetic value judgments.", ex: "Rectangular wooden structure carved with floral motifs on the top rail." }
+                        ]
+                    },
+                    {
+                        block: "2XX",
+                        blockTitle: "Block 2XX - Physical Characteristics",
+                        fields: [
+                            { tag: "200", name: "Material", req: true, rep: true, sub: false, desc: "Constituent materials of the object.", rule: "List from the predominant material to the minority one, separated by commas.", ex: "Wood, bronze, leather" },
+                            { tag: "210", name: "Support material", req: true, rep: true, sub: false, desc: "Structure that supports or frames the main piece.", rule: "Specify chassis, frame, or base.", ex: "Wooden chassis, Plaster frame" },
+                            { tag: "220", name: "Technique", req: true, rep: true, sub: false, desc: "Method of making or applied artistic technique.", rule: "Controlled vocabulary.", ex: "Watercolor, Woodcut, Casting, Carpentry" },
+                            { tag: "230", name: "Dimensions", req: true, rep: false, sub: true, desc: "Exact measurements of the object recorded in centimeters (cm).", rule: "Order: Height x Width x Depth/Diameter. Subfields: ^a Height, ^b Width, ^c Depth, ^d Diameter.", ex: "120 x 80 x 45 cm (^a120^b80^c45)" },
+                            { tag: "240", name: "Mount dimensions", req: true, rep: false, sub: true, desc: "Exclusive measurements of the frame, base, or fixed display.", rule: "Same metric rule as field 230.", ex: "135 x 95 x 5 cm (^a135^b95^c5)" },
+                            { tag: "250", name: "Weight", req: true, rep: false, sub: false, desc: "Physical mass of the object.", rule: "Record in grams (g) or kilograms (kg).", ex: "125 g or 3.5 kg" }
+                        ]
+                    },
+                    {
+                        block: "3XX",
+                        blockTitle: "Block 3XX - Creator and Production",
+                        fields: [
+                            { tag: "300", name: "Author/Artist", req: true, rep: true, sub: false, desc: "Creator or artist responsible for the object.", rule: "Bibliographic standard: Last Name, First Name. If unknown, use 'Unknown'.", ex: "Portinari, Cândido" },
+                            { tag: "310", name: "Manufacturer/Publisher", req: true, rep: false, sub: false, desc: "Company or factory responsible for commercial/industrial items.", rule: "Full commercial name.", ex: "Móveis Cimo S.A., Casa da Moeda" },
+                            { tag: "320", name: "Author's Biography/Background", req: true, rep: false, sub: false, desc: "Brief biographical context or manufacturer's history.", rule: "Only relevant historical data and locations of activity.", ex: "Brazilian painter (1903-1962), active in Rio de Janeiro." },
+                            { tag: "330", name: "Date/Period of Creation", req: true, rep: false, sub: false, desc: "Formal dating of the piece.", rule: "Exact: DD/MM/YYYY | Decade: ca. 1930 | Period: 1945-1950 | Century: 19th c. | No date: n.d.", ex: "ca. 1930" },
+                            { tag: "340", name: "Place of Production", req: true, rep: false, sub: false, desc: "Geographical location of creation and manufacturing process.", rule: "Indicate City/Country and process: Artisanal, Manufactured, or Industrial.", ex: "São Paulo, Brazil (Artisanal)" }
+                        ]
+                    },
+                    {
+                        block: "4XX",
+                        blockTitle: "Block 4XX - Provenance and Acquisition",
+                        fields: [
+                            { tag: "400", name: "Provenance (Donor/Seller)", req: true, rep: false, sub: false, desc: "Individual or legal entity that transferred ownership to the museum.", rule: "Full name of the donor or transferor.", ex: "Silva Family or Private Collection" },
+                            { tag: "410", name: "Date of Acquisition", req: true, rep: false, sub: false, desc: "Formal date of contractual entry into the collection.", rule: "ISO format: YYYY-MM-DD or DD/MM/YYYY.", ex: "2015-08-20" },
+                            { tag: "420", name: "Acquisition Cost", req: true, rep: false, sub: false, desc: "Nominal financial value paid upon acquisition (if a purchase).", rule: "Currency and value.", ex: "$ 15,000.00" },
+                            { tag: "430", name: "Method of Acquisition", req: true, rep: false, sub: false, desc: "Legal modality of item entry.", rule: "Controlled vocabulary: Purchase, Donation, Legacy, Field collection, Transfer, Exchange.", ex: "Donation" },
+                            { tag: "440", name: "Provenance History", req: true, rep: true, sub: false, desc: "Timeline of previous owners (Chain of Custody).", rule: "Describe the chain of custody since creation.", ex: "Acquired from the author in 1950; José Carlos Collection (1950-1980); Donor in 2015." }
+                        ]
+                    },
+                    {
+                        block: "5XX",
+                        blockTitle: "Block 5XX - Conservation and Condition",
+                        fields: [
+                            { tag: "500", name: "Condition", req: true, rep: true, sub: false, desc: "Synthetic evaluation of physical integrity.", rule: "Valid values: Good, Fair, Poor.", ex: "Fair" },
+                            { tag: "510", name: "Date of Assessment", req: true, rep: true, sub: false, desc: "Date of the technical conservation report.", rule: "YYYY-MM-DD format.", ex: "2024-03-10" },
+                            { tag: "520", name: "Access conditions/Handling", req: true, rep: false, sub: false, desc: "Safety rules for handling the piece.", rule: "Operational technical recommendations.", ex: "Use nitrile gloves; Restricted to conservators." },
+                            { tag: "530", name: "Description of Damage/Incidents", req: true, rep: true, sub: false, desc: "Details of pathologies visible on the piece.", rule: "Consult the Pathology Glossary (e.g., Oxidation, Craquelure).", ex: "Craquelure in the pictorial layer and inactive biological attack on the back." },
+                            { tag: "540", name: "Treatment/Recommendation", req: true, rep: true, sub: false, desc: "Proposals for corrective or preventive intervention.", rule: "Suggestions from the technical restoration team.", ex: "Mechanical cleaning and support consolidation." },
+                            { tag: "550", name: "Restoration Priority", req: true, rep: false, sub: false, desc: "Urgency of intervention on the object.", rule: "Values: High, Medium, Low.", ex: "High" },
+                            { tag: "560", name: "Previous Interventions", req: true, rep: true, sub: false, desc: "Marks of old restorations or repairs observed.", rule: "Record traces of non-original intervention.", ex: "Presence of old adhesive tape on the back of the paper." }
+                        ]
+                    },
+                    {
+                        block: "6XX",
+                        blockTitle: "Block 6XX - Sets",
+                        fields: [
+                            { tag: "600", name: "Is it a set?", req: true, rep: false, sub: false, desc: "Indicates whether the record comprises an articulated group of pieces.", rule: "Values: Yes or No.", ex: "Yes" },
+                            { tag: "610", name: "Name of the Set/Collection", req: true, rep: false, sub: false, desc: "Grouping title of the set.", rule: "Name of the set or collection.", ex: "Imperial Porcelain Tea Set" },
+                            { tag: "620", name: "Number of parts in the set", req: true, rep: false, sub: false, desc: "Total of independent pieces with individual sub-inventory numbers.", rule: "Whole number.", ex: "6" },
+                            { tag: "630", name: "Part-Whole Relationship", req: false, rep: true, sub: false, desc: "Subordinate parts that do not receive an individual inventory number.", rule: "Description of fixed parts (e.g., dresser drawers).", ex: "Dresser (1 piece) containing 4 removable drawers (4 parts)." }
+                        ]
+                    },
+                    {
+                        block: "7XX",
+                        blockTitle: "Block 7XX - Registrations and Trademarks",
+                        fields: [
+                            { tag: "700", name: "Has Inscription?", req: false, rep: false, sub: false, desc: "Presence of visible marks or inscriptions.", rule: "Yes or No.", ex: "Yes" },
+                            { tag: "710", name: "Number of Inscriptions", req: false, rep: false, sub: false, desc: "Total number of identified marks.", rule: "Whole number.", ex: "2" },
+                            { tag: "720", name: "Inscriptions (Group)", req: false, rep: true, sub: true, desc: "Repetitive group with structured subfields for marks.", rule: "Subfields: ^a Type, ^b Location, ^l Language, ^t Transcript.", ex: "^aSignature^bt.l.c.^lEnglish^t\"A. Volpi\"" },
+                            { tag: "730", name: "Location of the inscription on the artefact", req: false, rep: true, sub: false, desc: "Linear location field for migration or direct use.", rule: "Use mapping acronyms (e.g., t.l.c., b.c., etc.).", ex: "t.l.c. (top left corner)" },
+                            { tag: "740", name: "Content/Transcript", req: false, rep: true, sub: false, desc: "Literal text transcribed from the inscription.", rule: "Maintain original spelling.", ex: "Made in São Paulo 1940" },
+                            { tag: "750", name: "Transcription of the inscription", req: false, rep: false, sub: false, desc: "Secondary field for diplomatic transcription.", rule: "Complementary use.", ex: "Signed in the bottom corner" },
+                            { tag: "760", name: "Note regarding the inscription", req: false, rep: false, sub: false, desc: "Additional notes on the legibility or technique of the mark.", rule: "Record faded old numbers.", ex: "Old ink notation removed: TR-104." }
+                        ]
+                    },
+                    {
+                        block: "8XX",
+                        blockTitle: "Block 8XX - Location and Movement",
+                        fields: [
+                            { tag: "800", name: "Current Physical Location", req: false, rep: true, sub: false, desc: "Exact storage address in the technical reserve or exhibition.", rule: "Structure: Room / Rack / Shelf / Box.", ex: "Technical Reserve 02, Rack B, Shelf 4" },
+                            { tag: "810", name: "Movement History", req: false, rep: true, sub: false, desc: "Log of locations where the object has circulated internally.", rule: "Chronological record.", ex: "Temporary Exhibition Room A (Jan-Mar 2023)" },
+                            { tag: "820", name: "Appendices", req: false, rep: true, sub: false, desc: "Nomenclature of high-resolution digital files for internal use.", rule: "Standard: InventoryNumber_01.jpg.", ex: "BR_MUS_ART_MB_0000001_01.jpg" },
+                            { tag: "821", name: "Public annexes", req: false, rep: true, sub: false, desc: "Lower resolution or watermarked images for the OPAC.", rule: "Accessible to the external public on the website.", ex: "BR_MUS_ART_MB_0000001_web.jpg" },
+                            { tag: "830", name: "Object History", req: false, rep: false, sub: false, desc: "The social life and symbolic value of the piece outside the museum.", rule: "Original use, linked historical events, classic exhibitions.", ex: "Used in the solemn opening session of the building in 1950." },
+                            { tag: "840", name: "Research Source", req: false, rep: false, sub: false, desc: "Bibliographic or archival references supporting the cataloging.", rule: "Standard bibliographic citation.", ex: "SILVA, João. History of Furniture. NY: Art Ed., 2010." },
+                            { tag: "850-853", name: "Borrower's Name", req: false, rep: true, sub: false, desc: "Control of temporary release of the object to third parties.", rule: "850: Borrower | 851: Name | 852: Contact | 853: Authorising Officer.", ex: "Loan Art Expo 2024 - Partner Museum" },
+                            { tag: "860-863", name: "Insurance and Policies", req: false, rep: true, sub: false, desc: "Management of financial valuation and insurance policies.", rule: "860: Policy | 861: Val. Date | 862: Note | 863: Author.", ex: "Insurance Policy X #998231 - $ 50,000.00" },
+                            { tag: "870", name: "General Comments", req: false, rep: true, sub: false, desc: "Free notes that do not fit into other fields.", rule: "Complementary information.", ex: "Donated object accompanied by the original wooden box." },
+                            { tag: "880", name: "Staff Name", req: false, rep: false, sub: false, desc: "Name of the cataloger who created the initial record.", rule: "Professional identification.", ex: "Maria Oliveira - Museologist" },
+                            { tag: "890-893", name: "Record update date", req: false, rep: false, sub: false, desc: "Systemic control and technical audit stamps post-movement.", rule: "Date, responsible person, and review note.", ex: "Updated on 2024-05-12 by Carlos Santos." }
+                        ]
+                    },
+                    {
+                        block: "9XX",
+                        blockTitle: "Block 9XX - Rights and Licences",
+                        fields: [
+                            { tag: "900", name: "Copyright Holder", req: false, rep: false, sub: false, desc: "Person or institution holding intellectual property.", rule: "Name of author, heirs, or institution.", ex: "Artist's Estate" },
+                            { tag: "910", name: "Rights Type", req: false, rep: false, sub: false, desc: "Nature of the protected right.", rule: "Patrimonial, Moral, or Image Right.", ex: "Patrimonial Right" },
+                            { tag: "920", name: "Status (Public Domain/Copyright)", req: false, rep: false, sub: false, desc: "Legal situation of the work.", rule: "Controlled vocabulary: Public Domain, Copyright Protected, Orphan.", ex: "Public Domain" },
+                            { tag: "930", name: "Licence (CC-BY, etc.)", req: false, rep: false, sub: false, desc: "License assigned for reproducing the image of the piece in the OPAC.", rule: "Examples: CC-BY, CC-BY-NC-ND, Strict Internal Use.", ex: "CC-BY-NC 4.0" },
+                            { tag: "940", name: "Expiry Date", req: false, rep: false, sub: false, desc: "Year the work enters the public domain.", rule: "Limit year.", ex: "2035" },
+                            { tag: "950", name: "Source of information", req: false, rep: false, sub: false, desc: "Document proving the transfer of rights.", rule: "Deed of donation or legal contract.", ex: "Deed of Donation No. 45/2015" },
+                            { tag: "960", name: "Notes on Rights", req: false, rep: false, sub: false, desc: "Special restrictions imposed by the donor/author.", rule: "Commercial or merchandising restrictions.", ex: "Image released exclusively for educational purposes." },
+                            { tag: "980", name: "System Log", req: false, rep: false, sub: false, desc: "Timestamp automatically generated by the database.", rule: "Internal systemic control.", ex: "2026-08-15 10:30:00" }
+                        ]
+                    }
+                ], spectrum: [
+                    { num: 1, name: "Object Entry", priority: "Essential", desc: "Formal and temporary record of the receipt of any item.", icon: "📥" },
+                    { num: 2, name: "Acquisition", priority: "Essential", desc: "Formalization of the legal transfer of ownership of the object.", icon: "📜" },
+                    { num: 3, name: "Inventory Control", priority: "Essential", desc: "Periodic verification and traceability of physical existence.", icon: "📋" },
+                    { num: 4, name: "Location Control", priority: "Essential", desc: "Real-time tracking and updating of the physical address.", icon: "📍" },
+                    { num: 5, name: "Cataloguing", priority: "Essential", desc: "Standardized recording of physical, historical, and conceptual data.", icon: "🏷️" },
+                    { num: 7, name: "Conservation and Care", priority: "Recommended", desc: "Planning and execution of preventive conservation actions.", icon: "🧪" },
+                    { num: 12, name: "Deaccessioning and Disposal", priority: "Optional", desc: "Physical execution of the disposal of a previously deaccessioned item.", icon: "🗑️" }
+                ], pathology: [
+                    { name: "Abrasion", desc: "Superficial wear caused by friction.", impact: "Aesthetic loss and loss of the pictorial layer.", action: "Gentle mechanical cleaning." },
+                    { name: "Biological Attack", desc: "Active or inactive presence of insects or fungi.", impact: "Severe structural destruction.", action: "Isolation in biological quarantine." },
+                    { name: "Craquelure", desc: "Network of fine cracks in the pictorial layer.", impact: "Risk of paint flaking off.", action: "Fixing and consolidation of the pictorial layer." },
+                    { name: "Oxidation", desc: "Chemical reaction of metals with oxygen (e.g., rust).", impact: "Corrosion and weakening.", action: "Mechanical removal and application of wax." }
+                ]
+            },
+            es: {
+                ui: {
+                    "nav.home": "Inicio",
+                    "nav.fdt": "Campos",
+                    "nav.spectrum": "Procedimientos",
+                    "nav.pathology": "Patologías",
+                    "nav.tools": "Taller del Catalogador",
+                    "dashboard.version": "Versión Oficial de Referencia 0.1",
+                    "dashboard.title": "Estandarización de la Base de Datos ABCD-Spectrum",
+                    "dashboard.description": "Bienvenido al portal interactivo de catalogación museológica. Esta documentación consolida los estándares Spectrum 5.1 (Collections Trust UK) con la arquitectura de base de datos CDS/ISIS del Sistema ABCD.",
+                    "dashboard.explore_fdt": "🔍 Explorar los Campos FDT",
+                    "dashboard.fdt_fields": "Campos FDT Estructurados",
+                    "dashboard.logical_blocks": "Bloques Lógicos (0XX a 9XX)",
+                    "dashboard.procedures": "Procedimientos Spectrum 5.1",
+                    "dashboard.conservative_pathologies": "Patologías de Conservación",
+                    "dashboard.fields_per_block": "Distribución de los Campos",
+                    "dashboard.base_abcd": "Base ABCD",
+                    "dashboard.fields_per_block_description": "Cantidad de campos FDT asignados en cada uno de los 10 bloques de información.",
+                    "dashboard.spectrum_procedures": "Prioridad de los Procedimientos",
+                    "dashboard.spectrum_version": "Spectrum 5.1",
+                    "dashboard.spectrum_procedures_description": "Nivel de obligatoriedad y recomendación para la conformidad museológica.",
+                    "dashboard.core_principles": "Principios Fundamentales de Catalogación en ABCD",
+                    "dashboard.principle_1": "1. Unicidad del Número de Registro (002)",
+                    "dashboard.principle_1_description": "El Número de Registro es la clave jurídica de la colección. Debe ser rigurosamente único.",
+                    "dashboard.principle_2": "2. Objetividad Descriptiva (120)",
+                    "dashboard.principle_2_description": "La descripción física debe ser neutral, absteniéndose de juicios de valor estético.",
+                    "dashboard.principle_3": "3. Precisión Metrológica (230)",
+                    "dashboard.principle_3_description": "Todas las dimensiones físicas deben medirse en centímetros (cm).",
+                    "dashboard.fdt_guide": "Guía Detallada de la FDT",
+                    "dashboard.fdt_description": "Instrucciones técnicas para cada campo.",
+                    "dashboard.fdt_filter_all": "Todos los tipos",
+                    "dashboard.fdt_filter_rep": "Solo Repetitivos",
+                    "dashboard.fdt_filter_sub": "Con Subcampos (^a, ^b...)",
+                    "dashboard.spectrum_title": "Los 21 Procedimientos Spectrum 5.1",
+                    "dashboard.spectrum_description": "Mapeo de los estándares internacionales.",
+                    "dashboard.spectrum_filter_all": "Todos",
+                    "dashboard.spectrum_filter_essential": "🟢 Esencial",
+                    "dashboard.spectrum_filter_recommended": "🟡 Recomendado",
+                    "dashboard.spectrum_filter_optional": "🔵 Opcional",
+                    "dashboard.patologia_title": "Glosario de Patologías",
+                    "dashboard.patologia_description": "Vocabulario técnico estandarizado para el Campo 530.",
+                    "dashboard.oficina_titulo": "Taller Práctico del Catalogador",
+                    "dashboard.oficina_descricao": "Herramientas de apoyo interactivas para formato automatizado.",
+                    "dashboard.tombo_generator_titulo": "Generador de Número de Registro",
+                    "dashboard.tombo_pais_label": "País",
+                    "dashboard.tombo_inst_label": "Institución",
+                    "dashboard.tombo_col_label": "Colección",
+                    "dashboard.tombo_tip_label": "Tipología",
+                    "dashboard.tombo_seq_label": "Secuencial",
+                    "dashboard.tombo_conj_label": "Conjunto",
+                    "dashboard.insc_composer_titulo": "Compositor de Inscripciones",
+                    "dashboard.insc_tipo_label": "Tipo",
+                    "dashboard.insc_loc_label": "Ubicación",
+                    "dashboard.insc_idioma_label": "Idioma",
+                    "dashboard.insc_texto_label": "Transcripción",
+                    "dashboard.dim_formatter_titulo": "Formateador de Dimensiones",
+                    "dashboard.dim_alt_label": "Altura",
+                    "dashboard.dim_larg_label": "Ancho",
+                    "dashboard.dim_prof_label": "Profundidad",
+                    "dashboard.dim_diam_label": "Diámetro",
+                    "search.global": "Buscar campo, código o patología...",
+                    "search.fdt": "Filtrar por nombre, etiqueta o regla...",
+                    "search.pathology": "Buscar patología...",
+                    "placeholder.conjunto": "Ej: 1 para la pieza 1 del conjunto",
+                    "placeholder.insc": "Ej: A. Volpi",
+                    "fdt.fields_count": "campos",
+                    "fdt.rule": "Regla:",
+                    "fdt.example": "Ejemplo:",
+                    "fdt.not_found": "No se encontraron campos.",
+                    "fdt.filter_all_blocks": "Todos",
+                    "pathology.impact": "Impacto:",
+                    "tools.btn_copy": "Copiar",
+                    "tools.btn_copy_value": "Copiar Valor",
+                    "tools.alert_copied": "Copiado al portapapeles: ",
+                    "tools.waiting": "Esperando...",
+                    "dashboard.footer_titulo": "Base de Datos Museológica ABCD-Spectrum",
+                    "dashboard.footer_descricao": 'Alineado con el Estándar Internacional Spectrum 5.1 (<a href="https://collectionstrust.org.uk/spectrum/" target="_blank" class="text-white hover:underline">Collections Trust UK</a>) & <a href="https://abcd-community.org" target="_blank" class="text-white hover:underline">Sistema ABCD</a>',
+                    "dashboard.footer_desenvolvido": 'Desarrollado por <a href="https://www.mackenzie.br/" target="_blank" class="text-white hover:underline">Centro Histórico e Cultural Mackenzie</a>',
+                    "dashboard.footer_direitos": "© 2026 ABCD - Automatización de Bibliotecas y Centros de Documentación", "tip.AT": "AT - Archaeological", "tip.AV": "AV - Visual Arts", "tip.EQ": "EQ - Equipment", "tip.GEO": "GEO - Geology", "tip.HE": "HE - Heraldry", "tip.VE": "VE - Garments", "tip.MB": "MB - Furniture", "tip.NM": "NM - Numismatics", "tip.OB": "OB - Object", "tip.PR": "PR - Award", "tip.VX": "VX - Vexillology",
+                    "insc.type.assinatura": "Signature", "insc.type.manuscrito": "Manuscript", "insc.type.marcadagua": "Watermark", "insc.type.carimbo": "Stamp", "insc.type.selo": "Seal", "insc.type.etiqueta": "Label", "insc.type.placa": "Plaque", "insc.type.logomarca": "Logo", "insc.type.impressao": "Print",
+                    "insc.group.frente_obra": "I. Front - Object", "insc.loc.fcse": "f.c.s.e. (Top left corner)", "insc.loc.facc": "f.ac.c. (Top center)", "insc.loc.fcsd": "f.c.s.d. (Top right corner)", "insc.loc.fce": "f.c.e. (Center left)", "insc.loc.fc": "f.c. (Center)", "insc.loc.fcd": "f.c.d. (Center right)", "insc.loc.fcie": "f.c.i.e. (Bottom left corner)", "insc.loc.fabc": "f.ab.c. (Bottom center)", "insc.loc.fcid": "f.c.i.d. (Bottom right corner)",
+                    "insc.group.frente_moldura": "I. Front - Frame", "insc.loc.mac": "m.ac. (Top)", "insc.loc.mab": "m.ab. (Bottom)", "insc.loc.me": "m.e. (Left)", "insc.loc.md": "m.d. (Right)",
+                    "insc.group.verso_obra": "II. Back - Object", "insc.loc.vcse": "v.c.s.e. (Top left corner)", "insc.loc.vacc": "v.ac.c. (Top center)", "insc.loc.vcsd": "v.c.s.d. (Top right corner)", "insc.loc.vce": "v.c.e. (Center left)", "insc.loc.vc": "v.c. (Center)", "insc.loc.vcd": "v.c.d. (Center right)", "insc.loc.vcie": "v.c.i.e. (Bottom left corner)", "insc.loc.vic": "v.i.c. (Bottom center)", "insc.loc.vcid": "v.c.i.d. (Bottom right corner)",
+                    "insc.group.verso_chassi": "II. Back - Chassis", "insc.loc.chassiac": "chassi ac. (Top)", "insc.loc.chassiab": "chassi ab. (Bottom)", "insc.loc.chassie": "chassi e. (Left)", "insc.loc.chassid": "chassi d. (Right)",
+                    "insc.group.verso_moldura": "II. Back - Frame", "insc.loc.vmac": "v.m.ac. (Top)", "insc.loc.vme": "v.m.e. (Left)", "insc.loc.vmd": "v.m.d. (Right)", "insc.loc.vmab": "v.m.ab. (Bottom)",
+                    "insc.group.tridimensional_geral": "III. 3D - General", "insc.loc.ff": "f.f. (Front Face)", "insc.loc.fp": "f.p. (Back Face)", "insc.loc.fs": "f.s. (Top Face)", "insc.loc.fi": "f.i. (Bottom Face)", "insc.loc.fle": "f.l.e. (Left Face)", "insc.loc.fld": "f.l.d. (Right Face)",
+                    "insc.group.tridimensional_base": "III. 3D - Base", "insc.loc.bff": "b.f.f. (Front Base)", "insc.loc.bfp": "b.f.p. (Back Base)", "insc.loc.bfs": "b.f.s. (Top Base)", "insc.loc.bfi": "b.f.i. (Bottom Base)", "insc.loc.bfle": "b.f.l.e. (Left Base)", "insc.loc.bfld": "b.f.l.d. (Right Base)",
+                    "insc.group.tridimensional_interno": "III. 3D - Internal", "insc.loc.intff": "int.f.f. (Internal Front)", "insc.loc.intfp": "int.f.p. (Internal Back)", "insc.loc.intfs": "int.f.s. (Internal Top)", "insc.loc.intfi": "int.f.i. (Internal Bottom)", "insc.loc.intfle": "int.f.l.e. (Internal Left)", "insc.loc.intfld": "int.f.l.d. (Internal Right)"
+                },
+                fdt: [
+                    {
+                        block: "0XX",
+                        blockTitle: "Bloque 0XX - Identificación y Clasificación",
+                        fields: [
+                            { tag: "001", name: "ID (Inventario)", req: false, rep: false, sub: false, desc: "Identificador secuencial automático (MFN) o número provisional de pre-inventario.", rule: "Generado por el sistema o rellenado en la entrada provisional.", ex: "000045" },
+                            { tag: "002", name: "Número de Registro (Número de Accesión)", req: true, rep: false, sub: false, desc: "Clave única y definitiva de identificación jurídica del objeto.", rule: "Estructura: País_Institución_Colección_Tipología_Número. Para conjuntos, añada un desdoblamiento al final.", ex: "BR_MUS_ART_MB_0000001" },
+                            { tag: "010", name: "Nombre del Objeto", req: true, rep: false, sub: false, desc: "Nomenclatura primaria simple y directa.", rule: "Usar vocabulario controlado en singular.", ex: "Silla, Moneda, Escultura, Pincel" },
+                            { tag: "020", name: "Clasificación (Taxonomía/Chenhall)", req: true, rep: false, sub: false, desc: "Categoría jerárquica basada en sistemas estandarizados (Nomenclatura Chenhall).", rule: "Define el gran grupo conceptual.", ex: "Artefacto de Comunicación, Cultura Material" },
+                            { tag: "030", name: "Número de Ítems (Cantidad)", req: true, rep: false, sub: false, desc: "Cantidad exacta de elementos físicos abarcados en este registro.", rule: "Usar números enteros.", ex: "1 (pieza única) o 12 (lote)" },
+                            { tag: "050", name: "Título Específico (si lo hay)", req: false, rep: false, sub: false, desc: "Título dado por el autor o título atribuido descriptivo.", rule: "Para obras de arte: Título original. Para objetos sin título: Usar corchetes [Balanza de Precisión].", ex: "Obreros o [Par de Sillones]" },
+                            { tag: "060", name: "Categoría / Tipología", req: true, rep: false, sub: false, desc: "Función utilitaria del objeto según el vocabulario controlado de la institución.", rule: "Seleccione la función primaria del ítem.", ex: "Indumentaria, Numismática, Mobiliario, Herramienta" },
+                            { tag: "070", name: "Código de Barras/RFID", req: false, rep: false, sub: false, desc: "Código numérico/alfanumérico de etiquetas inteligentes o lectores ópticos.", rule: "Vinculado a las etiquetas físicas en la pieza para auditoría rápida.", ex: "7891234567890" }
+                        ]
+                    },
+                    {
+                        block: "1XX",
+                        blockTitle: "Bloque 1XX - Descripción Visual",
+                        fields: [
+                            { tag: "100", name: "Descripción Resumida", req: true, rep: false, sub: false, desc: "Texto corto de hasta 2-3 líneas para rápida identificación en listas del OPAC.", rule: "Resumen directo sin juicios de valor.", ex: "Sillón de madera noble con asiento tapizado en cuero marrón." },
+                            { tag: "110", name: "Descripción Detallada/Analítica", req: true, rep: false, sub: false, desc: "Texto centrado en la utilidad y el modo de operación del objeto.", rule: "Responde: ¿Para qué sirve y cómo opera?", ex: "Balanza mecánica de dos platillos destinada al pesaje de precisión en gramos." },
+                            { tag: "120", name: "Descripción Física (Marcas/Inscripciones)", req: false, rep: false, sub: false, desc: "Descripción objetiva de la forma, colores, estructura y elementos decorativos.", rule: "Describir de lo general a lo particular, del primer plano al fondo. Sin juicios de valor estético.", ex: "Estructura rectangular en madera tallada con motivos florales en el travesaño superior." }
+                        ]
+                    },
+                    {
+                        block: "2XX",
+                        blockTitle: "Bloque 2XX - Características Físicas",
+                        fields: [
+                            { tag: "200", name: "Material", req: true, rep: true, sub: false, desc: "Materiales constitutivos del objeto.", rule: "Listar del material preponderante al minoritario, separados por comas.", ex: "Madera, bronce, cuero" },
+                            { tag: "210", name: "Material del soporte", req: true, rep: true, sub: false, desc: "Estructura que sostiene o enmarca la pieza principal.", rule: "Especificar bastidor, marco o base.", ex: "Bastidor de madera, Marco de yeso" },
+                            { tag: "220", name: "Técnica", req: true, rep: true, sub: false, desc: "Forma de confección o técnica artística aplicada.", rule: "Vocabulario controlado.", ex: "Acuarela, Xilografía, Fundición, Ebanistería" },
+                            { tag: "230", name: "Dimensiones", req: true, rep: false, sub: true, desc: "Medidas exactas del objeto registradas en centímetros (cm).", rule: "Orden: Alto x Ancho x Profundidad/Diámetro. Subcampos: ^a Alto, ^b Ancho, ^c Profundidad, ^d Diámetro.", ex: "120 x 80 x 45 cm (^a120^b80^c45)" },
+                            { tag: "240", name: "Dimensiones del soporte", req: true, rep: false, sub: true, desc: "Medidas exclusivas del marco, base o expositor fijo.", rule: "Misma regla métrica que el campo 230.", ex: "135 x 95 x 5 cm (^a135^b95^c5)" },
+                            { tag: "250", name: "Peso", req: true, rep: false, sub: false, desc: "Masa física del objeto.", rule: "Registrar en gramos (g) o kilogramos (kg).", ex: "125 g o 3.5 kg" }
+                        ]
+                    },
+                    {
+                        block: "3XX",
+                        blockTitle: "Bloque 3XX - Autoría y Producción",
+                        fields: [
+                            { tag: "300", name: "Autor/Artista", req: true, rep: true, sub: false, desc: "Creador o artista responsable del objeto.", rule: "Patrón bibliográfico: Apellido, Nombre. Si es desconocido, usar 'Desconocido'.", ex: "Portinari, Cândido" },
+                            { tag: "310", name: "Fabricante/Editor", req: true, rep: false, sub: false, desc: "Empresa o fábrica responsable de ítems comerciales/industriales.", rule: "Nombre comercial completo.", ex: "Móveis Cimo S.A., Casa da Moeda" },
+                            { tag: "320", name: "Biografía/Historial del Autor", req: true, rep: false, sub: false, desc: "Breve contexto biográfico o historial del fabricante.", rule: "Solo datos históricos y lugares de actuación relevantes.", ex: "Pintor brasileño (1903-1962), activo en Río de Janeiro." },
+                            { tag: "330", name: "Fecha/Período de Creación", req: true, rep: false, sub: false, desc: "Datación formal de la pieza.", rule: "Exacta: DD/MM/AAAA | Década: ca. 1930 | Período: 1945-1950 | Siglo: s. XIX | Sin fecha: s/f.", ex: "ca. 1930" },
+                            { tag: "340", name: "Lugar de Producción", req: true, rep: false, sub: false, desc: "Lugar geográfico de creación y proceso de fabricación.", rule: "Indicar Ciudad/País y proceso: Artesanal, Manufacturado o Industrial.", ex: "São Paulo, Brasil (Artesanal)" }
+                        ]
+                    },
+                    {
+                        block: "4XX",
+                        blockTitle: "Bloque 4XX - Procedencia y Adquisición",
+                        fields: [
+                            { tag: "400", name: "Procedencia (Donante/Vendedor)", req: true, rep: false, sub: false, desc: "Persona física o jurídica que transfirió la posesión al museo.", rule: "Nombre completo del donante o enajenante.", ex: "Familia Silva o Colección Particular" },
+                            { tag: "410", name: "Fecha de Adquisición", req: true, rep: false, sub: false, desc: "Fecha formal de entrada contractual en el acervo.", rule: "Formato ISO: AAAA-MM-DD o DD/MM/AAAA.", ex: "2015-08-20" },
+                            { tag: "420", name: "Valor de Adquisición", req: true, rep: false, sub: false, desc: "Valor financiero nominal pagado en la adquisición (si es compra).", rule: "Moneda y valor.", ex: "€ 15.000,00" },
+                            { tag: "430", name: "Forma de Adquisición", req: true, rep: false, sub: false, desc: "Modalidad legal de ingreso de la pieza.", rule: "Vocabulario controlado: Compra, Donación, Legado, Colecta de campo, Transferencia, Permuta.", ex: "Donación" },
+                            { tag: "440", name: "Historial de Procedencia", req: true, rep: true, sub: false, desc: "Línea de tiempo de los propietarios anteriores (Cadena de Custodia).", rule: "Describir la cadena de custodia desde la creación.", ex: "Adquirido del autor en 1950; Colección José Carlos (1950-1980); Donante en 2015." }
+                        ]
+                    },
+                    {
+                        block: "5XX",
+                        blockTitle: "Bloque 5XX - Conservación y Condición",
+                        fields: [
+                            { tag: "500", name: "Estado de Conservación", req: true, rep: true, sub: false, desc: "Evaluación sintética de la integridad física.", rule: "Valores válidos: Bueno, Regular, Malo.", ex: "Regular" },
+                            { tag: "510", name: "Fecha de Evaluación", req: true, rep: true, sub: false, desc: "Fecha del informe técnico de conservación.", rule: "Formato AAAA-MM-DD.", ex: "2024-03-10" },
+                            { tag: "520", name: "Condiciones de acceso/Manipulación", req: true, rep: false, sub: false, desc: "Reglas de seguridad en la manipulación de la pieza.", rule: "Recomendaciones técnicas operativas.", ex: "Usar guantes de nitrilo; Restringido a conservadores." },
+                            { tag: "530", name: "Descripción de Daños/Incidentes", req: true, rep: true, sub: false, desc: "Detalle de patologías visibles en la pieza.", rule: "Consultar Glosario de Patologías (ej: Oxidación, Craquelado).", ex: "Craquelado en la capa pictórica y ataque biológico inactivo en el reverso." },
+                            { tag: "540", name: "Tratamiento/Recomendación", req: true, rep: true, sub: false, desc: "Propuestas de intervención correctiva o preventiva.", rule: "Sugerencias del equipo técnico de restauración.", ex: "Limpieza mecánica y consolidación del soporte." },
+                            { tag: "550", name: "Prioridad de Restauración", req: true, rep: false, sub: false, desc: "Urgencia de intervención en el objeto.", rule: "Valores: Alta, Media, Baja.", ex: "Alta" },
+                            { tag: "560", name: "Intervenciones Anteriores", req: true, rep: true, sub: false, desc: "Marcas de restauraciones o reparaciones antiguas observadas.", rule: "Registrar vestigios de intervención no original.", ex: "Presencia de cinta adhesiva antigua en el reverso del papel." }
+                        ]
+                    },
+                    {
+                        block: "6XX",
+                        blockTitle: "Bloque 6XX - Conjuntos",
+                        fields: [
+                            { tag: "600", name: "¿Es un conjunto?", req: true, rep: false, sub: false, desc: "Indica si el registro comprende un grupo articulado de piezas.", rule: "Valores: Sí o No.", ex: "Sí" },
+                            { tag: "610", name: "Nombre del Conjunto/Colección", req: true, rep: false, sub: false, desc: "Título agrupador del conjunto.", rule: "Nombre del juego o colección.", ex: "Juego de Té Porcelana Imperial" },
+                            { tag: "620", name: "Número de piezas en el conjunto", req: true, rep: false, sub: false, desc: "Total de piezas independientes con desdoblamiento de registro.", rule: "Número entero.", ex: "6" },
+                            { tag: "630", name: "Relación Partes/Todo", req: false, rep: true, sub: false, desc: "Partes subordinadas que no reciben número de registro individual.", rule: "Descripción de partes fijas (ej: cajones de cómoda).", ex: "Cómoda (1 pieza) que contiene 4 cajones extraíbles (4 partes)." }
+                        ]
+                    },
+                    {
+                        block: "7XX",
+                        blockTitle: "Bloque 7XX - Inscripciones y Marcas",
+                        fields: [
+                            { tag: "700", name: "¿Tiene Inscripción? (S/N)", req: false, rep: false, sub: false, desc: "Presencia de marcas o inscripciones visibles.", rule: "Sí o No.", ex: "Sí" },
+                            { tag: "710", name: "Cantidad de Inscripciones", req: false, rep: false, sub: false, desc: "Total de marcas identificadas.", rule: "Número entero.", ex: "2" },
+                            { tag: "720", name: "Inscripciones (Grupo)", req: false, rep: true, sub: true, desc: "Grupo repetitivo con subcampos estructurados para marcas.", rule: "Subcampos: ^a Tipo, ^b Ubicación, ^l Idioma, ^t Transcripción.", ex: "^aFirma^be.s.i.^lEspañol^t\"A. Volpi\"" },
+                            { tag: "730", name: "Ubicación de la inscripción en la pieza", req: false, rep: true, sub: false, desc: "Campo lineal de ubicación para migración o uso directo.", rule: "Usar siglas de mapeo (ej: e.s.i., r.c., etc.).", ex: "e.s.i. (esquina superior izquierda)" },
+                            { tag: "740", name: "Contenido/Transcripción", req: false, rep: true, sub: false, desc: "Texto literal transcrito de la inscripción.", rule: "Mantener ortografía original.", ex: "Fabricado en São Paulo 1940" },
+                            { tag: "750", name: "Transcripción de la inscripción", req: false, rep: false, sub: false, desc: "Campo secundario de transcripción diplomática.", rule: "Uso complementario.", ex: "Firmado en la esquina inferior" },
+                            { tag: "760", name: "Nota sobre la inscripción", req: false, rep: false, sub: false, desc: "Notas adicionales sobre la legibilidad o técnica de la marca.", rule: "Registrar numeraciones antiguas borradas.", ex: "Anotación antigua a tinta eliminada: TR-104." }
+                        ]
+                    },
+                    {
+                        block: "8XX",
+                        blockTitle: "Bloque 8XX - Ubicación y Movimiento",
+                        fields: [
+                            { tag: "800", name: "Ubicación Física Actual", req: false, rep: true, sub: false, desc: "Dirección exacta de almacenamiento en la reserva técnica o exposición.", rule: "Estructura: Sala / Estante / Repisa / Caja.", ex: "Reserva Técnica 02, Estante B, Repisa 4" },
+                            { tag: "810", name: "Historial de Movimientos", req: false, rep: true, sub: false, desc: "Registro de lugares por donde el objeto ya circuló internamente.", rule: "Registro cronológico.", ex: "Exposición Temporal Sala A (Ene-Mar 2023)" },
+                            { tag: "820", name: "Anexos", req: false, rep: true, sub: false, desc: "Nomenclatura de los archivos digitales en alta resolución para uso interno.", rule: "Patrón: NumeroDeRegistro_01.jpg.", ex: "BR_MUS_ART_MB_0000001_01.jpg" },
+                            { tag: "821", name: "Anexos públicos", req: false, rep: true, sub: false, desc: "Imágenes en menor resolución o con marca de agua para el OPAC.", rule: "Accesible al público externo en el sitio web.", ex: "BR_MUS_ART_MB_0000001_web.jpg" },
+                            { tag: "830", name: "Historial del Objeto", req: false, rep: false, sub: false, desc: "La vida social y el valor simbólico de la pieza fuera del museo.", rule: "Uso original, eventos históricos vinculados, exposiciones clásicas.", ex: "Utilizada en la sesión solemne de inauguración del edificio en 1950." },
+                            { tag: "840", name: "Fuente de Investigación", req: false, rep: false, sub: false, desc: "Referencias bibliográficas o archivísticas que respaldan la catalogación.", rule: "Cita bibliográfica estándar.", ex: "SILVA, João. Historia del Mobiliario. MAD: Ed. Arte, 2010." },
+                            { tag: "850-853", name: "Nombre del Prestatario", req: false, rep: true, sub: false, desc: "Control de salida temporal del objeto a terceros.", rule: "850: Prestatario | 851: Nombre | 852: Contacto | 853: Autorizador.", ex: "Préstamo Expo Arte 2024 - Museo Asociado" },
+                            { tag: "860-863", name: "Seguro y Pólizas", req: false, rep: true, sub: false, desc: "Gestión de valoración financiera y pólizas de seguro.", rule: "860: Póliza | 861: Fecha Valor. | 862: Nota | 863: Autor.", ex: "Póliza Aseguradora X #998231 - € 50.000,00" },
+                            { tag: "870", name: "Observaciones Generales", req: false, rep: true, sub: false, desc: "Notas libres que no encajan en otros campos.", rule: "Información complementaria.", ex: "Objeto donado acompañado de la caja de madera original." },
+                            { tag: "880", name: "Nombre del Personal", req: false, rep: false, sub: false, desc: "Nombre del catalogador que creó el registro inicial.", rule: "Identificación profesional.", ex: "Maria Oliveira - Museóloga" },
+                            { tag: "890-893", name: "Fecha de actualización del registro", req: false, rep: false, sub: false, desc: "Control sistémico y sellos de auditoría técnica post-movimiento.", rule: "Fecha, responsable y nota de revisión.", ex: "Actualizado el 2024-05-12 por Carlos Santos." }
+                        ]
+                    },
+                    {
+                        block: "9XX",
+                        blockTitle: "Bloque 9XX - Derechos y Licencias",
+                        fields: [
+                            { tag: "900", name: "Titular de los Derechos de Autor", req: false, rep: false, sub: false, desc: "Persona o institución que posee la propiedad intelectual.", rule: "Nombre del autor, herederos o institución.", ex: "Sucesión del Artista" },
+                            { tag: "910", name: "Tipo de Derecho", req: false, rep: false, sub: false, desc: "Naturaleza del derecho protegido.", rule: "Derecho Patrimonial, Moral o de Imagen.", ex: "Derecho Patrimonial" },
+                            { tag: "920", name: "Estado (Dominio Público/Copyright)", req: false, rep: false, sub: false, desc: "Situación jurídica de la obra.", rule: "Vocabulario controlado: Dominio Público, Protegido por Copyright, Huérfano.", ex: "Dominio Público" },
+                            { tag: "930", name: "Licencia de Uso (CC-BY, etc.)", req: false, rep: false, sub: false, desc: "Licencia asignada para reproducción de la imagen de la pieza en el OPAC.", rule: "Ejemplos: CC-BY, CC-BY-NC-ND, Uso Estricto Interno.", ex: "CC-BY-NC 4.0" },
+                            { tag: "940", name: "Fecha de Vencimiento", req: false, rep: false, sub: false, desc: "Año en que la obra entra en dominio público.", rule: "Año límite.", ex: "2035" },
+                            { tag: "950", name: "Fuente de información", req: false, rep: false, sub: false, desc: "Documento probatorio de la cesión de derechos.", rule: "Término de donación o contrato legal.", ex: "Término de Donación nº 45/2015" },
+                            { tag: "960", name: "Notas sobre Derechos", req: false, rep: false, sub: false, desc: "Restricciones especiales impuestas por el donante/autor.", rule: "Restricciones comerciales o de merchandising.", ex: "Imagen liberada exclusivamente para fines educativos." },
+                            { tag: "980", name: "Log del Sistema", req: false, rep: false, sub: false, desc: "Marca de tiempo generada automáticamente por la base de datos.", rule: "Control sistémico interno.", ex: "2026-08-15 10:30:00" }
+                        ]
+                    }
+                ], spectrum: [
+                    { num: 1, name: "Entrada de objeto", priority: "Esencial", desc: "Registro formal y temporal del ingreso de cualquier ítem.", icon: "📥" },
+                    { num: 2, name: "Adquisición", priority: "Esencial", desc: "Formalización de la transferencia legal de propiedad del objeto.", icon: "📜" },
+                    { num: 3, name: "Control de inventario", priority: "Esencial", desc: "Verificación periódica y trazabilidad de la existencia física.", icon: "📋" },
+                    { num: 4, name: "Control de ubicación", priority: "Esencial", desc: "Rastreo y actualización en tiempo real de la dirección física.", icon: "📍" },
+                    { num: 5, name: "Catalogación", priority: "Esencial", desc: "Registro normalizado de datos físicos, históricos y conceptuales.", icon: "🏷️" },
+                    { num: 7, name: "Conservación y cuidados", priority: "Recomendado", desc: "Planificación y ejecución de acciones de conservación preventiva.", icon: "🧪" },
+                    { num: 12, name: "Salida para descarte", priority: "Opcional", desc: "Ejecución física del descarte de un ítem previamente dado de baja.", icon: "🗑️" }
+                ], pathology: [
+                    { name: "Abrasión", desc: "Desgaste superficial provocado por fricción.", impact: "Pérdida estética y de capa pictórica.", action: "Limpieza mecánica suave." },
+                    { name: "Ataque biológico", desc: "Presencia activa o inactiva de insectos u hongos.", impact: "Destrucción estructural grave.", action: "Aislamiento en cuarentena biológica." },
+                    { name: "Craquelado", desc: "Red de fisuras finas en la capa pictórica.", impact: "Riesgo de desprendimiento de pintura en escamas.", action: "Fijación y consolidación de la capa pictórica." },
+                    { name: "Oxidación", desc: "Reacción química de metales con oxígeno (ej: óxido).", impact: "Corrosión y debilitamiento.", action: "Remoción mecánica y aplicación de cera." }
+                ]
+            },
+            fr: {
+                ui: {
+                    "nav.home": "Accueil",
+                    "nav.fdt": "Champs",
+                    "nav.spectrum": "Procédures",
+                    "nav.pathology": "Pathologies",
+                    "nav.tools": "Atelier du Catalogueur",
+                    "dashboard.version": "Version Officielle de Référence 0.1",
+                    "dashboard.title": "Normalisation de la Base de Données ABCD-Spectrum",
+                    "dashboard.description": "Bienvenue sur le portail interactif de catalogage muséal. Cette documentation consolide les normes Spectrum 5.1 (Collections Trust UK) avec l'architecture de base de données CDS/ISIS du Système ABCD.",
+                    "dashboard.explore_fdt": "🔍 Explorer les Champs FDT",
+                    "dashboard.fdt_fields": "Champs FDT Structurés",
+                    "dashboard.logical_blocks": "Blocs Logiques (0XX à 9XX)",
+                    "dashboard.procedures": "Procédures Spectrum 5.1",
+                    "dashboard.conservative_pathologies": "Pathologies de Conservation",
+                    "dashboard.fields_per_block": "Distribution des Champs",
+                    "dashboard.base_abcd": "Base ABCD",
+                    "dashboard.fields_per_block_description": "Nombre de champs FDT alloués dans chacun des 10 blocs d'information.",
+                    "dashboard.spectrum_procedures": "Priorité des Procédures",
+                    "dashboard.spectrum_version": "Spectrum 5.1",
+                    "dashboard.spectrum_procedures_description": "Niveau d'obligation et de recommandation pour la conformité muséologique.",
+                    "dashboard.core_principles": "Principes Fondamentaux de Catalogage ABCD",
+                    "dashboard.principle_1": "1. Unicité du Numéro d'Enregistrement (002)",
+                    "dashboard.principle_1_description": "Le numéro d'enregistrement est la clé juridique de la collection. Il doit être strictement unique.",
+                    "dashboard.principle_2": "2. Objectivité Descriptive (120)",
+                    "dashboard.principle_2_description": "La description physique doit être neutre, en s'abstenant de tout jugement de valeur esthétique.",
+                    "dashboard.principle_3": "3. Précision Métrologique (230)",
+                    "dashboard.principle_3_description": "Toutes les dimensions physiques doivent être mesurées en centimètres (cm).",
+                    "dashboard.fdt_guide": "Guide Détaillé de la FDT",
+                    "dashboard.fdt_description": "Instructions techniques pour chaque champ.",
+                    "dashboard.fdt_filter_all": "Tous les types",
+                    "dashboard.fdt_filter_rep": "Uniquement Répétitifs",
+                    "dashboard.fdt_filter_sub": "Avec Sous-champs (^a, ^b...)",
+                    "dashboard.spectrum_title": "Les 21 Procédures Spectrum 5.1",
+                    "dashboard.spectrum_description": "Cartographie des normes internationales.",
+                    "dashboard.spectrum_filter_all": "Tous",
+                    "dashboard.spectrum_filter_essential": "🟢 Essentiel",
+                    "dashboard.spectrum_filter_recommended": "🟡 Recommandé",
+                    "dashboard.spectrum_filter_optional": "🔵 Optionnel",
+                    "dashboard.patologia_title": "Glossaire des Pathologies",
+                    "dashboard.patologia_description": "Vocabulaire technique standardisé pour le Champ 530.",
+                    "dashboard.oficina_titulo": "Atelier Pratique du Catalogueur",
+                    "dashboard.oficina_descricao": "Outils d'assistance interactifs pour le formatage automatisé.",
+                    "dashboard.tombo_generator_titulo": "Générateur de Numéro d'Enregistrement",
+                    "dashboard.tombo_pais_label": "Pays",
+                    "dashboard.tombo_inst_label": "Institution",
+                    "dashboard.tombo_col_label": "Collection",
+                    "dashboard.tombo_tip_label": "Typologie",
+                    "dashboard.tombo_seq_label": "Séquentiel",
+                    "dashboard.tombo_conj_label": "Ensemble",
+                    "dashboard.insc_composer_titulo": "Compositeur d'Inscriptions",
+                    "dashboard.insc_tipo_label": "Type",
+                    "dashboard.insc_loc_label": "Emplacement",
+                    "dashboard.insc_idioma_label": "Langue",
+                    "dashboard.insc_texto_label": "Transcription",
+                    "dashboard.dim_formatter_titulo": "Formateur de Dimensions",
+                    "dashboard.dim_alt_label": "Hauteur",
+                    "dashboard.dim_larg_label": "Largeur",
+                    "dashboard.dim_prof_label": "Profondeur",
+                    "dashboard.dim_diam_label": "Diamètre",
+                    "search.global": "Rechercher champ, code ou pathologie...",
+                    "search.fdt": "Filtrer par nom, balise ou règle...",
+                    "search.pathology": "Rechercher une pathologie...",
+                    "placeholder.conjunto": "Ex : 1 pour la pièce 1 de l'ensemble",
+                    "placeholder.insc": "Ex : A. Volpi",
+                    "fdt.fields_count": "champs",
+                    "fdt.rule": "Règle :",
+                    "fdt.example": "Exemple :",
+                    "fdt.not_found": "Aucun champ trouvé.",
+                    "fdt.filter_all_blocks": "Tous",
+                    "pathology.impact": "Impact :",
+                    "tools.btn_copy": "Copier",
+                    "tools.btn_copy_value": "Copier la valeur",
+                    "tools.alert_copied": "Copié dans le presse-papiers : ",
+                    "tools.waiting": "En attente...",
+                    "dashboard.footer_titulo": "Base de Données Muséologique ABCD-Spectrum",
+                    "dashboard.footer_descricao": 'Aligné sur la norme internationale Spectrum 5.1 (<a href="https://collectionstrust.org.uk/spectrum/" target="_blank" class="text-white hover:underline">Collections Trust UK</a>) & <a href="https://abcd-community.org" target="_blank" class="text-white hover:underline">Système ABCD</a>',
+                    "dashboard.footer_desenvolvido": 'Développé par le <a href="https://www.mackenzie.br/" target="_blank" class="text-white hover:underline">Centro Histórico e Cultural Mackenzie</a>',
+                    "dashboard.footer_direitos": "© 2026 ABCD - Automatisation des Bibliothèques et Centres de Documentation", "tip.AT": "AT - Arqueológico", "tip.AV": "AV - Artes Visuales", "tip.EQ": "EQ - Equipamiento", "tip.GEO": "GEO - Geología", "tip.HE": "HE - Heráldica", "tip.VE": "VE - Indumentaria", "tip.MB": "MB - Mobiliario", "tip.NM": "NM - Numismática", "tip.OB": "OB - Objeto", "tip.PR": "PR - Premiación", "tip.VX": "VX - Vexilología",
+                    "insc.type.assinatura": "Firma", "insc.type.manuscrito": "Manuscrito", "insc.type.marcadagua": "Marca de agua", "insc.type.carimbo": "Sello/Cuño", "insc.type.selo": "Timbre", "insc.type.etiqueta": "Etiqueta", "insc.type.placa": "Placa", "insc.type.logomarca": "Logotipo", "insc.type.impressao": "Impresión",
+                    "insc.group.frente_obra": "I. Frente - Obra", "insc.loc.fcse": "f.c.s.e. (Esq. sup. izquierda)", "insc.loc.facc": "f.ac.c. (Arriba al centro)", "insc.loc.fcsd": "f.c.s.d. (Esq. sup. derecha)", "insc.loc.fce": "f.c.e. (Centro izquierda)", "insc.loc.fc": "f.c. (Centro)", "insc.loc.fcd": "f.c.d. (Centro derecha)", "insc.loc.fcie": "f.c.i.e. (Esq. inf. izquierda)", "insc.loc.fabc": "f.ab.c. (Abajo al centro)", "insc.loc.fcid": "f.c.i.d. (Esq. inf. derecha)",
+                    "insc.group.frente_moldura": "I. Frente - Marco", "insc.loc.mac": "m.ac. (Arriba)", "insc.loc.mab": "m.ab. (Abajo)", "insc.loc.me": "m.e. (Izquierda)", "insc.loc.md": "m.d. (Derecha)",
+                    "insc.group.verso_obra": "II. Reverso - Obra", "insc.loc.vcse": "v.c.s.e. (Esq. sup. izq.)", "insc.loc.vacc": "v.ac.c. (Arriba al centro)", "insc.loc.vcsd": "v.c.s.d. (Esq. sup. der.)", "insc.loc.vce": "v.c.e. (Centro izquierda)", "insc.loc.vc": "v.c. (Centro)", "insc.loc.vcd": "v.c.d. (Centro derecha)", "insc.loc.vcie": "v.c.i.e. (Esq. inf. izq.)", "insc.loc.vic": "v.i.c. (Inferior centro)", "insc.loc.vcid": "v.c.i.d. (Esq. inf. der.)",
+                    "insc.group.verso_chassi": "II. Reverso - Bastidor", "insc.loc.chassiac": "chassi ac. (Arriba)", "insc.loc.chassiab": "chassi ab. (Abajo)", "insc.loc.chassie": "chassi e. (Izquierda)", "insc.loc.chassid": "chassi d. (Derecha)",
+                    "insc.group.verso_moldura": "II. Reverso - Marco", "insc.loc.vmac": "v.m.ac. (Arriba)", "insc.loc.vme": "v.m.e. (Izquierda)", "insc.loc.vmd": "v.m.d. (Derecha)", "insc.loc.vmab": "v.m.ab. (Abajo)",
+                    "insc.group.tridimensional_geral": "III. Tridimensional - General", "insc.loc.ff": "f.f. (Cara Frontal)", "insc.loc.fp": "f.p. (Cara Posterior)", "insc.loc.fs": "f.s. (Cara Superior)", "insc.loc.fi": "f.i. (Cara Inferior)", "insc.loc.fle": "f.l.e. (Lateral Izquierda)", "insc.loc.fld": "f.l.d. (Lateral Derecha)",
+                    "insc.group.tridimensional_base": "III. Tridimensional - Base", "insc.loc.bff": "b.f.f. (Base Frontal)", "insc.loc.bfp": "b.f.p. (Base Posterior)", "insc.loc.bfs": "b.f.s. (Base Superior)", "insc.loc.bfi": "b.f.i. (Base Inferior)", "insc.loc.bfle": "b.f.l.e. (Base Lat. Izq.)", "insc.loc.bfld": "b.f.l.d. (Base Lat. Der.)",
+                    "insc.group.tridimensional_interno": "III. Tridimensional - Interno", "insc.loc.intff": "int.f.f. (Interno Frontal)", "insc.loc.intfp": "int.f.p. (Interno Posterior)", "insc.loc.intfs": "int.f.s. (Interno Superior)", "insc.loc.intfi": "int.f.i. (Interno Inferior)", "insc.loc.intfle": "int.f.l.e. (Interno Lat. Izq.)", "insc.loc.intfld": "int.f.l.d. (Interno Lat. Der.)"
+                },
+                fdt: [
+                    {
+                        block: "0XX",
+                        blockTitle: "Bloco 0XX - Identification et Classification",
+                        fields: [
+                            { tag: "001", name: "ID (Inventaire)", req: false, rep: false, sub: false, desc: "Identifiant séquentiel automatique (MFN) ou numéro de pré-inventaire provisoire.", rule: "Généré par le système ou rempli lors de l'entrée provisoire.", ex: "000045" },
+                            { tag: "002", name: "Numéro d'enregistrement (Numéro d'acquisition)", req: true, rep: false, sub: false, desc: "Clé unique et définitive d'identification juridique de l'objet.", rule: "Structure : Pays_Institution_Collection_Typologie_Numéro. Pour les ensembles, ajoutez un dédoublement à la fin.", ex: "BR_MUS_ART_MB_0000001" },
+                            { tag: "010", name: "Nom de l'objet", req: true, rep: false, sub: false, desc: "Nomenclature primaire simple et directe.", rule: "Utiliser un vocabulaire contrôlé au singulier.", ex: "Chaise, Pièce de monnaie, Sculpture, Pinceau" },
+                            { tag: "020", name: "Classification (Taxonomie/Chenhall)", req: true, rep: false, sub: false, desc: "Catégorie hiérarchique basée sur des systèmes standardisés (Nomenclature de Chenhall).", rule: "Définit le grand groupe conceptuel.", ex: "Artefact de communication, Culture matérielle" },
+                            { tag: "030", name: "Nombre d'éléments (Quantité)", req: true, rep: false, sub: false, desc: "Quantité exacte d'éléments physiques couverts par ce registre.", rule: "Utiliser des nombres entiers.", ex: "1 (pièce unique) ou 12 (lot)" },
+                            { tag: "050", name: "Titre spécifique (le cas échéant)", req: false, rep: false, sub: false, desc: "Titre donné par l'auteur ou titre descriptif attribué.", rule: "Pour les œuvres d'art : Titre original. Pour les objets sans titre : Utiliser des crochets [Balance de précision].", ex: "Ouvriers ou [Paire de Fauteuils]" },
+                            { tag: "060", name: "Catégorie / Typologie", req: true, rep: false, sub: false, desc: "Fonction utilitaire de l'objet selon le vocabulaire contrôlé de l'institution.", rule: "Sélectionnez la fonction principale de l'article.", ex: "Vêtements, Numismatique, Mobilier, Outil" },
+                            { tag: "070", name: "Code-barres/RFID", req: false, rep: false, sub: false, desc: "Code numérique/alphanumérique des étiquettes intelligentes ou lecteurs optiques.", rule: "Lié aux étiquettes physiques sur la pièce pour un audit rapide.", ex: "7891234567890" }
+                        ]
+                    },
+                    {
+                        block: "1XX",
+                        blockTitle: "Bloco 1XX - Description visuelle",
+                        fields: [
+                            { tag: "100", name: "Description sommaire", req: true, rep: false, sub: false, desc: "Texte court de 2 à 3 lignes pour une identification rapide dans les listes de l'OPAC.", rule: "Résumé direct sans jugement de valeur esthétique.", ex: "Fauteuil en bois noble avec assise tapissée en cuir marron." },
+                            { tag: "110", name: "Description détaillée/analytique", req: true, rep: false, sub: false, desc: "Texte centré sur l'utilité et le mode de fonctionnement de l'objet.", rule: "Répond à : À quoi ça sert et comment ça marche ?", ex: "Balance mécanique à deux plateaux destinée à la pesée de précision en grammes." },
+                            { tag: "120", name: "Description physique (Marques/Inscriptions)", req: false, rep: false, sub: false, desc: "Description objective de la forme, des couleurs, de la structure et des éléments décoratifs.", rule: "Décrire du général au particulier, du premier plan à l'arrière-plan. Aucun jugement de valeur esthétique.", ex: "Structure rectangulaire en bois sculpté avec des motifs floraux sur la traverse supérieure." }
+                        ]
+                    },
+                    {
+                        block: "2XX",
+                        blockTitle: "Bloco 2XX - Caractéristiques physiques",
+                        fields: [
+                            { tag: "200", name: "Matériau (Répétitif)", req: true, rep: true, sub: false, desc: "Matériaux constitutifs de l'objet.", rule: "Énumérer du matériau prédominant au matériau minoritaire, séparés par des virgules.", ex: "Bois, bronze, cuir" },
+                            { tag: "210", name: "Matériau du support", req: true, rep: true, sub: false, desc: "Structure qui soutient ou encadre la pièce principale.", rule: "Préciser châssis, cadre ou base.", ex: "Châssis en bois, Cadre en plâtre" },
+                            { tag: "220", name: "Technique (Répétitif)", req: true, rep: true, sub: false, desc: "Méthode de fabrication ou technique artistique appliquée.", rule: "Vocabulaire contrôlé.", ex: "Aquarelle, Xylographie, Fonte, Menuiserie" },
+                            { tag: "230", name: "Dimensions (^aHauteur ^bLargeur ^cProf ^dDiamètre)", req: true, rep: false, sub: true, desc: "Mesures exactes de l'objet enregistrées en centimètres (cm).", rule: "Ordre : Hauteur x Largeur x Profondeur/Diamètre. Sous-champs : ^a Hauteur, ^b Largeur, ^c Profondeur, ^d Diamètre.", ex: "120 x 80 x 45 cm (^a120^b80^c45)" },
+                            { tag: "240", name: "Dimensions du support", req: true, rep: false, sub: true, desc: "Mesures exclusives du cadre, de la base ou du présentoir fixe.", rule: "Même règle métrique que le champ 230.", ex: "135 x 95 x 5 cm (^a135^b95^c5)" },
+                            { tag: "250", name: "Poids", req: true, rep: false, sub: false, desc: "Masse physique de l'objet.", rule: "Enregistrer en grammes (g) ou kilogrammes (kg).", ex: "125 g ou 3.5 kg" }
+                        ]
+                    },
+                    {
+                        block: "3XX",
+                        blockTitle: "Bloco 3XX - Création et Production",
+                        fields: [
+                            { tag: "300", name: "Auteur/Artiste (Répétitif)", req: true, rep: true, sub: false, desc: "Créateur ou artiste responsable de l'objet.", rule: "Norme bibliographique : Nom de famille, Prénom. Si inconnu, utilisez 'Inconnu'.", ex: "Portinari, Cândido" },
+                            { tag: "310", name: "Fabricant/Éditeur", req: true, rep: false, sub: false, desc: "Entreprise ou usine responsable des articles commerciaux/industriels.", rule: "Nom commercial complet.", ex: "Móveis Cimo S.A., Casa da Moeda" },
+                            { tag: "320", name: "Biographie/Historique de l'auteur", req: true, rep: false, sub: false, desc: "Bref contexte biographique ou historique du fabricant.", rule: "Uniquement les données historiques pertinentes et les lieux d'activité.", ex: "Peintre brésilien (1903-1962), actif à Rio de Janeiro." },
+                            { tag: "330", name: "Date/Période de création (AAAA-MM-JJ)", req: true, rep: false, sub: false, desc: "Datation formelle de la pièce.", rule: "Exacte : AAAA-MM-JJ | Décennie : ca. 1930 | Période : 1945-1950 | Siècle : XIXe s. | Sans date : s.d.", ex: "ca. 1930" },
+                            { tag: "340", name: "Lieu de production", req: true, rep: false, sub: false, desc: "Situation géographique de création et procédé de fabrication.", rule: "Indiquer Ville/Pays et procédé : Artisanal, Manufacturé ou Industriel.", ex: "São Paulo, Brésil (Artisanal)" }
+                        ]
+                    },
+                    {
+                        block: "4XX",
+                        blockTitle: "Bloco 4XX - Provenance et Acquisition",
+                        fields: [
+                            { tag: "400", name: "Provenance (Donateur/Vendeur)", req: true, rep: false, sub: false, desc: "Personne physique ou morale qui a transféré la possession au musée.", rule: "Nom complet du donateur ou du cédant.", ex: "Famille Silva ou Collection particulière" },
+                            { tag: "410", name: "Date d'acquisition (AAAA-MM-JJ)", req: true, rep: false, sub: false, desc: "Date officielle d'entrée contractuelle dans la collection.", rule: "Format ISO : AAAA-MM-JJ ou JJ/MM/AAAA.", ex: "2015-08-20" },
+                            { tag: "420", name: "Valeur d'acquisition", req: true, rep: false, sub: false, desc: "Valeur financière nominale payée lors de l'acquisition (si achat).", rule: "Devise et valeur.", ex: "15 000,00 €" },
+                            { tag: "430", name: "Mode d'acquisition (Achat/Don)", req: true, rep: false, sub: false, desc: "Modalité légale d'entrée de la pièce.", rule: "Vocabulaire contrôlé : Achat, Don, Legs, Collecte sur le terrain, Transfert, Échange.", ex: "Don" },
+                            { tag: "440", name: "Historique de provenance", req: true, rep: true, sub: false, desc: "Chronologie des anciens propriétaires (Chaîne de possession).", rule: "Décrire la chaîne de possession depuis la création.", ex: "Acquis auprès de l'auteur en 1950 ; Collection José Carlos (1950-1980) ; Donateur en 2015." }
+                        ]
+                    },
+                    {
+                        block: "5XX",
+                        blockTitle: "Bloco 5XX - Conservation et État",
+                        fields: [
+                            { tag: "500", name: "État de conservation (Répétitif)", req: true, rep: true, sub: false, desc: "Évaluation synthétique de l'intégrité physique.", rule: "Valeurs valides : Bon, Passable, Mauvais.", ex: "Passable" },
+                            { tag: "510", name: "Date d'évaluation", req: true, rep: true, sub: false, desc: "Date du rapport technique de conservation.", rule: "Format AAAA-MM-JJ.", ex: "2024-03-10" },
+                            { tag: "520", name: "Conditions d'accès/Manipulation", req: true, rep: false, sub: false, desc: "Règles de sécurité pour la manipulation de la pièce.", rule: "Recommandations techniques opérationnelles.", ex: "Utiliser des gants en nitrile ; Réservé aux conservateurs." },
+                            { tag: "530", name: "Description des dommages/incidents", req: true, rep: true, sub: false, desc: "Détail des pathologies visibles sur la pièce.", rule: "Consulter le glossaire des pathologies (ex : Oxydation, Craquelure).", ex: "Craquelure dans la couche picturale et attaque biologique inactive au dos." },
+                            { tag: "540", name: "Traitement/Recommandation", req: true, rep: true, sub: false, desc: "Propositions d'intervention corrective ou préventive.", rule: "Suggestions de l'équipe technique de restauration.", ex: "Nettoyage mécanique et consolidation du support." },
+                            { tag: "550", name: "Priorité de restauration", req: true, rep: false, sub: false, desc: "Urgence de l'intervention sur l'objet.", rule: "Valeurs : Haute, Moyenne, Basse.", ex: "Haute" },
+                            { tag: "560", name: "Interventions antérieures", req: true, rep: true, sub: false, desc: "Marques de restaurations anciennes ou réparations observées.", rule: "Enregistrer les traces d'intervention non originale.", ex: "Présence de ruban adhésif ancien au dos du papier." }
+                        ]
+                    },
+                    {
+                        block: "6XX",
+                        blockTitle: "Bloco 6XX - Ensembles",
+                        fields: [
+                            { tag: "600", name: "Est-ce un ensemble ?", req: true, rep: false, sub: false, desc: "Indique si la notice comprend un groupe articulé de pièces.", rule: "Valeurs : Oui ou Non.", ex: "Oui" },
+                            { tag: "610", name: "Nom de l'ensemble/Collection", req: true, rep: false, sub: false, desc: "Titre de regroupement de l'ensemble.", rule: "Nom du jeu ou de la collection.", ex: "Service à thé en Porcelaine Impériale" },
+                            { tag: "620", name: "Nombre de pièces dans l'ensemble", req: true, rep: false, sub: false, desc: "Total des pièces indépendantes avec dédoublement du numéro d'inventaire.", rule: "Nombre entier.", ex: "6" },
+                            { tag: "630", name: "Relation Parties/Tout", req: false, rep: true, sub: false, desc: "Parties subordonnées qui ne reçoivent pas de numéro d'inventaire individuel.", rule: "Description des parties fixes (ex: tiroirs de commode).", ex: "Commode (1 pièce) contenant 4 tiroirs amovibles (4 parties)." }
+                        ]
+                    },
+                    {
+                        block: "7XX",
+                        blockTitle: "Bloco 7XX - Inscriptions et Marques",
+                        fields: [
+                            { tag: "700", name: "Possède une inscription ? (O/N)", req: false, rep: false, sub: false, desc: "Présence de marques ou d'inscriptions visibles.", rule: "Oui ou Non.", ex: "Oui" },
+                            { tag: "710", name: "Nombre d'inscriptions", req: false, rep: false, sub: false, desc: "Nombre total de marques identifiées.", rule: "Nombre entier.", ex: "2" },
+                            { tag: "720", name: "Inscriptions (Groupe)", req: false, rep: true, sub: true, desc: "Groupe répétitif avec sous-champs structurés pour les marques.", rule: "Sous-champs : ^a Type, ^b Emplacement, ^l Langue, ^t Transcription.", ex: "^aSignature^bc.s.g.^lFrançais^t\"A. Volpi\"" },
+                            { tag: "730", name: "Emplacement de l'inscription sur la pièce", req: false, rep: true, sub: false, desc: "Champ linéaire de localisation pour la migration ou l'utilisation directe.", rule: "Utiliser des acronymes de cartographie (ex: c.s.g., c.i.d., etc.).", ex: "c.s.g. (coin supérieur gauche)" },
+                            { tag: "740", name: "Contenu/Transcription", req: false, rep: true, sub: false, desc: "Texte littéral transcrit de l'inscription.", rule: "Conserver l'orthographe d'origine.", ex: "Fabriqué à São Paulo 1940" },
+                            { tag: "750", name: "Transcription de l'inscription", req: false, rep: false, sub: false, desc: "Champ secondaire de transcription diplomatique.", rule: "Utilisation complémentaire.", ex: "Signé dans le coin inférieur" },
+                            { tag: "760", name: "Note sur l'inscription", req: false, rep: false, sub: false, desc: "Notes supplémentaires sur la lisibilité ou la technique de la marque.", rule: "Enregistrer les anciennes numérotations effacées.", ex: "Ancienne annotation à l'encre effacée : TR-104." }
+                        ]
+                    },
+                    {
+                        block: "8XX",
+                        blockTitle: "Bloco 8XX - Localisation et Mouvement",
+                        fields: [
+                            { tag: "800", name: "Localisation physique actuelle", req: false, rep: true, sub: false, desc: "Adresse exacte de stockage dans la réserve technique ou l'exposition.", rule: "Structure : Salle / Étagère / Rayon / Boîte.", ex: "Réserve technique 02, Étagère B, Rayon 4" },
+                            { tag: "810", name: "Historique des mouvements", req: false, rep: true, sub: false, desc: "Journal des lieux où l'objet a circulé en interne.", rule: "Registre chronologique.", ex: "Exposition temporaire Salle A (Jan-Mar 2023)" },
+                            { tag: "820", name: "Annexes", req: false, rep: true, sub: false, desc: "Nomenclature des fichiers numériques haute résolution à usage interne.", rule: "Standard : NumeroInventaire_01.jpg.", ex: "BR_MUS_ART_MB_0000001_01.jpg" },
+                            { tag: "821", name: "Annexes publiques", req: false, rep: true, sub: false, desc: "Images en basse résolution ou avec filigrane pour l'OPAC.", rule: "Accessible au public externe sur le site Web.", ex: "BR_MUS_ART_MB_0000001_web.jpg" },
+                            { tag: "830", name: "Historique de l'objet", req: false, rep: false, sub: false, desc: "La vie sociale et la valeur symbolique de la pièce en dehors du musée.", rule: "Usage d'origine, événements historiques liés, expositions classiques.", ex: "Utilisée lors de la session solennelle d'inauguration du bâtiment en 1950." },
+                            { tag: "840", name: "Source de recherche", req: false, rep: false, sub: false, desc: "Références bibliographiques ou archivistiques appuyant le catalogage.", rule: "Citation bibliographique standard.", ex: "SILVA, João. Histoire du Mobilier. Paris: Éd. Art, 2010." },
+                            { tag: "850-853", name: "Informations de prêt et d'emprunt", req: false, rep: true, sub: false, desc: "Contrôle de la sortie temporaire de l'objet à des tiers.", rule: "850: Informations | 851: Nom | 852: Contact | 853: Responsable.", ex: "Prêt Expo Art 2024 - Musée Partenaire" },
+                            { tag: "860-863", name: "Assurance et Polices", req: false, rep: true, sub: false, desc: "Gestion de l'évaluation financière et des polices d'assurance.", rule: "860: Police | 861: Date Éval. | 862: Note | 863: Auteur.", ex: "Police d'assurance X #998231 - 50 000,00 €" },
+                            { tag: "870", name: "Observations générales", req: false, rep: true, sub: false, desc: "Notes libres qui ne rentrent pas dans les autres champs.", rule: "Informations complémentaires.", ex: "Objet donné accompagné de sa boîte en bois d'origine." },
+                            { tag: "880", name: "Nom du personnel", req: false, rep: false, sub: false, desc: "Nom du catalogueur qui a créé le registre initial.", rule: "Identification professionnelle.", ex: "Maria Oliveira - Muséologue" },
+                            { tag: "890-893", name: "Date de mise à jour du dossier", req: false, rep: false, sub: false, desc: "Contrôle systémique et cachets d'audit technique post-mouvement.", rule: "Date, responsable et note de révision.", ex: "Mis à jour le 2024-05-12 par Carlos Santos." }
+                        ]
+                    },
+                    {
+                        block: "9XX",
+                        blockTitle: "Bloco 9XX - Droits et Licences",
+                        fields: [
+                            { tag: "900", name: "Titulaire des droits d'auteur", req: false, rep: false, sub: false, desc: "Personne ou institution détenant la propriété intellectuelle.", rule: "Nom de l'auteur, des héritiers ou de l'institution.", ex: "Succession de l'artiste" },
+                            { tag: "910", name: "Type de droit", req: false, rep: false, sub: false, desc: "Nature du droit protégé.", rule: "Droit patrimonial, Moral ou d'Image.", ex: "Droit patrimonial" },
+                            { tag: "920", name: "Statut (Domaine public/Copyright)", req: false, rep: false, sub: false, desc: "Situation juridique de l'œuvre.", rule: "Vocabulaire contrôlé : Domaine public, Protégé par le droit d'auteur, Orpheline.", ex: "Domaine public" },
+                            { tag: "930", name: "Licence d'utilisation (CC-BY, etc.)", req: false, rep: false, sub: false, desc: "Licence attribuée pour la reproduction de l'image de la pièce dans l'OPAC.", rule: "Exemples : CC-BY, CC-BY-NC-ND, Usage interne strict.", ex: "CC-BY-NC 4.0" },
+                            { tag: "940", name: "Date d'expiration", req: false, rep: false, sub: false, desc: "Année où l'œuvre tombe dans le domaine public.", rule: "Année limite.", ex: "2035" },
+                            { tag: "950", name: "Source d'information", req: false, rep: false, sub: false, desc: "Document prouvant la cession des droits.", rule: "Acte de donation ou contrat légal.", ex: "Acte de donation n° 45/2015" },
+                            { tag: "960", name: "Notes sur les droits", req: false, rep: false, sub: false, desc: "Restrictions spéciales imposées par le donateur/auteur.", rule: "Restrictions commerciales ou de marchandisage.", ex: "Image libérée exclusivement à des fins éducatives." },
+                            { tag: "980", name: "Journal du système", req: false, rep: false, sub: false, desc: "Horodatage généré automatiquement par la base de données.", rule: "Contrôle systémique interne.", ex: "2026-08-15 10:30:00" }
+                        ]
+                    }
+                ], spectrum: [
+                    { num: 1, name: "Entrée d'objet", priority: "Essentiel", desc: "Enregistrement formel et temporaire de l'entrée de tout article.", icon: "📥" },
+                    { num: 2, name: "Acquisition", priority: "Essentiel", desc: "Formalisation du transfert légal de propriété de l'objet.", icon: "📜" },
+                    { num: 3, name: "Contrôle d'inventaire", priority: "Essentiel", desc: "Vérification périodique et traçabilité de l'existence physique.", icon: "📋" },
+                    { num: 4, name: "Contrôle de localisation", priority: "Essentiel", desc: "Suivi et mise à jour en temps réel de l'adresse physique.", icon: "📍" },
+                    { num: 5, name: "Catalogage", priority: "Essentiel", desc: "Enregistrement normalisé des données physiques, historiques et conceptuelles.", icon: "🏷️" },
+                    { num: 7, name: "Conservation et soins", priority: "Recommandé", desc: "Planification et exécution des actions de conservation préventive.", icon: "🧪" },
+                    { num: 12, name: "Sortie pour mise au rebut", priority: "Optionnel", desc: "Exécution physique du retrait d'un article préalablement aliéné.", icon: "🗑️" }
+                ],  pathology: [
+                    { name: "Abrasion", desc: "Usure superficielle provoquée par la friction.", impact: "Perte esthétique et de la couche picturale.", action: "Nettoyage mécanique doux." },
+                    { name: "Attaque biologique", desc: "Présence active ou inactive d'insectes ou de champignons.", impact: "Destruction structurelle grave.", action: "Isolement en quarantaine biologique." },
+                    { name: "Craquelure", desc: "Réseau de fines fissures dans la couche picturale.", impact: "Risque de détachement de la peinture en écailles.", action: "Fixation et consolidation de la couche picturale." },
+                    { name: "Oxydation", desc: "Réaction chimique des métaux avec l'oxygène (ex : rouille).", impact: "Corrosion et affaiblissement.", action: "Élimination mécanique et application de cire." }
+                ]
+            }
+        };
+
+        let currentLang = 'pt';
+        let activeBlockFilter = 'ALL';
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`sec-${tabId}`).classList.remove('hidden');
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('bg-white/10', 'text-white');
+                btn.classList.add('text-museum-border');
+            });
+            const activeBtn = document.getElementById(`nav-${tabId}`);
+            if (activeBtn) activeBtn.classList.add('bg-white/10', 'text-white');
+
+            document.querySelectorAll('.mobile-nav-btn').forEach(btn => btn.classList.remove('bg-white/20', 'text-white'));
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+    function changeLanguage(lang) {
+        if (!i18n[lang]) return;
+        currentLang = lang;
+
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (i18n[lang].ui && i18n[lang].ui[key]) {
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    el.placeholder = i18n[lang].ui[key];
+                } else if (el.tagName === 'OPTGROUP') { 
+                    el.label = i18n[lang].ui[key];
+                } else {
+                    el.innerHTML = i18n[lang].ui[key];
+                }
+            }
+        });
+
+        renderBlockPills();
+        renderFdtFields();
+        renderSpectrumCards(i18n[currentLang].spectrum);
+        renderPatologiaCards(i18n[currentLang].pathology);
+        initCharts();
+
+        localStorage.setItem('abcd_lang', lang);
+    }
+
+    function renderBlockPills() {
+        const container = document.getElementById('blockFilterPills');
+        const currentFdt = i18n[currentLang].fdt;
+        if (!container || !currentFdt) return;
+
+        let html = `<button onclick="filterFdtBlock('ALL')" class="px-2.5 py-1 rounded-full border transition ${activeBlockFilter === 'ALL' ? 'bg-museum-primary text-white' : 'bg-museum-bg text-museum-dark border-museum-border hover:bg-museum-border'}">${i18n[currentLang].ui["fdt.filter_all_blocks"]}</button>`;
+
+        currentFdt.forEach(b => {
+            html += `<button onclick="filterFdtBlock('${b.block}')" class="px-2.5 py-1 rounded-full border transition ${activeBlockFilter === b.block ? 'bg-museum-primary text-white' : 'bg-museum-bg text-museum-dark border-museum-border hover:bg-museum-border'}">${b.block}</button>`;
+        });
+        container.innerHTML = html;
+    }
+
+    function renderFdtFields() {
+        const container = document.getElementById('fdtFieldsContainer');
+        const currentFdt = i18n[currentLang].fdt;
+        if (!container || !currentFdt) return;
+
+        const searchVal = (document.getElementById('fdtFilterSearch') ? document.getElementById('fdtFilterSearch').value.toLowerCase() : "");
+        const repFilter = (document.getElementById('fdtRepeatableFilter') ? document.getElementById('fdtRepeatableFilter').value : "all");
+
+        let html = '';
+
+        currentFdt.forEach(b => {
+            if (activeBlockFilter !== 'ALL' && b.block !== activeBlockFilter) return;
+
+            const filteredFields = b.fields.filter(f => {
+                const matchText = f.tag.toLowerCase().includes(searchVal) || f.name.toLowerCase().includes(searchVal) || f.desc.toLowerCase().includes(searchVal);
+                let matchType = true;
+                if (repFilter === 'rep') matchType = f.rep;
+                if (repFilter === 'sub') matchType = f.sub;
+                return matchText && matchType;
+            });
+
+            if (filteredFields.length === 0) return;
+
+            html += `
+                <div class="bg-museum-card rounded-xl border border-museum-border overflow-hidden shadow-sm">
+                    <div class="bg-museum-sidebar px-5 py-3 border-b border-museum-border flex items-center justify-between">
+                        <h3 class="font-serif font-bold text-museum-primary text-base sm:text-lg">${b.blockTitle}</h3>
+                        <span class="text-xs bg-white px-2 py-0.5 rounded-full font-semibold border border-museum-border">${filteredFields.length} ${i18n[currentLang].ui["fdt.fields_count"]}</span>
+                    </div>
+                    <div class="divide-y divide-museum-border/50">`;
+
+            filteredFields.forEach(f => {
+                html += `
+                    <div class="p-4 sm:p-5 hover:bg-museum-bg/60 transition space-y-2">
+                        <div class="flex items-center space-x-3">
+                            <span class="px-2.5 py-1 bg-museum-primary text-white font-mono font-bold text-xs rounded">${f.tag}</span>
+                            <h4 class="font-bold text-museum-dark text-sm sm:text-base">${f.name}</h4>
+                        </div>
+                        <p class="text-xs sm:text-sm text-museum-muted leading-relaxed">${f.desc}</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs pt-2">
+                            <div class="bg-museum-bg p-2.5 rounded border"><strong class="text-museum-primary">${i18n[currentLang].ui["fdt.rule"]}</strong> ${f.rule}</div>
+                            <div class="bg-museum-bg p-2.5 rounded border"><strong class="text-museum-accent">${i18n[currentLang].ui["fdt.example"]}</strong> ${f.ex}</div>
+                        </div>
+                    </div>`;
+            });
+            html += `</div></div>`;
+        });
+        container.innerHTML = html || `<div class="p-8 text-center">${i18n[currentLang].ui["fdt.not_found"]}</div>`;
+    }
+
+    function renderPatologiaCards(data) {
+        const container = document.getElementById('patologiaGrid');
+        if (!container || !data) return;
+        let html = '';
+        data.forEach(p => {
+            html += `
+                <div class="bg-museum-card p-5 rounded-xl border border-museum-border shadow-sm space-y-3">
+                    <h4 class="font-serif font-bold text-museum-primary text-base">${p.name}</h4>
+                    <p class="text-xs text-museum-muted">${p.desc}</p>
+                    <div class="text-xs bg-museum-bg p-3 rounded-lg border">
+                        <div class="text-rose-900 font-semibold">${i18n[currentLang].ui["pathology.impact"]} <span class="font-normal text-museum-dark">${p.impact}</span></div>
+                    </div>
+                </div>`;
+        });
+        container.innerHTML = html;
+    }
+
+    function copyToClipboard(id) {
+        navigator.clipboard.writeText(document.getElementById(id).innerText).then(() => alert(i18n[currentLang].ui["tools.alert_copied"] + document.getElementById(id).innerText));
+    }
+
+    function updateDim() {
+        const alt = document.getElementById('dimAlt').value;
+        const larg = document.getElementById('dimLarg').value;
+        const prof = document.getElementById('dimProf').value;
+        const diam = document.getElementById('dimDiam').value;
+
+        let linear = [];
+        let sub = [];
+
+        if (alt) { linear.push(alt); sub.push(`^a${alt}`); }
+        if (larg) { linear.push(larg); sub.push(`^b${larg}`); }
+        if (prof) { linear.push(prof); sub.push(`^c${prof}`); }
+        if (diam) { linear.push(`Diâm: ${diam}`); sub.push(`^d${diam}`); }
+
+        const res = linear.length > 0 ? `${linear.join(' x ')} cm (${sub.join('')})` : i18n[currentLang].ui["tools.waiting"];
+        document.getElementById('dimOutput').innerText = res;
+    }
+
+        function copyToClipboard(id) {
+            navigator.clipboard.writeText(document.getElementById(id).innerText).then(() => alert(i18n[currentLang].ui["tools.alert_copied"] + document.getElementById(id).innerText));
+        }
+
+        function updateDim() {
+            const alt = document.getElementById('dimAlt').value;
+            const larg = document.getElementById('dimLarg').value;
+            const prof = document.getElementById('dimProf').value;
+            const diam = document.getElementById('dimDiam').value;
+
+            let linear = [];
+            let sub = [];
+
+            if (alt) { linear.push(alt); sub.push(`^a${alt}`); }
+            if (larg) { linear.push(larg); sub.push(`^b${larg}`); }
+            if (prof) { linear.push(prof); sub.push(`^c${prof}`); }
+            if (diam) { linear.push(`Diâm: ${diam}`); sub.push(`^d${diam}`); }
+
+            const res = linear.length > 0 ? `${linear.join(' x ')} cm (${sub.join('')})` : i18n[currentLang].ui["tools.waiting"];
+            document.getElementById('dimOutput').innerText = res;
+        }
+
+    function initCharts() {
+        const currentFdt = i18n[currentLang].fdt;
+        const currentSpec = i18n[currentLang].spectrum;
+
+        if (!currentFdt || currentFdt.length === 0) return;
+
+        const ctxFields = document.getElementById('chartFieldsPerBlock').getContext('2d');
+        const blockLabels = currentFdt.map(b => b.block);
+        const blockCounts = currentFdt.map(b => b.fields.length);
+
+        if (window.chart1) window.chart1.destroy();
+        window.chart1 = new Chart(ctxFields, {
+            type: 'doughnut',
+            data: {
+                labels: blockLabels,
+                datasets: [{
+                    data: blockCounts,
+                    backgroundColor: ['#52567a', '#3d564a', '#ba86cb', '#a85a3c', '#d4a359', '#8c7b6c', '#6b635b'],
+                    borderWidth: 2, borderColor: '#ffffff'
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right' } } }
+        });
+
+        const ctxSpec = document.getElementById('chartSpectrumPriority').getContext('2d');
+
+        // CORREÇÃO: Conta usando a primeira letra (E, R, O) válida para os 4 idiomas
+        const essentials = currentSpec.filter(s => s.priority.charAt(0) === 'E').length;
+        const recommended = currentSpec.filter(s => s.priority.charAt(0) === 'R').length;
+        const optional = currentSpec.filter(s => s.priority.charAt(0) === 'O').length;
+
+        if (window.chart2) window.chart2.destroy();
+        window.chart2 = new Chart(ctxSpec, {
+            type: 'bar',
+            data: {
+                // CORREÇÃO: Puxa a tradução direto do seu dicionário UI
+                labels: [
+                    i18n[currentLang].ui["dashboard.spectrum_filter_essential"],
+                    i18n[currentLang].ui["dashboard.spectrum_filter_recommended"],
+                    i18n[currentLang].ui["dashboard.spectrum_filter_optional"]
+                ],
+                datasets: [{
+                    label: 'Qtd',
+                    data: [essentials, recommended, optional],
+                    backgroundColor: ['#10b981', '#f59e0b', '#3b82f6'],
+                    borderRadius: 6
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true } } }
+        });
+    }
+
+        function renderBlockPills() {
+            const container = document.getElementById('blockFilterPills');
+            const currentFdt = i18n[currentLang].fdt;
+            if (!container || !currentFdt) return;
+
+            let html = `<button onclick="filterFdtBlock('ALL')" class="px-2.5 py-1 rounded-full border transition ${activeBlockFilter === 'ALL' ? 'bg-museum-primary text-white' : 'bg-museum-bg text-museum-dark border-museum-border hover:bg-museum-border'}">Todos</button>`;
+
+            currentFdt.forEach(b => {
+                html += `<button onclick="filterFdtBlock('${b.block}')" class="px-2.5 py-1 rounded-full border transition ${activeBlockFilter === b.block ? 'bg-museum-primary text-white' : 'bg-museum-bg text-museum-dark border-museum-border hover:bg-museum-border'}">${b.block}</button>`;
+            });
+            container.innerHTML = html;
+        }
+
+        function filterFdtBlock(block) {
+            activeBlockFilter = block;
+            renderBlockPills();
+            renderFdtFields();
+        }
+
+        function renderFdtFields() {
+            const container = document.getElementById('fdtFieldsContainer');
+            const currentFdt = i18n[currentLang].fdt;
+            if (!container || !currentFdt) return;
+
+            const searchVal = (document.getElementById('fdtFilterSearch') ? document.getElementById('fdtFilterSearch').value.toLowerCase() : "");
+            const repFilter = (document.getElementById('fdtRepeatableFilter') ? document.getElementById('fdtRepeatableFilter').value : "all");
+
+            let html = '';
+
+            currentFdt.forEach(b => {
+                if (activeBlockFilter !== 'ALL' && b.block !== activeBlockFilter) return;
+
+                const filteredFields = b.fields.filter(f => {
+                    const matchText = f.tag.toLowerCase().includes(searchVal) || f.name.toLowerCase().includes(searchVal) || f.desc.toLowerCase().includes(searchVal);
+                    let matchType = true;
+                    if (repFilter === 'rep') matchType = f.rep;
+                    if (repFilter === 'sub') matchType = f.sub;
+                    return matchText && matchType;
+                });
+
+                if (filteredFields.length === 0) return;
+
+                html += `
+                <div class="bg-museum-card rounded-xl border border-museum-border overflow-hidden shadow-sm">
+                    <div class="bg-museum-sidebar px-5 py-3 border-b border-museum-border flex items-center justify-between">
+                        <h3 class="font-serif font-bold text-museum-primary text-base sm:text-lg">${b.blockTitle}</h3>
+                        <span class="text-xs bg-white px-2 py-0.5 rounded-full font-semibold border border-museum-border">${filteredFields.length} campos</span>
+                    </div>
+                    <div class="divide-y divide-museum-border/50">`;
+
+                filteredFields.forEach(f => {
+                    html += `
+                    <div class="p-4 sm:p-5 hover:bg-museum-bg/60 transition space-y-2">
+                        <div class="flex items-center space-x-3">
+                            <span class="px-2.5 py-1 bg-museum-primary text-white font-mono font-bold text-xs rounded">${f.tag}</span>
+                            <h4 class="font-bold text-museum-dark text-sm sm:text-base">${f.name}</h4>
+                        </div>
+                        <p class="text-xs sm:text-sm text-museum-muted leading-relaxed">${f.desc}</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs pt-2">
+                            <div class="bg-museum-bg p-2.5 rounded border"><strong class="text-museum-primary" data-i18n="fdt.rule">${i18n[currentLang].ui["fdt.rule"]}</strong> ${f.rule}</div>
+                            <div class="bg-museum-bg p-2.5 rounded border"><strong class="text-museum-accent" data-i18n="fdt.example">${i18n[currentLang].ui["fdt.example"]}</strong> ${f.ex}</div>
+                        </div>
+                    </div>`;
+                });
+                html += `</div></div>`;
+            });
+            container.innerHTML = html || `<div class="p-8 text-center">Nenhum campo encontrado.</div>`;
+        }
+
+    function renderSpectrumCards(data) {
+        const container = document.getElementById('spectrumGrid');
+        if (!container || !data) return;
+        let html = '';
+        data.forEach(s => {
+            let badgeColor = s.priority.charAt(0) === 'E' ? 'bg-emerald-100 text-emerald-800' : (s.priority.charAt(0) === 'R' ? 'bg-amber-100 text-amber-800' : 'bg-blue-100 text-blue-800');
+
+            html += `
+                <div class="bg-museum-card p-5 rounded-xl border border-museum-border shadow-sm">
+                    <div class="flex items-center justify-between mb-3"><span class="text-2xl">${s.icon}</span><span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${badgeColor}">${s.priority}</span></div>
+                    <h4 class="font-serif font-bold text-museum-primary text-base">${s.num}. ${s.name}</h4>
+                    <p class="text-xs text-museum-muted mt-2">${s.desc}</p>
+                </div>`;
+        });
+        container.innerHTML = html;
+    }
+
+    function filterSpectrum(priority) {
+        const data = i18n[currentLang].spectrum;
+        if (!data) return;
+
+        // Restaura as cores dos botões ao clicar
+        document.querySelectorAll('.spec-filter-btn').forEach(b => {
+            b.classList.remove('bg-museum-primary', 'text-white');
+            b.classList.add('bg-museum-sidebar', 'text-museum-dark');
+        });
+
+        if (priority === 'all') {
+            document.getElementById('spec-btn-all').classList.add('bg-museum-primary', 'text-white');
+            renderSpectrumCards(data);
+        } else {
+            const btnId = `spec-btn-${priority.toLowerCase()}`;
+            if (document.getElementById(btnId)) document.getElementById(btnId).classList.add('bg-museum-primary', 'text-white');
+
+            // CORREÇÃO: Compara a 1ª letra do botão (ex: 'E') com a 1ª letra da tradução
+            renderSpectrumCards(data.filter(s => s.priority.charAt(0) === priority.charAt(0)));
+        }
+    }
+
+        function renderPatologiaCards(data) {
+            const container = document.getElementById('patologiaGrid');
+            if (!container || !data) return;
+            let html = '';
+            data.forEach(p => {
+                html += `
+                <div class="bg-museum-card p-5 rounded-xl border border-museum-border shadow-sm space-y-3">
+                    <h4 class="font-serif font-bold text-museum-primary text-base">${p.name}</h4>
+                    <p class="text-xs text-museum-muted">${p.desc}</p>
+                    <div class="text-xs bg-museum-bg p-3 rounded-lg border">
+                        <div class="text-rose-900 font-semibold" data-i18n="pathology.impact">${i18n[currentLang].ui["pathology.impact"]} <span class="font-normal text-museum-dark">${p.impact}</span></div>
+                    </div>
+                </div>`;
+            });
+            container.innerHTML = html;
+        }
+
+        function copyToClipboard(id) {
+            navigator.clipboard.writeText(document.getElementById(id).innerText).then(() => alert('Copiado!'));
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('abcd_lang') || 'pt';
+            document.getElementById('langSwitcher').value = savedLang;
+
+            // Ativa o idioma inicial e inicializa gráficos
+            changeLanguage(savedLang);
+
+            // Listeners da Oficina
+            ['tomboPais', 'tomboInst', 'tomboCol', 'tomboTip', 'tomboSeq', 'tomboConj'].forEach(id => {
+                if (document.getElementById(id)) document.getElementById(id).addEventListener('input', () => {
+                    const res = `${document.getElementById('tomboPais').value}_${document.getElementById('tomboInst').value}_${document.getElementById('tomboCol').value}_${document.getElementById('tomboTip').value}_${String(document.getElementById('tomboSeq').value).padStart(7, '0')}`;
+                    document.getElementById('tomboOutput').innerText = res + (document.getElementById('tomboConj').value ? `_${document.getElementById('tomboConj').value}` : '');
+                });
+            });
+
+            ['inscTipo', 'inscLoc', 'inscIdioma', 'inscTexto'].forEach(id => {
+                if (document.getElementById(id)) document.getElementById(id).addEventListener('input', () => {
+                    document.getElementById('inscOutput').innerText = `^a${document.getElementById('inscTipo').value}^b${document.getElementById('inscLoc').value}^l${document.getElementById('inscIdioma').value}^t"${document.getElementById('inscTexto').value}"`;
+                });
+            });
+
+            ['dimAlt', 'dimLarg', 'dimProf', 'dimDiam'].forEach(id => {
+                if (document.getElementById(id)) document.getElementById(id).addEventListener('input', () => {
+                    let linear = [], sub = [];
+                    ['Alt', 'Larg', 'Prof'].forEach((k, i) => {
+                        let v = document.getElementById('dim' + k).value;
+                        if (v) { linear.push(v); sub.push(`^${['a', 'b', 'c'][i]}${v}`); }
+                    });
+                    if (document.getElementById('dimDiam').value) { linear.push(`Diâm: ${document.getElementById('dimDiam').value}`); sub.push(`^d${document.getElementById('dimDiam').value}`); }
+                    document.getElementById('dimOutput').innerText = linear.length ? `${linear.join(' x ')} cm (${sub.join('')})` : 'Aguardando...';
+                });
+            });
+
+            // Listeners de Busca
+            document.getElementById('globalSearchInput').addEventListener('input', (e) => {
+                switchTab('fdt');
+                document.getElementById('fdtFilterSearch').value = e.target.value;
+                renderFdtFields();
+            });
+            document.getElementById('fdtFilterSearch').addEventListener('input', renderFdtFields);
+            document.getElementById('fdtRepeatableFilter').addEventListener('change', renderFdtFields);
+            document.getElementById('patologiaSearch').addEventListener('input', (e) => {
+                const term = e.target.value.toLowerCase();
+                renderPatologiaCards(i18n[currentLang].pathology.filter(p => p.name.toLowerCase().includes(term) || p.desc.toLowerCase().includes(term)));
+            });
+        });
+    </script>
+</body>
+
+</html>
