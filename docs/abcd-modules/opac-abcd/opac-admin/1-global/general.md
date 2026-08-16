@@ -39,18 +39,33 @@ This interface is the primary way to configure the behavior and look of your por
 * **Charset:** Select the character encoding (UTF-8 or ISO-8859-1).
     * *Note:* This must match your database encoding to avoid character display errors (like `Ã£`).
 
+### Search Engine (Performance & Ranking)
+To ensure system stability and prevent server timeouts (`max_execution_time`) when searching very large databases, the OPAC includes an intelligent **Relevance Gate**. Calculating keyword relevance across tens of thousands of records is highly CPU-intensive. This mechanism limits heavy text-scoring algorithms on massive result sets while ensuring the total number of hits remains accurate.
+
+Here is what each parameter controls:
+
+* **`RELEVANCE_GATE_ENABLED` (Y/N):** 
+  Activates the volume protection mechanism. When set to `Y`, the system will monitor the total number of results found before attempting to score them.
+* **`RELEVANCE_MAX_SCORED` (Integer):** 
+  The threshold limit (default is `3500`). If a broad search returns more records than this limit, the system bypasses the heavy relevance scoring and performs a fast fallback sort by MFN (chronological order of entry). 
+  *Important:* This does **not** hide records or truncate the total count. The user will still see the exact total (e.g., "12,015 records found"), but a transparent warning message will appear suggesting they refine their search with more specific keywords to enable relevance ranking.
+* **`RELEVANCE_CACHE_ENABLED` (Y/N):** 
+  Enables the temporary storage of the heavy sorting operations for search results. This drastically speeds up pagination, sorting changes, and format switching within the same search session by preventing the server from recalculating the entire array on every page click.
+* **`RELEVANCE_CACHE_TTL` (Integer):** 
+  Cache Time-To-Live in seconds (default is `300`, which equals 5 minutes). Determines how long the sorted cache remains valid before the system discards it and forces a fresh database query.
+
 ---
 
 ## 2. Cache Management
 **Access:** **Global Parameters** > **Cache Management** (Bottom of the page)
 
-To improve performance, the OPAC caches search results, facet calculations, and configuration arrays in the `opac/cache/` directory.
+To improve performance, the OPAC caches search results (including relevance scoring arrays), facet calculations, and configuration arrays in the `opac/cache/` directory.
 
 ### When to Clear Cache?
 You should click the **"Clean Cache"** button if:
 1.  You made changes to `opac.def` or `bases.dat` that are not appearing.
 2.  You updated a PFT format, but records still show the old layout.
-3.  The OPAC seems "stuck" on old search results.
+3.  The OPAC seems "stuck" on old search results after a massive database update.
 
 ![Clear Cache](../../../../media/abcd-modules/opac-abcd/opac-admin/opac-clear-cache.png)
 
@@ -79,11 +94,18 @@ link_logo=[http://my-library.org](http://my-library.org)
 TituloPagina=My Library Catalog
 footer_text=© 2024 Library Systems
 styles=styles.css
-captcha=Y
+CAPTCHA=Y
+
+; Search Engine Performance
+RELEVANCE_GATE_ENABLED=Y
+RELEVANCE_MAX_SCORED=3500
+RELEVANCE_CACHE_ENABLED=Y
+RELEVANCE_CACHE_TTL=300
 
 ```
 
-:::warning URL Configuration
+:::warning 
+URL Configuration
 The parameter **`OpacHttp`** is critical. It must match your server's public URL exactly. If images break or AJAX searches fail, check this value in the file manually.
 :::
 
@@ -97,3 +119,5 @@ The `bases/opac_conf/` folder contains the "Global Configuration" assets that ap
 * **`lang.tab`**: Maps language codes (en, es, pt) to human-readable names.
 * **`formatos.dat`**: Defines the output options (ISO, Word, Print) available in the toolbar.
 * **`record_toolbar.tab`**: Controls which icons appear above records (Print, Reserve, etc.).
+
+```

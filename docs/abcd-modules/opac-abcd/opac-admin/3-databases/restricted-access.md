@@ -76,7 +76,8 @@ Tag|Value|UserLevelCode
 
 *(Where 20 and 100 are the internal codes for the user categories).*
 
-:::info Multiple Restrictions
+:::info 
+Multiple Restrictions
 You can add multiple rules for the same database. The system checks them sequentially. If a record matches *any* restriction rule, the permission check is triggered.
 :::
 
