@@ -184,6 +184,7 @@
 </ul>
 </li>
 </ul>
+<!-- -->
 <p><strong>Full Changelog</strong>: <a href="https://github.com/ABCD-DEVCOM/ABCD/compare/v3.8.1...v3.8.2" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/compare/v3.8.1...v3.8.2</a></p>]]></content:encoded>
             <category>Release</category>
             <category>v3.8.2</category>
@@ -200,6 +201,7 @@
 <li class="">Removes unused icons by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/652" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/652</a></li>
 <li class="">Refactor formatting, JS, UI; remove IAH assets by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/653" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/653</a></li>
 </ul>
+<!-- -->
 <p><strong>Full Changelog</strong>: <a href="https://github.com/ABCD-DEVCOM/ABCD/compare/v3.8.0...v3.8.1" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/compare/v3.8.0...v3.8.1</a></p>]]></content:encoded>
             <category>Release</category>
             <category>v3.8.1</category>
