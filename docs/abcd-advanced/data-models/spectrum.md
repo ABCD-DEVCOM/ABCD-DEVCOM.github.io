@@ -208,7 +208,8 @@ Correct typing for this field is done with a lowercase "x" (e.g., number [space]
 *   *Ex 1:* 200 x 30 x 500
 *   *Ex 2:* Open: 50 x 20 x 70 / Closed: 102 x 20 x 75
 
-:::info Automate this field
+:::info 
+Automate this field
 You can automatically format the subfields (`^a`, `^b`, `^c`, `^d`) without syntax errors using the Dimension Formatter tool in our [Interactive Workbench](/spectrum#sec-ferramentas/).
 :::
 
