@@ -34,7 +34,7 @@ The important thing to emphasize immediately is that there is no single way to p
 
 :::tip 
 Interactive Workbench
-Need to put these rules into practice? Access the [Cataloger's Workbench](/spectrum) to quickly explore FDT fields, translate pathologies, and use automated generators for Registry Numbers and Dimensions.
+Need to put these rules into practice? Access the [Cataloger's Workbench](/spectrum/) to quickly explore FDT fields, translate pathologies, and use automated generators for Registry Numbers and Dimensions.
 :::
 
 ## Procedures
@@ -209,7 +209,7 @@ Correct typing for this field is done with a lowercase "x" (e.g., number [space]
 *   *Ex 2:* Open: 50 x 20 x 70 / Closed: 102 x 20 x 75
 
 :::info Automate this field
-You can automatically format the subfields (`^a`, `^b`, `^c`, `^d`) without syntax errors using the Dimension Formatter tool in our [Interactive Workbench](/spectrum#sec-ferramentas).
+You can automatically format the subfields (`^a`, `^b`, `^c`, `^d`) without syntax errors using the Dimension Formatter tool in our [Interactive Workbench](/spectrum#sec-ferramentas/).
 :::
 
 ### 240 - Mount/Support Dimensions
