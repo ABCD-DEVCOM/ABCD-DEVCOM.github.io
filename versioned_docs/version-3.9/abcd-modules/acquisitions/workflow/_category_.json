@@ -1,0 +1,8 @@
+{
+  "label": "Acquisition Workflow",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "The complete lifecycle: Suggestion -> Decision -> Order -> Receiving."
+  }
+}

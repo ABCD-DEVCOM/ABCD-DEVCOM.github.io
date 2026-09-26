@@ -1,0 +1,8 @@
+{
+  "label": "Cataloging",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "Learn everything about the heart of ABCD: the Cataloging module. From defining the data structure to entering records and using advanced tools."
+  }
+}

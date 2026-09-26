@@ -1,0 +1,8 @@
+{
+    "label": "Acquisitions",
+    "position": 5,
+    "link": {
+        "type": "generated-index",
+        "description": "Understand the workflow of the Procurement module, from receiving purchase suggestions from users to creating and managing purchase orders for suppliers."
+    }
+}

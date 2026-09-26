@@ -34,7 +34,7 @@ The important thing to emphasize immediately is that there is no single way to p
 
 :::tip 
 Interactive Workbench
-Need to put these rules into practice? Access the [Cataloger's Workbench](/spectrum/) to quickly explore FDT fields, translate pathologies, and use automated generators for Registry Numbers and Dimensions.
+Need to put these rules into practice? Access the [Cataloger's Workbench](/spectrum//) to quickly explore FDT fields, translate pathologies, and use automated generators for Registry Numbers and Dimensions.
 :::
 
 ## Procedures

@@ -1,0 +1,8 @@
+{
+    "label": "Reservations",
+    "position": 5,
+    "link": {
+        "type": "generated-index",
+        "description": "Configuration and management of user holds and reservations."
+    }
+}

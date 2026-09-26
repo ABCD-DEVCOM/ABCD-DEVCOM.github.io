@@ -1,0 +1,8 @@
+{
+  "label": "Database Configuration",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "Tools to define the database structure (FDT), indexing rules (FST), and input forms (FMT)."
+  }
+}

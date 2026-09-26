@@ -1,0 +1,8 @@
+{
+  "label": "Daily Workflow",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "Essential tasks for the cataloger: searching, creating records, and using Z39.50."
+  }
+}
