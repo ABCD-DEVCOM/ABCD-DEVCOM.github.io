@@ -1,0 +1,8 @@
+{
+    "label": "OPAC (Public Catalog)",
+    "position": 9,
+    "link": {
+        "type": "generated-index",
+        "description": "Complete guide to the Online Public Access Catalog: Configuration and Usage."
+    }
+}
