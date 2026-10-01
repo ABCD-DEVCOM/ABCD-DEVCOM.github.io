@@ -132,7 +132,7 @@ Below is the current list of available hooks within the ABCD ecosystem, divided 
 
 | Hook Name | Type | Location | Description |
 | --- | --- | --- | --- |
-| `opac_head_end` | Action | `opac/head.php`<br>`opac/head-my.php` | Fires immediately before the `</head>` tag. Ideal for injecting custom CSS, meta tags, and early scripts (e.g., SEO tags, dark mode styles). |
+| `opac_head_end` | Action | `opac/head.php`, `opac/head-my.php` | Fires immediately before the `</head>` tag. Ideal for injecting custom CSS, meta tags, and early scripts (e.g., SEO tags, dark mode styles). |
 | `opac_footer_end` | Action | `opac/views/footer.php` | Fires right before the `</body>` tag. Perfect for loading heavy scripts, analytics trackers, or chatbots without blocking rendering. |
 | `opac_topbar_menu` | Action | `opac/views/topbar.php` | Allows plugins to inject new navigation links or buttons directly into the OPAC's main topbar menu. |
 | `opac_record_toolbar` | Filter | `opac/get_record_details.php` | Filters the native action buttons of a bibliographic record. Perfect for adding export, citation, or custom interaction buttons (e.g., "Export to Zotero"). |
