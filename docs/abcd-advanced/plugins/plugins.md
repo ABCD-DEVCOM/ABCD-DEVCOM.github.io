@@ -115,7 +115,9 @@ abcd_run_hook(string $hook, mixed $data = null): mixed
 
 ## 5. Hook Reference
 
-Below is the current list of available hooks within the ABCD ecosystem. *(Note: As the ABCD API expands, more hooks for cataloging, circulation, and OPAC intervention will be documented here).*
+Below is the current list of available hooks within the ABCD ecosystem, divided by module. *(Note: As the ABCD API expands, more hooks for cataloging, circulation, and OPAC intervention will be documented here).*
+
+### Core Hooks (`/central/`)
 
 | Hook Name | Type | Location | Description |
 | --- | --- | --- | --- |
@@ -125,6 +127,17 @@ Below is the current list of available hooks within the ABCD ecosystem. *(Note: 
 | `config_menu` | Filter | `/central/settings/conf_abcd.php` | Allows plugins to add new menu items to the ABCD configuration settings. |
 | `abcd_translation_menu` | Filter | `central/dbadmin/menu_traducir.php` | Injects custom buttons into the main translation interface, allowing plugins to expose their own `.tab` files for local translation. |
 | `abcd_compare_translation_menu` | Filter | `central/dbadmin/menu_traducir.php` | Injects custom buttons into the translation comparison interface. |
+
+### OPAC Hooks (`/opac/`)
+
+| Hook Name | Type | Location | Description |
+| --- | --- | --- | --- |
+| `opac_head_end` | Action | `opac/head.php`<br>`opac/head-my.php` | Fires immediately before the `</head>` tag. Ideal for injecting custom CSS, meta tags, and early scripts (e.g., SEO tags, dark mode styles). |
+| `opac_footer_end` | Action | `opac/views/footer.php` | Fires right before the `</body>` tag. Perfect for loading heavy scripts, analytics trackers, or chatbots without blocking rendering. |
+| `opac_topbar_menu` | Action | `opac/views/topbar.php` | Allows plugins to inject new navigation links or buttons directly into the OPAC's main topbar menu. |
+| `opac_record_toolbar` | Filter | `opac/get_record_details.php` | Filters the native action buttons of a bibliographic record. Perfect for adding export, citation, or custom interaction buttons (e.g., "Export to Zotero"). |
+| `opac_sidebar_facets` | Action | `opac/facets.php` | Fires at the end of the sidebar facets rendering. Useful for injecting external API widgets (e.g., author biographies, event calendars, related links). |
+
 
 ## 6. Routing (Basic MVC Pattern)
 
