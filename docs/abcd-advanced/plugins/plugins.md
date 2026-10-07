@@ -127,6 +127,12 @@ Below is the current list of available hooks within the ABCD ecosystem, divided 
 | `config_menu` | Filter | `/central/settings/conf_abcd.php` | Allows plugins to add new menu items to the ABCD configuration settings. |
 | `abcd_translation_menu` | Filter | `central/dbadmin/menu_traducir.php` | Injects custom buttons into the main translation interface, allowing plugins to expose their own `.tab` files for local translation. |
 | `abcd_compare_translation_menu` | Filter | `central/dbadmin/menu_traducir.php` | Injects custom buttons into the translation comparison interface. |
+| `abcd_topbar_modules` | Filter | `central/common/nav_general_topbar.php` | Allows plugins to dynamically inject or modify available modules in the top navigation bar. |
+| `abcd_after_save_record` | Action | `central/dataentry/` | Fires after a record is saved. Useful for audit trails, webhooks, or background processing. |
+| `abcd_nav_home_url` | Filter | `central/common/inc_home.php` | Intercepts and overrides the standard Home URL in breadcrumb navigation. |
+| `abcd_nav_back_url` | Filter | `central/common/inc_back.php` | Intercepts and overrides the standard Back URL in breadcrumb navigation. |
+| `abcd_nav_cancel_url` | Filter | `central/common/inc_cancel.php` | Intercepts and overrides the standard Cancel URL in breadcrumb navigation. |
+| `abcd_menu_home_action` | Filter | `central/dataentry/menu_main.php` | Intercepts the JavaScript action of the DataEntry Home button to handle contextual routing inside iframes. |
 
 ### OPAC Hooks (`/opac/`)
 
