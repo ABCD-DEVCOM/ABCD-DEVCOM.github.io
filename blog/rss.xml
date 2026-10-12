@@ -4,10 +4,50 @@
         <title>ABCD Software Documentation Blog</title>
         <link>https://ABCD-DEVCOM.github.io/blog</link>
         <description>ABCD Software Documentation Blog</description>
-        <lastBuildDate>Sun, 28 Jun 2026 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 12 Oct 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[ABCD 4.0.0]]></title>
+            <link>https://ABCD-DEVCOM.github.io/blog/2026-10-12-release-4-0-0</link>
+            <guid>https://ABCD-DEVCOM.github.io/blog/2026-10-12-release-4-0-0</guid>
+            <pubDate>Mon, 12 Oct 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[We are pleased to announce the release of ABCD version 4.0.0. This update represents a historic architectural leap, marking the transition of ABCD from a traditional ILS (Integrated Library System) to a true plugin-based LSP (Library Services Platform). The new version brings a modular approach, a native REST API, and expanded support for different types of collections.]]></description>
+            <content:encoded><![CDATA[<p>We are pleased to announce the release of ABCD version 4.0.0. This update represents a historic architectural leap, marking the transition of ABCD from a traditional ILS (Integrated Library System) to a true plugin-based LSP (Library Services Platform). The new version brings a modular approach, a native REST API, and expanded support for different types of collections.</p>
+<p>Below, we highlight the main new features and structural improvements in this version:</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-plugin-based-modular-architecture">🧩 Plugin-Based Modular Architecture<a href="https://abcd-devcom.github.io/blog/2026-10-12-release-4-0-0#-plugin-based-modular-architecture" class="hash-link" aria-label="Direct link to 🧩 Plugin-Based Modular Architecture" title="Direct link to 🧩 Plugin-Based Modular Architecture" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Plugin System:</strong> The system core now operates with a robust plugin architecture, allowing the expansion of services without the need to modify the central code (core).</li>
+<li class=""><strong>On-Demand Installation:</strong> Legacy or specific databases and modules (such as ODDS, SIP2, Projects, and Experts) have been removed from the default installation. These components can now be managed and installed remotely, ensuring a lighter system adaptable to the needs of each institution.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-interoperability-and-data-export">🔗 Interoperability and Data Export<a href="https://abcd-devcom.github.io/blog/2026-10-12-release-4-0-0#-interoperability-and-data-export" class="hash-link" aria-label="Direct link to 🔗 Interoperability and Data Export" title="Direct link to 🔗 Interoperability and Data Export" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Native REST API:</strong> Implementation of a complete REST API for direct and secure access to databases, featuring centralized API key management, SHA256 encryption, and read/write scope control.</li>
+<li class=""><strong>Batch JSON Export:</strong> New integrated workflow for exporting databases in JSON format, allowing extraction in the native ISIS format or with direct mapping to the Dublin Core standard.</li>
+<li class=""><strong>Export Resilience and Management:</strong> The data conversion engine was restructured to process blocks individually, ensuring high tolerance against malformed markup, control characters, and UTF-8 encoding failures. The interface includes a real-time progress bar and a manager for secure downloading and deletion of generated files.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-museum-management-spectrum-standard">🏛️ Museum Management (SPECTRUM Standard)<a href="https://abcd-devcom.github.io/blog/2026-10-12-release-4-0-0#%EF%B8%8F-museum-management-spectrum-standard" class="hash-link" aria-label="Direct link to 🏛️ Museum Management (SPECTRUM Standard)" title="Direct link to 🏛️ Museum Management (SPECTRUM Standard)" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>New Data Model:</strong> Initial implementation of an example database and management module tailored for museums, strictly structured based on the international SPECTRUM standard.</li>
+<li class=""><strong>Museum OPAC:</strong> New public interfaces and display formats (PFTs) adapted for museum collections, featuring support for attachment metadata, inscription control, and multilingual support.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-public-interface-opac-and-search">🔍 Public Interface (OPAC) and Search<a href="https://abcd-devcom.github.io/blog/2026-10-12-release-4-0-0#-public-interface-opac-and-search" class="hash-link" aria-label="Direct link to 🔍 Public Interface (OPAC) and Search" title="Direct link to 🔍 Public Interface (OPAC) and Search" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Expert Search:</strong> Introduction of a new direct boolean search interface in the OPAC, accompanied by results organized in collapsible panels to optimize the user experience.</li>
+<li class=""><strong>Relevance Control and Performance:</strong> Addition of configurable controls for relevance ranking, increased search buffer, and refactoring of the integrated search logic, ensuring more speed and stability for large collections.</li>
+<li class=""><strong>Metrics and Usability:</strong> Significant performance improvements in search log analysis (OPAC Analytics) and corrections in encoding handling for form submissions with accents.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-cataloging-and-system-administration">🛠️ Cataloging and System Administration<a href="https://abcd-devcom.github.io/blog/2026-10-12-release-4-0-0#%EF%B8%8F-cataloging-and-system-administration" class="hash-link" aria-label="Direct link to 🛠️ Cataloging and System Administration" title="Direct link to 🛠️ Cataloging and System Administration" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Language Management (LanguageManager):</strong> Implementation of a cascading translation system. Core files are now kept separate from institutions' local customizations (saved in the <code>content</code> folder), preventing data loss during updates.</li>
+<li class=""><strong>Enhanced Data Entry:</strong> Support for a new <code>HASH</code> field type (generating cryptographic values for unique identifiers), improved handling of multi-select fields, and integration of a secure assistant for auto-increment (AI) numbering.</li>
+<li class=""><strong>Security and Interface (UI):</strong> Complete redesign of the central topbar, addition of a native and secure interface for changing passwords (with CSRF protection), and rigorous sanitization of variables to prevent XSS vulnerabilities.</li>
+<li class=""><strong>Maintenance and Synchronization:</strong> New automated routine for smart synchronization of the copies database with the loans database (loanobjects), and refactoring of the CrunchMF conversion utility for greater reliability on Linux systems.</li>
+</ul>]]></content:encoded>
+            <category>Release</category>
+            <category>v4.0.0</category>
+        </item>
         <item>
             <title><![CDATA[ABCD 3.9.0]]></title>
             <link>https://ABCD-DEVCOM.github.io/blog/2026-06-28-release-3-9-0</link>
@@ -830,42 +870,6 @@ Planning: Several code upgrades will be necessary and, at a certain moment also 
 <p>We no longer work with <code>site</code> and <code>iah</code>, but feel free to continue</p>]]></content:encoded>
             <category>Release</category>
             <category>v3.1.0</category>
-        </item>
-        <item>
-            <title><![CDATA[v3.0.0 Major upgrade for OPAC]]></title>
-            <link>https://ABCD-DEVCOM.github.io/blog/v3-0-0-major-upgrade-for-opac</link>
-            <guid>https://ABCD-DEVCOM.github.io/blog/v3-0-0-major-upgrade-for-opac</guid>
-            <pubDate>Tue, 25 Nov 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[What's Changed]]></description>
-            <content:encoded><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-changed">What's Changed<a href="https://abcd-devcom.github.io/blog/v3-0-0-major-upgrade-for-opac#whats-changed" class="hash-link" aria-label="Direct link to What's Changed" title="Direct link to What's Changed" translate="no">​</a></h2>
-<p><strong>Description</strong>: Major changes and implementations in OPAC by @rogercgui in</p>
-<ul>
-<li class=""><a href="https://github.com/ABCD-DEVCOM/ABCD/pull/574" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/574</a></li>
-<li class=""><a href="https://github.com/ABCD-DEVCOM/ABCD/pull/577" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/577</a></li>
-</ul>
-<!-- -->
-<p><strong>Details</strong></p>
-<ul>
-<li class="">Enhance session management &amp; small bug by @fho4abcd in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/572" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/572</a></li>
-<li class="">Update test/wxis.php by @fho4abcd in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/573" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/573</a></li>
-<li class="">Opac v2 by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/574" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/574</a></li>
-<li class="">Improvements to dbadmin by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/575" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/575</a></li>
-<li class="">Update ABCD login/logout for OPAC directory structure by @fho4abcd in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/576" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/576</a></li>
-<li class="">Opac v2 by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/577" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/577</a></li>
-<li class="">Plasters for annoying behavior by @fho4abcd in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/578" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/578</a></li>
-<li class="">Update version.php by @fho4abcd in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/579" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/579</a></li>
-<li class="">Fixes concatenation error for Linux. by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/580" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/580</a></li>
-</ul>
-<p><strong>Full Changelog</strong>: <a href="https://github.com/ABCD-DEVCOM/ABCD/compare/v2.4.1...v3.0.0" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/compare/v2.4.1...v3.0.0</a></p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="actions-by-database-administrator">Actions by database administrator<a href="https://abcd-devcom.github.io/blog/v3-0-0-major-upgrade-for-opac#actions-by-database-administrator" class="hash-link" aria-label="Direct link to Actions by database administrator" title="Direct link to Actions by database administrator" translate="no">​</a></h2>
-<p>The upgrade of the code can be done with the upgrade manager.</p>
-<p>There are also many updates in the database examples. See the Full Changelog. Copy as appropriate</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="info-for-all-users">Info for all users<a href="https://abcd-devcom.github.io/blog/v3-0-0-major-upgrade-for-opac#info-for-all-users" class="hash-link" aria-label="Direct link to Info for all users" title="Direct link to Info for all users" translate="no">​</a></h2>
-<p>OPAC is now the application that opens if you enter the default URL.
-Open ABCD by the default URL + /admin
-You can add a button in OPAC to switch to ABCD.</p>]]></content:encoded>
-            <category>Release</category>
-            <category>v3.0.0</category>
         </item>
     </channel>
 </rss>
