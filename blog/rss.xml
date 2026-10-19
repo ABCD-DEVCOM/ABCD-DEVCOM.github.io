@@ -4,10 +4,56 @@
         <title>ABCD Software Documentation Blog</title>
         <link>https://ABCD-DEVCOM.github.io/blog</link>
         <description>ABCD Software Documentation Blog</description>
-        <lastBuildDate>Mon, 12 Oct 2026 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 18 Oct 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[ABCD 4.0.1]]></title>
+            <link>https://ABCD-DEVCOM.github.io/blog/2026-10-18-release-4-0-1</link>
+            <guid>https://ABCD-DEVCOM.github.io/blog/2026-10-18-release-4-0-1</guid>
+            <pubDate>Sun, 18 Oct 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[ABCD 4.0.1]]></description>
+            <content:encoded><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="abcd-401">ABCD 4.0.1<a href="https://abcd-devcom.github.io/blog/2026-10-18-release-4-0-1#abcd-401" class="hash-link" aria-label="Direct link to ABCD 4.0.1" title="Direct link to ABCD 4.0.1" translate="no">​</a></h2>
+<p>This is a maintenance release that fixes a problem affecting everyday work in ABCD Central: users being signed out unexpectedly after viewing a report preview. It is recommended for all 4.0.0 installations.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-you-may-have-noticed">What you may have noticed<a href="https://abcd-devcom.github.io/blog/2026-10-18-release-4-0-1#what-you-may-have-noticed" class="hash-link" aria-label="Direct link to What you may have noticed" title="Direct link to What you may have noticed" translate="no">​</a></h3>
+<p>After generating a report (Reports, then a search, then <strong>Preview</strong>), the result opened correctly in a new window. But when you then clicked <strong>Home</strong> in the main window, ABCD showed "Session expired or you are not logged in" and sent you back to the sign-in page. Anything not yet saved at that moment was at risk. Your databases and records were not affected.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-was-wrong">What was wrong<a href="https://abcd-devcom.github.io/blog/2026-10-18-release-4-0-1#what-was-wrong" class="hash-link" aria-label="Direct link to What was wrong" title="Direct link to What was wrong" translate="no">​</a></h3>
+<p>Pages such as the report preview did not declare a site icon, so the browser asked the server for <code>/favicon.ico</code> on its own. That file did not exist, and the request ended up at the sign-in page, which clears the current session. The user was signed out without any warning.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-changed">What changed<a href="https://abcd-devcom.github.io/blog/2026-10-18-release-4-0-1#what-changed" class="hash-link" aria-label="Direct link to What changed" title="Direct link to What changed" translate="no">​</a></h3>
+<ul>
+<li class="">Pages such as the report preview now declare the ABCD icon (<code>central/common/header_display.php</code>), so the browser no longer asks for <code>/favicon.ico</code>.</li>
+<li class="">A <code>favicon.ico</code> file is now included in the web root and served directly.</li>
+<li class="">Requests for missing images, styles and scripts now return a normal "not found" (404) response instead of falling through to a PHP page (<code>.htaccess</code>).</li>
+<li class="">Opening the sign-in page while already signed in now takes you straight to the system instead of showing the form again (<code>login.php</code>).</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="upgrading">Upgrading<a href="https://abcd-devcom.github.io/blog/2026-10-18-release-4-0-1#upgrading" class="hash-link" aria-label="Direct link to Upgrading" title="Direct link to Upgrading" translate="no">​</a></h3>
+<p>Update as usual, or replace the files listed below. No database or configuration changes are required, and your own <code>config.php</code> is not touched.</p>
+<p>Files changed:</p>
+<ul>
+<li class=""><code>central/common/header_display.php</code></li>
+<li class=""><code>login.php</code></li>
+<li class=""><code>.htaccess</code></li>
+<li class=""><code>favicon.ico</code> (new)</li>
+</ul>
+<p><strong>If you cannot update right away</strong>, create a <code>favicon.ico</code> in the web root (the folder that contains <code>login.php</code>). This alone prevents the sign-out. For example, from that folder:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token plain">cp assets/images/favicons/favicon-32x32.png favicon.ico</span><br></div></code></pre></div></div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="notes">Notes<a href="https://abcd-devcom.github.io/blog/2026-10-18-release-4-0-1#notes" class="hash-link" aria-label="Direct link to Notes" title="Direct link to Notes" translate="no">​</a></h3>
+<ul>
+<li class="">The Windows installer has been rebuilt with these fixes.</li>
+<li class="">Details: #765 (issue) and #766  (pull request).</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-changed">What's Changed<a href="https://abcd-devcom.github.io/blog/2026-10-18-release-4-0-1#whats-changed" class="hash-link" aria-label="Direct link to What's Changed" title="Direct link to What's Changed" translate="no">​</a></h2>
+<ul>
+<li class="">Fix session loss caused by browser /favicon.ico request by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/766" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/766</a></li>
+<li class="">Harden login and logout session handling by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/767" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/767</a></li>
+<li class="">Simplify login session regeneration by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/768" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/768</a></li>
+</ul>
+<p><strong>Full Changelog</strong>: <a href="https://github.com/ABCD-DEVCOM/ABCD/compare/v4.0.0...v4.0.1" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/compare/v4.0.0...v4.0.1</a></p>
+<p>Thank you to everyone who reported and helped reproduce this problem.</p>]]></content:encoded>
+            <category>Release</category>
+            <category>v4.0.1</category>
+        </item>
         <item>
             <title><![CDATA[ABCD 4.0.0]]></title>
             <link>https://ABCD-DEVCOM.github.io/blog/2026-10-12-release-4-0-0</link>
@@ -832,44 +878,6 @@ Planning: Several code upgrades will be necessary and, at a certain moment also 
 <p>The upgrade of the code can be done with the upgrade manager</p>]]></content:encoded>
             <category>Release</category>
             <category>v3.1.1</category>
-        </item>
-        <item>
-            <title><![CDATA[Release v3.1.0: Repairs for OPAC and Update manager]]></title>
-            <link>https://ABCD-DEVCOM.github.io/blog/release-v3-1-0-repairs-for-opac-and-update-manager</link>
-            <guid>https://ABCD-DEVCOM.github.io/blog/release-v3-1-0-repairs-for-opac-and-update-manager</guid>
-            <pubDate>Fri, 12 Dec 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[What's Changed]]></description>
-            <content:encoded><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-changed">What's Changed<a href="https://abcd-devcom.github.io/blog/release-v3-1-0-repairs-for-opac-and-update-manager#whats-changed" class="hash-link" aria-label="Direct link to What's Changed" title="Direct link to What's Changed" translate="no">​</a></h2>
-<ul>
-<li class="">OPAC: functionality + security + search + cleanup</li>
-<li class="">Update update manager</li>
-<li class="">Repair missing footer</li>
-</ul>
-<!-- -->
-<p><strong>Full Changelog</strong>: <a href="https://github.com/ABCD-DEVCOM/ABCD/compare/v3.0.0...v3.1.0" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/compare/v3.0.0...v3.1.0</a></p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="actions-by-database-administrator">Actions by database administrator<a href="https://abcd-devcom.github.io/blog/release-v3-1-0-repairs-for-opac-and-update-manager#actions-by-database-administrator" class="hash-link" aria-label="Direct link to Actions by database administrator" title="Direct link to Actions by database administrator" translate="no">​</a></h2>
-<p>The upgrade proces for this release consists of following steps</p>
-<ol>
-<li class="">Download from Git file upgrade_manager.php (<a href="https://github.com/ABCD-DEVCOM/ABCD/blob/9b2c3cad60831bf1436b391d325d497750fb2d70/www/htdocs/update_manager.php" target="_blank" rel="noopener noreferrer" class="">www/htdocs/update_manager.php</a> )</li>
-<li class="">Copy the downloaded file to the Document root of your installation<!-- -->
-<ol>
-<li class="">In Linux typical  <code>/opt/ABCD/htdocs</code></li>
-<li class="">Check that <code>update_manager.php</code> is readable by your webserver</li>
-</ol>
-</li>
-<li class="">Run ABCD, login as administrator, perform some arbitrary actions to ensure that ABCD detects the new version</li>
-<li class="">The footer shows a yellow bar with text <code>Update now (v3.1.0) ABCD is available</code>. Click on the link <code>Update Now</code>
-5.The version of the Update  manager should be: <strong>v4.3</strong></li>
-<li class="">The Update manager will guide you through the upgrade process</li>
-</ol>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="notes">Notes<a href="https://abcd-devcom.github.io/blog/release-v3-1-0-repairs-for-opac-and-update-manager#notes" class="hash-link" aria-label="Direct link to Notes" title="Direct link to Notes" translate="no">​</a></h2>
-<ul>
-<li class="">ABCD module <code>Site</code> is no longer present in Git. If not used: delete folder <code>.../htdocs/site</code></li>
-<li class="">ABCD module <code>iAH</code> is no longer present in Git. If not used: delete folder <code>.../htdocs/iah</code></li>
-</ul>
-<p>We no longer work with <code>site</code> and <code>iah</code>, but feel free to continue</p>]]></content:encoded>
-            <category>Release</category>
-            <category>v3.1.0</category>
         </item>
     </channel>
 </rss>
