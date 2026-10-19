@@ -151,3 +151,7 @@ v4.0.0:
   label: v4.0.0
   permalink: /v4.0.0
   description: Version 4.0.0 specific posts
+v4.0.1:
+  label: v4.0.1
+  permalink: /v4.0.1
+  description: Version 4.0.1 specific posts
