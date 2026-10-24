@@ -4,10 +4,58 @@
         <title>ABCD Software Documentation Blog</title>
         <link>https://ABCD-DEVCOM.github.io/blog</link>
         <description>ABCD Software Documentation Blog</description>
-        <lastBuildDate>Sun, 18 Oct 2026 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 24 Oct 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Important Update: ABCD v4.0.2 (Hotfix) Released – How to Update Safely]]></title>
+            <link>https://ABCD-DEVCOM.github.io/blog/2026-10-24-release-4-0-2</link>
+            <guid>https://ABCD-DEVCOM.github.io/blog/2026-10-24-release-4-0-2</guid>
+            <pubDate>Sat, 24 Oct 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[We are excited to announce the release of ABCD v4.0.2. This maintenance release is highly focused on correcting and stabilizing the Update Manager itself, addressing critical bottlenecks that affected users upgrading from versions 4.0.0 and 4.0.1.]]></description>
+            <content:encoded><![CDATA[<p>We are excited to announce the release of <strong>ABCD v4.0.2</strong>. This maintenance release is highly focused on correcting and stabilizing the <strong>Update Manager</strong> itself, addressing critical bottlenecks that affected users upgrading from versions 4.0.0 and 4.0.1.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-whats-new-in-v402">🛠️ What’s New in v4.0.2?<a href="https://abcd-devcom.github.io/blog/2026-10-24-release-4-0-2#%EF%B8%8F-whats-new-in-v402" class="hash-link" aria-label="Direct link to 🛠️ What’s New in v4.0.2?" title="Direct link to 🛠️ What’s New in v4.0.2?" translate="no">​</a></h3>
+<p>The transition to the ABCD 4 architecture introduced a new batched AJAX processing system to the Update Manager, preventing screen freezes and server timeouts. However, versions 4.0.0 and 4.0.1 encountered three unintended side effects:</p>
+<ol>
+<li class=""><strong>Extraction Infinite Loop:</strong> The extraction phase would hang in an infinite loop because the system failed to recognize the "success" string returned by the server, a problem exacerbated if your interface was not set to English.</li>
+<li class=""><strong>Aborted config.php Update:</strong> A premature shutdown hook falsely assumed the update process was incomplete (logging <code>config.php v4 NOT applied</code>), which aborted the new configuration merge.</li>
+<li class=""><strong>Fatal Error ("Main config not found"):</strong> During the replacement of the main core directory (<code>central/</code>), the configuration file was temporarily wiped from the disk and not restored in time for the next batch request, triggering a fatal error.</li>
+</ol>
+<p>We have successfully resolved these issues in <strong>v4.0.2</strong>. Furthermore, we have introduced a <strong>"Pre-Download Self-Update"</strong> mechanism. Moving forward, the Update Manager will update itself before downloading and applying any core ABCD files, ensuring you always execute the safest and most recent update logic.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-how-to-update-to-abcd-402">📖 How to Update to ABCD 4.0.2<a href="https://abcd-devcom.github.io/blog/2026-10-24-release-4-0-2#-how-to-update-to-abcd-402" class="hash-link" aria-label="Direct link to 📖 How to Update to ABCD 4.0.2" title="Direct link to 📖 How to Update to ABCD 4.0.2" translate="no">​</a></h3>
+<p>The path to update depends entirely on your current ABCD version.</p>
+<p><strong>➡️ For Users Upgrading from v3.9.x:</strong>
+You can proceed normally! The legacy Update Manager in the 3.9 series runs the installation in a single monolithic request, so you are not affected by the bugs mentioned above. You will transition smoothly into the v4 architecture.</p>
+<p><strong>➡️ For Users Currently on v4.0.0 or v4.0.1:</strong>
+Because your current Update Manager contains the extraction loop bug, <strong>you cannot update directly using the standard "Update" button</strong>.</p>
+<p>However, thanks to ABCD 4's new modular architecture, you can apply this hotfix directly from your browser—no SSH or FTP access required!</p>
+<p>To ensure a smooth process, we have created a quick step-by-step video tutorial. <strong>Please watch the tutorial before proceeding:</strong>
+🔗 <strong><a href="https://www.youtube.com/watch?v=DO-Tw23q0jM" target="_blank" rel="noopener noreferrer" class="">Watch the Update Tutorial Here</a></strong></p>
+<p><strong>Step-by-Step Instructions:</strong></p>
+<ol>
+<li class="">Go to <strong>Configuration ABCD</strong> -&gt; <strong>Plugins</strong>.</li>
+<li class="">Locate the <strong>"ABCD Update Manager Hotfix"</strong> in the plugin list. <em>(Note: The update notification is already visible at the bottom of the page, but <strong>do not click it yet</strong>).</em></li>
+<li class="">Click <strong>Install</strong>, wait a few seconds, and then click <strong>Activate</strong>.</li>
+<li class="">Click on <strong>Settings</strong> within the active plugin list (or click the link inside the green notification bar at the top of the screen).</li>
+<li class="">Your Update Manager is now patched! You can safely navigate to the Update Manager and proceed with the ABCD 4.0.2 update as usual.</li>
+</ol>
+<p><em>(Please be patient during the final installation stage of the Update Manager, as the system takes a few moments to clear temporary files. Wait until the "Reload Page" button appears).</em></p>
+<p>Once you have successfully updated to v4.0.2, the self-update system will be active, and the Hotfix plugin can be safely deactivated and removed.</p>
+<p>Thank you for your continuous support. Be sure to subscribe to the ABCD YouTube channel for more tutorials and updates!</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-changed">What's Changed<a href="https://abcd-devcom.github.io/blog/2026-10-24-release-4-0-2#whats-changed" class="hash-link" aria-label="Direct link to What's Changed" title="Direct link to What's Changed" translate="no">​</a></h2>
+<ul>
+<li class="">Fix batched update lifecycle and config migration by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/771" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/771</a></li>
+<li class="">Add updater self-update and localized progress by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/772" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/772</a></li>
+<li class="">Few improvements by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/773" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/773</a></li>
+<li class="">Bump version to v4.0.2 by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/774" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/774</a></li>
+<li class="">Improve update progress and text encoding by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/775" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/775</a></li>
+</ul>
+<p><strong>Full Changelog</strong>: <a href="https://github.com/ABCD-DEVCOM/ABCD/compare/v4.0.1...v4.0.2" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/compare/v4.0.1...v4.0.2</a></p>]]></content:encoded>
+            <category>Release</category>
+            <category>v4.0.2</category>
+        </item>
         <item>
             <title><![CDATA[ABCD 4.0.1]]></title>
             <link>https://ABCD-DEVCOM.github.io/blog/2026-10-18-release-4-0-1</link>
@@ -859,25 +907,6 @@ The <code>php-zip</code> extension must be enabled in your <code>php.ini</code> 
 </ol>]]></content:encoded>
             <category>Release</category>
             <category>v3.1.2</category>
-        </item>
-        <item>
-            <title><![CDATA[Update for HTML5 part1]]></title>
-            <link>https://ABCD-DEVCOM.github.io/blog/release-v3-1-1-update-for-html5-part1-latest</link>
-            <guid>https://ABCD-DEVCOM.github.io/blog/release-v3-1-1-update-for-html5-part1-latest</guid>
-            <pubDate>Tue, 23 Dec 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[What's Changed]]></description>
-            <content:encoded><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-changed">What's Changed<a href="https://abcd-devcom.github.io/blog/release-v3-1-1-update-for-html5-part1-latest#whats-changed" class="hash-link" aria-label="Direct link to What's Changed" title="Direct link to What's Changed" translate="no">​</a></h2>
-<p>Functional: nothing</p>
-<p><strong>Full Changelog</strong>: <a href="https://github.com/ABCD-DEVCOM/ABCD/compare/v3.1.0...v3.1.1" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/compare/v3.1.0...v3.1.1</a></p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="details">Details<a href="https://abcd-devcom.github.io/blog/release-v3-1-1-update-for-html5-part1-latest#details" class="hash-link" aria-label="Direct link to Details" title="Direct link to Details" translate="no">​</a></h2>
-<p>The current generated HTML has obsolete tags/attributes, unclosed tags and many more (small errors). Many of these inconsistencies are hidden/masked/solved by modern browsers so the user is not aware of anomalies. But this is a ticking bomb, so the target is more robust code in HTML5.</p>
-<!-- -->
-<p>Tool:  <strong>Markup Validation Service</strong> (<a href="https://validator.w3.org/" target="_blank" rel="noopener noreferrer" class="">https://validator.w3.org/</a>)
-Planning: Several code upgrades will be necessary and, at a certain moment also a rewrite of existing users defined reports/worksheets.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="actions-by-database-administrator">Actions by database administrator<a href="https://abcd-devcom.github.io/blog/release-v3-1-1-update-for-html5-part1-latest#actions-by-database-administrator" class="hash-link" aria-label="Direct link to Actions by database administrator" title="Direct link to Actions by database administrator" translate="no">​</a></h3>
-<p>The upgrade of the code can be done with the upgrade manager</p>]]></content:encoded>
-            <category>Release</category>
-            <category>v3.1.1</category>
         </item>
     </channel>
 </rss>
