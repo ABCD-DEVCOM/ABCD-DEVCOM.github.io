@@ -1,0 +1,8 @@
+{
+  "label": "Guides & Tutorials",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "Step-by-step guides on how to use PFT for sorting, indexing, and validation."
+  }
+}

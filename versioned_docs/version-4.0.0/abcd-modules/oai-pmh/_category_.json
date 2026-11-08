@@ -1,0 +1,8 @@
+{
+  "label": "OAI-PMH Provider",
+  "position": 7,
+  "link": {
+    "type": "generated-index",
+    "description": "Exposing your catalog to harvesters using the Open Archives Initiative Protocol."
+  }
+}
