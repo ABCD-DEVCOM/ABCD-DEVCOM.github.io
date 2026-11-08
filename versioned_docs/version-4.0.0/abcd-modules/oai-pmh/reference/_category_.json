@@ -1,0 +1,8 @@
+{
+  "label": "Technical Reference (Verbs)",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "Technical details of the OAI-PMH verbs supported by the ABCD Provider."
+  }
+}

@@ -1,0 +1,8 @@
+{
+    "label": "Tutorials & How-To",
+    "position": 9,
+    "link": {
+        "type": "generated-index",
+        "description": "Step-by-step guides for common tasks and workflows in ABCD."
+    }
+}

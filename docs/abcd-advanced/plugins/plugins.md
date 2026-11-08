@@ -33,12 +33,29 @@ Let's create an example plugin called `my_plugin`. The folder structure under `/
     /en/
     /pt/
     /es/
+    /fr/
   /assets/                 # CSS, JS, and Images specific to the plugin
+    /css/
+    /js/
 ```
 
 ## 2. The Local Plugin Manifest (`plugin.json`)
 
-Every plugin requires a `plugin.json` file strictly in the root of its physical folder. It informs the ABCD core of the vital metadata required for local loading.
+Every plugin requires a `plugin.json` file strictly in the root of its physical folder. It informs the ABCD core of the vital metadata required for local loading and version compatibility verification.
+
+### Manifest Parameters
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `name` | String / Object | Yes | Display name of the plugin (supports a string or a multilingual object). |
+| `slug` | String | Yes | Unique identifier matching the plugin folder name (lowercase, numbers, hyphens, or underscores). |
+| `version` | String | Yes | Semantic version of the plugin (e.g., `"1.0.0"`). |
+| `requires` | String | Recommended | Minimum ABCD core version required to install and activate the plugin (e.g., `"4.1.0"`). If omitted, the Plugin Manager displays an *"Untested with your version of ABCD"* warning. If the installed ABCD version is lower than `requires`, installation and activation are blocked. |
+| `description` | String / Object | Yes | Brief summary of the plugin's purpose (supports a string or a multilingual object). |
+| `entry` | String | Yes | Main router file (typically `"index.php"`). |
+| `settings_page` | String | No | Relative path to the plugin's administrative configuration script (e.g., `"admin/settings.php"`). |
+| `hooks` | Array | No | List of ABCD hooks utilized by the plugin for documentation and discovery. |
+| `config_bridge` | Boolean | Yes | Enables `PluginBridge` context injection (`true`). |
 
 **Example:**
 ```json
@@ -46,12 +63,15 @@ Every plugin requires a `plugin.json` file strictly in the root of its physical 
   "name": "My Plugin",
   "slug": "my_plugin",
   "version": "1.0.0",
+  "requires": "4.1.0",
   "description": "Example plugin for ABCD",
   "entry": "index.php",
   "settings_page": "admin/settings.php",
   "hooks": [
     "central_menu",
-    "abcd_translation_menu"
+    "abcd_translation_menu",
+    "dataentry_toolbar_search",
+    "dataentry_footer"
   ],
   "config_bridge": true
 }
@@ -59,9 +79,9 @@ Every plugin requires a `plugin.json` file strictly in the root of its physical 
 
 ## 3. The `PluginBridge` Class (Security and Context)
 
-To avoid polluting the global scope and directly including the core's `config.php`, ABCD provides the `PluginBridge` class. It safely exposes essential paths and variables (such as `$db_path` and `$xWxis`). 
+To avoid polluting the global scope and directly including the core's `config.php` in internal views or helper files, ABCD provides the `PluginBridge` class. It safely exposes essential paths and variables (such as `$db_path` and `$xWxis`).
 
-Always start your PHP files (especially `index.php`) by validating access and instantiating the Bridge:
+Always start your internal PHP files (`plugin-bootstrap.php`, `ajax.php`, `process.php`, etc.) by validating that `PluginBridge` is loaded:
 
 ```php
 <?php
@@ -133,6 +153,8 @@ Below is the current list of available hooks within the ABCD ecosystem, divided 
 | `abcd_nav_back_url` | Filter | `central/common/inc_back.php` | Intercepts and overrides the standard Back URL in breadcrumb navigation. |
 | `abcd_nav_cancel_url` | Filter | `central/common/inc_cancel.php` | Intercepts and overrides the standard Cancel URL in breadcrumb navigation. |
 | `abcd_menu_home_action` | Filter | `central/dataentry/menu_main.php` | Intercepts the JavaScript action of the DataEntry Home button to handle contextual routing inside iframes. |
+| `dataentry_toolbar_search` | Filter | `central/dataentry/menu_main.php` | *(Added in v4.1.0)* Fires immediately after the `busqueda_palabras` quick-search input in the cataloging toolbar. Ideal for injecting advanced search triggers or contextual tool buttons. |
+| `dataentry_footer` | Filter | `central/dataentry/menu_main.php` | *(Added in v4.1.0)* Fires right before the closing `</body>` tag of the cataloging toolbar frame. Ideal for injecting hidden modals, slide-out sidebars, stylesheets, and scripts into the DataEntry interface. |
 
 ### OPAC Hooks (`/opac/`)
 
@@ -144,17 +166,27 @@ Below is the current list of available hooks within the ABCD ecosystem, divided 
 | `opac_record_toolbar` | Filter | `opac/get_record_details.php` | Filters the native action buttons of a bibliographic record. Perfect for adding export, citation, or custom interaction buttons (e.g., "Export to Zotero"). |
 | `opac_sidebar_facets` | Action | `opac/facets.php` | Fires at the end of the sidebar facets rendering. Useful for injecting external API widgets (e.g., author biographies, event calendars, related links). |
 
-
 ## 6. Routing (Basic MVC Pattern)
 
-It is recommended that `index.php` acts as a main controller (Router). It receives the `action` variable via URL or form request and includes the correct processing files, keeping the logic strictly isolated from the interface.
+It is recommended that `index.php` acts as a main controller (Router). It loads the core configuration, verifies `PluginBridge`, receives the `action` variable via URL or form request, and includes the appropriate processing files, keeping logic strictly isolated from the interface.
 
 **Example `index.php`:**
 ```php
 <?php
+ob_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 $config_path = realpath(__DIR__ . '/../../../central/config.php');
 if (file_exists($config_path)) {
     require_once $config_path;
+}
+
+if (!class_exists('PluginBridge')) {
+    ob_end_clean();
+    header("HTTP/1.1 403 Forbidden");
+    die("Direct access forbidden.");
 }
 
 global $msgstr, $langManager, $lang;
@@ -169,26 +201,19 @@ if (isset($langManager)) {
     $msgstr = array_merge($msgstr ?? [], $plugin_msgs);
 }
 
-// Router
+// Router (PHP 8.3+ match expression)
 $action = $_REQUEST['action'] ?? 'form';
 
-switch ($action) {
-    case 'process':
-        require_once __DIR__ . '/process.php';
-        break;
-    case 'ajax':
-        require_once __DIR__ . '/ajax.php';
-        break;
-    case 'form':
-    default:
-        require_once __DIR__ . '/form.php';
-        break;
-}
+match ($action) {
+    'process' => require_once __DIR__ . '/process.php',
+    'ajax'    => require_once __DIR__ . '/ajax.php',
+    default   => require_once __DIR__ . '/form.php',
+};
 ```
 
 ## 7. Internationalization (Translations and LanguageManager)
 
-Plugin internationalization uses the `LanguageManager` and follows an intelligent override hierarchy. Translation files are no longer restricted to the system's base folder.
+Plugin internationalization uses the `LanguageManager` and follows an intelligent override hierarchy. Translation files are no longer restricted to the system's base folder. Never hardcode user-facing strings directly in PHP or JavaScript; always use `$msgstr` keys and provide `.tab` files for supported languages (`en`, `pt`, `es`, `fr`).
 
 1. **User Vault (Local Overrides/Customizations):** `/htdocs/content/lang/{language}/my_plugin.tab`
 2. **Plugin Default (Your folder):** `/htdocs/content/plugins/my_plugin/lang/{language}/my_plugin.tab`
@@ -250,11 +275,11 @@ if (isset($contenido[1]) && str_starts_with($contenido[1], "MFN:")) {
 
 ## 9. Recommended Security Practices
 
-* **Direct Access:** Always use the `PluginBridge` check at the top of all `.php` files to prevent internal scripts from being executed directly via a URL browser request.
-* **Request Method Enforcement:** When processing forms, block unauthorized access via `GET`:
+* **Direct Access:** Always use the `PluginBridge` check at the top of internal `.php` files to prevent internal scripts from being executed directly via a URL browser request.
+* **Request Method Enforcement:** When processing forms or AJAX endpoints, block unauthorized access via `GET`:
   ```php
   if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-      header("Location: /content/plugins/my_plugin/?action=form");
+      header("HTTP/1.1 405 Method Not Allowed");
       exit;
   }
   ```
@@ -303,16 +328,26 @@ abcd_add_hook('abcd_translation_menu', function(string $menuHtml): string {
 });
 ```
 
-### Example 3: Injecting a Custom Script in the Footer
-You can load custom JavaScript files or analytics trackers globally across the ABCD administrative interface.
+### Example 3: Injecting a Button and Sidebar into the Cataloging Toolbar (v4.1.0+)
+Using `dataentry_toolbar_search` and `dataentry_footer`, you can add interactive tools directly beside the cataloging search input.
 
-**File:** `content/plugins/my-plugin/plugin-bootstrap.php`
+**File:** `content/plugins/like-winisis/plugin-bootstrap.php`
 ```php
 <?php
+$bridge = PluginBridge::getInstance();
 
-abcd_add_hook('abcd_footer_end', function(string $output): string {
-    $customScript = '<script src="/content/plugins/my-plugin/assets/js/custom.js"></script>';
-    return $output . PHP_EOL . $customScript;
+abcd_add_hook('dataentry_toolbar_search', function(string $html) use ($bridge): string {
+    global $msgstr;
+    $title = htmlspecialchars($msgstr['like_winisis_title'] ?? 'Legacy Search');
+    $btn = '<a href="javascript:void(0);" id="like-winisis-toggle" class="btn-toolbar-blue" title="' . $title . '">';
+    $btn .= '<i class="fas fa-terminal"></i></a>';
+    return $html . $btn;
+});
+
+abcd_add_hook('dataentry_footer', function(string $html): string {
+    $assets  = '<link rel="stylesheet" href="../../content/plugins/like-winisis/assets/css/like-winisis.css">';
+    $assets .= '<script src="../../content/plugins/like-winisis/assets/js/like-winisis.js"></script>';
+    return $html . $assets;
 });
 ```
 
@@ -332,8 +367,9 @@ ABCD uses a hybrid and efficient architecture: physical packages (`.zip`) are ho
 This submission file differs from the local `plugin.json`. It is richer and has native multilingual support. ABCD automatically handles translating and adjusting the characters (UTF-8 / ISO-8859-1) to suit the final user interface.
 
 * **Mandatory Structure:** The root key must be exactly the slug of your plugin.
-* The `name` and `description` attributes must be objects (arrays) mapping the supported languages (minimum of English `en`).
-* The `url` attribute generates the "More information" button, ideal for linking the documentation or the main repository of your project.
+* **Version Compatibility (`requires`):** Always specify the minimum ABCD core version required (e.g., `"requires": "4.1.0"`). The ABCD Plugin Manager compares this value against the local `version.php` to prevent users on older versions from installing incompatible plugins.
+* The `name` and `description` attributes must be objects mapping the supported languages (minimum of English `en`).
+* The `url` attribute generates the "More info" button, ideal for linking the documentation or the main repository of your project.
 
 **Complete Submission Example (`registry/ric_cm.json`):**
 ```json
@@ -341,9 +377,10 @@ This submission file differs from the local `plugin.json`. It is richer and has 
   "ric_cm": {
     "slug": "ric_cm",
     "version": "1.0.0",
+    "requires": "4.1.0",
     "author": "ABCD Community",
-    "download_url": "[https://github.com/ABCD-DEVCOM/ric_cm/archive/refs/tags/v1.0.0.zip](https://github.com/ABCD-DEVCOM/ric_cm/archive/refs/tags/v1.0.0.zip)",
-    "url": "[https://github.com/ABCD-DEVCOM/ric_cm](https://github.com/ABCD-DEVCOM/ric_cm)",
+    "download_url": "https://github.com/ABCD-DEVCOM/ric_cm/archive/refs/tags/v1.0.0.zip",
+    "url": "https://github.com/ABCD-DEVCOM/ric_cm",
     "name": {
       "en": "Records in Contexts (RiC-CM)",
       "fr": "Records in Contexts (RiC-CM)",
@@ -362,9 +399,9 @@ This submission file differs from the local `plugin.json`. It is richer and has 
 
 ## Summary Checklist for Publishing a Plugin
 1. Place your files in `/htdocs/content/plugins/your_slug/`.
-2. Create the local manifest `plugin.json`.
-3. Register the visual hooks (menus) in `plugin-bootstrap.php`.
+2. Create the local manifest `plugin.json` (including the `"requires"` version attribute).
+3. Register the visual hooks (menus/toolbars) in `plugin-bootstrap.php`.
 4. Centralize the security routing in `index.php`.
 5. Place your language files in `lang/{language}/file.tab` and load them via `LanguageManager`.
-6. Host the code and generate the `.zip` on GitHub.
-7. Submit the multilingual manifest via Pull Request to the `registry/` folder of the `abcd-plugin-registry`.
+6. Host the code and generate the `.zip` release on GitHub.
+7. Submit the multilingual manifest (with `"requires"`) via Pull Request to the `registry/` folder of the `abcd-plugin-registry`.
