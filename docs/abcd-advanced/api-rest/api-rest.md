@@ -36,7 +36,6 @@ The security level depends on how the database was configured in the API Manager
 To access restricted databases, you **must** include a valid API key in the HTTP request header using `X-API-Key`:
 ```http
 X-API-Key: abcd_sk_your_generated_key_here
-
 ```
 
 ---
@@ -46,11 +45,7 @@ X-API-Key: abcd_sk_your_generated_key_here
 The API supports data extraction through the `format` URL parameter:
 
 * **`dc` (Dublin Core - Default):** Returns a clean JSON using the mapping files created in the Visual Mapper. This format **preserves HTML code** (such as `<b>`, `<p>`) inserted by catalogers and translates native tags into the 15 universal Dublin Core elements.
-
-
 * **`native` (Native Format):** Returns the JSON with the raw CISIS structure (exact numeric ISIS FDT tags, indicators, and subfields). Used when an exact migration or copy of the cataloged data is required.
-
-
 
 ---
 
@@ -61,31 +56,18 @@ The API supports data extraction through the `format` URL parameter:
 Use this endpoint to verify if the API is online and responding correctly.
 
 * **Endpoint:** `GET /abcd-api/`
-
 * **Action:** Returns a simple welcome message confirming the API is active.
-
-
 
 ### 2. Database Discovery
 
 These public routes do not require authentication keys. They are used to list exposed database configurations and the available metadata output formats for each database.
 
 * **Endpoint:** `GET /abcd-api/databases`
-
 * **Action:** Returns a list of all exposed databases (e.g., `marc`, `dubcore`) along with their descriptions.
 
-
-
-
 * **Endpoint:** `GET /abcd-api/databases/{database_name}`
-
 * **Action:** Returns specific configuration details for a single database, including its CISIS version and the available formats (`native`, `dc`, etc.) configured via the visual mapper or manually created `.pft` files.
-
-
 * **Example:** `/abcd-api/databases/marc`
-
-
-
 
 ### 3. Record Retrieval and Search
 
@@ -94,52 +76,59 @@ Searches and lists records within a specific database. It will automatically fal
 * **Endpoint:** `GET /abcd-api/records/{database_name}`
 
 * **Supported URL Parameters:**
-* `q`: The search expression. It accepts mapped fields like `q=author:"silva"` or `q=$` to retrieve all records. If omitted, it defaults to searching everything (`$`).
+  * `q`: The search expression. The API features a smart parser that natively supports natural language phrases, exact terms, boolean operators (`AND`, `OR`, `NOT`), and right-truncation wildcards (`$`). If omitted, it defaults to searching everything (`$`).
+  * `limit`: The number of records to return per page. For security and performance, this is strictly capped at a maximum of 100 records. (Default: `10`).
+  * `from`: The starting index for the result set, used for pagination. (Default: `0`).
+  * `format`: The metadata output format. Accepts `dc` (Dublin Core JSON, default) or `native` (raw ISIS FDT tags).
+  * `debug`: Set to `?debug=1` to intercept the raw WXIS execution paths, commands, and XML responses for troubleshooting.
 
+#### Advanced Query Parsing (`q=`)
+When you submit a query using mapped field aliases (e.g., `title:"Escola de publicidade"`), the API's smart parser automatically breaks down the phrase into individual words, applies the configured CISIS prefix (e.g., `TW_`) to each term, and safely joins them with the `AND` (`*`) operator behind the scenes.
 
-* `limit`: The number of records to return per page. For security and performance, this is strictly capped at a maximum of 100 records. (Default: `10`).
+**Request Examples & Boolean Combinations:**
 
-
-* `from`: The starting index for the result set, used for pagination. (Default: `0`).
-
-
-* `format`: The metadata output format. Accepts `dc` (Dublin Core JSON, default) or `native` (raw ISIS FDT tags).
-
-
-* `debug`: Set to `?debug=1` to intercept the raw WXIS execution paths, commands, and XML responses for troubleshooting.
-
-
-
-
-
-**Request Examples:**
-
-```http
-GET /abcd-api/records/marc
-GET /abcd-api/records/marc?q=author:"machado"&limit=50&from=1
-GET /abcd-api/records/dubcore?format=native
-
-```
+* **Fetch All (Default):**
+  ```http
+  GET /abcd-api/records/marc
+  ```
+* **Single Term Search:**
+  ```http
+  GET /abcd-api/records/marc?q=author:"machado"
+  ```
+* **Phrase Search (Auto-parsed):**
+  ```http
+  GET /abcd-api/records/dubcore?q=title:"Escola de publicidade"
+  ```
+  *(The API translates this into the native query: `(TW_ESCOLA * TW_DE * TW_PUBLICIDADE)`)*
+* **Right-Truncation (Wildcard):**
+  Use the `$` symbol at the end of a phrase or word to match variations of the last term (e.g., matching "publicidade", "publicidades", etc.).
+  ```http
+  GET /abcd-api/records/dubcore?q=title:"Escola de publicidade$"
+  ```
+  *(Translates to: `(TW_ESCOLA * TW_DE * TW_PUBLICIDADE$)`)*
+* **Boolean Combinations:**
+  You can combine different fields using standard boolean operators (`AND`, `OR`, `NOT`).
+  ```http
+  GET /abcd-api/records/marc?q=title:"psicologia" AND author:"freud"
+  ```
+* **Mixed Mapped & Native Tags:**
+  You can freely mix your API aliases with raw CISIS prefixes if advanced filtering is needed.
+  ```http
+  GET /abcd-api/records/marc?q=title:"Estrutura" AND TW_Curricular
+  ```
 
 ### 4. Fetching a Single Record by ID (MFN)
 
 Retrieves a single, exact record based on its physical Master File Number (MFN) bypassing the CISIS dictionary.
 
 * **Endpoint:** `GET /abcd-api/records/{database_name}/{mfn}`
-
 * **Security:** The MFN parameter undergoes strict security validation and only accepts integer characters.
-
-
 * **Supported URL Parameters:** `format` and `debug`.
 
-
-
 **Request Examples:**
-
 ```http
 GET /abcd-api/records/dubcore/1
 GET /abcd-api/records/spectrum/25?format=native
-
 ```
 
 ---
@@ -177,8 +166,5 @@ The ABCD API architecture utilizes armored serialization, ensuring the response 
         }
     ]
 }
-
 ```
-
 *(Note: In the `dc` format, HTML code is kept intact within the JSON node, preserving the cataloger's formatting).*
-
