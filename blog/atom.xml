@@ -2,11 +2,92 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ABCD-DEVCOM.github.io/blog</id>
     <title>ABCD Software Documentation Blog</title>
-    <updated>2026-10-24T00:00:00.000Z</updated>
+    <updated>2026-11-08T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ABCD-DEVCOM.github.io/blog"/>
     <subtitle>ABCD Software Documentation Blog</subtitle>
     <icon>https://ABCD-DEVCOM.github.io/img/favicon.png</icon>
+    <entry>
+        <title type="html"><![CDATA[ABCD v4.1.0]]></title>
+        <id>https://ABCD-DEVCOM.github.io/blog/2026-11-08-release-4-1-0</id>
+        <link href="https://ABCD-DEVCOM.github.io/blog/2026-11-08-release-4-1-0"/>
+        <updated>2026-11-08T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[We are pleased to announce the release of ABCD v4.1.0. This version brings important improvements to stability, security, new data import features, plugin management, and general optimizations to the updater and user interface.]]></summary>
+        <content type="html"><![CDATA[<p>We are pleased to announce the release of <strong>ABCD v4.1.0</strong>. This version brings important improvements to stability, security, new data import features, plugin management, and general optimizations to the updater and user interface.</p>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="new-features-and-highlights">New Features and Highlights<a href="https://abcd-devcom.github.io/blog/2026-11-08-release-4-1-0#new-features-and-highlights" class="hash-link" aria-label="Direct link to New Features and Highlights" title="Direct link to New Features and Highlights" translate="no">​</a></h2>
+<p><strong>Header-Based Text Imports (#779)</strong></p>
+<ul>
+<li class="">Added support for loading CSV/TSV files with encoding selection.</li>
+<li class="">Introduced a conversion-table mode that maps header names directly to fields, including support for repeated occurrences.</li>
+<li class="">Implemented unmatched column reporting and added localized interface text.</li>
+</ul>
+<p><strong>Plugin Management and Compatibility (#782)</strong></p>
+<ul>
+<li class="">Added ABCD version compatibility checks for plugins.</li>
+<li class="">The system now displays version requirements and compatibility warnings, blocking incompatible installations and activations.</li>
+<li class="">Improved plugin manager error handling with new translated messages.</li>
+</ul>
+<p><strong>Data Entry Hooks (#781)</strong></p>
+<ul>
+<li class="">Exposed extension hooks for the data entry toolbar search area and the page footer.</li>
+</ul>
+<p><strong>Search Term Expansion (#780)</strong></p>
+<ul>
+<li class="">Multiword search terms are now split, applying the configured field prefix to each unqualified word and joining adjacent terms with the ISIS AND operator, while preserving explicit operators and existing prefixes.</li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="update-system-lifecycle-and-migration">Update System, Lifecycle, and Migration<a href="https://abcd-devcom.github.io/blog/2026-11-08-release-4-1-0#update-system-lifecycle-and-migration" class="hash-link" aria-label="Direct link to Update System, Lifecycle, and Migration" title="Direct link to Update System, Lifecycle, and Migration" translate="no">​</a></h2>
+<p><strong>Updater Self-Update (#772)</strong></p>
+<ul>
+<li class="">Added a pre-download check that safely validates and replaces the update manager when a newer release is available.</li>
+<li class="">Standardized batched update statuses and fixed migration script discovery.</li>
+</ul>
+<p><strong>Lifecycle and Migration (#771)</strong></p>
+<ul>
+<li class="">Prevented extract-loop hangs and restored the protected config across partial-update batches.</li>
+<li class="">Improved v4 config migration checks and localized update-manager and migration messages (English, Spanish, French, and Portuguese).</li>
+</ul>
+<p><strong>Progress and Text Encoding (#775)</strong></p>
+<ul>
+<li class="">Normalized update logs and release notes for reliable UTF-8 display.</li>
+<li class="">Capped progress below completion during source installation and added elapsed time tracking for slow requests.</li>
+<li class="">Added a cleanup announcement before removing temporary files so the update remains visibly active.</li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="security-and-fixes">Security and Fixes<a href="https://abcd-devcom.github.io/blog/2026-11-08-release-4-1-0#security-and-fixes" class="hash-link" aria-label="Direct link to Security and Fixes" title="Direct link to Security and Fixes" translate="no">​</a></h2>
+<p><strong>CloudAV False Positive Fix and API Hardening (#776, #777)</strong></p>
+<ul>
+<li class="">Refactored <code>central/settings/api_manager.php</code> to eliminate the <code>SMW-INJ-CLOUDAV-php.dropper.content_include-PHPTRP2-4</code> heuristic false positive triggered by CloudAV / Imunify360 malware scanners on Linux hosting environments.</li>
+<li class=""><strong>Strict Extension Whitelist:</strong> Added explicit validation using <code>basename()</code> and <code>pathinfo(..., PATHINFO_EXTENSION)</code> so <code>file_put_contents()</code> only writes <code>.i2x</code> and <code>.pft</code> files inside <code>/resources/mappings/</code>, preventing arbitrary file extensions.</li>
+<li class=""><strong>Safe Config Generation:</strong> Refactored how API configuration files are written and loaded so the script no longer interpolates <code>$_POST</code> parameters into raw <code>&lt;?php</code> strings.</li>
+</ul>
+<p><strong>General Adjustments</strong></p>
+<ul>
+<li class=""><strong>Removed the MAX_TMP_STRING parameter (#778):</strong> This parameter does not exist in the CISIS binary build. For UTF-8 binaries, its presence in <code>.xis</code> scripts caused errors. The <code>buffersize</code> parameter alone is sufficient.</li>
+<li class=""><strong>Layout Fix (#773):</strong> Set a 350px maximum width for the database heading select, fixing layout breaks when a database has a very long name.</li>
+<li class=""><strong>Preserve Return Script (#773):</strong> Added a hidden <code>backtoscript</code> field in the JSON export form so the configured return destination is properly submitted.</li>
+</ul>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-changed">What's Changed<a href="https://abcd-devcom.github.io/blog/2026-11-08-release-4-1-0#whats-changed" class="hash-link" aria-label="Direct link to What's Changed" title="Direct link to What's Changed" translate="no">​</a></h2>
+<ul>
+<li class="">fix(api): prevent CloudAV heuristic false positive and harden file validation in api_manager.php by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/777" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/777</a></li>
+<li class="">Remove the MAX_TMP_STRING parameter by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/778" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/778</a></li>
+<li class="">Support header-based text imports by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/779" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/779</a></li>
+<li class="">Expand search terms into prefixed AND clauses by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/780" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/780</a></li>
+<li class="">Add data entry toolbar and footer hooks by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/781" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/781</a></li>
+<li class="">Check ABCD version compatibility for plugins by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/782" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/782</a></li>
+<li class="">Bump version to v4.1.0 by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/783" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/783</a></li>
+<li class="">Remove Bootstrap source map reference by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/784" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/784</a></li>
+</ul>
+<p><strong>Full Changelog</strong>: <a href="https://github.com/ABCD-DEVCOM/ABCD/compare/v4.0.2...v4.1.0" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/compare/v4.0.2...v4.1.0</a></p>]]></content>
+        <author>
+            <name>Roger C. Guilherme</name>
+            <uri>https://www.linkedin.com/in/rogerguilherme/</uri>
+        </author>
+        <category label="Release" term="Release"/>
+        <category label="v4.1.0" term="v4.1.0"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Important Update: ABCD v4.0.2 (Hotfix) Released – How to Update Safely]]></title>
         <id>https://ABCD-DEVCOM.github.io/blog/2026-10-24-release-4-0-2</id>
@@ -944,46 +1025,5 @@ The <code>php-zip</code> extension must be enabled in your <code>php.ini</code> 
         </author>
         <category label="Release" term="Release"/>
         <category label="v3.2.1" term="v3.2.1"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[v3.1.2 Cleaning and repairs]]></title>
-        <id>https://ABCD-DEVCOM.github.io/blog/v3-1-2-cleaning-and-repairs</id>
-        <link href="https://ABCD-DEVCOM.github.io/blog/v3-1-2-cleaning-and-repairs"/>
-        <updated>2026-01-10T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[What's Changed]]></summary>
-        <content type="html"><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-changed">What's Changed<a href="https://abcd-devcom.github.io/blog/v3-1-2-cleaning-and-repairs#whats-changed" class="hash-link" aria-label="Direct link to What's Changed" title="Direct link to What's Changed" translate="no">​</a></h2>
-<ul>
-<li class="">General Cleanup, UI Improvements, and Bug Fixes by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/590" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/590</a></li>
-<li class="">Meta tag added by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/591" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/591</a></li>
-<li class="">Update opac.tab by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/592" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/592</a></li>
-<li class="">OPAC HTML Improvement by @rogercgui in <a href="https://github.com/ABCD-DEVCOM/ABCD/pull/593" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/pull/593</a></li>
-</ul>
-<!-- -->
-<p><strong>Full Changelog</strong>: <a href="https://github.com/ABCD-DEVCOM/ABCD/compare/v3.1.1...v3.1.2" target="_blank" rel="noopener noreferrer" class="">https://github.com/ABCD-DEVCOM/ABCD/compare/v3.1.1...v3.1.2</a></p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="actions-by-database-administrator">Actions by database administrator<a href="https://abcd-devcom.github.io/blog/v3-1-2-cleaning-and-repairs#actions-by-database-administrator" class="hash-link" aria-label="Direct link to Actions by database administrator" title="Direct link to Actions by database administrator" translate="no">​</a></h2>
-<p>The upgrade of the code can be done with the upgrade manager</p>
-<p><strong>Note: If you are upgrading from v.3.0.0 or earlier then</strong></p>
-<ol>
-<li class="">Download from Git file upgrade_manager.php (<a href="https://github.com/ABCD-DEVCOM/ABCD/blob/9b2c3cad60831bf1436b391d325d497750fb2d70/www/htdocs/update_manager.php" target="_blank" rel="noopener noreferrer" class="">www/htdocs/update_manager.php</a> )</li>
-<li class="">Copy the downloaded file to the Document root of your installation<!-- -->
-<ol>
-<li class="">In Linux typical  <code>/opt/ABCD/htdocs</code></li>
-<li class="">Check that <code>update_manager.php</code> is readable by your webserver</li>
-</ol>
-</li>
-<li class="">Run ABCD, login as administrator, perform some arbitrary actions to ensure that ABCD detects the new version</li>
-<li class="">The footer shows a yellow bar with text <code>Update now (v3.1.2) ABCD is available</code>. Click on the link <code>Update Now</code></li>
-<li class="">The version of the Update  manager should be: <strong>v4.3</strong></li>
-<li class="">The Update manager will guide you through the upgrade process</li>
-</ol>]]></content>
-        <author>
-            <name>Fred Hommerson</name>
-        </author>
-        <author>
-            <name>Roger C. Guilherme</name>
-            <uri>https://www.linkedin.com/in/rogerguilherme/</uri>
-        </author>
-        <category label="Release" term="Release"/>
-        <category label="v3.1.2" term="v3.1.2"/>
     </entry>
 </feed>
